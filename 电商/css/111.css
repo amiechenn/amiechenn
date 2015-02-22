@@ -1,0 +1,363 @@
+html,body
+{font-family:sans-serif, Tahoma,微软雅黑;
+ font-size:100%;
+ background-color:#fff;
+ color:#333;
+ margin:0;
+ padding:0;
+ }
+a
+{text-decoration:none;
+}
+ul 
+{list-style-type:none}
+
+.top
+{background-color:#CCC;
+height:40px;
+margin-bottom:10px;
+}
+.heared
+{margin:20px 0;
+ 
+}
+.hearedin
+{width:1210px;
+margin:auto;
+}
+.logo
+{float:left;
+ padding:0;
+}
+.search
+{float:left;
+ position:relative;
+ left:100px;
+ top:20px;
+ padding:0px;
+ margin:0px;
+ border:4px solid #ccc;}
+.searchtext
+{padding:0;
+ margin:0;
+ font-size:16px;
+ border:0;
+ height:30px;
+ width:400px;
+ float:left;
+
+}
+.searchsubmit
+{color:#FFF;
+ background-color:#ccc;
+ padding:0;
+ font-size:18px;
+ margin:0;
+ border:0;
+ height:30px;
+ width:100px;
+ float:left;
+}
+
+.sortnav
+{ margin:10px auto;
+ width:1210px;
+ padding:0;
+}
+.allsort
+{float:left;
+ margin:0;
+ padding:0;
+}
+.allsorttop
+{font-weight:bold;
+ text-align:center;
+ background-color:#B3B3B3;
+ padding:15px 0;
+ margin:0;
+ border:0;
+ width:222px;
+
+}
+.allsort ul
+{margin:0;
+ padding:0;
+}
+.allsort li
+{padding:0px;
+ text-align:center;
+}
+.allsort-a
+{display:block;
+color:#FFF;
+font-weight:bold;
+width:222px;
+ height:82px;
+ background-color:#CCC;
+ line-height:82px;
+ }
+.allsort a:hover
+{color:#000;
+ background-color:#FFF;
+}
+.sort-right
+{position:relative;
+
+}
+
+.sort-a
+{ background-color:#fff;
+  color:#333;
+  font-weight:bold;
+  width:200px;
+  
+  margin:0;
+
+ display:none;
+}
+.sort-a a
+{float:left;
+  width:100px;
+  height:82px;
+  line-height:82px;
+  color:#F00;
+}
+.sort-p
+{position:absolute;
+ top:0px;
+ left:222px;
+}
+.allsort li:hover .sort-p
+{display:block;
+}
+
+.sort-i
+{position:absolute;
+ top:82px;
+ left:222px;
+}
+.allsort li:hover .sort-i
+{display:block;
+}
+
+.sort-c
+{position:absolute;
+ top:164px;
+ left:222px;
+}
+.allsort li:hover .sort-c
+{display:block;
+}
+.nav
+{font-weight:bold;
+ padding:0;
+ margin:0;
+
+}
+.nav li
+{float:left;
+ margin:0;
+ padding:15px 0;
+ 
+ }
+.nav li a
+{
+ color:#333;
+ padding:16px 20px;
+ margin:0;
+ border:0;
+ }
+
+ 
+li.active a
+{color:#fff;
+ background-color:#CCC;
+}
+ a.one:hover,a.one:active
+{color:#fff;
+background-color:#CCC;
+}
+
+.ban
+{width:988px;
+height:410px;
+ float:left;
+}
+
+.content
+{width:1210px;
+margin:auto;
+margin-top:10px;
+}
+
+.select
+{float:left;
+ width:220px;
+ height:582px;
+ border:1px  solid #CCC;
+ color:#333;
+}
+.selecttop
+{font-weight:bold;
+ color:#333;
+ background-color:#CCC;
+ padding:10px;
+}
+.select dl
+{ text-align:center;
+ 
+}
+.select dd
+{padding:0;
+ margin:0;
+}
+.select dd a
+{display:inline-block;
+ height:60px;
+ width:100px;
+ text-align:center;
+ line-height:60px;
+}
+.select dd a:hover
+{color:#F33
+}
+.content-m
+{float:left;
+ margin:0  4px ;
+ padding:0;
+ width:756px;
+}
+
+.contenttop
+{background-color:#ccc;
+ font-weight:bold;
+ padding:10px;
+ margin:0;
+ border:1px solid #CCC;
+ border-bottom:0;
+}
+.img
+{float:left;
+ margin:9px 0;
+ padding:0;
+
+ 
+}
+.img img
+{border:2px solid #FFF;
+ width:185px;
+ height:190px;
+ }
+ .img a:hover img 
+{ border:2px solid #999;
+}
+
+.text
+{text-align:center;
+ color:#000;
+ background-color:#FFF;
+ margin:0px;
+ padding:0px;
+ height:60px;
+ line-height:40px;
+ }
+
+.seo
+{float:left;
+ margin: 0;
+ padding:0;
+ width:220px;
+  border:1px solid #C0C0C0;
+}
+.seotop
+{
+}
+.seo ul
+{padding:0;
+ margin:0 ;
+
+  }
+.seo li
+{padding:10px  0;
+ margin:0;
+ border-top:0;
+ width:216px;
+ background-color:#FFF;
+ height:90px;
+}
+.seo ul a
+{color:#666;
+ margin:0 ;
+ padding:0 10px;
+ line-height:20px;
+ display:block;
+ 
+}
+.seo ul a:hover
+{color:#F03;
+}
+.seoimg
+{padding:0 ;
+margin:0 ;
+float:left;
+}
+ 
+.seoumb
+{display: inline-block;
+width: 13px;
+height: 13px;
+line-height: 13px;
+margin-right: 5px;
+text-align: center;
+background-color: #fa4e4e;
+color: #fff;
+font-size:13px;
+} 
+.s-price
+{ display:block;
+  margin-top:20px;
+  font-size:20px;
+  
+}
+.more
+{display:inline;
+ float:right;
+ color:#006;
+ font-size:16px;
+ padding:0;
+ margin:0;
+}
+.foot
+{background-color:#CCC;
+ height:100px;
+ margin:10px 0 0 0;
+ }
+ 
+.footin
+{width:1210px;
+line-height:30px;
+ margin:0 auto;
+ clear:both;
+ text-align:center;
+
+}
+.footin ul
+{list-style-type:none;
+margin:0 auto;
+padding:0;
+display:block;
+width:650px;
+
+}
+
+.footin li 
+{float:left;
+padding:10px;
+margin:0;
+color:#333;
+}
+
+
+.clear {
+  clear: both;
+  }
