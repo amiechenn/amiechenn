@@ -34,9 +34,10 @@
 var SHAKE_THRESHOLD = 1000;
 var last_update = 0;
 var x, y, z, last_x, last_y, last_z;
+var curTime = new Date().getTime();
 function deviceMotionHandler(eventData) {
     var acceleration = eventData.accelerationIncludingGravity;
-    var curTime = newDate().getTime();
+    curTime = new Date().getTime();
     if ((curTime - lastUpdate) > 100) {
         var diffTime = curTime - last_update;
         last_update = curTime;
@@ -57,7 +58,7 @@ function deviceMotionHandler(eventData) {
 document.write(last_x+ "<br>");
 document.write(last_y+ "<br>");
 document.write(last_z+ "<br>");
-
+document.write(curTime + "<br>");
 
 </script>
 </head>
