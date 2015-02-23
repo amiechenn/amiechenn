@@ -91,9 +91,10 @@ function deviceMotionHandler(eventData) {
     }
 
 }
-setInterval(window.removeEventListener('devicemotion', deviceMotionHandler, false),5000)
+//setInterval(,5000)
 
 
+$("#button").click(window.removeEventListener('devicemotion', deviceMotionHandler, false))
 
 
 
