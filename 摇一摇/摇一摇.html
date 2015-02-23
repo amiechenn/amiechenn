@@ -89,18 +89,21 @@ function deviceMotionHandler(eventData) {
     }
 
 }
+
+function again(){
+	alert(999);
+	score=0;
+	window.addEventListener('devicemotion', deviceMotionHandler, false);
+}
+
 function scoreDialog(){
 	$(function () {
 		$("#dialog").dialog({
-			modal:true, 
-	
+			modal:true,
+			close:again,
 			buttons:{
-			"again":function(){
-				$(this).dialog("close",function(){
-					
-					score=0;
-        			window.addEventListener('devicemotion', deviceMotionHandler, false);
-   				 });
+				"再来一发":function(){
+					$(this).dialog("close");
 				}
 			}
 		});
@@ -109,8 +112,10 @@ function scoreDialog(){
 	document.getElementById("dialog").innerHTML = score;
 }
 
-setInterval(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},10000);
+setInterval(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
 
+
+		 
 
 
 
