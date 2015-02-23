@@ -96,8 +96,11 @@ function scoreDialog(){
 	
 			buttons:{
 			"again":function(){
-				$(this).dialog("close");
-			
+				$(this).dialog("close",function(){
+					
+					score=0;
+        			window.addEventListener('devicemotion', deviceMotionHandler, false);
+   				 });
 				}
 			}
 		});
@@ -110,7 +113,7 @@ setInterval(function (){window.removeEventListener('devicemotion', deviceMotionH
 
 
 
-//setInterval(function (){;},10000);
+
 
 </script>
 
