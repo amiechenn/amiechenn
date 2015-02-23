@@ -34,7 +34,7 @@
 	<div id="empty"  style="visibility:visible;">gaga</div>
 	
 </div>
-<div id="dialog" title="score">ww</div>  
+<div id="dialog" title="score"></div>  
 	
 </body>
 
@@ -77,7 +77,7 @@ function deviceMotionHandler(eventData) {
 				
 				score++;
 				document.getElementById("empty").innerHTML = score;
-				document.getElementById("dialog").innerHTML = score;
+				
 			}
 			addone();
 			
@@ -89,18 +89,23 @@ function deviceMotionHandler(eventData) {
     }
 
 }
-$(function scoreDialog() {
-	$("#dialog").dialog({
-		modal:true, 
-
-		buttons:{
-		"again":function(){
-			$(this).dialog("close");
+function scoreDialog(){
+	$(function () {
+		$("#dialog").dialog({
+			modal:true, 
+	
+			buttons:{
+			"again":function(){
+				$(this).dialog("close");
+			
+				}
 			}
-		}
+		});
+	
 	});
+	document.getElementById("dialog").innerHTML = score;
+}
 
-});
 setInterval(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},10000);
 
 
