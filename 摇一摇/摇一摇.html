@@ -82,7 +82,7 @@ function deviceMotionHandler(eventData) {
 				document.getElementById("empty").innerHTML = score;
 			}
 			addone();
-			
+			setInterval(window.removeEventListener,5000)
 
         }
         last_x = x;
@@ -93,11 +93,7 @@ function deviceMotionHandler(eventData) {
 }
 
 
-$("#button").click(function addone(){
-				
-				score++;
-				document.getElementById("empty").innerHTML = score;
-			});
+
 
 
 
