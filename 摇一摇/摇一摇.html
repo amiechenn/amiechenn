@@ -94,9 +94,9 @@ function deviceMotionHandler(eventData) {
 //setInterval(,5000)
 
 
-$("#button").click(window.removeEventListener('devicemotion', deviceMotionHandler, false))
+//$("#button").click()
 
-
+$("#button").click(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false);alert("ttt")});
 
 
 </script>
