@@ -82,7 +82,7 @@ function deviceMotionHandler(eventData) {
 				document.getElementById("empty").innerHTML = score;
 			}
 			addone();
-			setInterval(window.removeEventListener,5000)
+			setInterval(window.removeEventListener('devicemotion', deviceMotionHandler, false),5000)
 
         }
         last_x = x;
