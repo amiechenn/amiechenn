@@ -35,7 +35,20 @@ var SHAKE_THRESHOLD = 1000;
 var last_update = 0;
 var x, y, z, last_x, last_y, last_z;
 var curTime = new Date().getTime();
-alert(111);
+
+function init() {
+    last_update = new Date().getTime();
+    media = document.getElementById("musicBox");
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', deviceMotionHandler, false);
+    } else {
+        
+        alert('not support mobile event');
+    }
+}
+
+
+
 function deviceMotionHandler(eventData) {
     var acceleration = eventData.accelerationIncludingGravity;
     curTime = new Date().getTime();
@@ -67,7 +80,7 @@ document.write(curTime + "<br>");
 </script>
 </head>
 
-<body>
+<body onload="init()">
 <div class="numbers">
 	<div id="empty"  style="visibility:visible;"></div>
 	<div id="one" class="numb" style="visibility:hidden;">1</div>
