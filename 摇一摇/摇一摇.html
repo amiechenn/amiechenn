@@ -12,16 +12,16 @@
 .numb
 {
 	position:absolute;
-	left:10px;
-	top:10px;
+	left:100px;
+	top:100px;
 	font-size:24px;
 }
 
 #empty
 {
 	position:absolute;
-	left:10px;
-	top:10px;
+	left:100px;
+	top:100px;
 	width:30px;
 	height:30px;
 	background-color:#06F; 	
@@ -54,7 +54,9 @@ function deviceMotionHandler(eventData) {
         last_z = z;
     }
 }
-
+document.write(last_x+ "<br>");
+document.write(last_y+ "<br>");
+document.write(last_z+ "<br>");
 
 
 </script>
