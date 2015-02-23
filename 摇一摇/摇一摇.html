@@ -22,9 +22,8 @@
 	position:absolute;
 	left:100px;
 	top:100px;
-	width:30px;
-	height:30px;
-	background-color:#06F; 	
+	font-size:36px;
+		
 }
 </style>
 
@@ -49,7 +48,7 @@ var SHAKE_THRESHOLD = 2000;
 var last_update = 0;
 var x = y = z = last_x = last_y = last_z = 0;
 var media;
-
+var score = 0;
 function init() {
     last_update = new Date().getTime();
     media = document.getElementById("musicBox");
@@ -76,7 +75,7 @@ function deviceMotionHandler(eventData) {
         diffTime * 10000;
         
         if (speed > SHAKE_THRESHOLD) {
-            var score = 0;
+            
 			function addone(){
 				
 				score++;
