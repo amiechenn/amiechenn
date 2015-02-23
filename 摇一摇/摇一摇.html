@@ -45,7 +45,8 @@ function deviceMotionHandler(eventData) {
         z = acceleration.z;
         var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
         if (speed > SHAKE_THRESHOLD) {
-            $("#one").attr("style","visibility:visible");
+            $("#one").attr("style","visibility:visible;");
+			$("#empty").attr("style","visibility:hidden;");
         
         }
         last_x = x;
