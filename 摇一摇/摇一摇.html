@@ -91,12 +91,12 @@ function deviceMotionHandler(eventData) {
     }
 
 }
-//setInterval(,5000)
+setInterval(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false)},5000)
 
 
-//$("#button").click()
 
-$("#button").click(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false);alert("ttt")});
+
+//$("#button").click(;alert("ttt")});
 
 
 </script>
