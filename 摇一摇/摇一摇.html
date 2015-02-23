@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+.numbers
+{
+ 	
+}
+
+.numb
+{
+	position:absolute;
+	left:10px;
+	top:10px;
+	font-size:24px;
+}
+
+#empty
+{
+	position:absolute;
+	left:10px;
+	top:10px;
+	width:30px;
+	height:30px;
+	background-color:#06F; 	
+}
+
+</style>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script>
+
+var SHAKE_THRESHOLD = 1000;
+var last_update = 0;
+var x, y, z, last_x, last_y, last_z;
+function deviceMotionHandler(eventData) {
+    var acceleration = eventData.accelerationIncludingGravity;
+    var curTime = newDate().getTime();
+    if ((curTime - lastUpdate) > 100) {
+        var diffTime = curTime - last_update;
+        last_update = curTime;
+        x = acceleration.x;
+        y = acceleration.y;
+        z = acceleration.z;
+        var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+        if (speed > SHAKE_THRESHOLD) {
+            $("#one").attr("style","visibility:visible");
+        
+        }
+        last_x = x;
+        last_y = y;
+        last_z = z;
+    }
+}
+
+
+
+</script>
+</head>
+
+<body>
+<div class="numbers">
+	<div id="empty"  style="visibility:visible;"></div>
+	<div id="one" class="numb" style="visibility:hidden;">1</div>
+	<div id="two" class="numb" style="visibility:hidden;">2</div>
+	<div id="three" class="numb" style="visibility:hidden;">3</div>
+	<div id="four" class="numb" style="visibility:hidden;">4</div>
+	<div id="five" class="numb" style="visibility:hidden;">5</div>
+</div>
+</body>
+</html>
