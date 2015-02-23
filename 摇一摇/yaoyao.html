@@ -11,47 +11,48 @@ DTD/xhtml1-strict.dtd">
 <meta name="MobileOptimized" content="240"/>  
 <title>HTML摇一摇。。。</title>  
    
-<script type="text/javascript">  
-       var SHAKE_THRESHOLD = 3000;      
-    var last_update = 0;      
-    var x=y=z=last_x=last_y=last_z=0;     
-    var  media;   
-      
-    function init(){  
-    last_update=new Date().getTime();  
-    media= document.getElementById("musicBox");  
-    if (window.DeviceMotionEvent) {   
-    window.addEventListener('devicemotion',deviceMotionHandler, false);    
-    } else{  
-          
-    alert('not support mobile event');  
-    }  
-    }  
-  
-    function deviceMotionHandler(eventData) {      
-      
-    var acceleration =eventData.accelerationIncludingGravity;    
-       
-    var curTime = new Date().getTime();   
-    if ((curTime - last_update)> 100) {    
-        var diffTime = curTime -last_update;      
-        last_update = curTime;          
-        x = acceleration.x;   
-        y = acceleration.y;     
-        z = acceleration.z;     
-        var speed = Math.abs(x +y + z - last_x - last_y - last_z) /   
-diffTime * 10000;     
-          
-        if (speed > SHAKE_THRESHOLD) {      
-            alert("shaked");          
-        }      
-        last_x = x;      
-        last_y = y;      
-        last_z = z;      
-        }      
-       
-    }    
-  
+<script type="text/javascript">
+
+var SHAKE_THRESHOLD = 3000;
+var last_update = 0;
+var x = y = z = last_x = last_y = last_z = 0;
+var media;
+
+function init() {
+    last_update = new Date().getTime();
+    media = document.getElementById("musicBox");
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', deviceMotionHandler, false);
+    } else {
+        
+        alert('not support mobile event');
+    }
+}
+
+function deviceMotionHandler(eventData) {
+    alert(777);
+    var acceleration = eventData.accelerationIncludingGravity;
+    
+    var curTime = new Date().getTime();
+    if ((curTime - last_update) > 100) {
+        var diffTime = curTime - last_update;
+        last_update = curTime;
+        x = acceleration.x;
+        y = acceleration.y;
+        z = acceleration.z;
+        var speed = Math.abs(x + y + z - last_x - last_y - last_z) / 
+        diffTime * 10000;
+        
+        if (speed > SHAKE_THRESHOLD) {
+            alert("shaked");
+        }
+        last_x = x;
+        last_y = y;
+        last_z = z;
+    }
+
+}
+
 </script>  
   
   
