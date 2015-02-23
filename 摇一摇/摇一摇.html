@@ -33,8 +33,8 @@
 
 var SHAKE_THRESHOLD = 3000;
 var last_update = 0;
-var x, y, z, last_x, last_y, last_z;
-var curTime = new Date().getTime();
+var x = y = z = last_x = last_y = last_z = 0;
+var media;
 
 function init() {
     last_update = new Date().getTime();
@@ -59,7 +59,8 @@ function deviceMotionHandler(eventData) {
         x = acceleration.x;
         y = acceleration.y;
         z = acceleration.z;
-        var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+        var speed = Math.abs(x + y + z - last_x - last_y - last_z) / 
+		diffTime * 10000;
         if (speed > SHAKE_THRESHOLD) {
             $("#one").attr("style","visibility:visible;");
 			$("#empty").attr("style","visibility:hidden;");
