@@ -9,7 +9,7 @@
 <style>
 body
 {
-	background-image:url(image/1.jpg);
+	background:url(image/4.jpg);
 	margin:auto;
 }
 #content
@@ -152,6 +152,9 @@ function scoreDialog(){
 			close:buttonState,
 			buttons:{
 				"再来一发":function(){
+					$(this).dialog("close");
+				},
+				"分享到朋友圈":function(){
 					$(this).dialog("close");
 				}
 			}
