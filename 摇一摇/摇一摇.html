@@ -29,9 +29,9 @@
 
 </head>
 
-<body onload="init()">
+<body onload="playGame()">
 <div class="numbers">
-	<div id="empty"  style="visibility:visible;">gaga</div>
+	<div id="empty"  style="visibility:visible;"></div>
 	
 </div>
 <div id="dialog" title="score"></div>  
@@ -46,66 +46,65 @@ var last_update = 0;
 var x = y = z = last_x = last_y = last_z = 0;
 var media;
 var score = 0;
-function game(){
-	function init() {
-		last_update = new Date().getTime();
-		media = document.getElementById("musicBox");
-		if (window.DeviceMotionEvent) {
-			window.addEventListener('devicemotion', deviceMotionHandler, false);
-		} else {
-			
-			alert('not support mobile event');
-		}
-	}
-	
-	function deviceMotionHandler(eventData) {
+
+function init() {
+	last_update = new Date().getTime();
+	media = document.getElementById("musicBox");
+	if (window.DeviceMotionEvent) {
+		window.addEventListener('devicemotion', deviceMotionHandler, false);
+	} else {
 		
-		var acceleration = eventData.accelerationIncludingGravity;
-		
-		var curTime = new Date().getTime();
-		if ((curTime - last_update) > 100) {
-			var diffTime = curTime - last_update;
-			last_update = curTime;
-			x = acceleration.x;
-			y = acceleration.y;
-			z = acceleration.z;
-			var speed = Math.abs(x + y + z - last_x - last_y - last_z) / 
-			diffTime * 10000;
-			
-			if (speed > SHAKE_THRESHOLD) {
-				
-				function addone(){
-					
-					score++;
-					document.getElementById("empty").innerHTML = score;
-					
-				}
-				addone();
-				
-	
-			}
-			last_x = x;
-			last_y = y;
-			last_z = z;
-		}
-	
+		alert('not support mobile event');
 	}
 }
 
-
-function again(){
+function deviceMotionHandler(eventData) {
 	
+	var acceleration = eventData.accelerationIncludingGravity;
+	
+	var curTime = new Date().getTime();
+	if ((curTime - last_update) > 100) {
+		var diffTime = curTime - last_update;
+		last_update = curTime;
+		x = acceleration.x;
+		y = acceleration.y;
+		z = acceleration.z;
+		var speed = Math.abs(x + y + z - last_x - last_y - last_z) / 
+		diffTime * 10000;
+		
+		if (speed > SHAKE_THRESHOLD) {
+			
+			function addone(){
+				
+				score++;
+				document.getElementById("empty").innerHTML = score;
+				
+			}
+			addone();
+			
+
+		}
+		last_x = x;
+		last_y = y;
+		last_z = z;
+	}
+
+}
+
+function playGame(){
+	setTimeout (function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
 	score=0;
 	document.getElementById("empty").innerHTML = score;
-	game();
-
-}
+	init() ;
+	
+	
+}	
 
 function scoreDialog(){
 	$(function () {
 		$("#dialog").dialog({
 			modal:true,
-			close:again,
+			close:playGame,
 			buttons:{
 				"再来一发":function(){
 					$(this).dialog("close");
@@ -117,10 +116,11 @@ function scoreDialog(){
 	document.getElementById("dialog").innerHTML = score;
 }
 
-setInterval(function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
 
 
-		 
+
+
+
 
 
 
