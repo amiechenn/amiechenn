@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <title>摇一摇</title>
 
@@ -11,20 +11,29 @@ body
 {
 	background-image:url(image/1.jpg);
 }
-.numbers
-{
- 	
-}
 
 
 
-#empty
+#number
 {
 	position:absolute;
-	left:100px;
-	top:100px;
-	
-		
+	left:7rem;
+	top:8rem;
+	font-size:4rem;
+	color:#FF5F11;
+}
+
+#button
+{
+	position:absolute;
+	left:5rem;
+	top:20rem;
+	width:6rem;
+	height:3rem;
+	font-size:1rem;
+	background-color:#F44;
+	border:#FF8282 solid ;
+	color:#FFF;
 }
 </style>
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
@@ -32,11 +41,11 @@ body
 
 </head>
 
-<body onload="playGame()">
-<div class="numbers">
-	<div id="empty"  style="visibility:visible;"></div>
+<body>
+
+<div id="number"  style="visibility:visible;"></div>
 	
-</div>
+<button id=button onclick="playGame()"><b>开&nbsp;&nbsp;始</b></button>
 <div id="dialog" title="score"></div>  
 	
 </body>
@@ -80,7 +89,7 @@ function deviceMotionHandler(eventData) {
 			function addone(){
 				
 				score++;
-				document.getElementById("empty").innerHTML = score;
+				document.getElementById("number").innerHTML = score;
 				
 			}
 			addone();
@@ -97,7 +106,7 @@ function deviceMotionHandler(eventData) {
 function playGame(){
 	setTimeout (function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
 	score=0;
-	document.getElementById("empty").innerHTML = score;
+	document.getElementById("number").innerHTML = score;
 	init() ;
 	
 	
