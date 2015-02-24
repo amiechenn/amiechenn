@@ -31,7 +31,7 @@ body
 	width:6rem;
 	height:3rem;
 	font-size:1rem;
-	background-color:#F44;
+	
 	border:#FF8282 solid ;
 	color:#FFF;
 }
@@ -45,14 +45,14 @@ body
 
 <div id="number"  style="visibility:visible;"></div>
 	
-<button id=button onclick="playGame(),playBegin()" >开&nbsp;&nbsp;始</button>
+<button id=button onclick="playGame(),playBegin()"  style="background-color:#F44;">开&nbsp;&nbsp;始</button>
 <div id="dialog" title="score"></div>  
 	
 </body>
 
 
 <script>
-var playing=0;
+var playing=false;
 var SHAKE_THRESHOLD = 2000;
 var last_update = 0;
 var x = y = z = last_x = last_y = last_z = 0;
@@ -117,26 +117,28 @@ function playGame(){
 
 
 
-function buttonHide(){
-	if(playing==1){
+function buttonState(){
+	if(playing==true){
 		$("#button").attr("onclick","");
+		$("#button").attr("style","background-color:#999;");
 	}
-	if(playing==0){
-		$("#button").attr("onclick","playGame(),playBegin()");	
+	if(playing==false){
+		$("#button").attr("onclick","playGame(),playBegin()");
+		$("#button").attr("style","background-color:#F44;");	
 	}
 }
 function playBegin(){
-	playing++;
-	buttonHide();
+	playing=true;
+	buttonState();
 	//playing=1,playbegin,button over
 };
 
 function scoreDialog(){
-	playing=0;
+	playing=false;
 	$(function () {
 		$("#dialog").dialog({
 			modal:true,
-			close:buttonHide,
+			close:buttonState,
 			buttons:{
 				"再来一发":function(){
 					$(this).dialog("close");
