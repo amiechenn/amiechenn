@@ -17,7 +17,7 @@ body
 #number
 {
 	position:absolute;
-	left:7rem;
+	left:9rem;
 	top:8rem;
 	font-size:4rem;
 	color:#FF5F11;
@@ -26,7 +26,7 @@ body
 #button
 {
 	position:absolute;
-	left:5rem;
+	left:7rem;
 	top:20rem;
 	width:6rem;
 	height:3rem;
@@ -45,26 +45,31 @@ body
 
 <div id="number"  style="visibility:visible;"></div>
 	
-<button id=button onclick="playGame()"><b>开&nbsp;&nbsp;始</b></button>
+<button id=button onclick="playGame(),playBegin()" >开&nbsp;&nbsp;始</button>
 <div id="dialog" title="score"></div>  
 	
 </body>
 
 
 <script>
-
+var playing=0;
 var SHAKE_THRESHOLD = 2000;
 var last_update = 0;
 var x = y = z = last_x = last_y = last_z = 0;
 var media;
 var score = 0;
 
+
+		
+
+
 function init() {
 	last_update = new Date().getTime();
 	media = document.getElementById("musicBox");
 	if (window.DeviceMotionEvent) {
 		window.addEventListener('devicemotion', deviceMotionHandler, false);
-	} else {
+	} 
+	else {
 		
 		alert('not support mobile event');
 	}
@@ -108,15 +113,30 @@ function playGame(){
 	score=0;
 	document.getElementById("number").innerHTML = score;
 	init() ;
-	
-	
 }	
 
+
+
+function buttonHide(){
+	if(playing==1){
+		$("#button").attr("onclick","");
+	}
+	if(playing==0){
+		$("#button").attr("onclick","playGame(),playBegin()");	
+	}
+}
+function playBegin(){
+	playing++;
+	buttonHide();
+	//playing=1,playbegin,button over
+};
+
 function scoreDialog(){
+	playing=0;
 	$(function () {
 		$("#dialog").dialog({
 			modal:true,
-			//close:playGame,
+			close:buttonHide,
 			buttons:{
 				"再来一发":function(){
 					$(this).dialog("close");
@@ -127,9 +147,6 @@ function scoreDialog(){
 	});
 	document.getElementById("dialog").innerHTML = score;
 }
-
-
-
 
 
 
