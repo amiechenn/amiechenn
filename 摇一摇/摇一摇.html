@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<title>摇一摇</title>
+<title id="title">摇一摇</title>
 
 <style>
 body
@@ -38,9 +38,17 @@ body
 	width:6rem;
 	height:3rem;
 	font-size:1rem;
-	
 	border:#FF8282 solid ;
 	color:#FFF;
+}
+
+#share
+{
+	width:8rem;
+	height:5rem;
+	background-color:#999;
+	
+	
 }
 </style>
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
@@ -57,7 +65,9 @@ body
 		
 	<button id=button onclick="playGame(),playBegin()"  style="background-color:#F44;">开&nbsp;&nbsp;始</button>
 	<div id="dialog" title="score"></div> 
+	<div id="share" style="visibility:visible;">点击右上角<br />分享到朋友圈</div>
 </div> 
+
 	
 </body>
 
@@ -144,17 +154,25 @@ function playBegin(){
 	
 };
 
+
+function share(){
+	document.getElementById("title").innerHTML = "我摇到" + score;
+}
+
 function scoreDialog(){
 	playing=false;
 	$(function () {
 		$("#dialog").dialog({
 			modal:true,
-			close:buttonState,
+			
 			buttons:{
 				"再来一发":function(){
+					buttonState();
 					$(this).dialog("close");
 				},
 				"分享到朋友圈":function(){
+					buttonState();
+					share();
 					$(this).dialog("close");
 				}
 			}
