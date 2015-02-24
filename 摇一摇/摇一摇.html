@@ -28,18 +28,48 @@ body
 	margin:0 auto;
 	top:4rem;
 	font-size:4rem;
-	color:#FF5F11;
+	color:#FF0;
 	width:3rem;
+	z-index:1000;
 }
 
 
+#hongbao
+{
+	display:block;
+	position:relative;
+	margin:0 auto;
+	top:-4rem;
+	width:13rem;
+	
+}
 
+#hongbao img
+{
+	border-radius:5px;
+	-moz-border-radius:5px;
+	 -webkit-border-radius:5px;
+	 -o-border-radius:5px;
+	 box-shadow:10px 10px 7px #888888;
+	 -moz-box-shadow:10px 10px 7px #888888;
+}
+
+#hongbao b
+{
+	display:block;
+	position:relative;
+	margin:0 auto;
+	top:-4rem;
+	width:10rem;
+	font-size:3rem;
+	color:#FF9;
+}
 
 #button
 {
 	display:block;
 	position:relative;
-	top:10rem;
+	top:0.5rem;
 	margin:0 auto;
 	width:6rem;
 	height:3rem;
@@ -90,6 +120,8 @@ body
 <div id="content">
 	<div id="share" style="visibility:hidden;"><b>点击右上角<br />分享到朋友圈</b></div>
 	<div id="number"  style="visibility:visible;">0</div>
+	<div id="hongbao"><img src="image/红包.jpg" /><b>大红包</b></div>
+	
 	<button id=button onclick="playGame(),playBegin()"  style="background-color:#F44;">开&nbsp;&nbsp;始</button>
 	<div id="dialog" title="score"></div> 
 	
