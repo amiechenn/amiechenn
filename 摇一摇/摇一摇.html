@@ -14,7 +14,7 @@ body
 }
 #content
 {
-	width:10rem;
+	width:360px;
 	height:0;
 	margin:auto;
 	background-color:#CCC;
@@ -23,32 +23,59 @@ body
 
 #number
 {
+	display:block;
 	position:relative;
-	left:4rem;
-	top:8rem;
+	margin:0 auto;
+	top:4rem;
 	font-size:4rem;
 	color:#FF5F11;
+	width:3rem;
 }
+
+
+
 
 #button
 {
+	display:block;
 	position:relative;
-	top:20rem;
-	left:3rem;
+	top:10rem;
+	margin:0 auto;
 	width:6rem;
 	height:3rem;
 	font-size:1rem;
 	border:#FF8282 solid ;
 	color:#FFF;
+	border-radius:15px;
+	-moz-border-radius:15px;
+	 -webkit-border-radius:15px;
+	 -o-border-radius:15px;
 }
 
 #share
 {
+	position:relative;
+	top:0;
+	margin:0 auto;
 	width:8rem;
-	height:5rem;
-	background-color:#999;
+	height:5.2rem;
+	background-color:#333;
+	text-align:center;
+	line-height:2;
+	color:#FFF;
+	border-radius:15px;
+	-moz-border-radius:15px;
+	 -webkit-border-radius:15px;
+	 -o-border-radius:15px;
 	
 	
+	
+}
+
+#share b
+{
+	position:relative;
+	top:0.6rem;
 }
 </style>
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
@@ -61,11 +88,11 @@ body
 <img src="image/wxlogo.jpg" />
 </div>
 <div id="content">
+	<div id="share" style="visibility:hidden;"><b>点击右上角<br />分享到朋友圈</b></div>
 	<div id="number"  style="visibility:visible;">0</div>
-		
 	<button id=button onclick="playGame(),playBegin()"  style="background-color:#F44;">开&nbsp;&nbsp;始</button>
 	<div id="dialog" title="score"></div> 
-	<div id="share" style="visibility:visible;">点击右上角<br />分享到朋友圈</div>
+	
 </div> 
 
 	
@@ -130,6 +157,7 @@ function deviceMotionHandler(eventData) {
 }
 
 function playGame(){
+	$("#share").attr("style","visibility:hidden;");
 	setTimeout (function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
 	score=0;
 	document.getElementById("number").innerHTML = score;
@@ -157,6 +185,7 @@ function playBegin(){
 
 function share(){
 	document.getElementById("title").innerHTML = "我摇到" + score;
+	$("#share").attr("style","visibility:visible;");
 }
 
 function scoreDialog(){
@@ -164,14 +193,12 @@ function scoreDialog(){
 	$(function () {
 		$("#dialog").dialog({
 			modal:true,
-			
+			close:buttonState,
 			buttons:{
 				"再来一发":function(){
-					buttonState();
 					$(this).dialog("close");
 				},
 				"分享到朋友圈":function(){
-					buttonState();
 					share();
 					$(this).dialog("close");
 				}
