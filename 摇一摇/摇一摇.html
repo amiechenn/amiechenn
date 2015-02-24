@@ -191,14 +191,15 @@ function deviceMotionHandler(eventData) {
 function playGame(){
 	$("#share").attr("style","visibility:hidden;");
 	setTimeout (function (){window.removeEventListener('devicemotion', deviceMotionHandler, false),scoreDialog()},5000);
-	score=0;
-	document.getElementById("number").innerHTML = score;
+	
 	init() ;
 }	
 
 
 
 function buttonState(){
+	score=0;
+	document.getElementById("number").innerHTML = score;
 	if(playing==true){
 		$("#button").attr("onclick","");
 		$("#button").attr("style","background-color:#999;");
@@ -249,8 +250,6 @@ function scoreDialog(){
 
 </script>
 
-<script>
 
-</script>
 
 </html>
