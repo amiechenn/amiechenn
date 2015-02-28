@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
-<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js"></script>
 <title>井字过三关</title>
 <style>
 body{
@@ -142,21 +142,25 @@ function judge(arr){
 			if(arr[i][0]==arr[i][1] && arr[i][1]==arr[i][2] && arr[i][1]!=0){
 				
 				$("#win").attr("style","visibility:visible");
+				$(".block").attr("onClick","")
 				return true;
 			}
 			if(arr[0][i]==arr[1][i] && arr[1][i]==arr[2][i] && arr[1][i]!=0){
 				
 				$("#win").attr("style","visibility:visible");
+				$(".block").attr("onClick","")
 				return true;
 			}
 			
 		}
 		if(arr[0][0]==arr[1][1] && arr[1][1]==arr[2][2] && arr[1][1]!=0){
 			$("#win").attr("style","visibility:visible");
+			$(".block").attr("onClick","")
 			return true;
 		}
 		if(arr[0][2]==arr[1][1] && arr[1][1]==arr[2][0] && arr[1][1]!=0){
 			$("#win").attr("style","visibility:visible");
+			$(".block").attr("onClick","")
 			return true;
 		}
 	return false;
@@ -183,8 +187,10 @@ function reply_click(clicked_id){
 		//}
 	}
 	updateBoard(i,j);
-	
 	judge(arr);
+	if(judge(arr)==true){
+		return 
+	};
 	
 	// AI 下棋
 	
@@ -203,6 +209,7 @@ function reply_click(clicked_id){
 	
 	judge(arr);
 	
+	
 	// AI 动画
 	
 	// AI 赢判断
@@ -215,6 +222,7 @@ function reply_click(clicked_id){
 
 $("#again").click(function(){
 	$("#win").attr("style","visibility:hidden");
+	$(".block").attr("onClick","reply_click(this.id)")
 	arr = [[ 0, 0, 0],
            [ 0, 0, 0],
            [ 0, 0, 0]];
