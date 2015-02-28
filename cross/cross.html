@@ -62,10 +62,18 @@ body{
 	-moz-border-radius:10px;
 	 -webkit-border-radius:10px;
 	 -o-border-radius:10px;
+	 position:relative;
+	 top:-3rem;
 }
 #dialog p b{
-	font-size:3rem;
+	font-size:1.5rem;
 	color:#F00;
+}
+#duangwin{
+	display:block;
+	position:relative;
+	top:-3.5rem;
+	
 }
 </style>
 </head>
@@ -90,7 +98,8 @@ body{
 	<div style="clear:both"></div>	
 </div>
 <div id="dialog">
-		<p><b id="win" style="visibility:hidden">"胜利"</b></p>
+		<p><b id="win" style="visibility:hidden">你打败了duang！</b></p>
+		<p><b id="duangwin" style="visibility:hidden">duang win</b></p>
 		<p ><button id="again">重新开始</button></p>
 		
 	</div>
@@ -99,6 +108,7 @@ body{
 <script>
 
 var player=0;
+var stepOfPlayer=0;
 var arr = [[ 0, 0, 0],[ 0, 0, 0],[ 0, 0, 0]];
 
 for(var i=0;i<3;i++){
@@ -141,28 +151,29 @@ function judge(arr){
 		for(i=0;i<3;i++){
 			if(arr[i][0]==arr[i][1] && arr[i][1]==arr[i][2] && arr[i][1]!=0){
 				
-				$("#win").attr("style","visibility:visible");
+				
 				$(".block").attr("onClick","")
 				return true;
 			}
 			if(arr[0][i]==arr[1][i] && arr[1][i]==arr[2][i] && arr[1][i]!=0){
 				
-				$("#win").attr("style","visibility:visible");
+				
 				$(".block").attr("onClick","")
 				return true;
 			}
 			
 		}
 		if(arr[0][0]==arr[1][1] && arr[1][1]==arr[2][2] && arr[1][1]!=0){
-			$("#win").attr("style","visibility:visible");
+			
 			$(".block").attr("onClick","")
 			return true;
 		}
 		if(arr[0][2]==arr[1][1] && arr[1][1]==arr[2][0] && arr[1][1]!=0){
-			$("#win").attr("style","visibility:visible");
+			
 			$(".block").attr("onClick","")
 			return true;
 		}
+		
 	return false;
 }
 function GetRandomNum(Min,Max){   
@@ -177,6 +188,7 @@ function reply_click(clicked_id){
 	var j=x[1];
 	if(arr[i][j]==0){
 		player++;
+		stepOfPlayer++;
 		if(player==1){
 			
 			arr[i][j]=1;
@@ -187,27 +199,35 @@ function reply_click(clicked_id){
 		//}
 	}
 	updateBoard(i,j);
-	judge(arr);
-	if(judge(arr)==true){
+	//judge(arr);
+	if(judge(arr)==true ){
+		$("#win").attr("style","visibility:visible");
 		return 
-	};
+	}
 	
 	// AI 下棋
 	
-	var i=GetRandomNum(0,2);
-	var j=GetRandomNum(0,2);
-	while(arr[i][j]!=0){
+	if(judge(arr)==false && player==1 && stepOfPlayer!=5){
+		var i=GetRandomNum(0,2);
+		var j=GetRandomNum(0,2);
+		while(arr[i][j]!=0){
+			
+			i=GetRandomNum(0,2);
+			 j=GetRandomNum(0,2);
+		}
 		
-		i=GetRandomNum(0,2);
-		 j=GetRandomNum(0,2);
+			arr[i][j]=2;
+				player=0;
+		
+		updateBoard(i,j);
+		
+		//judge(arr);
+		if(judge(arr)==true){
+			$("#duangwin").attr("style","visibility:visible");
+			return
+		}
+		
 	}
-	
-		arr[i][j]=2;
-			player=0;
-	
-	updateBoard(i,j);
-	
-	judge(arr);
 	
 	
 	// AI 动画
@@ -222,6 +242,7 @@ function reply_click(clicked_id){
 
 $("#again").click(function(){
 	$("#win").attr("style","visibility:hidden");
+	$("#duangwin").attr("style","visibility:hidden");
 	$(".block").attr("onClick","reply_click(this.id)")
 	arr = [[ 0, 0, 0],
            [ 0, 0, 0],
@@ -234,6 +255,7 @@ $("#again").click(function(){
 	}
 
 	player=0;
+	stepOfPlayer=0;
 
 });
 
