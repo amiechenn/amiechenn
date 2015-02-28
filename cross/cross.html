@@ -46,7 +46,7 @@ body{
 	top:2rem;
 	margin:auto;
 }
-#dialog p{
+.judge{
 	display:block;
 	margin:auto;
 	text-align:center;
@@ -63,9 +63,9 @@ body{
 	 -webkit-border-radius:10px;
 	 -o-border-radius:10px;
 	 position:relative;
-	 top:-3rem;
+	 top:-10rem;
 }
-#dialog p b{
+#dialog  b{
 	font-size:1.5rem;
 	color:#F00;
 }
@@ -74,6 +74,12 @@ body{
 	position:relative;
 	top:-3.5rem;
 	
+}
+#duangphoto{
+	margin:auto;
+	position:relative;
+	top:-12rem;
+		
 }
 </style>
 </head>
@@ -98,9 +104,10 @@ body{
 	<div style="clear:both"></div>	
 </div>
 <div id="dialog">
-	<p><b id="win" style="visibility:hidden">你打败了duang！</b></p>
-	<p><b id="duangwin" style="visibility:hidden">duang win</b></p>
-	<p ><button id="again">重新开始</button></p>
+	<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang！</b></div>
+	<div id="duangwin" class="judge" style="visibility:hidden"><b>duang win</b></div>
+	<div id="duangphoto" class="judge" style="visibility:hidden"><img src="images/duang.gif" width="126" height="80" /></div>
+	<div class="judge" ><button id="again">重新开始</button></div>
 </div>
 <div id="song" style="visibility:hidden"> </div>
 
@@ -108,8 +115,7 @@ body{
 <script>
 
 var player=0;
-var stepOfPlayer=0;
-var arr = [[ 0, 0, 0],[ 0, 0, 0],[ 0, 0, 0]];
+var arr = [[ 0, 0, 0],[0 ,0, 0],[ 0, 0, 0]];
 
 for(var i=0;i<3;i++){
 	for(var j=0;j<3;j++){
@@ -186,9 +192,9 @@ function reply_click(clicked_id){
 	var x=getColRowByString(clicked_id);
 	var i=x[0];
 	var j=x[1];
+	player=0;
 	if(arr[i][j]==0){
 		player++;
-		stepOfPlayer++;
 		if(player==1){
 			
 			arr[i][j]=1;
@@ -202,39 +208,36 @@ function reply_click(clicked_id){
 	//judge(arr);
 	if(judge(arr)==true ){
 		$("#win").attr("style","visibility:visible");
+		$("#duangphoto").attr("style","visibility:visible");
 		return 
 	}
 	
-	// AI 下棋
-	
-	if(judge(arr)==false && player==1 && stepOfPlayer!=5){
-		var i=GetRandomNum(0,2);
-		var j=GetRandomNum(0,2);
-		while(arr[i][j]!=0){
+	if(arr[0][0]==0 || arr[0][1]==0 || arr[0][2]==0 || arr[1][0]==0 || arr[1][1]==0 || arr[1][2]==0 || arr[2][0]==0 || arr[2][1]==0 || arr[2][2]==0 ){// AI 下棋
+		var s=0;
+		var e=GetRandomNum(1,3);
+		for(s=0;s<e;s++){
+			if(judge(arr)==false && player==1 ){
+				var i=GetRandomNum(0,2);
+				var j=GetRandomNum(0,2);
+				while(arr[i][j]!=0){
+					i=GetRandomNum(0,2);
+					 j=GetRandomNum(0,2);
+				}
+					arr[i][j]=2;
+				
+				updateBoard(i,j);
+				//judge(arr);
+				if(judge(arr)==true){
+					$("#duangwin").attr("style","visibility:visible");
+					$("#duangphoto").attr("style","visibility:visible");
+					document.getElementById("song").innerHTML = "<audio src=\"song.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
+					return
+				}
 			
-			i=GetRandomNum(0,2);
-			 j=GetRandomNum(0,2);
-		}
-		
-			arr[i][j]=2;
-				player=0;
-		
-		updateBoard(i,j);
-		
-		//judge(arr);
-		if(judge(arr)==true){
-			$("#duangwin").attr("style","visibility:visible");
-			document.getElementById("song").innerHTML = "<audio src=\"song.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
-			return
+			}
 		}
 		
 	}
-	
-	
-	// AI 动画
-	
-	// AI 赢判断
-	
 	
      return clicked_id;
 }
@@ -244,7 +247,8 @@ function reply_click(clicked_id){
 $("#again").click(function(){
 	$("#win").attr("style","visibility:hidden");
 	$("#duangwin").attr("style","visibility:hidden");
-	$(".block").attr("onClick","reply_click(this.id)")
+	$("#duangphoto").attr("style","visibility:hidden");
+	$(".block").attr("onClick","reply_click(this.id)");
 	arr = [[ 0, 0, 0],
            [ 0, 0, 0],
            [ 0, 0, 0]];
@@ -256,7 +260,6 @@ $("#again").click(function(){
 	}
 
 	player=0;
-	stepOfPlayer=0;
 
 });
 
