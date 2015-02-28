@@ -128,10 +128,10 @@ function updateBoard(i,j){
 		document.getElementById(selId(i ,j)).innerHTML = "&nbsp;";
 	}
 	if(arr[i][j]==1){
-		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player1.png\" width=\"84px\" height=\"80px\"/>";
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player1.png\" width=\"82px\" height=\"80px\"/>";
 	}
 	if(arr[i][j]==2){
-		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player2.jpg\" width=\"84px\" height=\"80px\"/>";
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player2.jpg\" width=\"82px\" height=\"80px\"/>";
 	}
 }
 
@@ -179,6 +179,13 @@ function reply_click(clicked_id){
 	updateBoard(i,j);
 	
 	judge(arr);
+	
+	// AI 下棋
+	
+	// AI 动画
+	
+	// AI 赢判断
+	
 	
      return clicked_id;
 }
