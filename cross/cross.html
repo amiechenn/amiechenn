@@ -128,10 +128,10 @@ function updateBoard(i,j){
 		document.getElementById(selId(i ,j)).innerHTML = "&nbsp;";
 	}
 	if(arr[i][j]==1){
-		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player1.png\" width=\"82px\" height=\"80px\"/>";
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player1.png\" width=\"81px\" height=\"80px\"/>";
 	}
 	if(arr[i][j]==2){
-		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player2.jpg\" width=\"82px\" height=\"80px\"/>";
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player2.jpg\" width=\"81px\" height=\"80px\"/>";
 	}
 }
 
@@ -161,6 +161,12 @@ function judge(arr){
 		}
 	return false;
 }
+function GetRandomNum(Min,Max){   
+	var Range = Max - Min;   
+	var Rand = Math.random();   
+	return(Min + Math.round(Rand * Range));   
+} 
+  
 function reply_click(clicked_id){
 	var x=getColRowByString(clicked_id);
 	var i=x[0];
@@ -171,16 +177,31 @@ function reply_click(clicked_id){
 			
 			arr[i][j]=1;
 		}
-		if(player==2){
-			arr[i][j]=2;
-			player=0;
-		}
+		//if(player==2){
+			//arr[i][j]=2;
+			//player=0;
+		//}
 	}
 	updateBoard(i,j);
 	
 	judge(arr);
 	
 	// AI 下棋
+	
+	var i=GetRandomNum(0,2);
+	var j=GetRandomNum(0,2);
+	while(arr[i][j]!=0){
+		
+		i=GetRandomNum(0,2);
+		 j=GetRandomNum(0,2);
+	}
+	
+		arr[i][j]=2;
+			player=0;
+	
+	updateBoard(i,j);
+	
+	judge(arr);
 	
 	// AI 动画
 	
