@@ -98,11 +98,11 @@ body{
 	<div style="clear:both"></div>	
 </div>
 <div id="dialog">
-		<p><b id="win" style="visibility:hidden">你打败了duang！</b></p>
-		<p><b id="duangwin" style="visibility:hidden">duang win</b></p>
-		<p ><button id="again">重新开始</button></p>
-		
-	</div>
+	<p><b id="win" style="visibility:hidden">你打败了duang！</b></p>
+	<p><b id="duangwin" style="visibility:hidden">duang win</b></p>
+	<p ><button id="again">重新开始</button></p>
+</div>
+<div id="song" style="visibility:hidden"> </div>
 
 </body>
 <script>
@@ -224,6 +224,7 @@ function reply_click(clicked_id){
 		//judge(arr);
 		if(judge(arr)==true){
 			$("#duangwin").attr("style","visibility:visible");
+			document.getElementById("song").innerHTML = "<audio src=\"song.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
 			return
 		}
 		
