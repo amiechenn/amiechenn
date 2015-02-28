@@ -7,14 +7,14 @@
 <title>井字过三关</title>
 <style>
 body{
-	width:360px;
+	width:320px;
 	margin:auto;
 	position:relative;
 	color:#FFF;
 }
 #contain{
 	width:16rem;
-	padding:1.5rem;
+	padding:1rem;
 	margin:auto;
 	background-color:#333;
 	border:#FFF solid 2px;
@@ -24,20 +24,17 @@ body{
 	 -o-border-radius:10px;
 }
 .col0{
-	/*position:absolute;
-	top:3rem;
-	left:3rem;*/
-	line-height:4rem;
 	float:left;
+	line-height:5rem;
 }
 .col1{
 	float:left;
-	line-height:4rem;
+	line-height:5rem;
 }
 
 .col2{
 	float:left;
-	line-height:4rem;
+	line-height:5rem;
 	
 }
 .block{
@@ -46,7 +43,7 @@ body{
 }
 #dialog{
 	position:relative;
-	top:4rem;
+	top:2rem;
 	margin:auto;
 }
 #dialog p{
@@ -74,7 +71,6 @@ body{
 </head>
 
 <body>
-
 <div id=contain>
 	<div class="col0">
 		<div id="col0row0" class="block" onClick="reply_click(this.id)"></div>
@@ -101,6 +97,7 @@ body{
 
 </body>
 <script>
+
 var player=0;
 var arr = [[ 0, 0, 0],[ 0, 0, 0],[ 0, 0, 0]];
 
@@ -130,8 +127,11 @@ function updateBoard(i,j){
 	if(arr[i][j]==0){
 		document.getElementById(selId(i ,j)).innerHTML = "&nbsp;";
 	}
-	else{
-		document.getElementById(selId(i ,j)).innerHTML = arr[i][j];
+	if(arr[i][j]==1){
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player1.png\" width=\"84px\" height=\"80px\"/>";
+	}
+	if(arr[i][j]==2){
+		document.getElementById(selId(i ,j)).innerHTML ="<img src=\"images/player2.jpg\" width=\"84px\" height=\"80px\"/>";
 	}
 }
 
@@ -168,6 +168,7 @@ function reply_click(clicked_id){
 	if(arr[i][j]==0){
 		player++;
 		if(player==1){
+			
 			arr[i][j]=1;
 		}
 		if(player==2){
