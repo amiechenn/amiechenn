@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
 <script src="http://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js"></script>
-<title>duangduangduang~</title>
+<title id="title">duangduangduang~</title>
 <style>
 body{
 	color:#FFF;
@@ -66,6 +66,14 @@ body{
 	 -o-border-radius:10px;
 	 position:relative;
 	 top:3rem;
+}
+#again{
+	position:relative;
+	left:-2rem;
+}
+#next{
+	position:relative;
+	left:2rem; 
 }
 #dialog  b{
 	font-size:1.5rem;
@@ -181,7 +189,7 @@ body{
 <img src="images/wxlogo.jpg"   />
 </div>
 <div id="main">
-	<div id="amount">你连续赢了<span id="amount_n"></span>次</div>
+	<div id="amount">你连续赢了<span id="amount_n">&nbsp;</span>次</div>
 	<div id=contain>
 		<div class="col0">
 			<div id="col0row0" class="block" onClick="reply_click(this.id)"></div>
@@ -204,12 +212,13 @@ body{
 		<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang~</b></div>
 		<div id="duangwin" class="judge" style="visibility:hidden"><b>duang~ win</b></div>
 		
-		<div class="judge" ><button id="again">重新开始</button></div>
+		<div class="judge" ><button id="again">重新开始</button><button id="next" style="visibility:visible">下一局</button></div>
+		
 		<div ><img id="duangphoto" class="judge" style="visibility:hidden" src="images/duang.gif" alt="GUANG"  />
 		</div>
 		<div ><img id="player" class="judge" style="visibility:hidden;" src="images/player1.png" alt="player"  />
 		</div>
-	
+		
 </div>
 
 <div id="song" style="visibility:hidden"> </div>
@@ -314,12 +323,13 @@ function reply_click(clicked_id){
 		$("#win").attr("style","visibility:visible");
 		$("#player").attr("style","visibility:visible;animation:player 1s;-moz-animation:player 1s;-webkit-animation:player 1s;  -o-animation:player 1s;"  );
 		document.getElementById("amount_n").innerHTML = amount;
+		document.getElementById("title").innerHTML = "井字过三duang--我连赢"+ amount +"局！" ;
 		return 
 	}
 	
 	// AI 下棋
 	var s=0;
-	var e=GetRandomNum(1,5);
+	var e=GetRandomNum(1,4);
 	for(s=0;s<e;s++){
 		if(judge(arr)==false && player==1 ){
 			if(arr[0][0]==0 || arr[0][1]==0 || arr[0][2]==0 || arr[1][0]==0 || arr[1][1]==0 || arr[1][2]==0 || arr[2][0]==0 || arr[2][1]==0 || arr[2][2]==0 ){
@@ -334,8 +344,7 @@ function reply_click(clicked_id){
 				updateBoard(i,j);
 				//judge(arr);
 				if(judge(arr)==true){
-					amout=0;
-					document.getElementById("amount_n").innerHTML = amount;
+					$("#next").attr("style","visibility:hidden");
 					$("#duangwin").attr("style","visibility:visible");
 					$("#duangphoto").attr("style","visibility:visible;animation:duanggif 1s;-moz-animation:duanggif 1s;-webkit-animation:duanggif 1s;  -o-animation:duanggif 1s;  ");
 					document.getElementById("song").innerHTML = "<audio src=\"duangduang.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
@@ -353,6 +362,7 @@ function reply_click(clicked_id){
 
 
 $("#again").click(function(){
+	$("#next").attr("style","visibility:visible");
 	$("#win").attr("style","visibility:hidden");
 	$("#duangwin").attr("style","visibility:hidden");
 	$("#duangphoto").attr("style","visibility:hidden");
@@ -369,9 +379,30 @@ $("#again").click(function(){
 	}
 
 	player=0;
+	amount=0;
+	document.getElementById("amount_n").innerHTML = amount;
 
 });
+$("#next").click(function(){
+	$("#win").attr("style","visibility:hidden");
+	$("#duangwin").attr("style","visibility:hidden");
+	$("#duangphoto").attr("style","visibility:hidden");
+	$("#player").attr("style","visibility:hidden");
+	$(".block").attr("onClick","reply_click(this.id)");
+	arr = [[ 0, 0, 0],
+           [ 0, 0, 0],
+           [ 0, 0, 0]];
+	for(var i=0;i<3;i++){
+		for(var j=0;j<3;j++){
+			
+		updateBoard(i,j);
+		}
+	}
 
+	player=0;
+	
+
+});
 
 </script>
 </html>
