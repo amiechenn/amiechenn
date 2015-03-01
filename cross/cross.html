@@ -80,12 +80,25 @@ body{
 	position:relative;
 	top:-14rem;
 }
+@keyframes duanggif{
+	0%{width:0px; height:0px;}
+	50%{width:186px; height:110px;}
+	100%{width:146px; height:80px;}
+}
 @-webkit-keyframes duanggif{
 	0%{width:0px; height:0px;}
 	50%{width:186px; height:110px;}
 	100%{width:146px; height:80px;}
-
-	
+}
+@-moz-keyframes duanggif{
+	0%{width:0px; height:0px;}
+	50%{width:186px; height:110px;}
+	100%{width:146px; height:80px;}
+}
+@-o-keyframes duanggif{
+	0%{width:0px; height:0px;}
+	50%{width:186px; height:110px;}
+	100%{width:146px; height:80px;}
 }
 #duangphoto{
 	margin:auto;
@@ -94,7 +107,18 @@ body{
 	width:146px;
 	height:80px;	
 }
-
+@keyframes player{
+	0%{top:-24rem;}
+	10%{top:-23rem;}
+	20%{top:-24rem;}
+	30%{top:-23rem;}
+	40%{top:-24rem;}
+	50%{top:-23rem;}
+	60%{top:-24rem;}
+	70%{top:-23rem;}
+	80%{top:-24rem;}
+	100%{top:-12rem;}
+}
 @-webkit-keyframes player{
 	0%{top:-24rem;}
 	10%{top:-23rem;}
@@ -105,7 +129,30 @@ body{
 	60%{top:-24rem;}
 	70%{top:-23rem;}
 	80%{top:-24rem;}
-	
+	100%{top:-12rem;}
+}
+@-o-keyframes player{
+	0%{top:-24rem;}
+	10%{top:-23rem;}
+	20%{top:-24rem;}
+	30%{top:-23rem;}
+	40%{top:-24rem;}
+	50%{top:-23rem;}
+	60%{top:-24rem;}
+	70%{top:-23rem;}
+	80%{top:-24rem;}
+	100%{top:-12rem;}
+}
+@-moz-keyframes player{
+	0%{top:-24rem;}
+	10%{top:-23rem;}
+	20%{top:-24rem;}
+	30%{top:-23rem;}
+	40%{top:-24rem;}
+	50%{top:-23rem;}
+	60%{top:-24rem;}
+	70%{top:-23rem;}
+	80%{top:-24rem;}
 	100%{top:-12rem;}
 }
 #player{
@@ -119,6 +166,9 @@ body{
 </head>
 
 <body>
+<div id='wx_logo' style='margin:0 auto;display:none'>
+<img src="images/wxlogo.jpg" width="300px" height="300px" />
+</div
 <div id=contain>
 	<div class="col0">
 		<div id="col0row0" class="block" onClick="reply_click(this.id)"></div>
@@ -154,7 +204,7 @@ body{
 <script>
 
 var player=0;
-var arr = [[ 1, 2, 0],[2 ,1, 0],[1, 2, 2]];
+var arr = [[ 0, 0, 0],[0 ,0, 0],[0, 0, 0]];
 
 for(var i=0;i<3;i++){
 	for(var j=0;j<3;j++){
