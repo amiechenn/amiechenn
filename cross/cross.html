@@ -212,7 +212,7 @@ body{
 		<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang~</b></div>
 		<div id="duangwin" class="judge" style="visibility:hidden"><b>duang~ win</b></div>
 		
-		<div class="judge" ><button id="again">重新开始</button><button id="next" style="visibility:visible">下一局</button></div>
+		<div class="judge" ><button id="again">重新开始</button><button id="next" style="visibility:hidden">下一局</button></div>
 		
 		<div ><img id="duangphoto" class="judge" style="visibility:hidden" src="images/duang.gif" alt="GUANG"  />
 		</div>
@@ -320,6 +320,7 @@ function reply_click(clicked_id){
 	//judge(arr);
 	if(judge(arr)==true ){
 		amount++;
+		$("#next").attr("style","visibility:visible");
 		$("#win").attr("style","visibility:visible");
 		$("#player").attr("style","visibility:visible;animation:player 1s;-moz-animation:player 1s;-webkit-animation:player 1s;  -o-animation:player 1s;"  );
 		document.getElementById("amount_n").innerHTML = amount;
@@ -362,7 +363,6 @@ function reply_click(clicked_id){
 
 
 $("#again").click(function(){
-	$("#next").attr("style","visibility:visible");
 	$("#win").attr("style","visibility:hidden");
 	$("#duangwin").attr("style","visibility:hidden");
 	$("#duangphoto").attr("style","visibility:hidden");
