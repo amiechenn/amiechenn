@@ -63,7 +63,7 @@ body{
 	 -webkit-border-radius:10px;
 	 -o-border-radius:10px;
 	 position:relative;
-	 top:-10rem;
+	 top:-4rem;
 }
 #dialog  b{
 	font-size:1.5rem;
@@ -78,8 +78,17 @@ body{
 #duangphoto{
 	margin:auto;
 	position:relative;
-	top:-12rem;
+	top:-30rem;
 		
+}
+@-webkit-keyframes duanggif{
+	0%{width:0px; height:0px;}
+	100%{width:246px; height:160px;}
+}
+
+#duangphoto {
+	width:246px;
+	height:160px;
 }
 </style>
 </head>
@@ -106,9 +115,12 @@ body{
 <div id="dialog">
 	<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang！</b></div>
 	<div id="duangwin" class="judge" style="visibility:hidden"><b>duang win</b></div>
-	<div id="duangphoto" class="judge" style="visibility:hidden"><img src="images/duang.gif" width="126" height="80" /></div>
+	
 	<div class="judge" ><button id="again">重新开始</button></div>
+	<div ><img id="duangphoto" class="judge" style="visibility:hidden" src="images/duang.gif" alt="GUANG"  />
+	</div>
 </div>
+
 <div id="song" style="visibility:hidden"> </div>
 
 </body>
@@ -208,7 +220,7 @@ function reply_click(clicked_id){
 	//judge(arr);
 	if(judge(arr)==true ){
 		$("#win").attr("style","visibility:visible");
-		$("#duangphoto").attr("style","visibility:visible");
+		$("#duangphoto").attr("style","visibility:visible;animation:duanggif 0.3s;-moz-animation:duanggif 0.3s;-webkit-animation:duanggif 0.3s;  -o-animation:duanggif 0.3s;"  );
 		return 
 	}
 	
@@ -229,7 +241,7 @@ function reply_click(clicked_id){
 				//judge(arr);
 				if(judge(arr)==true){
 					$("#duangwin").attr("style","visibility:visible");
-					$("#duangphoto").attr("style","visibility:visible");
+					$("#duangphoto").attr("style","visibility:visible;animation:duanggif 0.3s;-moz-animation:duanggif 0.3s;-webkit-animation:duanggif 0.3s;  -o-animation:duanggif 0.3s;  ");
 					document.getElementById("song").innerHTML = "<audio src=\"song.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
 					return
 				}
