@@ -165,6 +165,14 @@ body{
 	top:-12rem;
 	
 }
+#amount{
+	color:#F00;
+	font-size:1.5rem;
+	margin:auto;
+	display:block;
+	width:13rem;
+	text-align:center;
+}
 </style>
 </head>
 
@@ -173,40 +181,42 @@ body{
 <img src="images/wxlogo.jpg"   />
 </div>
 <div id="main">
-<div id=contain>
-	<div class="col0">
-		<div id="col0row0" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col0row1" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col0row2" class="block" onClick="reply_click(this.id)"></div>
+	<div id="amount">你连续赢了<span id="amount_n"></span>次</div>
+	<div id=contain>
+		<div class="col0">
+			<div id="col0row0" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col0row1" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col0row2" class="block" onClick="reply_click(this.id)"></div>
+		</div>
+		<div class="col1">
+			<div id="col1row0" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col1row1" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col1row2" class="block" onClick="reply_click(this.id)"></div>
+		</div>
+		<div class="col2">
+			<div id="col2row0" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col2row1" class="block" onClick="reply_click(this.id)"></div>
+			<div id="col2row2" class="block" onClick="reply_click(this.id)"></div>
+		</div>		
+		<div style="clear:both"></div>	
 	</div>
-	<div class="col1">
-		<div id="col1row0" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col1row1" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col1row2" class="block" onClick="reply_click(this.id)"></div>
-	</div>
-	<div class="col2">
-		<div id="col2row0" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col2row1" class="block" onClick="reply_click(this.id)"></div>
-		<div id="col2row2" class="block" onClick="reply_click(this.id)"></div>
-	</div>		
-	<div style="clear:both"></div>	
-</div>
-<div id="dialog">
-	<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang~</b></div>
-	<div id="duangwin" class="judge" style="visibility:hidden"><b>duang~ win</b></div>
+	<div id="dialog">
+		<div id="win" class="judge" style="visibility:hidden"><b>你打败了duang~</b></div>
+		<div id="duangwin" class="judge" style="visibility:hidden"><b>duang~ win</b></div>
+		
+		<div class="judge" ><button id="again">重新开始</button></div>
+		<div ><img id="duangphoto" class="judge" style="visibility:hidden" src="images/duang.gif" alt="GUANG"  />
+		</div>
+		<div ><img id="player" class="judge" style="visibility:hidden;" src="images/player1.png" alt="player"  />
+		</div>
 	
-	<div class="judge" ><button id="again">重新开始</button></div>
-	<div ><img id="duangphoto" class="judge" style="visibility:hidden" src="images/duang.gif" alt="GUANG"  />
-	</div>
-	<div ><img id="player" class="judge" style="visibility:hidden;" src="images/player1.png" alt="player"  />
-	</div>
 </div>
 
 <div id="song" style="visibility:hidden"> </div>
 </div>
 </body>
 <script>
-
+var amount=0;
 var player=0;
 var arr = [[ 0, 0, 0],[0 ,0, 0],[0, 0, 0]];
 
@@ -300,8 +310,10 @@ function reply_click(clicked_id){
 	updateBoard(i,j);
 	//judge(arr);
 	if(judge(arr)==true ){
+		amount++;
 		$("#win").attr("style","visibility:visible");
 		$("#player").attr("style","visibility:visible;animation:player 1s;-moz-animation:player 1s;-webkit-animation:player 1s;  -o-animation:player 1s;"  );
+		document.getElementById("amount_n").innerHTML = amount;
 		return 
 	}
 	
@@ -322,6 +334,8 @@ function reply_click(clicked_id){
 				updateBoard(i,j);
 				//judge(arr);
 				if(judge(arr)==true){
+					amout=0;
+					document.getElementById("amount_n").innerHTML = amount;
 					$("#duangwin").attr("style","visibility:visible");
 					$("#duangphoto").attr("style","visibility:visible;animation:duanggif 1s;-moz-animation:duanggif 1s;-webkit-animation:duanggif 1s;  -o-animation:duanggif 1s;  ");
 					document.getElementById("song").innerHTML = "<audio src=\"duangduang.mp3\" controls=\"controls\" autoplay=\"autoplay\"></audio>"
