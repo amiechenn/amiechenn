@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>全屏滚动</title>
+</head>
+<style>
+.swiper-container{
+	width:600px;
+	height:200px;
+	overflow:hidden;
+	position:relative;
+}
+.swiper-wrapper{
+	width:4200px;
+	height:200px;
+	position:relative;
+}
+
+.swiper_slide{
+	float:left;
+	width:600px;
+	height:200px;
+}
+.arrow_next{
+	background-color:#000;
+ 	width:50px;
+	height:50px;
+	position:absolute;
+	top:40%;
+	right:10%;
+	z-index:100;
+	opacity:0.6;
+}
+
+.arrow_prev{
+	background-color:#000;
+ 	width:50px;
+	height:50px;
+	position:absolute;
+	top:40%;
+	left:10%;
+	z-index:100;
+	opacity:0.6;
+}
+.selected a{
+	background:#F40;
+}
+li a{
+	text-decoration:none;
+	display:block;
+	width:10px;
+	height:0px;
+	padding-top: 9px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+	background-color:#999;
+	overflow: hidden;
+}
+ul{
+	z-index:1;
+	position:absolute;
+	top:80%;
+	left:40%;
+}
+li{
+	display:inline-block;
+}
+</style>
+
+<script src="https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/js/lib/jquery-1.10.2_d88366fd.js"></script>
+
+<body>
+
+<div class="swiper-container"> 
+	<div class="swiper-wrapper" >
+        <div class="swiper_slide">
+            <img src="image/5.jpg" width="600px" height="200px" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/1.jpg" width="100%" height="100%" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/2.jpg" width="100%" height="100%" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/3.jpg" width="100%" height="100%" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/4.jpg" width="100%" height="100%" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/5.jpg" width="100%" height="100%" />
+        </div>
+        <div class="swiper_slide">
+            <img src="image/1.jpg" width="100%" height="100%" />
+        </div>
+	</div>   
+    <ul>
+        <li class="shade_switch"  type="button"><a href="#">1</a></li>
+        <li class="shade_switch"  type="button"><a href="#">2</a></li>
+        <li class="shade_switch"  type="button"><a href="#">3</a></li>
+        <li class="shade_switch"  type="button"><a href="#">4</a></li>
+        <li class="shade_switch"  type="button"><a href="#">4</a></li>
+    </ul>
+	<div class="arrow">
+		<a class="arrow_next" href="#"></a>
+		<a class="arrow_prev" href="#"></a>
+    </div>
+</div>
+
+<script  type="text/javascript">
+
+
+function mySwiper(width){
+	// this.width = width;
+	var width = width
+	this.swiper = function (){
+		var arrow=true;
+		var sel=0;
+		
+		$(document).ready(function(){
+			w=(-width).toString();
+			var elems = document.getElementsByClassName('swiper-wrapper');
+			for(var j = 0; j < elems.length; j++) {
+				elems[j].style.left = w+"px";
+			}
+			$(".swiper-wrapper").css({"-webkit-transition-duration":"0.5s"});
+			$($(".shade_switch").get(0)).addClass("selected");
+			$(".arrow").attr("style","visibility:hidden;");
+			
+		});
+		//end--初始属性值赋值
+		
+		$(document).ready(function(){
+			for(var i=0;i<($(".swiper_slide").length-2);i++){
+				$($(".shade_switch").get(i)).click(function(index){
+					return function(){	
+						sel=index;
+						w=(-width*(index+1)).toString();
+						var elems = document.getElementsByClassName('swiper-wrapper');
+						for(var j = 0; j < elems.length; j++) {
+							elems[j].style.left = w+"px";
+						}
+						$(".swiper-wrapper").css({"-webkit-transition-duration":"0.5s"});
+						$(".shade_switch").removeClass("selected");
+						$($(".shade_switch").get(index)).addClass("selected");
+					}
+				}(i));
+			}
+		});
+		
+		//end--switch 函数
+		
+		//var i=self.setInterval("flexslide()",5000)
+		function flexslide(){
+			leftAction()
+		}
+		//end--自动轮播
+		function leftAction(){
+			
+			if(sel<($(".swiper_slide").length-3)){
+				sel++
+			}
+			else{
+				sel=0
+			}
+				
+			if(sel==0){
+				w=(-width*($(".swiper_slide").length-1)).toString();
+				var elems = document.getElementsByClassName('swiper-wrapper');
+				for(var j = 0; j < elems.length; j++) {
+					elems[j].style.left = w+"px";
+				}
+				
+				$(".swiper-wrapper").css({"-webkit-transition-duration":"0.5s"});
+				$(".shade_switch").removeClass("selected");
+				$($(".shade_switch").get(0)).addClass("selected");
+						
+				setTimeout(function(){
+					w=(-width).toString();
+					var elems = document.getElementsByClassName('swiper-wrapper');
+					for(var j = 0; j < elems.length; j++) {
+						elems[j].style.left = w+"px";
+					}
+					
+					$(".swiper-wrapper").css({"-webkit-transition-duration":"0s"});
+				},500)
+			}
+				
+				
+				
+			for(var i=1;i<($(".swiper_slide").length-2);i++){
+				if(sel==i){
+					w=(-width*(i+1)).toString();
+					
+					var elems = document.getElementsByClassName('swiper-wrapper');
+					for(var j = 0; j < elems.length; j++) {
+						elems[j].style.left = w+"px";
+					}
+				
+					$(".swiper-wrapper").css({"-webkit-transition-duration":"0.5s"})
+					$(".shade_switch").removeClass("selected");
+					$($(".shade_switch").get(i)).addClass("selected");
+				}
+			}
+			setTimeout(function(){arrow=true;},500);
+		}
+		//end--leftaction函数
+					
+		function rightAction(){
+			if(sel>0){
+					sel--
+			}
+			else{
+				sel=$(".swiper_slide").length-3;
+			}
+				
+			for(var i=0;i<($(".swiper_slide").length-3);i++){
+				if(sel==i){
+					w=(-width*(i+1)).toString();
+					
+					var elems = document.getElementsByClassName('swiper-wrapper');
+					for(var j = 0; j < elems.length; j++) {
+						elems[j].style.left = w+"px";
+					}
+					$(".swiper-wrapper").css({"-webkit-transition-duration":"0.5s"});
+					$(".shade_switch").removeClass("selected");
+					$($(".shade_switch").get(i)).addClass("selected");
+				}
+			}	
+			if(sel==$(".swiper_slide").length-3){
+				$(".swiper-wrapper").attr("style","left:0px;-webkit-transition-duration:0.5s;");
+				$(".shade_switch").removeClass("selected");
+				$($(".shade_switch").get($(".swiper_slide").length-3)).addClass("selected");
+				setTimeout(function(){
+					w=(-width*($(".swiper_slide").length-2)).toString();
+					var elems = document.getElementsByClassName('swiper-wrapper');
+					for(var j = 0; j < elems.length; j++) {
+						elems[j].style.left = w+"px";
+					}
+					
+					$(".swiper-wrapper").css({"-webkit-transition-duration":"0s"});
+					},500)
+			}
+			setTimeout(function(){arrow=true;},500);	
+		}
+		//end--rightaction 函数
+		$(document).ready(function(){
+			$(".swiper-container").mouseenter(function(){
+				$(".arrow").attr("style","visibility:visible;")
+			});
+			$(".swiper-container").mouseleave(function(){
+				$(".arrow").attr("style","visibility:hidden;")
+			});
+			$(".arrow_next").click(function(){
+				if(arrow==true){
+					arrow=false;
+					leftAction();
+					
+				}
+			});
+			
+			$(".arrow_prev").click(function(){
+				if(arrow==true){
+					arrow=false;
+					rightAction();
+				};
+			});
+		
+		});
+		//end--arrow 函数
+	};
+	return this;
+}
+
+var s= new mySwiper(600);
+s.swiper();
+</script>
+
+</body>
+</html>

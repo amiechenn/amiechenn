@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+.shade-container {
+	postion: relative;
+	top: 10px;
+	left: 10px;
+}
+.shade-silde {
+	position: absolute;
+	top: 50px;
+	left: 10px;
+}
+
+.selected{
+	background-color:#F40;
+}
+/* selectesd改变switch被点击时的样式*/
+</style>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script src="jQuery.shade.js"></script>
+<!--插件-->
+<!--classname:"shade-container","shade-silde","shade-silde","shade-switch"-->
+</head>
+
+<body>
+<div>
+	<button class="shade-switch"  type="button">1</button>
+	<button class="shade-switch"  type="button">2</button>
+	<button class="shade-switch"  type="button">3</button>
+	<button class="shade-switch"  type="button">4</button>
+	<button class="shade-switch"  type="button">5</button>
+
+</div>
+<div class="shade-container">
+	<div class="shade-silde"  > <img src="image/1.jpg" width="400" height="200"  /></div>
+	<div class="shade-silde"  > <img src="image/2.jpg" width="400" height="200"  /></div>
+	<div class="shade-silde"   > <img src="image/3.jpg" width="400" height="200"  /></div>
+	<div class="shade-silde"  > <img src="image/4.jpg" width="400" height="200"  /></div>
+	<div class="shade-silde"  > <img src="image/5.jpg" width="400" height="200"  /></div>	
+</div>
+
+
+</div>
+</body>
+</html>
