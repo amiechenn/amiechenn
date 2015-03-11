@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0" />
+<title>叹茶</title>
+
+<style>
+
+body{
+	font-family:"Open Sans", "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	font-size:16px;
+	margin-top:50px;
+	padding:0;
+	color:#333;
+	margin-left:0;
+	margin-right:0;
+
+}
+a{
+	text-decoration:none;
+	color:#333;
+}
+
+.clear{
+	clear:both;
+}
+@keyframes header{
+	from{-webkit-transform:translate3d(0, -200px, 0);
+	      opacity:0}
+	to{-webkit-transform:none;
+	      opacity:1}
+}
+@-webkit-keyframes header{
+	from{-webkit-transform:translate3d(0, -200px, 0);
+	      opacity:0}
+	to{-webkit-transform:none;
+	      opacity:1}
+}
+@-o-keyframes header{
+	from{-webkit-transform:translate3d(0, -200px, 0);
+	      opacity:0}
+	to{-webkit-transform:none;
+	      opacity:1}
+}
+@-moz-keyframes header{
+	from{-webkit-transform:translate3d(0, -200px, 0);
+	      opacity:0}
+	to{-webkit-transform:none;
+	      opacity:1}
+}
+.header{
+	height:50px;
+	border-bottom:solid 1px #eeeeef;
+	margin:auto;
+	position:fixed;
+	top:0;
+	z-index:1000;
+	background-color:#FFF;
+	width:100%;
+	-webkit-animation:header 1s;
+	-o-animation:header 1s;
+	-moz-animation:header 1s;
+	animation:header 1s;
+}
+@media screen and (min-width : 992px) {
+	.nav{
+		max-width:960px;
+		padding:10px 0;
+		margin:0 auto;
+	}		
+}
+@media screen and (max-width : 992px) {
+	.nav{
+		max-width:750px;
+		padding:10px 0;
+		margin:0 auto;
+	}		
+}
+.nav-left{
+	font-size:16px;
+	float:left;
+	text-align:center;	
+}
+.nav-right{
+	float:right;
+}
+.nav-right a{
+	padding:0 10px;
+}
+/*heard*/
+.content{
+	padding:60px 0;
+	margin:0;
+	border-bottom:solid 1px #EFEFEF;	
+}
+
+
+@-webkit-keyframes banner-right{
+	from{-webkit-transform:translate3d(0, 200px, 0);
+	      opacity:0}
+	to{-webkit-transform:none;
+	   opacity:1}
+}
+@media screen and (min-width : 992px) {
+	.banner-right{
+		position:absolute;
+		top:40%;
+		left:60%;
+		max-width:250px;
+		text-align:center;
+		z-index:1;
+	}
+	#banner-left img{
+	width:60%;
+	}
+}
+@media screen and (max-width : 992px) {
+	.banner-right{
+		position:relative;
+		margin:auto;
+		max-width:250px;
+		z-index:1;
+	}
+	#banner-left img{
+	width:100%;
+	}
+}
+
+.banner-right h1{
+	text-align:center;
+	-webkit-animation:banner-right 3s;
+	-o-animation:banner-right 3s;
+	-moz-animation:banner-right 3s;
+	animation:banner-right 3s;
+}
+
+
+@-webkit-keyframes banner-left{
+	from{left:-940px;}
+	to{left:0;}
+}
+@-o-keyframes banner-left{
+	from{left:-940px;}
+	to{left:0;}
+}
+@-moz-keyframes banner-left{
+	from{left:-940px;}
+	to{left:0;}
+}
+@keyframes banner-left{
+	from{left:-940px;}
+	to{left:0;}
+}
+#banner-left{
+	position:relative;
+}
+/*banner*/
+
+.overlay{
+	background:url(image/cha1.jpg);
+	background-size:cover;
+	background-attachment: fixed;
+}
+
+.overlay-before{
+	background-color:#000;
+	position:relative;
+	top:0;
+	left:0;	
+	height:100%;
+	width:100%;
+	display:block;
+	padding:100px 0;
+	opacity:0.5;
+}
+.overlay-txt{
+	margin:auto;
+	text-align:center;
+	width:100%
+	font-size:16px;
+	color:#FFF;
+	line-height:3;
+}
+/*overlay*/
+
+.variety-header{
+	text-align:center;
+	margin:60px;
+}
+
+.variety-content ul{
+	list-style-type:none;
+	padding:0;
+}
+@media screen and (min-width : 992px) {
+	.variety-content ul li{
+	float:left;
+	text-align:center;	
+	width:16.66%;
+	padding:20px;
+	border-bottom:#eeeeef solid 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}	
+}
+@media screen and (max-width : 992px) {
+	.variety-content ul li{
+	float:left;
+	width:50%;
+	text-align:center;	
+	padding:20px;
+	border-bottom:#eeeeef solid 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}	
+}
+h2{
+	margin:30px;	
+}
+.variety-content ul li img{
+	width:100%;
+}
+/*variety*/
+@media screen and (min-width : 992px) {
+	.effect-right{
+		float:left;
+		width:35%;
+		line-height:2.5;
+		position:relative;
+		z-index:1;
+	}
+	#effect-left {
+		float:left;
+		width:65%;
+		-webkit-transform:translate3d(0, 0, 0);
+	
+	}
+}
+@media screen and (max-width : 992px) {
+	.effect-right{
+		margin:auto;
+		text-align:center;
+		line-height:2.5;
+	}
+	#effect-left {
+	width:100%;
+	-webkit-transform:translate3d(0, 0, 0);
+	}
+}
+@-webkit-keyframes effect-left {
+	0%{-webkit-transform:translate3d(0px, 0, 0);}
+	10%{-webkit-transform:translate3d(10px, 0, 0);}
+	20%{-webkit-transform:translate3d(-10px, 0, 0);}
+	30%{-webkit-transform:translate3d(10px, 0, 0);}
+	40%{-webkit-transform:translate3d(-10px, 0, 0);}
+	50%{-webkit-transform:translate3d(10px, 0, 0);}
+	60%{-webkit-transform:translate3d(-10px, 0, 0);}
+	70%{-webkit-transform:translate3d(10px, 0, 0);}
+	80%{-webkit-transform:translate3d(-10px, 0, 0);}
+	90%{-webkit-transform:translate3d(10px, 0, 0);}
+	100%{-webkit-transform:translate3d(0px, 0, 0);}
+}
+@-o-keyframes effect-left {
+	0%{-webkit-transform:translate3d(0px, 0, 0);}
+	10%{-webkit-transform:translate3d(10px, 0, 0);}
+	20%{-webkit-transform:translate3d(-10px, 0, 0);}
+	30%{-webkit-transform:translate3d(10px, 0, 0);}
+	40%{-webkit-transform:translate3d(-10px, 0, 0);}
+	50%{-webkit-transform:translate3d(10px, 0, 0);}
+	60%{-webkit-transform:translate3d(-10px, 0, 0);}
+	70%{-webkit-transform:translate3d(10px, 0, 0);}
+	80%{-webkit-transform:translate3d(-10px, 0, 0);}
+	90%{-webkit-transform:translate3d(10px, 0, 0);}
+	100%{-webkit-transform:translate3d(0px, 0, 0);}
+}
+@-moz-keyframes effect-left {
+	0%{-webkit-transform:translate3d(0px, 0, 0);}
+	10%{-webkit-transform:translate3d(10px, 0, 0);}
+	20%{-webkit-transform:translate3d(-10px, 0, 0);}
+	30%{-webkit-transform:translate3d(10px, 0, 0);}
+	40%{-webkit-transform:translate3d(-10px, 0, 0);}
+	50%{-webkit-transform:translate3d(10px, 0, 0);}
+	60%{-webkit-transform:translate3d(-10px, 0, 0);}
+	70%{-webkit-transform:translate3d(10px, 0, 0);}
+	80%{-webkit-transform:translate3d(-10px, 0, 0);}
+	90%{-webkit-transform:translate3d(10px, 0, 0);}
+	100%{-webkit-transform:translate3d(0px, 0, 0);}
+}
+@keyframes effect-left {
+	0%{-webkit-transform:translate3d(0px, 0, 0);}
+	10%{-webkit-transform:translate3d(10px, 0, 0);}
+	20%{-webkit-transform:translate3d(-10px, 0, 0);}
+	30%{-webkit-transform:translate3d(10px, 0, 0);}
+	40%{-webkit-transform:translate3d(-10px, 0, 0);}
+	50%{-webkit-transform:translate3d(10px, 0, 0);}
+	60%{-webkit-transform:translate3d(-10px, 0, 0);}
+	70%{-webkit-transform:translate3d(10px, 0, 0);}
+	80%{-webkit-transform:translate3d(-10px, 0, 0);}
+	90%{-webkit-transform:translate3d(10px, 0, 0);}
+	100%{-webkit-transform:translate3d(0px, 0, 0);}
+}
+#effect-left img{
+	width:100%;
+}
+/*effect*/
+
+.introduce{
+	text-align:center;
+}
+.introduce h1{
+	text-align:center;
+	margin:100px 0;
+}
+@media screen and (min-width : 992px) {
+	.introduce p{
+		display:inline-block;
+		margin:50px 0px;
+		max-width: 780px;
+		line-height:2;
+		text-align: justify;
+	}
+	
+	.introduce_photo{
+	max-width:500px;
+	display: inline-block;
+	margin:0;
+	}
+	.introduce_photo img{
+		width:100%;
+		vertical-align: middle;
+	}
+}
+@media screen and (max-width : 992px) {
+	.introduce p{
+		display:block;
+		margin:50px auto;
+		max-width: 780px;
+		line-height:2.5;
+	}
+	.introduce_photo img{
+	width:100%;
+	display: inline-block;
+	margin:0;
+	}
+}
+
+.overlay2{
+	background:url(image/cha3.jpg);
+	background-size:cover;
+	margin:50px 0 10px 0;
+	background-attachment: fixed;
+	position:relative;
+	padding:60px 30px;
+}
+.overlay2:before {
+	position:absolute;
+	content: " ";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	z-index: 0;
+	background: rgba(0,0,0,0.7);
+}
+.overlay2-content{
+	position:relative;
+	z-index: 1;
+}
+.overlay2-content p{
+	margin:auto;
+	text-align:center;
+	max-width:650px;
+	color:#FFF;
+	line-height:3;
+}
+.overlay2-content a{
+	color:#FFF;
+	text-align:center;
+	background-color:#1999ff;
+	margin:auto;
+	display:block;
+	width:100px;
+	padding:20px;
+	opacity:1;
+	border-radius: 4px;
+}
+@media screen and (min-width : 992px) {
+	.footer{
+		max-width:970px;
+		margin: 20px auto;
+	}
+}
+@media screen and (max-width : 992px) {
+	.footer{
+		max-width:750px;
+		margin: 20px auto;
+	}
+}
+.about-us{
+	float:left;
+	font-size:9px;
+}
+.about-us ul{
+	list-style-type:none;
+	padding:0;
+	
+}
+.about-us a{
+	color:#999;	
+}
+.pull{
+	float:right;
+	padding:10px;
+}
+.pull img{
+	width:100px;
+	height:100px;	
+}
+</style>
+<script src="js/jquery.min.js"></script>
+<script src="js/stellar.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script>
+$(function(){
+	$.stellar({
+		horizontalScrolling: false,
+		verticalOffset: 40
+	});
+});
+</script>
+</head>
+<body>
+<div class="header">
+	<div class="nav">
+    	<div class="nav-left"><a href="#">叹茶</a></div>
+        <div class="nav-right">
+        	<a href="#">加入我们</a>
+        	<a href="#">登陆</a>
+        </div>
+        <div class="clear"></div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="banner">
+        <div class="banner-right">
+            <h1>茶道茶德茶精神
+          <small>香醇浓厚</small></h1>
+        </div>
+        <div id="banner-left" style="visibility:visible;-webkit-animation:banner-left 2s; -o-animation:banner-left 2s;-moz-animation:banner-left 2s; animation:banner-left 2s;">
+            <img src="image/20120609051829956.jpg" />
+        </div>
+		
+    </div>    
+    <div class="overlay" data-stellar-background-ratio="0.5" style="background-position:50% 0px">
+    	<div class="overlay-before">
+        	<p class="overlay-txt">
+            全世界一百多个国家和地区的人喜爱品茶。<br />
+			各国茶文化各不相同，各有千秋。<br />
+			中国茶文化反映出中华民族的悠久的文明和礼仪。
+          </p>
+		</div>
+    </div>
+    
+    <div>
+    	<div class="variety-header">
+        	<h1>各茶品种</h1>
+            <small>沏茶、赏茶、闻茶、饮茶、品茶</small>
+        </div>
+        <div class="variety-content">
+        	<ul>
+            <li>
+            	<a href="#">
+                    <img src="image/hong.jpg" />
+                    <h2>红茶</h2>
+                </a>
+            </li>
+            <li>
+            	<a href="#">
+                    <img src="image/lv.jpg" />
+                    <h2>绿青</h2>
+                </a>
+            </li>
+            <li>
+            	<a href="#">
+                    <img src="image/bai.jpg" />
+                    <h2>白茶</h2>
+                </a>
+            </li>
+            <li>
+            	<a href="#">
+                    <img src="image/hei.jpg" />
+                    <h2>黑茶</h2>
+                </a>
+            </li>
+            <li>
+            	<a href="#">
+                    <img src="image/huang.jpg" />
+                    <h2>黄茶</h2>
+                </a>
+            </li>
+            <li>
+         		<a href="#">
+                    <img src="image/hua.jpg" />
+                    <h2>花茶</h2>
+                </a>
+            </li>
+            <div class="clear"></div>
+            </ul>
+        </div>
+    </div>
+    
+  <div class="effect">
+    	<div id="effect-left" style="visibility:visible;-webkit-animation:none 3s;-o-animation:none 3s;-moz-animation:none 3s;animation:none 3s;" >
+      		<img src="image/cha.jpg"/>
+      	</div>
+        <script>
+			var waypoint = new Waypoint({
+				element: document.getElementById('effect-left'),
+				handler: function() {
+					$("#effect-left").attr("style","visibility: visible;-webkit-animation:effect-left 1s;-o-animation:effect-left 1s;-moz-animation:effect-left 1s;animation:effect-left 1s;")  
+				},
+				offset: 300 ,
+			})
+	</script>
+        <div class="effect-right">
+        	<h1>各种茶的功效</h1>
+        	<small>绿茶：是一杯清晨的提神茶，让你开始精神饱满的一整天。<br />
+            	  红茶：是一杯温暖的下午茶，陪你度过一段闲暇浪漫的惬意时光。<br />
+				   白茶：恰似初恋，淡淡地却令人回味悠久。<br />
+                   黄茶：如一抹晚霞，温情无限好。<br />
+                   黑茶：是暗夜里远处的青山，充满岁月的沧桑厚重。
+            </small>
+        </div>
+        <div class="clear"></div>
+  </div>
+  
+  <div class="introduce">
+  	<h1>春茶</h1>
+    <p>春茶苦，夏茶涩，要好喝，秋 白露。<br />
+我国绝大部分产茶地区，茶树生长和茶叶采制是有季节性的。通常按采制时间，划分为春、夏、秋三季茶。事实上，由于现代泡茶技艺的发展，春茶的“苦”更受人追捧，更好喝。秋茶的汤色、滋味介于春茶和夏茶之间，香气平和，在营养成分方面一般不如春茶。
+	</p>
+    <div class="introduce_photo">
+		<img src="image/cha4.jpg"  />
+    </div>
+    <p>春季温度适中，雨量充分，再加上茶树经过了半年冬季的休养生息，使得春季茶芽肥硕，色泽翠绿，叶质柔软,且含有丰富的维生素，特别是氨基酸，不但使春茶滋味鲜活，香气宜人，还富有保健作用。</p>
+   </div>
+   
+   <div class="overlay2" data-stellar-background-ratio="0.3" style="background-position:50% 220px">
+   		<div class="overlay2-content">
+        	<p>制作好茶，投入，用心，回归产品本质。<br /> 
+           发现好茶，体验，品味，分享饮醉时刻。
+          </p>
+           <a href="#">购买茶</a>
+         </div>
+   </div>
+   
+</div>
+<div class="footer">
+	<div class="about-us">
+        <p>© 2015 叹茶</p>
+   		<ul>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">联系我们</a></li>
+        <li><a href="#">隐私条规</a></li>
+        </ul>
+   </div>
+   <div class="pull">
+   		<img src="image/erwei.jpg" />
+   </div>
+</div>
+</body>
+</html>
