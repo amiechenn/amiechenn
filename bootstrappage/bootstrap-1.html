@@ -4,13 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 
-<link href="bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.min.css" rel="stylesheet" />
+<link href="lightGallery.css" rel="stylesheet" />
 <script src="jquery-2.1.3.min.js"></script>
 <script src="bootstrap.min.js"></script>
-
 <script src="jquery.scrollUp.min.js"></script>
 <script src="jquery.nicescroll.min.js"></script>
- <script>
+<script src="lightGallery.min.js"></script>
+<script>
 $(document).ready(function(){  
 	$("html").niceScroll({  
 		cursorcolor:"#e04d47",  
@@ -62,7 +63,16 @@ $(function(){
                 $('body').delay(500);
             });
         });
-		
+//loading
+//lightGallery
+$(document).ready(function() {
+	$(".lightgallery").lightGallery({
+		loop:true,
+		auto:true,
+		pause:4000,
+	});
+});
+
 </script> 
 
 <style>
@@ -96,6 +106,7 @@ section{
 h1{
 	padding-top:30px;
 	font-size:50px;
+	text-transform:capitalize;
 }
 h2{
 	padding-bottom:40px;
@@ -165,7 +176,7 @@ margin: 100px auto;
 /*---模态框（Modal）---*/
 /*---轮播---*/
 #myCarousel{
-	padding-top:90px;
+	padding-top:50px;
 }
 .carousel-control span{
 	font-size:50px;
@@ -188,8 +199,11 @@ margin: 100px auto;
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
 	background-color:#FFF;
 	padding:30px;
-	
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
+	
+
 .service:hover{
 	background-color:#e04d47;
 	color:#FFF;
@@ -228,6 +242,8 @@ margin: 100px auto;
 }
 .mytabs li a{
 	color:#333;
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 .mytabs li a:hover{
 	background-color:#e04d47;
@@ -312,6 +328,12 @@ margin: 100px auto;
 	z-index:2;
 }
 /*---hotel---*/
+/*---picture---*/
+#picture{
+	background-color:#eeeeee;
+}
+
+/*---picture---*/
 /*---contact---*/
 .massage{
 	text-align: justify;
@@ -323,7 +345,7 @@ margin: 100px auto;
 .massage .input-group .form-control{
 	height:200px;
 }
-#contact{
+#contact h4{
 	font-weight:bold;
 	text-transform:uppercase;
 }
@@ -336,6 +358,7 @@ margin: 100px auto;
 .cantact-text ul{
 	list-style-type:none;
 	margin-top:100px;
+	padding:0;
 }
 .cantact-text ul li{
 	margin:20px;
@@ -356,7 +379,7 @@ margin: 100px auto;
 }
 	
 /*---contact---*/
-
+/*---footer---*/
 .footer{
 	height:50px;
 	background-color:#e04d47;
@@ -369,6 +392,8 @@ margin: 100px auto;
 	display:inline-block;
 	padding:10px;
 }
+/*---footer---*/
+/*---preloading---*/
 .preloading {
 position: fixed;
 left: 0px;
@@ -394,6 +419,7 @@ top: 50%;
 -o-transform: translate(-50%, -50%);
 transform: translate(-50%, -50%);
 }
+/*---preloading---*/
 </style>
 
 </head>
@@ -427,7 +453,7 @@ transform: translate(-50%, -50%);
                         <li><a href="#services">services</a></li>
                         <li><a href="#food">food</a></li>
                         <li><a href="#hotel">hotel</a></li>
-                        <li><a href="#">TEAM</a></li>
+                        <li><a href="#picture">picture</a></li>
                         <li><a href="#contact">contact</a></li>
                         <li data-toggle="tooltip" data-placement="bottom" title="点击试试" ><a href="#" data-toggle="modal" 
        data-target="#signinmodal">signin</a></li>
@@ -626,30 +652,30 @@ transform: translate(-50%, -50%);
                     <h2>A CLEAN AND FLEXIBLE TEMPLATE FOR PRODUCTS & BUSINESSES</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class=" row">
                 <div class="hotel-item col-md-6 col-sm-6 col-xs-12" >
-                    <div class="image">
+                    <div class="image" >
                         <img src="images/1 (1).jpg" class="img-responsive" />
                         <div class="caption-text">hotelname</div>
                         <div class="icon icon-pen"></div>
                     </div>
                 </div>
                 <div class="hotel-item col-md-6 col-sm-6 col-xs-12" >
-                    <div class="image">
+                    <div class="image" >
                         <img src="images/2 (1).jpg" class="img-responsive" />
                         <div class="caption-text">hotelname</div>
                         <div class="icon icon-pen"></div>
                     </div>
                 </div>
                 <div class="hotel-item col-md-6 col-sm-6 col-xs-12" >
-                    <div class="image">
+                    <div class="image" >
                         <img src="images/3 (1).jpg" class="img-responsive" />
                         <div class="caption-text">hotelname</div>
                         <div class="icon icon-pen"></div>
                     </div>
                 </div>
                 <div class="hotel-item col-md-6 col-sm-6 col-xs-12" >
-                    <div class="image">
+                    <div class="image" >
                         <img src="images/4 (1).jpg" class="img-responsive" />
                         <div class="caption-text">hotelname</div>
                         <div class="icon icon-pen"></div>
@@ -659,7 +685,46 @@ transform: translate(-50%, -50%);
         </div>
     </section>
     <!-- hotel -->
-    <!-- contact -->
+    
+    <!-- picture -->
+    <section id="picture">
+    	<div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>picture</h1>
+                    <h2>A CLEAN AND FLEXIBLE TEMPLATE FOR PRODUCTS & BUSINESSES</h2>
+                </div>
+            </div>
+            <div class="row lightgallery">
+               <div class="col-sm-6 col-md-3" data-src="images/cole.jpg" >
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole4.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole4.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole3.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole3.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+            </div>
+         </div>
+    </section>
+ <!-- picture -->
+<!-- contact -->
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -672,19 +737,19 @@ transform: translate(-50%, -50%);
                 <div class="cantact-from col-md-6 col-sm-6 col-xs-12">
                     <div class="row">
                         <div class="name col-md-6 col-sm-6 col-xs-12">
-                            <p>name</p>
+                            <h4>name</h4>
                             <div class="input-group ">
                             <input type="text" class="form-control" placeholder="name">
                             </div>
                         </div>
                         <div class="email col-md-6 col-sm-6 col-xs-12">
-                            <p>email</p>
+                            <h4>email</h4>
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="email"/>
                             </div>
                         </div>
                         <div class="massage col-md-12">
-                            <p>message</p>
+                            <h4>message</h4>
                             <div class="input-group">
                             <textarea  type="text" class="form-control" placeholder="message"></textarea>
                             </div>
@@ -714,9 +779,9 @@ transform: translate(-50%, -50%);
     <div class="footer">
         <div class="container">
             <ul>
-                <li><img src="images/facebook.png" /></li>
-                <li><img src="images/twitter.png" /></li>
-                <li><img src="images/linkedin.png" /></li>
+                <li data-src="images/facebook.png"><img src="images/facebook.png" /></li>
+                <li data-src="images/twitter.png"><img src="images/twitter.png" /></li>
+                <li data-src="images/linkedin.png"><img src="images/linkedin.png" /></li>
             </ul>
         </div>
     </div>
