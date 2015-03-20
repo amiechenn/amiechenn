@@ -44,7 +44,7 @@ $(function () {
     });
 });
 
-//锚点平滑滚动
+//锚点平滑滚动(非插件)
 $(function(){
 	$(".navbar-nav a").click(function(){
 		$("html,body").animate({ scrollTop:$($(this).attr("href")).offset().top},1000
@@ -54,16 +54,15 @@ $(function(){
 });
 
 //loading
- 
- $(function() {
-            $(window).load(function() {
-                "use strict";
-                $('.loading-gif').delay().fadeOut('slow');
-                $('.preloading').delay().fadeOut('slow');
-                $('body').delay(500);
-            });
-        });
-//loading
+$(function() {
+	$(window).load(function() {
+		"use strict";
+		$('.loading-gif').delay().fadeOut('slow');
+		$('.preloading').delay().fadeOut('slow');
+		$('body').delay(500);
+	});
+});
+
 //lightGallery
 $(document).ready(function() {
 	$(".lightgallery").lightGallery({
@@ -72,6 +71,27 @@ $(document).ready(function() {
 		pause:4000,
 	});
 });
+//正则表达式
+
+function checkFrom(){
+	$(".error").css({"display":"none"});
+	var email=document.getElementById("email").value;
+	var password=document.getElementById("password").value;
+	var re=/^[a-zA-Z0-9]\w{5,10}$/;
+	var reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+	if(reg.test(email)!=true){
+		$("#emailerror").css({"display":"block"});
+	}
+	if(re.test(password)!=true){
+		$("#passworderror").css({"display":"block"});
+	}
+	if(reg.test(email)&&re.test(password)){
+		alert("登陆成功")
+		return true;
+	}
+	
+};
+
 
 </script> 
 
@@ -172,6 +192,13 @@ margin: 100px auto;
 .icon-password:before{
 	content:"\e98f";
 	font-size:18px;
+}
+.error{
+	background-image:url(images/error.png);
+	background-repeat:no-repeat;
+	color:#F00;
+	font-size:12px;
+	padding-left:25px;
 }
 /*---模态框（Modal）---*/
 /*---轮播---*/
@@ -483,18 +510,19 @@ transform: translate(-50%, -50%);
                 </h4>
              </div>
              <div class="modal-body">
-                <div class="input-group people">
+             	<div id="emailerror" class="error" style="display:none">邮箱格式不正确</div>
+                <div class="input-group people" >
                     <span class="input-group-addon icon icon-people"></span>
-                        <input type="text" class="form-control" placeholder="E-mail">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
                 </div>
+                <div id="passworderror" class="error" style="display:none">密码格式不正确</div>
                 <div class="input-group password">
                     <span class="input-group-addon icon icon-password"></span>
-                        <input type="text" class="form-control" placeholder="password">
+                    <input type="password" name="password"  id="password" class="form-control" placeholder="password">
                 </div>
              </div>
              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" 
-                   data-dismiss="modal">登陆
+                <button  class="btn btn-primary signin"  onClick="checkFrom()" >登陆
                 </button>
                 <button type="button" class="btn btn-warning">
                    注册
@@ -696,9 +724,9 @@ transform: translate(-50%, -50%);
                 </div>
             </div>
             <div class="row lightgallery">
-               <div class="col-sm-6 col-md-3" data-src="images/cole.jpg" >
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg" >
                   <a href="#" class="thumbnail">
-                     <img src="images/cole.jpg" alt="通用的占位符缩略图">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
                   </a>
                   <h3>a picture</h3>
                </div>
@@ -708,15 +736,39 @@ transform: translate(-50%, -50%);
                   </a>
                   <h3>a picture</h3>
                </div>
-               <div class="col-sm-6 col-md-3" data-src="images/cole4.jpg">
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
                   <a href="#" class="thumbnail">
-                     <img src="images/cole4.jpg" alt="通用的占位符缩略图">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
                   </a>
                   <h3>a picture</h3>
                </div>
-               <div class="col-sm-6 col-md-3" data-src="images/cole3.jpg">
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
                   <a href="#" class="thumbnail">
-                     <img src="images/cole3.jpg" alt="通用的占位符缩略图">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg" >
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
+                  </a>
+                  <h3>a picture</h3>
+               </div>
+               <div class="col-sm-6 col-md-3" data-src="images/cole2.jpg">
+                  <a href="#" class="thumbnail">
+                     <img src="images/cole2.jpg" alt="通用的占位符缩略图">
                   </a>
                   <h3>a picture</h3>
                </div>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<!--<link href="jquery.mobile-1.4.5.min.css" rel="stylesheet" />-->
+<script src="jquery.min.js"></script>
+<!--<script src="jquery.mobile-1.4.5.min.js"></script>-->
+<script src="jquery.touchSwipe.js"></script>
+<style>
+baby{
+	margin-top:0;
+}
+.page{
+	background-color:#CC3;
+	height:100%;
+	width:100%;
+	position:absolute;
+	display:block;
+	top:0;
+	left:0;
+}
+img{
+	width:100%;
+	height:100%;
+    position:absolute;
+
+}
+.hide{
+	display:none;
+}
+.current{
+	z-index:1;
+}
+
+@-webkit-keyframes moveToTop {
+	from { -webkit-transform: translateY(0); }
+	to { -webkit-transform: translateY(-100%); }
+}
+@keyframes moveToTop {
+	from { -webkit-transform: translateY(0); }
+	to { -webkit-transform: translateY(-100%); }
+}
+@-webkit-keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); }
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+@keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@-webkit-keyframes moveToBottom {
+	from { }
+	to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+	from { }
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@-webkit-keyframes moveFromBottom {
+	from { -webkit-transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
+}
+@keyframes moveFromBottom {
+	from { -webkit-transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
+}
+.page-movetotop{
+	animation:moveToTop 1s both;
+	-webkit-animation:moveToTop 1s both;
+	-moz-animation:moveToTop 1s both;
+	-o-animation:moveToTop 1s both;
+}
+.page-movefromtop{
+	animation:moveFromTop 1s both;
+	-webkit-animation:moveFromTop 1s both;
+	-moz-animation:moveFromTop 1s both;
+	-o-animation:moveFromTop 1s both;
+}
+.page-movefrombottom{
+	animation:moveFromBottom 1s both;
+	-webkit-animation:moveFromBottom  1s ;
+	-moz-animation:moveFromBottom  1s both;
+	-o-animation:moveFromBottom  1s both;
+}
+</style>
+</head>
+<body>
+    <div id="page1" class="page current">
+    	<div><img src="images/1.jpg" /></div>
+    </div>
+    <div id="page2" class="page hide">
+    	<div><img src="images/2.jpg" /></div>
+    </div>
+    <div id="page3" class="page hide">
+    	<div><img src="images/1.jpg" /></div>
+    </div>
+    <div id="page4" class="page hide">
+   		<div><img src="images/2.jpg" /></div>
+    </div>
+</div>
+<script>
+$(function (){
+	
+});
+$(document).ready(function(){
+	$("#page1").swipe({
+		swipeUp:function(){
+			$("#page2").removeClass("hide");
+			$("#page2").addClass("page-movefrombottom");
+			$("#page1").addClass("page-movetotop");
+			setTimeout(function(){
+				$("#page2").removeClass("page-movefrombottom");
+				$("#page1").removeClass("page-movetotop");
+				$("#page1").removeClass("current");
+				$("#page1").addClass("hide");
+			},1000);
+		
+		}		
+	});
+});
+
+</script>
+
+</body>
+</html>

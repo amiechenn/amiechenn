@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery.min.js"></script>
+<style>
+
+@-webkit-keyframes moveToTop {
+	from { -webkit-transform: translateY(0); }
+	to { -webkit-transform: translateY(-100%); }
+}
+.page-movetotop{
+	animation:moveToTop 1s both;
+	-webkit-animation:moveToTop 1s both;
+	-moz-animation:moveToTop 1s both;
+	-o-animation:moveToTop 1s both;
+}
+#page1{
+	background-color:#999;
+	width:200px;
+	height:300px;
+	
+
+
+	}
+img{
+	
+}
+</style>
+</head>
+
+<body>
+<body>
+    <div id="page1" class="">
+    	<div><img src="images/1.jpg" /></div>
+    </div>
+    <script>
+	$("#page1").click(function(){
+		$("#page1").addClass("page-movetotop");	
+	})
+	</script>
+</body>
+</html>
