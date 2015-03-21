@@ -2,29 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
 <title>无标题文档</title>
 <!--<link href="jquery.mobile-1.4.5.min.css" rel="stylesheet" />-->
 <script src="jquery.min.js"></script>
 <!--<script src="jquery.mobile-1.4.5.min.js"></script>-->
 <script src="jquery.touchSwipe.js"></script>
 <style>
-baby{
-	margin-top:0;
-}
 .page{
-	background-color:#CC3;
+	font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+	text-align:center;
 	height:100%;
 	width:100%;
 	position:absolute;
 	display:block;
 	top:0;
 	left:0;
-}
-img{
-	width:100%;
-	height:100%;
-    position:absolute;
-
+	color:#FFF;
 }
 .hide{
 	display:none;
@@ -32,7 +26,10 @@ img{
 .current{
 	z-index:1;
 }
-
+ul{
+	list-style-type:none;
+	padding-left:0;
+}
 @-webkit-keyframes moveToTop {
 	from { -webkit-transform: translateY(0); }
 	to { -webkit-transform: translateY(-100%); }
@@ -43,20 +40,20 @@ img{
 }
 @-webkit-keyframes moveFromTop {
 	from { -webkit-transform: translateY(-100%); }
-	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
 }
 @keyframes moveFromTop {
-	from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
-	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+	from { -webkit-transform: translateY(-100%);  }
+	to { -webkit-transform: translateY(0);  }
 }
 
 @-webkit-keyframes moveToBottom {
-	from { }
+	from {-webkit-transform: translateY(0); }
 	to { -webkit-transform: translateY(100%); }
 }
 @keyframes moveToBottom {
-	from { }
-	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+	from { -webkit-transform: translateY(0);}
+	to { -webkit-transform: translateY(100%); }
 }
 
 @-webkit-keyframes moveFromBottom {
@@ -68,57 +65,568 @@ img{
 	to { -webkit-transform: translateY(0); }
 }
 .page-movetotop{
-	animation:moveToTop 1s both;
-	-webkit-animation:moveToTop 1s both;
-	-moz-animation:moveToTop 1s both;
-	-o-animation:moveToTop 1s both;
+	animation:moveToTop 0.6s both;
+	-webkit-animation:moveToTop 0.6s both;
+	-moz-animation:moveToTop 0.6s both;
+	-o-animation:moveToTop 0.6s both;
 }
 .page-movefromtop{
-	animation:moveFromTop 1s both;
-	-webkit-animation:moveFromTop 1s both;
-	-moz-animation:moveFromTop 1s both;
-	-o-animation:moveFromTop 1s both;
+	animation:moveFromTop 0.6s both;
+	-webkit-animation:moveFromTop 0.6s both;
+	-moz-animation:moveFromTop 0.6s both;
+	-o-animation:moveFromTop 0.6s both;
 }
 .page-movefrombottom{
-	animation:moveFromBottom 1s both;
-	-webkit-animation:moveFromBottom  1s ;
-	-moz-animation:moveFromBottom  1s both;
-	-o-animation:moveFromBottom  1s both;
+	animation:moveFromBottom 0.6s both;
+	-webkit-animation:moveFromBottom  0.6s both ;
+	-moz-animation:moveFromBottom  0.6s both;
+	-o-animation:moveFromBottom  0.6s both;
 }
+.page-movetobottom{
+	animation:moveToBottom 0.6s both;
+	-webkit-animation:moveToBottom  0.6s both ;
+	-moz-animation:moveToBottom  0.6s both;
+	-o-animation:moveToBottom  0.6s both;
+}
+.page1{
+	background-color:#036;
+	
+}
+.page2{
+	background-color:#060;
+}
+.page3{
+	background-color:#333;
+}
+.page4{
+	background-color:#699;
+}
+.page5{
+	background-color:#003;
+}
+.page6{
+	background-color:#E10071;
+}
+@keyframes enlarge {
+	from {opacity: 0;transform: scale(0);}
+	to {}
+}
+@-webkit-keyframes enlarge {
+	from {opacity: 0;-webkit-transform: scale(0);}
+	to {}
+}
+.page1 .logo{
+	position:absolute;
+	top:10%;
+	left:50%;
+	margin-left:-8em;
+	width:16em;
+	animation:enlarge 1s ease-out;
+	-webkit-animation:enlarge 1s ease-out;
+}
+@keyframes fadeIn{
+	from{opacity: 0;}
+	to{opacity: 1;}
+}
+@-webkit-keyframes fadeIn{
+	from{opacity: 0;}
+	to{opacity: 1;}
+}
+.page1 .title{
+	position:absolute;
+	top:60%;
+	left:50%;
+	opacity:0;
+	margin-left:-5em;
+	animation:fadeIn 1s ease-out 1s  both;
+	-webkit-animation:fadeIn 1s ease-out 1s both;
+}
+@keyframes fly{
+	from{transform: rotate(60deg);top:80%;left:100%;}
+	to{transform: rotate(0deg);top:5%;left:50%;}
+}
+@-webkit-keyframes fly{
+	from{-webkit-transform: rotate(60deg);top:80%;left:100%;}
+	to{-webkit-transform: rotate(0deg);top:5%;left:50%;}
+}
+.page2 img{
+	position:absolute;
+	top:5%;
+	left:50%;
+	width:8em;
+	margin-left:-4em;
+	animation:fly 1s ease-out both;
+	-webkit-animation:fly 1s ease-out  both;
+}
+.page2 ul{
+	position:absolute;
+	top:35%;
+	left:50%;
+	margin-left:-7em;
+}
+
+.page2 li{
+	height:4em;
+	width:14em;
+}
+@keyframes fadeInLeft{
+	0%{opacity:0;transform: skew(0deg);left:300%;}
+	10%{opacity:1;transform: skew(0deg);left:300%;}
+	60%{transform: skew(30deg);left:50%;}
+	100%{transform: skew(0deg);left:50%;}
+}
+@-webkit-keyframes fadeInLeft{
+	0%{opacity:0;-webkit-transform: skew(0deg);left:300%;}
+	10%{opacity:1;-webkit-transform: skew(0deg);left:300%;}
+	60%{-webkit-transform: skew(30deg);left:50%;}
+	100%{-webkit-transform: skew(0deg);left:50%;}
+}
+.page2 .slide1{
+	position:relative;
+	left:50%;
+	margin-left:-4.5em;
+	background-color:#C40000;
+	animation:fadeInLeft 0.5s ease-out 1s both;
+	-webkit-animation:fadeInLeft 0.5s ease-out 1s both;
+	
+}
+.page2 .slide2{
+	position:relative;
+	left:50%;
+	margin-left:-4.5em;
+	background-color:#F30;
+	animation:fadeInLeft 0.5s ease-out 1.5s both;
+	-webkit-animation:fadeInLeft 0.5s ease-out 1.5s both;
+}
+.page2 .slide3{
+	position:relative;
+	left:50%;
+	margin-left:-4.5em;
+	background-color:#FC0;
+	animation:fadeInLeft 0.5s ease-out 2s both;
+	-webkit-animation:fadeInLeft 0.5s ease-out 2s both;
+}
+.page2 .slide4{
+	position:relative;
+	left:50%;
+	margin-left:-4.5em;
+	background-color:#000;
+	animation:fadeInLeft 0.5s ease-out 2.5s both;
+	-webkit-animation:fadeInLeft 0.5s ease-out 2.5s both;
+}
+
+.page3 h2{
+	position:absolute;
+	top:4%;
+	left:50%;
+	margin-left:-3em;
+	animation:fadeIn 1s ease-out 1.5s  both;
+	-webkit-animation:fadeIn 1s ease-out 1.5s both;
+}
+@-webkit-keyframes fadeInCircle1{
+	0%{opacity:0;height:5em;top:0%;}
+	50%{opacity:1;height:5em;top:35%;}
+	80%{height:1em;top:30%;}
+	100%{height:5em;;top:30%;}
+}
+.page3 .circle1{
+	position:absolute;
+	top:30%;
+	left:50%;
+	margin-left:-8em;
+	background-color:#F69;
+	width:5em;
+	height:5em;
+	border-radius:60px;
+	line-height:5em;
+	animation:fadeInCircle1 0.5s  both;
+	-webkit-animation:fadeInCircle1 0.5s both;
+}
+@keyframes fadeInCircle2{
+	0%{opacity:0;height:6em;top:0%;}
+	50%{opacity:1;height:6em;top:55%;}
+	80%{height:1em;top:50%;}
+	100%{height:6em;;top:50%;}
+}
+@-webkit-keyframes fadeInCircle2{
+	0%{opacity:0;height:6em;top:0%;}
+	50%{opacity:1;height:6em;top:55%;}
+	80%{height:1em;top:50%;}
+	100%{height:6em;;top:50%;}
+}
+.page3 .circle2{
+	position:absolute;
+	top:55%;
+	left:50%;
+	margin-left:-7em;
+	background-color:#FF3;
+	width:6em;
+	height:6em;
+	border-radius:60px;
+	line-height:5em;
+	animation:fadeInCircle2 0.5s 0.3s both;
+	-webkit-animation:fadeInCircle2 0.5s 0.3s both;
+}
+@keyframes fadeInCircle3{
+	0%{opacity:0;height:4em;top:0%;}
+	50%{opacity:1;height:4em;top:85%;}
+	80%{height:1em;top:80%;}
+	100%{height:4em;;top:80%;}
+}
+@-webkit-keyframes fadeInCircle3{
+	0%{opacity:0;height:4em;top:0%;}
+	50%{opacity:1;height:4em;top:85%;}
+	80%{height:1em;top:80%;}
+	100%{height:4em;;top:80%;}
+}
+.page3 .circle3{
+	position:absolute;
+	top:80%;
+	left:50%;
+	margin-left:-1em;
+	background-color:#0C6;
+	width:4em;
+	height:4em;
+	border-radius:60px;
+	line-height:3.5em;
+	animation:fadeInCircle3 0.5s 0.6s both;
+	-webkit-animation:fadeInCircle3 1s 0.6s both;
+}
+@keyframes fadeInCircle4{
+	0%{opacity:0;height:7em;top:0%;}
+	50%{opacity:1;height:7em;top:30%;}
+	80%{height:1em;top:25%;}
+	100%{height:7em;;top:25%;}
+}
+@-webkit-keyframes fadeInCircle4{
+	0%{opacity:0;height:7em;top:0%;}
+	50%{opacity:1;height:7em;top:30%;}
+	80%{height:1em;top:25%;}
+	100%{height:7em;;top:25%;}
+}
+.page3 .circle4{
+	position:absolute;
+	top:25%;
+	left:50%;
+	margin-left:-1em;
+	background-color:#39C;
+	width:7em;
+	height:7em;
+	border-radius:60px;
+	line-height:6.5em;
+	animation:fadeInCircle4 0.5s 0.9s both;
+	-webkit-animation:fadeInCircle4 1s 0.9s both;
+
+}
+@keyframes fadeInCircle5{
+	0%{opacity:0;height:5em;top:0%;}
+	50%{opacity:1;height:5em;top:60%;}
+	80%{height:1em;top:55%;}
+	100%{height:5em;;top:55%;}
+}
+
+@-webkit-keyframes fadeInCircle5{
+	0%{opacity:0;height:5em;top:0%;}
+	50%{opacity:1;height:5em;top:60%;}
+	80%{height:1em;top:55%;}
+	100%{height:5em;;top:55%;}
+}
+.page3 .circle5{
+	position:absolute;
+	top:55%;
+	left:50%;
+	margin-left:1em;
+	background-color:#F63;
+	width:5em;
+	height:5em;
+	border-radius:60px;
+	line-height:5em;
+	animation:fadeInCircle5 0.5s 1.2s both;
+	-webkit-animation:fadeInCircle5 1s 1.2s both;
+}
+.page4 h2{
+	position:absolute;
+	top:4%;
+	left:50%;
+	margin-left:-3.5em;
+	animation:fadeIn 1s ease-out 0.5s  both;
+	-webkit-animation:fadeIn 1s ease-out 0.5s both;
+}
+.page4 li{
+	box-shadow: 0px 0px 5px #666;
+}
+@keyframes fadeInSquare1{
+	0%{opacity:0;left:-20%;top:20%}
+	100%{opacity:1;left:0%;top:30%}
+}
+@-webkit-keyframes fadeInSquare1{
+	0%{opacity:0;left:-20%;top:20%}
+	100%{opacity:1;left:0%;top:30%}
+}
+.page4 .square1{
+	position:absolute;
+	top:30%;
+	left:0%;
+	margin-left:1.5em;
+	background-color:#003;
+	width:40%;
+	height:20%;
+	animation:fadeInSquare1 0.5s  ease-out both;
+	-webkit-animation:fadeInSquare1 1s ease-out both;
+}
+@keyframes fadeInSquare2{
+	0%{opacity:0;left:60%;top:20%}
+	100%{opacity:1;left:50%;top:30%}
+}
+
+@-webkit-keyframes fadeInSquare2{
+	0%{opacity:0;left:60%;top:20%}
+	100%{opacity:1;left:50%;top:30%}
+}
+.page4 .square2{
+	position:absolute;
+	top:30%;
+	left:50%;
+	margin-left:0.5em;
+	background-color:#006;
+	width:40%;
+	height:20%;
+	animation:fadeInSquare2 0.5s  ease-out both;
+	-webkit-animation:fadeInSquare2 1s ease-out both;
+
+}
+@keyframes fadeInSquare3{
+	0%{opacity:0;left:-10%;top:70%}
+	100%{opacity:1;left:0%;top:60%}
+}
+@-webkit-keyframes fadeInSquare3{
+	0%{opacity:0;left:-10%;top:70%}
+	100%{opacity:1;left:0%;top:60%}
+}
+.page4 .square3{
+	position:absolute;
+	top:60%;
+	left:0;
+	margin-left:1.5em;
+	background-color:#036;
+	width:40%;
+	height:20%;
+	animation:fadeInSquare3 0.5s  ease-out both;
+	-webkit-animation:fadeInSquare3 1s ease-out both;
+}
+@keyframes fadeInSquare4{
+	0%{opacity:0;left:60%;top:70%}
+	100%{opacity:1;left:50%;top:60%}
+}
+@-webkit-keyframes fadeInSquare4{
+	0%{opacity:0;left:60%;top:70%}
+	100%{opacity:1;left:50%;top:60%}
+}
+.page4 .square4{
+	position:absolute;
+	top:60%;
+	left:50%;
+	margin-left:0.5em;
+	background-color:#36F;
+	width:40%;
+	height:20%;
+	animation:fadeInSquare4 0.5s  ease-out both;
+	-webkit-animation:fadeInSquare4 1s ease-out both;
+}
+
+.page5 h2{
+	position:absolute;
+	top:4%;
+	left:50%;
+	margin-left:-3em;
+	animation:fadeIn 1s ease-out 0.5s  both;
+	-webkit-animation:fadeIn 1s ease-out 0.5s both;
+
+}
+@keyframes fadeInDown{
+	0%{top:200%;}
+	50%{top:15%;}
+	60%{top:20%;}
+	70%{top:15%;}
+	80%{top:20%;}
+	90%{top:15%;}
+	100%{top:20%;}
+}
+@-webkit-keyframes fadeInDown{
+	0%{top:200%;}
+	50%{top:15%;}
+	60%{top:20%;}
+	70%{top:15%;}
+	80%{top:20%;}
+	90%{top:15%;}
+	100%{top:20%;}
+}
+.page5 img{
+	position:absolute;
+	top:20%;
+	left:50%;
+	margin-left:-8em;
+	animation:fadeInDown 1s ease-out both;
+	-webkit-animation:fadeInDown 1s ease-out both;
+} 
+@keyframes fadeInLine{
+	0%{left:-100%}
+	100%{left:0%}
+}
+
+@-webkit-keyframes fadeInLine{
+	0%{left:-100%}
+	100%{left:0%}
+}
+.page5 .line{
+	position:absolute;
+	top:80%;
+	width:100%;
+	height:1px;
+	background-color:#CCC;
+	box-shadow: 0px 0px 20px #FFF;
+	animation:fadeInLine 1s 0.5s both;
+	-webkit-animation:fadeInLine 1s 0.5s both;
+} 
+
+.page6 h1{
+	position:absolute;
+	top:20%;
+	left:50%;
+	margin-top:2.5em;
+	margin-left:-1em;
+	animation:fadeIn 1s ease-out 1s  both;
+	-webkit-animation:fadeIn 1s ease-out 1s both;
+}
+.page6 .end-cricle{
+	position:absolute;
+	top:20%;
+	left:50%;
+	margin-left:-6em;
+	width:200px;
+}
+@keyframes fadeInOwl{
+	0%{-webkit-transform: rotate(360deg);left:120%;}
+	100%{-webkit-transform: rotate(0deg);left:50%;}
+}
+@-webkit-keyframes fadeInOwl{
+	0%{-webkit-transform: rotate(360deg);left:120%;}
+	100%{-webkit-transform: rotate(0deg);left:50%;}
+}
+.page6 .owl{
+	position:absolute;
+	top:70%;
+	left:50%;
+	margin-left:-3em;
+	width:90px;
+	-webkit-transform: rotate(-30deg);
+	animation:fadeInOwl 1s 0.5s both;
+	-webkit-animation:fadeInOwl 1s 0.5s both;
+}
+.page6 .line{
+	position:absolute;
+	top:70%;
+	width:100%;
+	margin-top:90px;
+	height:1px;
+	background-color:#CCC;
+	box-shadow: 0px 0px 20px #FFF;
+	animation:fadeInLine 1s 0.5s both;
+	-webkit-animation:fadeInLine 1s 0.5s both;
+} 
+
 </style>
 </head>
-<body>
-    <div id="page1" class="page current">
-    	<div><img src="images/1.jpg" /></div>
+<body  style="overflow: hidden">
+    <div class="page page1 current">
+    	<div class="content">
+            <img class="logo" src="images/giraffe.png" />
+            <div class="title">
+                <h1>长颈鹿</h1>
+                <h2>我就是一个模板</h2>
+            </div>
+		</div>
     </div>
-    <div id="page2" class="page hide">
-    	<div><img src="images/2.jpg" /></div>
+    <div class="page page2 hide">
+        <img src="images/bee.png" />
+        <ul>
+            <li class="slide1">slide</li>
+            <li class="slide2">slide</li>
+            <li class="slide3">slide</li>
+            <li class="slide4">slide</li>
+        </ul>
     </div>
-    <div id="page3" class="page hide">
-    	<div><img src="images/1.jpg" /></div>
+    <div class="page page3 hide">
+        <h2>这里有好多圆</h2>
+        <ul>
+            <li class="circle1">1</li>
+            <li class="circle2">2</li>
+            <li class="circle3">3</li>
+            <li class="circle4">4</li>
+            <li class="circle5">5</li>
+        </ul>
     </div>
-    <div id="page4" class="page hide">
-   		<div><img src="images/2.jpg" /></div>
+    <div class="page page4 hide ">
+        <h2>这里有4个长方形</h2>
+        <ul>
+            <li class="square1">1</li>
+            <li class="square2">2</li>
+            <li class="square3">3</li>
+            <li class="square4">4</li>
+        </ul>
     </div>
+    <div  class="page page5 hide">
+        <h2>superheroe</h2>
+        <img src="images/superheroes-02.png" />
+        <div class="line"></div>
+    </div>
+    <div  class="page page6 hide">
+        <h1>END</h1>
+        <img  class="end-cricle"src="images/circle.gif" />
+        <img class="owl" src="images/owl.png" />
+        <div class="line"></div>
+	</div>
 </div>
 <script>
-$(function (){
-	
-});
+var page=0;
+var slide=true;//防止连续滑动，当settimeout动作完成时才能继续滑动。
 $(document).ready(function(){
-	$("#page1").swipe({
+	$(".page").swipe({
 		swipeUp:function(){
-			$("#page2").removeClass("hide");
-			$("#page2").addClass("page-movefrombottom");
-			$("#page1").addClass("page-movetotop");
-			setTimeout(function(){
-				$("#page2").removeClass("page-movefrombottom");
-				$("#page1").removeClass("page-movetotop");
-				$("#page1").removeClass("current");
-				$("#page1").addClass("hide");
-			},1000);
-		
-		}		
+			if(page!=($(".page").length-1)&&slide==true){
+				slide=false;
+				$($(".page").get(page+1)).removeClass("hide");
+				$($(".page").get(page+1)).addClass("page-movefrombottom current");
+				$($(".page").get(page)).addClass("page-movetotop");
+				setTimeout(function(){
+					$($(".page").get(page+1)).removeClass("page-movefrombottom");
+					$($(".page").get(page)).removeClass("page-movetotop");
+					$($(".page").get(page)).removeClass("current");
+					$($(".page").get(page)).addClass("hide");
+					page++;
+					slide=true;
+				},600);
+				return;
+			};
+			
+		},
+		swipeDown:function(){
+			if(page!=0&&slide==true){
+				slide=false;
+				$($(".page").get(page-1)).removeClass("hide");
+				$($(".page").get(page-1)).addClass("page-movefromtop current");
+				$($(".page").get(page)).addClass("page-movetobottom");
+				setTimeout(function(){
+					$($(".page").get(page-1)).removeClass("page-movefromtop");
+					$($(".page").get(page)).removeClass("page-movetobottom");
+					$($(".page").get(page)).removeClass("current");
+					$($(".page").get(page)).addClass("hide");
+					page--;
+					slide=true;
+				},600);
+				return;
+			};
+		},
 	});
 });
 

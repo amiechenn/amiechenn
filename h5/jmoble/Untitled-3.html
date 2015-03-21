@@ -4,6 +4,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <script src="jquery.min.js"></script>
+<script src="jquery.touchSwipe.js"></script>
+<script>
+$("#id").swipe({
+  swipeUp:function(){
+	  $("#page1").removeClass("hide");
+			$("#page1").addClass("page-movefromtop");
+			$("#page2").addClass("page-movetobottom");
+			setTimeout(function(){
+				$("#page1").removeClass("page-movefromtop");
+				$("#page2").removeClass("page-movetobottom");
+				$("#page2").removeClass("current");
+				$("#page2").addClass("hide");
+			},1000);
+  },
+  swipeDown:function(){
+	  $("#page3").removeClass("hide");
+			$("#page3").addClass("page-movefrombottom");
+			$("#page2").addClass("page-movetotop");
+			setTimeout(function(){
+				$("#page3").removeClass("page-movefrombottom");
+				$("#page2").removeClass("page-movetotop");
+				$("#page2").removeClass("current");
+				$("#page2").addClass("hide");
+			},1000);
+  },
+
+
+});
+</script>
 <style>
 
 @-webkit-keyframes moveToTop {
