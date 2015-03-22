@@ -576,9 +576,23 @@ ul{
 	left:0em;
 	z-index:2;
 }
-#wx_logo img{
-	width:8em;
+@keyframes top{
+	0%{ opacity:0;top:90%;}
+	100%{ opacity:1;top:85%;}
 }
+@-webkit-keyframes top{
+	0%{ opacity:0;top:90%;}
+	100%{ opacity:1;top:85%;}
+}
+.top img{
+	position:absolute;
+	z-index:2;
+	top:90%;
+	left:50%;
+	animation:top 1s linear infinite;
+	-webkit-animation:top 1s linear infinite;
+}
+
 </style>
 </head>
 <body  style="overflow: hidden">
@@ -593,6 +607,7 @@ ul{
             <div class="note"><img src="images/music.gif" width="60px" /></div> 
             <audio src="images/1.mp3" loop autoplay id="yin"></audio>	
         </div>
+        <div class="top"><img src="images/top.png" /></div>
         <div class="page page1 current">
             <img class="logo" src="images/giraffe.png" />
             <div class="title">
@@ -660,6 +675,9 @@ $(document).ready(function(){
 					page++;
 					slide=true;
 				},600);
+				if(page==($(".page").length-2)){
+					$(".top").addClass("hide");
+				}
 				return;
 			};
 			
@@ -678,6 +696,9 @@ $(document).ready(function(){
 					page--;
 					slide=true;
 				},600);
+				if(page==($(".page").length-1)){
+					$(".top").removeClass("hide");
+				}
 				return;
 			};
 		},
