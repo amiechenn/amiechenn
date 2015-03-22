@@ -5,69 +5,22 @@
 <title>无标题文档</title>
 <script src="jquery.min.js"></script>
 <script src="jquery.touchSwipe.js"></script>
-<script>
-$("#id").swipe({
-  swipeUp:function(){
-	  $("#page1").removeClass("hide");
-			$("#page1").addClass("page-movefromtop");
-			$("#page2").addClass("page-movetobottom");
-			setTimeout(function(){
-				$("#page1").removeClass("page-movefromtop");
-				$("#page2").removeClass("page-movetobottom");
-				$("#page2").removeClass("current");
-				$("#page2").addClass("hide");
-			},1000);
-  },
-  swipeDown:function(){
-	  $("#page3").removeClass("hide");
-			$("#page3").addClass("page-movefrombottom");
-			$("#page2").addClass("page-movetotop");
-			setTimeout(function(){
-				$("#page3").removeClass("page-movefrombottom");
-				$("#page2").removeClass("page-movetotop");
-				$("#page2").removeClass("current");
-				$("#page2").addClass("hide");
-			},1000);
-  },
-
-
-});
-</script>
 <style>
-
-@-webkit-keyframes moveToTop {
-	from { -webkit-transform: translateY(0); }
-	to { -webkit-transform: translateY(-100%); }
+bady{
+	background-color:#F00;
 }
-.page-movetotop{
-	animation:moveToTop 1s both;
-	-webkit-animation:moveToTop 1s both;
-	-moz-animation:moveToTop 1s both;
-	-o-animation:moveToTop 1s both;
-}
-#page1{
-	background-color:#999;
-	width:200px;
-	height:300px;
-	
-
-
-	}
-img{
-	
+div{
+	height:100%;
+	width:100%;
+	position:absolute;
+	display:block;
+	top:0;
+	left:0;
+	color:#FFF;
+	background-color:#036;
 }
 </style>
-</head>
-
-<body>
-<body>
-    <div id="page1" class="">
-    	<div><img src="images/1.jpg" /></div>
-    </div>
-    <script>
-	$("#page1").click(function(){
-		$("#page1").addClass("page-movetotop");	
-	})
-	</script>
+<bady>
+<div></div>
 </body>
 </html>
