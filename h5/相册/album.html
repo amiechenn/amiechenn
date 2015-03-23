@@ -259,6 +259,9 @@ $(document).ready(function(){
 			$('.preloading').delay().fadeOut('slow');
 			$('body').delay(1000);
 			$('.black-box').removeClass("hide");
+			setTimeout(function(){
+		      	$(".black").addClass("hide");
+	 		},2000);
 		});
      })
 	//------loading--------	
@@ -279,9 +282,7 @@ $(document).ready(function(){
 		  return;
 		};
 	});
-	setTimeout(function(){
-		$(".black").addClass("hide");
-	},2000);
+	
 	//-----black-------
 	numb=$(".photo").length.toString();
 	document.getElementById("pagenumber").innerHTML = numb;
