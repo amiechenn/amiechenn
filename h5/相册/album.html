@@ -150,6 +150,7 @@ h1{
 .return{
 	position:relative;
 	top:60px;
+	width:60px;
 }
 .more{
 	position:relative;
@@ -160,7 +161,8 @@ h1{
 
 <body >
     <section id="heared">
-        <div class="music rotate">
+        <div class="music" style="animation:rotate 2s linear infinite;
+	-webkit-animation:rotate 2s linear infinite;">
             <img src="images/headphone.png" />
         </div>
         <audio src="" loop autoplay id="yin"></audio>	
@@ -244,6 +246,7 @@ $(document).ready(function(){
 	var i=0;
 	$("#album-box").swipe({
 		swipeLeft:function(){
+			$(".next").addClass("hide");
 			if(i!=($(".photo").length-1)){
 				i++;
 				//---页码改变
@@ -309,13 +312,13 @@ $(document).ready(function(){
 	  var audio=document.getElementById("yin");
 	  if(music==false){
 		 audio.play();
-		  $(".music").addClass("rotate");
+		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
 		  music=true;
 		  return;
 		};
 	  if(music==true){
 		  audio.pause();
-		  $(".music").removeClass("rotate");
+		  $(".music").attr("style","");
 		  music=false;
 		  return;
 		};
