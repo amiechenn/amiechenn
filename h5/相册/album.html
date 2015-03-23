@@ -11,8 +11,7 @@ body{
 	margin:0;
 	padding:0;
 	background-color:#000;
-	width:100%;
-	height:100%;
+	
 }
 .hide{
 	display:none;
@@ -230,9 +229,8 @@ $(document).ready(function(){
 	numb=$(".photo").length.toString();
 	document.getElementById("pagenumber").innerHTML = numb;
 	//------pagenumber------
-	equipmentWidth=screen.availWidth.toString();
+	equipmentWidth=window.innerWidth.toString();
 	document.getElementById('album-box').style.width= equipmentWidth+"px";
-	document.getElementById('main').style.width= equipmentWidth+"px";
 	//------equipmentWidth改变轮播album-box宽度------
 	var elems = document.getElementsByClassName('photo');
 						for(var j = 0; j < elems.length; j++) {
