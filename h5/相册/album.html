@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
+<title>ALBUM</title>
+<script src="jquery-2.1.3.min.js"></script>
+<script src="jquery.touchSwipe.min.js"></script>
+<style>
+body{
+	font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+	margin:0;
+	padding:0;
+	background-color:#000;
+}
+.hide{
+	display:none;
+}
+/*heared*/
+
+.heared{
+	width:100%;
+	height:60px;
+	background-color:#000;
+	border-bottom: #4f4f4f 1px solid;
+}
+
+/*content*/
+.title{
+	text-align:center;
+	width:100%;
+	height:50px;
+	color:#FFF;
+	background-color:#000;
+}
+h1{
+	margin:0;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.number{
+	width:100%;
+	height:20px;
+	background-color:#000;
+	color:#CCC;
+	text-align:center;
+}
+#album-box{
+	overflow:hidden;
+}
+#album{
+	position:relative;
+}
+#album img{
+	float:left;
+}
+.text-box{
+	background-color:#000;
+	color:#FFF;
+	position:absolute;
+	width:100%;
+	height:60px;
+}
+.text{
+	position:absolute;
+	margin-left:30px;
+}
+/*footed*/
+
+</style>
+</head>
+
+<body>
+    <section class="heared">
+    	
+    </section>
+    <section class="content" >
+        <div class="title">
+        	<h1>name</h1>
+        </div>
+    	<div class="number">
+        	<span id=changepage>1</span>
+            <span>/</span>
+            <span id="pagenumber"></span>
+        </div>
+        <div id="album-box" style="width:300px;">
+            <div id="album" style="left:0;width:1300px;">
+                <div>
+                    <img  class="photo" src="images/1.JPG" />
+                </div>
+                <div>
+                    <img class="photo" src="images/2.JPG" />
+                </div>
+                <div>
+                    <img class="photo" src="images/4.JPG" />
+                </div>
+                <div>
+                    <img class="photo" src="images/5.JPG" />
+                </div>
+            </div>
+        </div>
+        <div class="text-box">
+        	<div class="text current">
+            	<p>one</p>
+            </div>
+            <div class="text hide">
+            	<p>2</p>
+            </div>
+            <div class="text hide">
+            	<p>3</p>
+            </div>
+            <div class="text hide">
+            	<p>4</p>
+            </div>
+        </div>
+    </section>
+    <section class="footed">
+    	
+    </section>
+<script>
+
+$(document).ready(function(){
+	numb=$(".photo").length.toString();
+	document.getElementById("pagenumber").innerHTML = numb;
+	//------pagenumber------
+	equipmentWidth=screen.availWidth.toString();
+	document.getElementById('album-box').style.width= equipmentWidth+"px";
+	//------equipmentWidth改变轮播album-box宽度------
+	var elems = document.getElementsByClassName('photo');
+						for(var j = 0; j < elems.length; j++) {
+							elems[j].style.width = equipmentWidth+"px";
+						}
+	//------equipmentWidth 改变图片的宽度-------
+	albumWidth=equipmentWidth*($(".photo").length).toString();
+	document.getElementById('album').style.width= albumWidth +"px";
+	
+	var width=equipmentWidth;
+	var i=0;
+	$("#album-box").swipe({
+		swipeLeft:function(){
+			if(i!=($(".photo").length-1)){
+				i++;
+				//---页码改变
+				changenumb=(i+1).toString();
+				document.getElementById("changepage").innerHTML =  changenumb;
+				//---页码改变
+				//---相片轮播
+				left=-(width*i).toString();
+				document.getElementById('album').style.left=left+"px";
+				$("#album").css({"-webkit-transition-duration":"0.5s","transition-duration":"0.5s"});
+				//---相片轮播
+				//---文字轮播
+				$($(".text").get(i)).removeClass("hide");
+				$(".current").addClass("hide");
+				$(".current").removeClass("current");
+				$($(".text").get(i)).addClass("current");
+				//---文字轮播
+				return;
+			};
+		},
+		swipeRight:function(){
+			if(i!=0){
+				i--;
+				//---页码改变
+				changenumb=(i+1).toString();
+				document.getElementById("changepage").innerHTML =  changenumb;
+				//---页码改变
+				//---相片轮播
+				left=-(width*i).toString();
+				document.getElementById('album').style.left=left+"px";
+				$("#album").css({"-webkit-transition-duration":"0.5s","transition-duration":"0.5s"});
+				//---相片轮播
+				//---文字轮播
+				$($(".text").get(i)).removeClass("hide");
+				$(".current").addClass("hide");
+				$(".current").removeClass("current");
+				$($(".text").get(i)).addClass("current");
+				//---文字轮播
+				return;
+			};
+		},
+	});
+	//----end photoswipe textchange------
+	
+	
+
+});
+</script>
+</body>
+</html>
