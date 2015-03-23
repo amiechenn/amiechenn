@@ -11,10 +11,33 @@ body{
 	margin:0;
 	padding:0;
 	background-color:#000;
-	
 }
 .hide{
 	display:none;
+}
+/*loading*/
+.preloading {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 9999;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+	display: block;
+}
+.loading-gif {
+	opacity: 1 ;
+  	-webkit-border-radius: 3px ;
+  	background: #ffffff;
+  	position: absolute;
+  	left: 50%;
+  	top: 50%;
+	margin-left:-50px;
+	margin-top:-50px;
 }
 /*heared*/
 
@@ -78,12 +101,12 @@ h1{
 	-webkit-animation:black 7s  both;
 }
 @keyframes remove{
-	from{opacity:1;transform: scale(4);top:150px;}
-	to{opacity:0;transform: scale(0);top:50px;}
+	from{opacity:1;transform: scale(6)}
+	to{opacity:0;transform: scale(0);}
 }
 @-webkit-keyframes remove{
-	from{opacity:1;-webkit-transform: scale(4);top:150px;}
-	to{opacity:0;-webkit-transform: scale(0);top:50px;}
+	from{opacity:1;-webkit-transform: scale(4);}
+	to{opacity:0;-webkit-transform: scale(0);}
 }
 .movetitle{
 	position:absolute;
@@ -130,7 +153,6 @@ h1{
 	margin-left:60px;
 	word-break:break-all;
 	overflow:hidden;
-	
 }
 @keyframes fadeIn{
 	from{opacity:0;left:50px;}
@@ -160,12 +182,16 @@ h1{
 </head>
 
 <body >
+	<section class="preloading" style="display:block;">
+        <img class="loading-gif" src="images/1.gif" alt="preloader" style="display:block;">
+    </section>
+
     <section id="heared">
         <div class="music" style="animation:rotate 2s linear infinite;
 	-webkit-animation:rotate 2s linear infinite;">
             <img src="images/headphone.png" />
         </div>
-        <audio src="" loop autoplay id="yin"></audio>	
+        <audio src="images/1.mp3" loop autoplay id="yin"></audio>	
     </section>
     <section class="content" >
         <div class="title">
@@ -224,6 +250,32 @@ h1{
 <script>
 
 $(document).ready(function(){
+	$(function() {
+		$(window).load(function() {
+			"use strict";
+			$('.loading-gif').delay().fadeOut('slow');
+			$('.preloading').delay().fadeOut('slow');
+			$('body').delay(1000);
+		});
+     })
+	//------loading--------	
+	var music=true;
+	$(".music").click(function show(){
+	  var audio=document.getElementById("yin");
+	  if(music==false){
+		 audio.play();
+		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
+		  music=true;
+		  return;
+		};
+	//------music------
+	  if(music==true){
+		  audio.pause();
+		  $(".music").attr("style","");
+		  music=false;
+		  return;
+		};
+	});
 	setTimeout(function(){
 		$(".black").addClass("hide");
 	},2000);
@@ -241,6 +293,8 @@ $(document).ready(function(){
 	//------equipmentWidth 改变图片的宽度-------
 	albumWidth=equipmentWidth*($(".photo").length).toString();
 	document.getElementById('album').style.width= albumWidth +"px";
+	
+	
 	
 	var width=equipmentWidth;
 	var i=0;
@@ -307,23 +361,8 @@ $(document).ready(function(){
 	});
 	//------return-----
 	
-	var music=true;
-	$(".music").click(function show(){
-	  var audio=document.getElementById("yin");
-	  if(music==false){
-		 audio.play();
-		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
-		  music=true;
-		  return;
-		};
-	  if(music==true){
-		  audio.pause();
-		  $(".music").attr("style","");
-		  music=false;
-		  return;
-		};
-	});
-	//------music------
+	
+	
 	
 
 });
