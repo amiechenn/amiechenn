@@ -197,8 +197,10 @@ h1{
         <div class="title">
         	<h1>name</h1>
         </div>
-        <div class="black"></div>
-        <div class="movetitle"><h1>name</h1></div>
+        <div class="black-box hide">
+            <div class="black"></div>
+            <div class="movetitle"><h1>name</h1></div>
+        </div>
     	<div class="number">
         	<span id=changepage>1</span>
             <span>/</span>
@@ -256,6 +258,7 @@ $(document).ready(function(){
 			$('.loading-gif').delay().fadeOut('slow');
 			$('.preloading').delay().fadeOut('slow');
 			$('body').delay(1000);
+			$('.black-box').removeClass("hide");
 		});
      })
 	//------loading--------	
