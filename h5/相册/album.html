@@ -158,7 +158,7 @@ h1{
 </style>
 </head>
 
-<body>
+<body id="main">
     <section id="heared">
         <div class="music rotate">
             <img src="images/headphone.png" />
@@ -231,7 +231,7 @@ $(document).ready(function(){
 	//------pagenumber------
 	equipmentWidth=screen.availWidth.toString();
 	document.getElementById('album-box').style.width= equipmentWidth+"px";
-	document.getElementById('heared').style.width= equipmentWidth+"px";
+	document.getElementById('main').style.width= equipmentWidth+"px";
 	//------equipmentWidth改变轮播album-box宽度------
 	var elems = document.getElementsByClassName('photo');
 						for(var j = 0; j < elems.length; j++) {
