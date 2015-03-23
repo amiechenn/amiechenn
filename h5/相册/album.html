@@ -77,10 +77,13 @@ h1{
 	animation:black 7s both ;
 	-webkit-animation:black 7s  both;
 }
-
+@keyframes remove{
+	from{opacity:1;transform: scale(4);top:150px;}
+	to{opacity:0;transform: scale(0);top:50px;}
+}
 @-webkit-keyframes remove{
 	from{opacity:1;-webkit-transform: scale(4);top:150px;}
-	to{opacity:0;-webkit-transform: scale(0);top:80px;}
+	to{opacity:0;-webkit-transform: scale(0);top:50px;}
 }
 .movetitle{
 	position:absolute;
@@ -88,7 +91,7 @@ h1{
 	z-index:100;
 	color:#FFF;
 	left:50%;
-	margin-left:-50px;
+	margin-left:-45px;
 	animation:remove 4s both ;
 	-webkit-animation:remove 4s  both;
 }
