@@ -12,14 +12,13 @@ body{
 	margin:0;
 	padding:0;
 	background-color:#000;
-	width:100%;
 }
 .hide{
 	display:none;
 }
 /*heared*/
 
-.heared{
+#heared{
 	width:100%;
 	height:60px;
 	background-color:#000;
@@ -160,7 +159,7 @@ h1{
 </head>
 
 <body>
-    <section class="heared">
+    <section id="heared">
         <div class="music rotate">
             <img src="images/headphone.png" />
         </div>
@@ -226,11 +225,13 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$(".black").addClass("hide");
 	},2000);
+	//-----black-------
 	numb=$(".photo").length.toString();
 	document.getElementById("pagenumber").innerHTML = numb;
 	//------pagenumber------
 	equipmentWidth=screen.availWidth.toString();
 	document.getElementById('album-box').style.width= equipmentWidth+"px";
+	document.getElementById('heared').style.width= equipmentWidth+"px";
 	//------equipmentWidth改变轮播album-box宽度------
 	var elems = document.getElementsByClassName('photo');
 						for(var j = 0; j < elems.length; j++) {
