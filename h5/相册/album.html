@@ -24,7 +24,27 @@ body{
 	background-color:#000;
 	border-bottom: #4f4f4f 1px solid;
 }
-
+.music{
+	position:absolute;
+	top:5px;
+	left:80%;
+	z-index:100;
+}
+.music img{
+	width:50px;
+}
+@keyframes rotate{
+	0%{transform: rotate(0deg);}
+	100%{transform: rotate(360deg);}
+} 
+@-webkit-keyframes rotate{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
+}
+.rotate{
+	animation:rotate 2s linear infinite;
+	-webkit-animation:rotate 2s linear infinite;
+}
 /*content*/
 .title{
 	text-align:center;
@@ -37,6 +57,40 @@ h1{
 	margin:0;
 	padding-top:10px;
 	padding-bottom:10px;
+}
+@keyframes black{
+	from{opacity:1;}
+	to{opacity:0;}
+}
+@-webkit-keyframes black{
+	from{opacity:1;}
+	to{opacity:0;}
+}
+.black{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:0.7;
+	z-index:50;
+	top:0;
+	animation:black 7s both ;
+	-webkit-animation:black 7s  both;
+}
+
+@-webkit-keyframes remove{
+	from{opacity:1;-webkit-transform: scale(4);top:150px;}
+	to{opacity:0;-webkit-transform: scale(0);top:80px;}
+}
+.movetitle{
+	position:absolute;
+	top:150px;
+	z-index:100;
+	color:#FFF;
+	left:50%;
+	margin-left:-50px;
+	animation:remove 4s both ;
+	-webkit-animation:remove 4s  both;
 }
 .number{
 	width:100%;
@@ -54,30 +108,66 @@ h1{
 #album img{
 	float:left;
 }
+.text-logo{
+	display:inline-block;
+}
 .text-box{
 	background-color:#000;
 	color:#FFF;
 	position:absolute;
 	width:100%;
-	height:60px;
+	height:100px;
+	display:inline-block;
+	background-image: url(images/quill.png);
+	background-repeat:no-repeat;
 }
+
 .text{
 	position:absolute;
-	margin-left:30px;
+	margin-left:60px;
+	word-break:break-all;
+	overflow:hidden;
+	
+}
+@keyframes fadeIn{
+	from{opacity:0;left:50px;}
+	to{opacity:1;left:0;}
+}
+@-webkit-keyframes fadeIn{
+	from{opacity:0;left:50px;}
+	to{opacity:1;left:0;}
+}
+.next{
+	position:absolute;
+	left:0;
+	animation:fadeIn 1s  infinite both ;
+	-webkit-animation:fadeIn 1s infinite both;
 }
 /*footed*/
-
+.return{
+	position:relative;
+	top:60px;
+}
+.more{
+	position:relative;
+	top:50px;
+}
 </style>
 </head>
 
 <body>
     <section class="heared">
-    	
+        <div class="music rotate">
+            <img src="images/headphone.png" />
+        </div>
+        <audio src="images/1.mp3" loop autoplay id="yin"></audio>	
     </section>
     <section class="content" >
         <div class="title">
         	<h1>name</h1>
         </div>
+        <div class="black"></div>
+        <div class="movetitle"><h1>name</h1></div>
     	<div class="number">
         	<span id=changepage>1</span>
             <span>/</span>
@@ -96,12 +186,18 @@ h1{
                 </div>
                 <div>
                     <img class="photo" src="images/5.JPG" />
-                </div>
-            </div>
+                </div> 
+                <div class="next">
+        			<img src="images/navigation-left.png" width="40px"/>
+        		</div>
+            
+            </div> 
+           
         </div>
+        
         <div class="text-box">
         	<div class="text current">
-            	<p>one</p>
+            	<p>onfge</p>
             </div>
             <div class="text hide">
             	<p>2</p>
@@ -113,13 +209,19 @@ h1{
             	<p>4</p>
             </div>
         </div>
+       
     </section>
     <section class="footed">
-    	
+    	<div class="return">
+        	<img src="images/button-rotate-ccw.png" />
+        </div>
     </section>
 <script>
 
 $(document).ready(function(){
+	setTimeout(function(){
+		$(".black").addClass("hide");
+	},2000);
 	numb=$(".photo").length.toString();
 	document.getElementById("pagenumber").innerHTML = numb;
 	//------pagenumber------
@@ -181,7 +283,40 @@ $(document).ready(function(){
 		},
 	});
 	//----end photoswipe textchange------
+	$(".return").click(function(){
+		i=0;
+		changenumb=(i+1).toString();
+		document.getElementById("changepage").innerHTML =  changenumb;
+		hangenumb=(i+1).toString();
+		document.getElementById("changepage").innerHTML =  changenumb;
+		left=-(width*i).toString();
+		document.getElementById('album').style.left=left+"px";
+		$("#album").css({"-webkit-transition-duration":"0.5s","transition-duration":"0.5s"});
+		$($(".text").get(i)).removeClass("hide");
+		$(".current").addClass("hide");
+		$(".current").removeClass("current");
+		$($(".text").get(i)).addClass("current");
+		return;
+	});
+	//------return-----
 	
+	var music=true;
+	$(".music").click(function show(){
+	  var audio=document.getElementById("yin");
+	  if(music==false){
+		 audio.play();
+		  $(".music").addClass("rotate");
+		  music=true;
+		  return;
+		};
+	  if(music==true){
+		  audio.pause();
+		  $(".music").removeClass("rotate");
+		  music=false;
+		  return;
+		};
+	});
+	//------music------
 	
 
 });
