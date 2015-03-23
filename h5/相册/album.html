@@ -5,6 +5,39 @@
 <title>ALBUM</title>
 <script src="jquery-2.1.3.min.js"></script>
 <script src="jquery.touchSwipe.min.js"></script>
+<script>
+$(function() {
+		$(window).load(function() {
+			"use strict";
+			$('.loading-gif').delay().fadeOut('slow');
+			$('.preloading').delay().fadeOut('slow');
+			$('body').delay(1000);
+			$('.black-box').removeClass("hide");
+			setTimeout(function(){
+		      	$(".black").addClass("hide");
+	 		},2000);
+		});
+     })
+	//------loading--------	
+	var music=true;
+	$(".music").click(function show(){
+	  var audio=document.getElementById("yin");
+	  if(music==false){
+		 audio.play();
+		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
+		  music=true;
+		  return;
+		};
+	
+	  if(music==true){
+		  audio.pause();
+		  $(".music").attr("style","");
+		  music=false;
+		  return;
+		};
+	});
+	//------music------
+</script>
 <style>
 body{
 	font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
@@ -252,36 +285,6 @@ h1{
 <script>
 
 $(document).ready(function(){
-	$(function() {
-		$(window).load(function() {
-			"use strict";
-			$('.loading-gif').delay().fadeOut('slow');
-			$('.preloading').delay().fadeOut('slow');
-			$('body').delay(1000);
-			$('.black-box').removeClass("hide");
-			setTimeout(function(){
-		      	$(".black").addClass("hide");
-	 		},2000);
-		});
-     })
-	//------loading--------	
-	var music=true;
-	$(".music").click(function show(){
-	  var audio=document.getElementById("yin");
-	  if(music==false){
-		 audio.play();
-		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
-		  music=true;
-		  return;
-		};
-	//------music------
-	  if(music==true){
-		  audio.pause();
-		  $(".music").attr("style","");
-		  music=false;
-		  return;
-		};
-	});
 	
 	//-----black-------
 	numb=$(".photo").length.toString();
