@@ -27,15 +27,15 @@ $(document).ready(function(){
 	$(".music").click(function show(){
 	  var audio=document.getElementById("yin");
 	  if(music==false){
-		 audio.play();
 		  $(".music").attr("style","animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite");
-		  music=true;
+		   audio.play();
+		   music=true;
 		  return;
 		};
 	
 	  if(music==true){
-		  audio.pause();
 		  $(".music").attr("style","");
+		  audio.pause();
 		  music=false;
 		  return;
 		};
@@ -200,11 +200,11 @@ h1{
 }
 @keyframes fadeIn{
 	from{opacity:0;left:50px;}
-	to{opacity:1;left:0;}
+	to{opacity:0.5;left:0;}
 }
 @-webkit-keyframes fadeIn{
 	from{opacity:0;left:50px;}
-	to{opacity:1;left:0;}
+	to{opacity:0.5;left:0;}
 }
 .next{
 	position:absolute;
@@ -281,7 +281,7 @@ h1{
                 </div> 
                  
                 <div class="next">
-        			<img src="images/navigation-left.png" width="40px"/>
+        			<img src="images/navigation-left.png" width="15px"/>
         		</div>
             
             </div> 
