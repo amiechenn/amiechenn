@@ -16,6 +16,9 @@ $(function() {
 			setTimeout(function(){
 		      	$(".black").addClass("hide");
 	 		},2000);
+			setTimeout(function(){
+		      	$(".movetitle").addClass("hide");
+	 		},4000);
 		});
      })
 	//------loading--------	
@@ -62,13 +65,13 @@ body{
 	display: none;
 	width: 100%;
 	height: 100%;
-	background: #ffffff;
+	background: #000;
 	display: block;
 }
 .loading-gif {
 	opacity: 1 ;
   	-webkit-border-radius: 3px ;
-  	background: #ffffff;
+  	background: #000;
   	position: absolute;
   	left: 50%;
   	top: 50%;
@@ -105,7 +108,7 @@ body{
 	-webkit-animation:rotate 2s linear infinite;
 }
 /*content*/
-.title{
+.album-title{
 	text-align:center;
 	width:100%;
 	height:50px;
@@ -230,7 +233,7 @@ h1{
         <audio src="images/1.mp3" loop autoplay id="yin"></audio>	
     </section>
     <section class="content" >
-        <div class="title">
+        <div class="album-title">
         	<h1>name</h1>
         </div>
         <div class="black-box hide">
