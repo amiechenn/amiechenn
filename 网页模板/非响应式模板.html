@@ -1,0 +1,1294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>非响应式模板</title>
+<script src="jquery-2.1.3.min.js"></script>
+<style>
+body{
+	font-family: verdana,Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,STHeiti;
+	margin:0;
+	padding:0;
+}
+p{
+	margin:0;
+}
+a{
+	text-decoration:none;
+	color:#000;
+}
+ul{
+	list-style-type:none;
+	padding-left:0;
+	margin:0;
+}
+.hide{
+	display:none;
+}
+.heared-content{
+	width:980px;
+	height:60px;
+	margin:auto;
+	position:relative;
+	top:0;
+}
+.logo a{
+	display:block;
+	height:50px;
+	width:120px;
+	margin:0 10px;
+}
+.logo img{
+	height:50px;
+}
+.search{
+	position:absolute;
+	top:15px;
+	left:300px;
+	height:26px;
+	padding:2px;
+	border:solid 1px #CCC;
+}
+.search-text{
+	float:left;
+}
+.search-text input{
+	width:250px;
+	height:18px;
+	padding:4px;
+	border:none;
+	outline:0;
+	border-right:1px solid #CCC;
+} 
+.search-button{
+	float:left;
+}
+.search-button input{
+	width:26px;
+	height:26px;
+	border:none;
+	background-color:#FFF;
+	outline:0;
+	cursor:pointer;
+	background-image:url(images/sprites.jpg);
+	background-repeat:no-repeat;
+	background-position:2px 0px;
+}
+.login-block{
+	position:absolute;
+	right:10px;
+	top:20px;
+}
+.login-block li{
+	display:inline-block;
+}
+.login-block li a{
+	display:block;
+	width:80px;
+	height:20px;
+	background-color:#C00;
+	color:#FFF;
+	text-align:center;
+	font-size:14px;
+	border-radius:5px;
+}
+.login-block li a:hover, a:active{
+	background-color:#E64346;
+}
+.nav{
+	background-color:#E64346;
+	height:40px;
+}
+.nav-content{
+	width:980px;
+	height:40px;
+	margin:auto;
+	position:relative;
+	background-color:#E64346;
+}
+.nav-left{
+	position:absolute;
+	left:10px;
+	z-index:1;
+}
+.nav-left h3{
+	text-align:center;
+	color:#FFF;
+	background-color:#C00;
+	height:40px;
+	width:250px;
+	margin:0;
+	font-size:16px;
+	line-height:40px;
+	box-shadow:0px 0px 1px #CCC; 
+	border-bottom:#FFF solid 1px;
+}
+.nav-left ul{
+	box-shadow:0px 0px 1px #CCC;
+}
+.nav-left li{
+	text-align:center;
+	cursor: default;
+}
+
+.pro-title{
+	position:relative;
+	
+}
+.nav-left li h4{
+	margin:0 30px;
+	height:50px;
+	border-bottom:#EBEBEB solid 1px;
+	line-height:50px;
+	width:180px;
+	background-image:url(images/sprites.jpg);
+	background-repeat:no-repeat;
+	background-position:-20px 10px;
+}
+.nav-left .nav-left-active  b{
+	display:block;
+}
+.nav-left .nav-left-active .pro{
+	display:block;
+}
+.nav-left b{
+	position:absolute;
+	top:-1px;
+	left:210px;
+	background-color:#FFF;
+	background-image:url(images/sprites.jpg);
+	background-repeat:no-repeat;
+	background-position:10px -28px;
+	height:50px;
+	width:40px;
+	border-bottom:#EBEBEB solid 1px;
+	border-top:#EBEBEB solid 1px;
+	z-index:11;
+	display:none;
+}
+.nav-left .pro{
+	position:absolute;
+	top:41px;
+	left:250px;
+	height:410px;
+	width:400px;
+	background-color:#FFF;
+	box-shadow:0px 0px 1px #CCC;
+	z-index:10;
+	display:none;
+}
+.nav-left .pro img{
+	height:410px;
+	width:400px;
+}
+
+.nav-right ul{
+	position:absolute;
+	left:261px;
+}
+.nav-right li{
+	float:left;
+}
+.nav-right a{
+	display:block;
+	height:40px;
+	line-height:40px;
+	padding:0 30px;
+	color:#FFF;
+}
+.nav-right a:hover, a:active{
+	background-color:#C00;
+}
+.active{
+	background-color:#C00;
+}
+.slide{
+	width:980px;
+	height:400px;
+	margin:auto;
+	position:relative;
+}
+.slide-content{
+	margin-left:260px;
+}
+.slide-main{
+	margin:20px 20px 0px 20px;
+	width:560px;
+	height:390px;
+	overflow:hidden;
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+}
+.slide-main img{
+	width:560px;
+	height:390px;
+}
+.slide-main ul{
+	width:2800px;
+	position:relative;
+	transition:all 1s;
+	-webkit-transition:all 1s;	
+}
+.slide-main li {
+	float:left;
+}
+.slide-item{
+	position:absolute;	
+	top:0px;
+	right:10px;
+	
+}
+.slide-item ul li{
+	padding:0px 0px 10px 20px;
+	display:block;
+}
+.slide-item img{
+	height:70px;
+}
+.slide-on{
+	background-image:url(images/sprites.jpg);
+	background-repeat:no-repeat;
+	background-position:-25px -33px;
+}
+.banner-content{
+	height:100px;
+	width:980px;
+	margin:auto;
+	background-image:url(images/5.JPG);
+	background-size:cover;
+	background-attachment:fixed;
+}
+.select{
+	width:980px;
+	margin:auto;
+	position:relative;
+}
+.side{
+	width:250px;
+	margin-left:10px;
+	overflow:hidden;
+}
+.box-one li a{
+	display:block;
+	height:70px;
+	line-height:70px;
+	
+
+}
+.box-one a:hover, a:active{
+	color:#C00;
+	background-color:#FFF;
+}
+.box-one img:hover{
+	transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+}
+.box-one img{
+	float:left;
+	width:50px;
+	height:50px;
+	margin:10px;
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	transition:transform 1s;
+	-webkit-transition:transform 1s;	
+}
+.booking{
+	position:absolute;
+	top:0;
+	left:260px;
+	width:700px;
+	height:260px;
+	margin:10px;
+	border:#C00 solid 5px;
+	background-color:#c00;
+}
+.booking h3{
+	width:100px;
+	margin:0;
+	height:63px;
+	line-height:64px;
+	text-align:center;
+	border-top:#F00 solid 1px;
+	border-bottom:#900 solid 1px;
+	color:#FFF;
+}
+.booking h3:hover{
+	color:#C00;
+	background-color:#FFF;
+	cursor:pointer;
+}
+.page-content{
+	position:absolute;
+	top:0;
+	left:100px;
+	width:600px;
+	height:258px;
+	background-color:#FFF;
+	border-top:#C00 solid 1px;
+	border-bottom:#C00 solid 1px;
+	display:none;
+}
+.booking .page-on .page-content{
+	display:block;
+}
+.booking .page-on h3{
+	color:#C00;
+	background-color:#FFF;
+	cursor:pointer;
+}
+.page-content ul{
+	margin-left:20px;
+}
+.page-content li{
+	float:left;
+}
+	
+.page-inblock-name h4{
+	width:100px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	margin:0;
+	background-color:#fff;
+	border-bottom:#fff solid 2px;
+}
+.page-inblock-name h4:hover{
+	cursor:pointer;
+}
+.page-inblock{
+	position:absolute;
+	top:52px;
+	left:20px;
+	background-color:#FF8080;
+	width:560px;
+	height:190px;
+	display:none;
+}
+.page-content .current .page-inblock{
+	display:block;
+}
+.page-content .current  h4{
+	border-bottom:#C00 solid 2px;
+}
+.pagination{
+	width:980px;
+	margin:auto;
+	position:relative;
+}
+.pagination-heared{
+	padding:20px 30px;
+	margin-bottom:5px;
+	border-bottom:#999 dashed 1px;
+}
+.pagination-heared-content{
+	overflow:hidden;
+	transition:height 1s;
+	-webkit-transition:height 1s;
+}
+.pagination-heared-content h3{
+	float:left;
+	margin:10px;
+	font-size:16px;
+}
+.pagination-heared-content ul{
+	float:left;
+	width:700px;
+}
+.pagination-heared-content ul li{
+	float:left;
+}
+.classify  a{
+	display:block;
+	width:200px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	margin:10px;
+	color:#C00;
+}
+.classify  a:hover, a:active{
+	background-color:#E64346;
+	color:#FFF;
+}
+
+.pagination-heared .more{
+	width:100%;
+	text-align:center;
+	cursor:pointer;
+	background-color:#FFD5D5;
+}
+.pagination-content{
+	padding:0 30px;
+	height:210px;
+	width:100%;
+	position:relative;
+}
+.pagination-content ul.pager{
+	position:absolute;
+	top:0;
+	left:0;
+	width:980px;
+	display:none;
+}
+@keyframes fadeIn{
+	from {opacity:0.7;}
+	to {opacity:1;}
+}
+@-webkit-keyframes fadeIn{
+	from {opacity:0;}
+	to {opacity:1;}
+}
+.pagination-content ul.pager-on{
+	display:block;
+	animation: fadeIn 1s linear both; 
+	-webkit-animation: fadeIn 1s linear both; 
+}
+.pagination-content ul li{
+	float:left;
+	width:25%;
+}
+.pagination-content ul li a{
+	display:block;
+	height:200px;
+	margin:5px;
+	background-color:#FFD5D5;
+}
+.pager-img{
+	width:235px;
+	height:150px;
+	overflow:hidden;
+	position:relative;
+}
+.pager-img img{
+	width:235px;
+	height:150px;
+	overflow:hidden;
+}
+.pager-img p{
+	position:absolute;
+	background-color:rgba(255,0,0,0.3);
+	width:235px;
+	height:30px;
+	line-height:30px;
+	color:#FFF;
+	text-align:center;
+	transition:all .3s;
+	-webkit-transition:all .3s;
+}
+.pager-img p:hover{
+	top:125px;
+}
+.pager-text{
+	text-align:center;
+	line-height:50px;
+}
+.pagination-footer{
+	margin:10px 0;
+}
+.paginator{
+	width:320px;
+	margin:auto;
+}
+.paginator a{
+	float:left;
+	display:block;
+	border:#C00 solid 1px;
+	margin:2px;
+	padding:1px 5px;
+	cursor:pointer;
+	font-size:11px;
+}
+.paginator-number-box{
+	float:left;
+	width:120px;
+	overflow:hidden;
+	position:relative;
+}
+#paginator-number{
+	width:300px;
+	position:relative;
+}
+.paginator a.num-on{
+	background-color:#E64346;
+	color:#FFF;
+}
+
+.footed{
+	background-color:#E64346;
+	height:50px;
+	position:relative;
+	top:0;
+	margin:20px 0;
+}
+
+</style>
+</head>
+<body>
+<section class="heared">
+	<div class="heared-content">
+        <div class="logo">
+            <a href="#"><img src="images/amie.png" /></a>
+        </div>
+        <div class="search">
+        	<div class="search-text">
+        		<input name="search" type="text" placeholder="text" autocomplete="on"/>
+            </div>
+            <div class="search-button">
+            	<input type="submit" value="" />
+            </div>
+        </div>
+        <div class="login-block">
+        	<ul>
+            	<li class="login"><a href="#">登陆</a></li>
+                <li class="logup"><a href="#">注册</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-content">
+            <div class="nav-left">
+                <h3>快速导航</h3>
+                <ul>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro1.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro2.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro3.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro4.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro5.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro6.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro7.png" /></div>
+                    </li>
+                    <li class="nav-left-item">
+                    	<div class="pro-title">
+                            <h4>项目</h4>
+                            <b></b>
+                        </div>
+                        <div class="pro"><img src="images/pro8.png" /></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-right">
+            	<ul>
+                	<li class="active"><a href="">首页</a></li>
+                    <li><a href="">产品</a></li>
+                    <li><a href="">服务</a></li>
+                    <li><a href="">招聘</a></li>
+                    <li><a href="">关于我们</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section class="slide">
+	<div class="slide-content">
+    	<div class="slide-main">
+        	<ul id="slide-main-id" style="left:0;">
+            	<li><img src="images/1.JPG" /></li>
+                <li><img src="images/2.JPG" /></li>
+                <li><img src="images/3.JPG" /></li>
+                <li><img src="images/4.JPG" /></li>
+                <li><img src="images/5.JPG" /></li>
+            </ul>
+        </div>
+        <div class="slide-item">
+        	<ul>
+            	<li class="item slide-on"><img src="images/1.JPG" /></li>
+                <li class="item"><img src="images/2.JPG" /></li>
+                <li class="item"><img src="images/3.JPG" /></li>
+                <li class="item"><img src="images/4.JPG" /></li>
+                <li class="item"><img src="images/5.JPG" /></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="banner">
+	<div class="banner-content"></div>
+</section>
+<section class="select">
+    <div class="side">
+        <ul class="box-one">
+            <li>
+            	<img src="images/box-one.jpg" />
+            	<a href="">box-one</a>
+            </li>
+            <li>
+            	<img src="images/box-one.jpg" />
+            	<a href="">box-one</a>
+            </li>
+            <li>
+            	<img src="images/box-one.jpg" />
+            	<a href="">box-one</a>
+            </li>
+            <li>
+            	<img src="images/box-one.jpg" />
+            	<a href="">box-one</a>
+            </li>
+       </ul>
+    </div>
+    <div class="booking">
+    	<ul>
+        	<li  class="page page-on">
+            	<h3 class="page-name">标题一</h3>
+            	<div class="page-content">
+                	<ul >
+                    	<li class="page-inblock-name first current">
+                        	<h4>1-1</h4>
+                            <div class="page-inblock">
+                            page1
+                            </div> 
+                         </li>
+                        <li class="page-inblock-name">
+                        	<h4>1-2</h4>
+                            <div class="page-inblock">
+                            page2
+                        </li>
+                         <li class="page-inblock-name">
+                        	<h4>1-3</h4>
+                            <div class="page-inblock">
+                            page3
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="page">
+            	<h3 class="page-name">标题二</h3>
+            	<div class="page-content">
+                	<ul >
+                    	<li class="page-inblock-name first current">
+                        	<h4>2-1</h4>
+                            <div class="page-inblock">
+                            page11
+                            </div> 
+                         </li>
+                        <li class="page-inblock-name">
+                        	<h4>2-2</h4>
+                            <div class="page-inblock">
+                            page22
+                        </li>
+                         <li class="page-inblock-name">
+                        	<h4>2-3</h4>
+                            <div class="page-inblock">
+                            page33
+                        </li>
+                </div>
+            </li>
+           <li  class="page">
+            	<h3 class="page-name">标题三</h3>
+            	<div class="page-content">
+                	<ul>
+                    	<li class="page-inblock-name first current">
+                        	<h4>3-1</h4>
+                            <div class="page-inblock">
+                            page111
+                            </div> 
+                         </li>
+                        <li class="page-inblock-name">
+                        	<h4>3-2</h4>
+                            <div class="page-inblock">
+                            page222
+                        </li>
+                         <li class="page-inblock-name">
+                        	<h4>3-3</h4>
+                            <div class="page-inblock">
+                            page333
+                        </li>
+                </div>
+            </li>
+            <li  class="page">
+            	<h3 class="page-name">标题四</h3>
+            	<div class="page-content">
+                	<ul >
+                    	<li class="page-inblock-name first current">
+                        	<h4>4-1</h4>
+                            <div class="page-inblock">
+                            page1111
+                            </div> 
+                         </li>
+                        <li class="page-inblock-name">
+                        	<h4>4-2</h4>
+                            <div class="page-inblock">
+                            page2222
+                        </li>
+                         <li class="page-inblock-name">
+                        	<h4>4-3</h4>
+                            <div class="page-inblock">
+                            page3333
+                        </li>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="pagination">
+	<div class="pagination-heared">
+    	<div class="pagination-heared-content" style="height:50px;">
+            <h3>选择</h3>
+            <ul class="classify">
+                <li><a href="">选1</a></li>	
+                <li><a href="">选2</a></li>
+                <li><a href="">选3</a></li>	
+                <li><a href="">选4</a></li>	
+                <li><a href="">选5</a></li>	
+                <li><a href="">选6</a></li>	
+                <li><a href="">选7</a></li>
+                <li><a href="">选8</a></li>		
+            </ul>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="more"><b>更多</b></div>
+    </div>
+    <div class="pagination-content">
+        <ul class="pager pager-on">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/1.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/1.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text" >description</p>
+                </a>
+            </li>	
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/1.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>		
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/1.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+        </ul>
+         <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/2.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">	
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/2.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/2.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/2.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/3.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/3.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/3.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/3.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/4.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/4.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/4.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/4.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>		
+        </ul>
+        <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/5.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+             <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/5.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+             <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/5.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>	
+             <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/5.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>			
+        </ul>
+        <ul class="pager">
+             <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/6.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/6.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/6.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/6.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>			
+        </ul>
+        <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/7.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/7.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/7.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/7.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="pager">
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/8.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/8.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/8.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+            <li class="pager-item">
+            	<a href="">
+                	<div class="pager-img">
+                        <img src="images/8.JPG"/>
+                        <p class="move-txt" style="top:155px;">texttext</p>
+                    </div>
+                    <p class="pager-text">description</p>
+                </a>
+            </li>
+        </ul>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="pagination-footer">
+     	<div class="paginator">
+        	<a class="frist-page">首页</a>
+            <a class="prev">上一页</a>
+            <div class="paginator-number-box">
+            	<div id="paginator-number" style="left:0px;">
+                    <a class="number num-on">1</a>
+                    <a class="number">2</a>
+                    <a class="number">3</a>
+                    <a class="number">4</a>
+                    <a class="number">5</a>
+                    <a class="number">6</a>
+                    <a class="number">7</a>
+                    <a class="number">8</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <a class="next">下一页</a>
+            <a class="last-page">尾页</a>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</section>
+<section class="footed">
+</section>
+
+<script>
+$(document).ready(function(){
+	//----***navleft***----
+	for(var pro=0;pro<=$(".nav-left-item").length;pro++){
+		$($(".nav-left-item").get(pro)).mouseenter(function(index){
+			return function(){
+				$($(".nav-left-item").get(index)).addClass("nav-left-active");
+				for(var i=0;i<=$(".nav-left-item").length;i++){
+					if (i==index) continue;
+							$($(".nav-left-item").get(i)).removeClass("nav-left-active");
+				}
+			}
+        }(pro));
+	}
+	$(".nav-left-item").mouseleave(function(){
+		$(".nav-left-item").removeClass("nav-left-active");
+	});
+	//-----***navleft***-----
+	//-----***slide***-----
+	var width=560;
+	var sel=0;
+	function itemSlide(index){
+		left=-(width)*index.toString();
+				document.getElementById('slide-main-id').style.left=left+"px";
+			for(var j=0;j<=$(".item").length;j++){
+				if (j==index) continue;
+				$($(".item").get(j)).removeClass("slide-on");
+			};
+			$($(".item").get(index)).addClass("slide-on");
+	};
+	
+	for(var slide=0;slide<=$(".item").length;slide++){
+		$($(".item").get(slide)).click(function(index){
+			return function(){
+				itemSlide(index);
+			sel=index+1;
+			};
+		}(slide));
+	};
+	//---slide-item-end
+	autoslide=setInterval(function(){
+		if(sel<($(".item").length-1)){
+			itemSlide(sel);
+			sel++;
+			return;
+		};
+		if(sel==($(".item").length-1)){//防止最后一张停留加倍的时间
+			itemSlide(sel);
+			sel=0;
+			return;
+		};
+	},5000);
+	//-----***slide***-----
+	//-----***booking***-----
+	for(var page=0;page<$(".page-name").length;page++){
+		$($(".page-name").get(page)).click(function(index){
+			return function(){
+				$($(".page").get(index)).addClass("page-on");
+				for(var p=0;p<=$(".page-name").length;p++){
+					if (p==index) continue;
+					$($(".page").get(p)).removeClass("page-on");
+					$(".page-inblock-name").removeClass("current");//点击page，全部inblock变隐藏；
+					$(".first").addClass("current");//每个page的一张显示
+				};	
+			};
+			
+		}(page));
+	};
+	//---booking page end
+	for(var inblock=0;inblock<$(".page-inblock-name").length;inblock++){
+		$($(".page-inblock-name").get(inblock)).click(function(index){
+			return function(){
+				$($(".page-inblock-name").get(index)).addClass("current");
+				for(var n=0;n<=$(".page-inblock-name").length;n++){
+					if (n==index) continue;
+					$($(".page-inblock-name").get(n)).removeClass("current");
+				};	
+			};
+			
+		}(inblock));
+	}
+	//----***booking***----
+	//----***pagination***----
+	var more=false
+	$(".more").click(function(){
+		if(more==false){
+			$(".pagination-heared-content").css({"height":"150px"});
+			more=true;
+			$(".more").html("<b>收起</b>");
+			return;
+		};
+		if(more==true){
+			$(".pagination-heared-content").css({"height":"50px"});
+			more=false;
+			$(".more").html("<b>更多</b>");
+			return;
+		};
+	});
+	//----pagination-heared end
+	var pageCur=0;
+	var unmberWidth=24;
+	function pagerslide(index){
+		$($(".pager").get(index)).addClass("pager-on");
+		$($(".number").get(index)).addClass("num-on");
+		for(m=0;m<=$(".pager").length;m++){
+			if (m==index) continue;
+			$($(".pager").get(m)).removeClass("pager-on");
+			$($(".number").get(m)).removeClass("num-on");
+		};
+		pageCur=index;
+	};
+	//----pagerslide 函数
+	function numberSlide(index){
+		paginatorLeft=(-unmberWidth*(index-2)).toString();
+		document.getElementById("paginator-number").style.left= paginatorLeft + "px"; 
+	};
+	//----numberSlide 函数
+	$(".frist-page").click(function(){
+		pagerslide(0);
+		numberSlide(2);
+		
+	});
+	//-----首页button end
+	$(".last-page").click(function(){
+		last=$(".pager").length-1;
+		pagerslide(last);
+		numberSlide(last-2);
+		
+	});
+	//-----尾页buttom end
+	$(".next").click(function(){
+		
+		if(pageCur<$(".pager").length-1){
+			pageCur++;
+			pagerslide(pageCur);
+			if(pageCur>2 && pageCur<$(".pager").length-2){//标签在第4页到倒数第二页的时候标签移动
+				numberSlide(pageCur);
+			};
+			return;
+		};
+	});
+	$(".prev").click(function(){
+		if(pageCur>0){
+			pageCur--;
+			pagerslide(pageCur);
+			if(pageCur>1 && pageCur<$(".pager").length-2){//标签在第3页到倒数第二页的时候标签移动
+				numberSlide(pageCur);
+			};
+			return;
+		};
+	});
+	//---next prev end
+	for(num=0;num<$(".number").length;num++){
+		$($(".number").get(num)).click(function(index){
+			return function(){
+				pagerslide(index);
+				if(index>1 && index<$(".pager").length-2){//标签在第3页到倒数第二页的时候标签移动
+					numberSlide(index);
+				};
+			};
+		}(num));
+	}
+	//----number end
+	//----***pagination***----
+	//----***pager-img text***----
+	for(movetxt=0;movetxt<$(".pager-item").length;movetxt++){
+		$($(".pager-item").get(movetxt)).mouseenter(function(index){
+			return function(){
+				$($(".move-txt").get(index)).css({"top":"125px"});
+			};
+		}(movetxt));
+	};
+	
+	$(".pager-item").mouseleave(function(){
+			$(".move-txt").css({"top":"155px"});
+	});
+});
+</script>
+</body>
+</html>
