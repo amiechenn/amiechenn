@@ -4,6 +4,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>非响应式模板</title>
 <script src="jquery-2.1.3.min.js"></script>
+<script>
+function is_mobile() { 
+     var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i; 
+  var u = navigator.userAgent; 
+       if (null == u) { 
+             return true; 
+       } 
+       var result = regex_match.exec(u); 
+
+       if (null == result) { 
+             return false 
+       } else { 
+             return true 
+       } 
+ } 
+ if (is_mobile()) { 
+       document.location.href= 'https://amiechenn.github.io/amiechenn/h5/jmoble/moble.html'; 
+ }
+</script>
 <style>
 body{
 	font-family: verdana,Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,STHeiti;
