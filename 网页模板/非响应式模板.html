@@ -44,6 +44,9 @@ ul{
 .hide{
 	display:none;
 }
+.heared{
+	z-index:30;
+}
 .heared-content{
 	width:980px;
 	height:60px;
@@ -56,7 +59,7 @@ ul{
 	height:50px;
 	width:120px;
 	margin:0 10px;
-	border:none;
+	color:#FFF;
 }
 .logo img{
 	height:50px;
@@ -101,6 +104,9 @@ ul{
 }
 .login-block li{
 	display:inline-block;
+	*float:left;
+	*margin:5px;
+
 }
 .login-block li a{
 	display:block;
@@ -111,6 +117,7 @@ ul{
 	text-align:center;
 	font-size:14px;
 	border-radius:5px;
+	*line-height:20px;
 }
 .login-block li a:hover, a:active{
 	background-color:#E64346;
@@ -118,6 +125,8 @@ ul{
 .nav{
 	background-color:#E64346;
 	height:40px;
+	*z-index:30;
+	
 }
 .nav-content{
 	width:980px;
@@ -125,11 +134,13 @@ ul{
 	margin:auto;
 	position:relative;
 	background-color:#E64346;
+	z-index:10;
 }
 .nav-left{
 	position:absolute;
 	left:10px;
-	z-index:1;
+	z-index:10;
+	*z-index:10;
 }
 .nav-left h3{
 	text-align:center;
@@ -145,10 +156,13 @@ ul{
 }
 .nav-left ul{
 	box-shadow:0px 0px 1px #CCC;
+	*z-index:20;
+	*border:#CCC solid 1px;
 }
 .nav-left li{
 	text-align:center;
 	cursor: default;
+	*background-color:#FFF;
 }
 
 .pro-title{
@@ -227,6 +241,7 @@ ul{
 	height:400px;
 	margin:auto;
 	position:relative;
+	*z-index:5;
 }
 .slide-content{
 	margin-left:260px;
@@ -236,6 +251,7 @@ ul{
 	width:560px;
 	height:390px;
 	overflow:hidden;
+	*position:relative;
 	border-top-left-radius:10px; 
 	border-bottom-left-radius:10px;
 }
@@ -255,11 +271,13 @@ ul{
 .slide-item{
 	position:absolute;	
 	top:0px;
+	*top:20px;
 	right:10px;
 	
 }
 .slide-item ul li{
 	padding:0px 0px 10px 20px;
+	*padding:0px 0px 5px 20px;
 	display:block;
 }
 .slide-item img{
@@ -274,6 +292,7 @@ ul{
 	height:100px;
 	width:980px;
 	margin:auto;
+	*margin:30px auto  auto auto;
 	background-image:url(images/4.JPG);
 	background-size:cover;
 	background-attachment:fixed;
@@ -473,6 +492,7 @@ ul{
 	height:200px;
 	margin:5px;
 	background-color:#FFD5D5;
+	color:#FFF;
 }
 .pager-img{
 	width:235px;
@@ -545,7 +565,7 @@ ul{
 </style>
 </head>
 <body>
-<section class="heared">
+<div class="heared">
 	<div class="heared-content">
         <div class="logo">
             <a href="#"><img src="images/amie.png" /></a>
@@ -640,8 +660,8 @@ ul{
             </div>
         </div>
     </div>
-</section>
-<section class="slide">
+</div>
+<div class="slide">
 	<div class="slide-content">
     	<div class="slide-main">
         	<ul id="slide-main-id" style="left:0;">
@@ -662,11 +682,11 @@ ul{
             </ul>
         </div>
     </div>
-</section>
-<section class="banner">
+</div>
+<div class="banner">
 	<div class="banner-content"></div>
-</section>
-<section class="select">
+</div>
+<div class="select">
     <div class="side">
         <ul class="box-one">
             <li>
@@ -780,8 +800,8 @@ ul{
             </li>
         </ul>
     </div>
-</section>
-<section class="pagination">
+</div>
+<div class="pagination">
 	<div class="pagination-heared">
     	<div class="pagination-heared-content" style="height:50px;">
             <h3>选择</h3>
@@ -1128,9 +1148,9 @@ ul{
             <div style="clear:both;"></div>
         </div>
     </div>
-</section>
-<section class="footed">
-</section>
+</div>
+<div class="footed">
+</div>
 
 <script>
 $(document).ready(function(){
