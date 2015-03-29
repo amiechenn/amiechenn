@@ -1,0 +1,178 @@
+@charset "utf-8";
+body{
+	font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+	margin:0;
+	padding:0;
+	background-color:#000;
+}
+.hide{
+	display:none;
+}
+/*loading*/
+.preloading {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 9999;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	display: block;
+}
+.loading-gif {
+	opacity: 1 ;
+  	-webkit-border-radius: 3px ;
+  	background: #000;
+  	position: absolute;
+  	left: 50%;
+  	top: 50%;
+	margin-left:-50px;
+	margin-top:-50px;
+}
+/*heared*/
+
+#heared{
+	width:100%;
+	height:60px;
+	background-color:#000;
+	border-bottom: #4f4f4f 1px solid;
+}
+.logo img{
+	padding-left:10px;
+	padding-top:10px;
+	height:40px;
+}
+.music{
+	position:absolute;
+	top:5px;
+	left:80%;
+	z-index:100;
+}
+.music img{
+	width:50px;
+}
+@keyframes rotate{
+	0%{transform: rotate(0deg);}
+	100%{transform: rotate(360deg);}
+} 
+@-webkit-keyframes rotate{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
+}
+.rotate{
+	animation:rotate 2s linear infinite;
+	-webkit-animation:rotate 2s linear infinite;
+}
+/*content*/
+.album-title{
+	text-align:center;
+	width:100%;
+	height:50px;
+	color:#FFF;
+	background-color:#000;
+}
+h1{
+	margin:0;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+@keyframes black{
+	from{opacity:1;}
+	to{opacity:0;}
+}
+@-webkit-keyframes black{
+	from{opacity:1;}
+	to{opacity:0;}
+}
+.black{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:0.7;
+	z-index:50;
+	top:0;
+	animation:black 7s both ;
+	-webkit-animation:black 7s  both;
+}
+@keyframes remove{
+	from{opacity:1;transform: scale(6)}
+	to{opacity:0;transform: scale(0);}
+}
+@-webkit-keyframes remove{
+	from{opacity:1;-webkit-transform: scale(4);}
+	to{opacity:0;-webkit-transform: scale(0);}
+}
+.movetitle{
+	position:absolute;
+	top:150px;
+	z-index:100;
+	color:#FFF;
+	left:50%;
+	margin-left:-45px;
+	animation:remove 4s both ;
+	-webkit-animation:remove 4s  both;
+}
+.number{
+	width:100%;
+	height:20px;
+	background-color:#000;
+	color:#CCC;
+	text-align:center;
+}
+#album-box{
+	overflow:hidden;
+}
+#album{
+	position:relative;
+}
+#album img{
+	float:left;
+}
+.text-logo{
+	display:inline-block;
+}
+.text-box{
+	background-color:#000;
+	color:#FFF;
+	position:absolute;
+	width:100%;
+	height:100px;
+	display:inline-block;
+	background-image: url(images/quill.png);
+	background-repeat:no-repeat;
+}
+
+.text{
+	position:absolute;
+	margin-left:60px;
+	word-break:break-all;
+	overflow:hidden;
+}
+@keyframes fadeIn{
+	from{opacity:0;left:50px;}
+	to{opacity:0.5;left:0;}
+}
+@-webkit-keyframes fadeIn{
+	from{opacity:0;left:50px;}
+	to{opacity:0.5;left:0;}
+}
+.next{
+	position:absolute;
+	left:0;
+	animation:fadeIn 1s  infinite both ;
+	-webkit-animation:fadeIn 1s infinite both;
+}
+/*footed*/
+.return{
+	position:relative;
+	top:60px;
+	width:60px;
+}
+.more{
+	position:relative;
+	top:50px;
+}
