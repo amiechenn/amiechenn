@@ -181,18 +181,6 @@ $(document).ready(function(){
 	}
 	//----number end
 	//----***pagination***----
-	//----***pager-img text***----
-	for(var movetxt=0;movetxt<$(".pager-item").length;movetxt++){
-		$($(".pager-item").get(movetxt)).mouseenter(function(index){
-			return function(){
-				$($(".move-txt").get(index)).css({"top":"125px"});
-			};
-		}(movetxt));
-	}
-	
-	
-	$(".pager-item").mouseleave(function(){
-			$(".move-txt").css({"top":"155px"});
-	});
+
 	
 });
