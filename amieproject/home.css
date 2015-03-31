@@ -39,7 +39,7 @@ p{
 .header{
 	max-width:720px;
 	margin:auto;
-	background-color:rgba(175,215,255,0.8);
+	background-color:rgba(175,215,255,0.7);
 	text-align:center;
 	padding:30px 0;	
 	position:relative;
@@ -55,7 +55,7 @@ p{
 	margin:0;
 }
 .content{
-	background-color:rgba(175,215,255,0.8);
+	background-color:rgba(175,215,255,0.7);
 	max-width:720px;
 	margin:auto;
 }
