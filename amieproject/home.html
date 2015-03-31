@@ -44,7 +44,15 @@ p{
 	max-width:720px;
 	margin:auto;
 	background-color:rgba(175,215,255,0.8);
-	text-align:center;	
+	text-align:center;
+	padding:30px 0;	
+	position:relative;
+}
+.bian{
+	position:absolute;
+	top:0;
+	left:0;
+	width:200px;
 }
 .header p{
 	width:100%;
@@ -168,8 +176,9 @@ p{
 	width:720px;
 	margin:auto;
 	background-color:#AFD7ED;
-	padding:50px 0 100px 0;
+	padding:50px 0 50px 0;
 	border-top:#5CA7BA 5px dashed;
+	position:relative;
 }
 ul{
 	list-style-type:none;
@@ -192,12 +201,21 @@ ul{
 .github{
 	background-position:0px -94px;
 }
+.footer-b{
+	position:absolute;
+	width:200px;
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	right:0;
+	bottom:0;
+}
 </style>
 </head>
 
 <body>
 <div class="header">
 	<div class="logo">
+        <img  class="bian" src="images/bian.png" />
     	<img src="images/amie.png" />
     </div>
     <p>Welcome to Amie's home!</p>
@@ -273,6 +291,7 @@ ul{
         <li class="email">364011856@qq.com</li>
         <li class="github">github.com/amiechenn</li>
     </ul>
+    <img class="footer-b" src="images/bian.png" />
 </div>
 </body>
 </html>
