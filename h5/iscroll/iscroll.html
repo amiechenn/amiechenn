@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="iscroll.js"></script>
+<script type="text/javascript">
+
+var myScroll;
+
+function loaded () {
+	myScroll = new IScroll('#wrapper', { 
+		 //bounceEasing: 'elastic', bounceTime: 1200 ,
+		// scrollX: true, scrollY: false
+	});
+}
+
+
+</script>
+<style>
+li{
+	font-size:200px;
+}
+#wrapper {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  overflow: hidden;
+}
+ul{
+	position: absolute;
+}
+</style>
+</head>
+
+<body onload="loaded()">
+<div id="wrapper"> 
+    <ul >
+      <li>111111</li>
+      <li>22222222222</li>
+      <li>333333333333</li>
+      <li>444444444444</li>
+      <li>55555555555</li>
+      <li>666666666666</li>
+    </ul>
+</div>
+
+
+</body>
+</html>
