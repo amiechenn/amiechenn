@@ -4,271 +4,64 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>parallax</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
+<link href="parallax.css" rel="stylesheet" />
 <script src="jquery-2.1.3.min.js"></script>
-<style>
-body{
-}
-.content{
-	position:absolute;
-	top:0;
-	left:0;
-	margin:auto;
-	width:100%;
-	height:100%;
-	overflow:hidden;
-	background-color:#FF6;
-}
-img{
-	width:80px;
-}
-ul{
-	list-style-type:none;
-	padding:0;
-	width:100%;
-}
-#loco{
-	position:relative;
-	
-}
-@keyframes shake{
-	from {transform: rotate(-30deg);}
-	to {transform: rotate(30deg);}
-}
-
-@-webkit-keyframes shake{
-	from {-webkit-transform: rotate(-30deg);}
-	to {-webkit-transform: rotate(30deg);}
-}
-.loco1-move{
-	animation: shake 2s linear  infinite alternate;
-	-webkit-animation: shake 2s linear  infinite alternate;
-}
-.loco1{
-	position:absolute;
-	top:50px;
-	z-index:2;
-}
-.loco1-0{
-	position:absolute;
-	left:-30%;
-	width:120%;
-}
-.loco1-0 img{
-	width:120%;
-	height:100px;
-}
-
-.loco1-1{
-	position:absolute;
-	left:10%;
-}
-.loco1-2{
-	position:absolute;
-	left:40%;
-}
-.loco1-3{
-	position:absolute;
-	left:70%;
-}
-.loco4-move{
-	animation: shake 2s linear 1s infinite alternate;
-	-webkit-animation: shake 2s linear 1s infinite alternate;
-	
-}
-.loco4{
-	position:absolute;
-	top:100px;
-	left:50px;
-	z-index:1;
-}
-.loco4-0{
-	position:absolute;
-	left:-30%;
-	width:120%;
-}
-.loco4-0 img{
-	width:120%;
-	height:100px;
-}
-
-.loco4-1{
-	position:absolute;
-	left:10%;
-}
-.loco4-2{
-	position:absolute;
-	left:40%;
-}
-.loco4-3{
-	position:absolute;
-	left:70%;
-}
-.loco4-move img{
-	width:60px;
-}
-@keyframes bigToSamll{
-	from {transform: skew(25deg,0deg);}
-	to {transform: skew(-25deg,0deg);}
-}
-@-webkit-keyframes bigToSamll{
-	from {-webkit-transform: skew(25deg,0deg);}
-	to {-webkit-transform: skew(-25deg,0deg);}
-}
-.loco2-move{
-	animation: bigToSamll 1s linear  infinite alternate;
-	-webkit-animation: bigToSamll 1s linear  infinite alternate;
-}
-.loco2{
-	position:absolute;
-	top:200px;
-}
-.loco2-0{
-	position:absolute;
-	left:-30%;
-	top:50px;
-	width:120%;
-}
-.loco2-0 img{
-	width:120%;
-	height:100px;
-}
-.loco2-1{
-	position:absolute;
-	left:20%;
-}
-.loco2-2{
-	position:absolute;
-	left:50%;
-}
-.loco2-3{
-	position:absolute;
-	left:80%;
-}
-@keyframes heightToShort{
-	from {transform: scaleY(2);}
-	to {transform: scaleY(3);}
-}
-@-webkit-keyframes heightToShort{
-	from {-webkit-transform: scaleY(2);}
-	to {-webkit-transform: scaleY(3);}
-}
-.loco3-move{
-	animation:heightToShort 1s linear  infinite alternate;
-	-webkit-animation:heightToShort 1s linear  infinite alternate;
-}
-.loco3{
-	position:absolute;
-	top:400px;
-	
-}
-.loco3-1{
-	position:absolute;
-	left:0%;
-}
-.loco3-2{
-	position:absolute;
-	left:10%;
-}
-.loco3-3{
-	position:absolute;
-	left:30%;
-}
-.loco3-4{
-	position:absolute;
-	left:50%;
-}
-.loco3-5{
-	position:absolute;
-	left:70%;
-}
-.loco3-6{
-	position:absolute;
-	left:90%;
-}
-.ban-img{
-	width:110%;
-}
-.ban1{
-	position:absolute;
-	top:300px;
-	left:-10%;
-	width:110%;
-}
-.ban2{
-	position:absolute;
-	top:350px;
-	left:-15%;
-	width:110%;
-}
-.ban3{
-	position:absolute;
-	top:400px;
-	left:-9%;
-	width:110%;
-}
-.ban4{
-	position:absolute;
-	top:450px;
-	left:-15%;
-	width:120%;
-}
-</style>
 </head>
 
 <body>
 <div class="content">
     <ul id="loco">
         <li class="layer" data-depth="0.90">
-        	<ul class="loco1">
-            	<li class="loco1-0"><img src="images/line.png" /></li>
-                <li class="loco1-1 loco1-move"><img src="images/loco_roco_01.png" /></li>
-                <li class="loco1-2 loco1-move"><img src="images/loco_roco_02.png" /></li> 
-                <li class="loco1-3 loco1-move"><img src="images/loco_roco_03.png" /></li>
+        	<ul class="loco1 absolute">
+            	<li class="loco1-0 absolute"><img src="images/line.png" /></li>
+                <li class="loco1-1 loco1-move absolute"><img src="images/loco_roco_01.png" /></li>
+                <li class="loco1-2 loco1-move absolute"><img src="images/loco_roco_02.png" /></li> 
+                <li class="loco1-3 loco1-move absolute"><img src="images/loco_roco_03.png" /></li>
         	</ul>
         </li>
         <li class="layer" data-depth="0.20">
-        	<ul class="loco4">
-            	<li class="loco4-0"><img src="images/line.png" /></li>
-                <li class="loco4-1 loco4-move"><img src="images/loco_roco_04.png" /></li>
-                <li class="loco4-2 loco4-move"><img src="images/loco_roco_05.png" /></li> 
-                <li class="loco4-3 loco4-move"><img src="images/loco_roco_06.png" /></li>
+        	<ul class="loco4 absolute">
+            	<li class="loco4-0 absolute"><img src="images/line.png" /></li>
+                <li class="loco4-1 loco4-move absolute"><img src="images/loco_roco_04.png" /></li>
+                <li class="loco4-2 loco4-move absolute"><img src="images/loco_roco_05.png" /></li> 
+                <li class="loco4-3 loco4-move absolute"><img src="images/loco_roco_06.png" /></li>
         	</ul>
         </li>
         <li class="layer" data-depth="0.60">
-        	<ul class="loco2">
-            	<li class="loco2-0"><img src="images/line.png" /></li>
-                <li class="loco2-1 loco2-move"><img src="images/loco_roco_09.png" /></li>
-                <li class="loco2-2 loco2-move"><img src="images/loco_roco_10.png" /></li> 
-                <li class="loco2-3 loco2-move"><img src="images/loco_roco_08.png" /></li>
+        	<ul class="loco2 absolute">
+            	<li class="loco2-0 absolute"><img src="images/line.png" /></li>
+                <li class="loco2-1 loco2-move absolute"><img src="images/loco_roco_09.png" /></li>
+                <li class="loco2-2 loco2-move absolute"><img src="images/loco_roco_10.png" /></li> 
+                <li class="loco2-3 loco2-move absolute"><img src="images/loco_roco_08.png" /></li>
         	</ul>
         </li>
         <li class="layer" data-depth="0.40">
-        	<ul class="loco3">
-                <li class="loco3-1 loco3-move"><img src="images/loco_roco_22.png" /></li>
-                <li class="loco3-2 loco3-move"><img src="images/loco_roco_23.png" /></li> 
-                <li class="loco3-3 loco3-move"><img src="images/loco_roco_24.png" /></li>
-                <li class="loco3-4 loco3-move"><img src="images/loco_roco_21.png" /></li>
-                <li class="loco3-5 loco3-move"><img src="images/loco_roco_22.png" /></li> 
-                <li class="loco3-6 loco3-move"><img src="images/loco_roco_24.png" /></li>
+        	<ul class="loco3 absolute">
+                <li class="loco3-1 loco3-move absolute"><img src="images/loco_roco_22.png" /></li>
+                <li class="loco3-2 loco3-move absolute"><img src="images/loco_roco_23.png" /></li> 
+                <li class="loco3-3 loco3-move absolute"><img src="images/loco_roco_24.png" /></li>
+                <li class="loco3-4 loco3-move absolute"><img src="images/loco_roco_21.png" /></li>
+                <li class="loco3-5 loco3-move absolute"><img src="images/loco_roco_22.png" /></li> 
+                <li class="loco3-6 loco3-move absolute"><img src="images/loco_roco_24.png" /></li>
         	</ul>
         </li>
        <li class="layer" data-depth="0.20">
-           <div class="ban1">
+           <div class="ban1 absolute">
            	<img class="ban-img" src="images/ban.png" /> 
            </div>
        </li>
        <li class="layer" data-depth="0.40">
-           <div class="ban2">
+           <div class="ban2 absolute">
            	<img class="ban-img" src="images/ban.png" /> 
            </div>
        </li>
        <li class="layer" data-depth="0.60">
-           <div class="ban3">
+           <div class="ban3 absolute">
            	<img class="ban-img" src="images/ban.png" /> 
            </div>
        </li>
        <li class="layer" data-depth="0.90">
-           <div class="ban4">
+           <div class="ban4 absolute">
            	<img class="ban-img" src="images/ban.png" /> 
            </div>
        </li>
