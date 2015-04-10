@@ -45,11 +45,13 @@ ul{
 }
 .loco1{
 	position:absolute;
-	top:100px;
+	top:50px;
+	z-index:2;
 }
 .loco1-0{
 	position:absolute;
 	left:-30%;
+	width:120%;
 }
 .loco1-0 img{
 	width:120%;
@@ -68,6 +70,42 @@ ul{
 	position:absolute;
 	left:70%;
 }
+.loco4-move{
+	animation: shake 2s linear 1s infinite alternate;
+	-webkit-animation: shake 2s linear 1s infinite alternate;
+	
+}
+.loco4{
+	position:absolute;
+	top:100px;
+	left:50px;
+	z-index:1;
+}
+.loco4-0{
+	position:absolute;
+	left:-30%;
+	width:120%;
+}
+.loco4-0 img{
+	width:120%;
+	height:100px;
+}
+
+.loco4-1{
+	position:absolute;
+	left:10%;
+}
+.loco4-2{
+	position:absolute;
+	left:40%;
+}
+.loco4-3{
+	position:absolute;
+	left:70%;
+}
+.loco4-move img{
+	width:60px;
+}
 @keyframes bigToSamll{
 	from {transform: skew(25deg,0deg);}
 	to {transform: skew(-25deg,0deg);}
@@ -82,12 +120,13 @@ ul{
 }
 .loco2{
 	position:absolute;
-	top:250px;
+	top:200px;
 }
 .loco2-0{
 	position:absolute;
 	left:-30%;
 	top:50px;
+	width:120%;
 }
 .loco2-0 img{
 	width:120%;
@@ -186,12 +225,21 @@ ul{
                 <li class="loco1-2 loco1-move"><img src="images/loco_roco_02.png" /></li> 
                 <li class="loco1-3 loco1-move"><img src="images/loco_roco_03.png" /></li>
         	</ul>
+        </li>
+        <li class="layer" data-depth="0.70">
+        	<ul class="loco4">
+            	<li class="loco4-0"><img src="images/line.png" /></li>
+                <li class="loco4-1 loco4-move"><img src="images/loco_roco_04.png" /></li>
+                <li class="loco4-2 loco4-move"><img src="images/loco_roco_05.png" /></li> 
+                <li class="loco4-3 loco4-move"><img src="images/loco_roco_06.png" /></li>
+        	</ul>
+        </li>
         <li class="layer" data-depth="0.60">
         	<ul class="loco2">
             	<li class="loco2-0"><img src="images/line.png" /></li>
-                <li class="loco2-1 loco2-move"><img src="images/loco_roco_10.png" /></li>
-                <li class="loco2-2 loco2-move"><img src="images/loco_roco_11.png" /></li> 
-                <li class="loco2-3 loco2-move"><img src="images/loco_roco_12.png" /></li>
+                <li class="loco2-1 loco2-move"><img src="images/loco_roco_09.png" /></li>
+                <li class="loco2-2 loco2-move"><img src="images/loco_roco_10.png" /></li> 
+                <li class="loco2-3 loco2-move"><img src="images/loco_roco_08.png" /></li>
         	</ul>
         </li>
         <li class="layer" data-depth="0.40">
