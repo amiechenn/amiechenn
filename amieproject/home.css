@@ -4,9 +4,10 @@ body{
 	font-family: verdana,Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,STHeiti;
 	margin:0;
 	background-image:url(images/bie.jpg);
+	background-size: 100% 100%;
 	background-repeat:no-repeat;
 	background-attachment:fixed;
-	background-size: 100% 100%;
+
 }
 @font-face
 {
