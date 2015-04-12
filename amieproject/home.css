@@ -38,6 +38,9 @@ p{
 	text-align:center;
 	color:#000;
 }
+img{
+	margin:auto;
+}
 .header{
 	max-width:720px;
 	margin:auto;
@@ -97,7 +100,7 @@ p{
 	float:left;
 	margin:10px;
 }
-.app-p img{
+.app-p img:first-child{
 	width:300px;
 	height:220px;
 	border:none;/*IE10+*/
@@ -121,7 +124,7 @@ p{
 	float:left;
 	margin:10px;
 }
-.game-p img{
+.game-p img:first-child{
 	width:200px;
 	height:330px;
 	border:none;/*IE10+*/
