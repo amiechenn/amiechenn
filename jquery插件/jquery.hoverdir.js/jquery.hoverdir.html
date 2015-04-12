@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="../../jquery-2.1.3.min.js"></script>
+<script src="jquery.hoverdir.js"></script>
+</head>
+<style>
+.da-thumbs .one {
+    float: left;
+    margin: 5px;
+    background: #fff;
+    padding: 8px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.da-thumbs .one a,
+.da-thumbs .one a img {
+    display: block;
+    position: relative;
+}
+.da-thumbs .one a {
+    overflow: hidden;
+}
+.da-thumbs .one a div {
+    position: absolute;
+    background: rgba(75,75,75,0.7);
+    width: 100%;
+    height: 100%;
+}
+.da-thumbs .one a div.da-animate {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+/* 动画开始阶段的class */
+.da-slideFromTop {
+    left: 0px;
+    top: -100%;
+}
+.da-slideFromBottom {
+    left: 0px;
+    top: 100%;
+}
+.da-slideFromLeft {
+    top: 0px; 
+    left: -100%;
+}
+.da-slideFromRight {
+    top: 0px;
+    left: 100%;
+}
+/* 动画结果阶段的class: */
+.da-slideTop {
+    top: 0px;
+}
+.da-slideLeft {
+    left: 0px;
+}
+</style>
+
+<body>
+<div id="da-thumbs" class="da-thumbs">
+    <div class="one">
+        <a href="#" >
+            <img src="images/loco_roco_01.png" />
+            <div><span>简介</span></div>
+        </a>
+    </div>
+    <div class="one">
+        <a href="#">
+            <img src="images/loco_roco_01.png" />
+            <div><span>简介</span></div>
+        </a>
+    </div >
+    <div class="one">
+        <a href="#">
+            <img src="images/loco_roco_01.png" />
+            <div><span>简介</span></div>
+        </a>
+    </div>
+    <div class="one">
+        <a href="#">
+            <img src="images/loco_roco_01.png" />
+            <div><span>简介</span></div>
+        </a>
+    </div>
+</ul>
+<script>
+$(function() {
+$("#da-thumbs .one").hoverdir();
+});
+</script>
+</body>
+</html>

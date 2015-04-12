@@ -32,6 +32,7 @@ h3{
 	text-align:center;
 	color:#FFF;
 	font-size:14px;
+	line-height:50px;
 }
 p{
 	text-align:center;
@@ -76,23 +77,11 @@ p{
 	overflow:hidden;
 	box-shadow:0px 0px 10px #666;
 }
-.web-p:hover .web-p-item h3{
-	top:0px;
-}
+
 .web-p:hover .web-p-item{
 	box-shadow:2px 2px 5px #666;
 }
-.web-p-item h3{
-	position:absolute;
-	top:-50px;
-	background:rgba(0,0,0,0.5);
-	width:200px;
-	height:50px;
-	line-height:50px;
-	margin:0;
-	transition:top .3s;
-	-webkit-transition:top .3s;
-}
+
 .webpage img{
 	width:200px;
 	height:200px;
@@ -118,20 +107,7 @@ p{
 	overflow:hidden;
 	box-shadow:0px 0px 10px #666;
 }
-.app-p-item h3{
-	position:absolute;
-	top:-50px;
-	background:rgba(0,0,0,0.5);
-	width:300px;
-	height:50px;
-	line-height:50px;
-	margin:0;
-	transition:top .3s;
-	-webkit-transition:top .3s;
-}
-.app-p:hover .app-p-item h3{
-	top:0px;
-}
+
 .app-p:hover .app-p-item{
 	box-shadow:2px 2px 5px #666;
 }
@@ -155,20 +131,8 @@ p{
 	overflow:hidden;
 	box-shadow:0px 0px 10px #666;
 }
-.game-p-item h3{
-	position:absolute;
-	top:-50px;
-	background:rgba(0,0,0,0.5);
-	width:200px;
-	height:50px;
-	line-height:50px;
-	margin:0;
-	transition:top .3s;
-	-webkit-transition:top .3s;
-}
-.game-p:hover .game-p-item h3{
-	top:0px;
-}
+
+
 .game-p:hover .game-p-item{
 	box-shadow:2px 2px 5px #666;
 }
@@ -208,4 +172,53 @@ ul{
 	-webkit-transform: rotate(180deg);
 	right:0;
 	bottom:0;
+}
+/*  下面是hoverdir插件的css*/
+.da-thumbs .move {
+    position: relative;
+}
+.da-thumbs .move,
+.da-thumbs .move img {
+    display: block;
+    position: relative;
+}
+.da-thumbs .move {
+    overflow: hidden;
+}
+.da-thumbs .move div {
+    position: absolute;
+    background:rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+}
+.da-thumbs .move div.da-animate {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+/* 动画开始阶段的class */
+.da-slideFromTop {
+    left: 0px;
+    top: -100%;
+}
+.da-slideFromBottom {
+    left: 0px;
+    top: 100%;
+}
+.da-slideFromLeft {
+    top: 0px; 
+    left: -100%;
+}
+.da-slideFromRight {
+    top: 0px;
+    left: 100%;
+}
+/* 动画结果阶段的class: */
+.da-slideTop {
+    top: 0px;
+}
+.da-slideLeft {
+    left: 0px;
 }
