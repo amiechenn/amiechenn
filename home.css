@@ -1,0 +1,227 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	font-family: verdana,Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,STHeiti;
+	margin:0;
+	background-image:url(images/bie.jpg);
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+
+}
+@font-face
+{
+font-family: myFirstFont;
+src:url(favicon.ico/fonts/icomoon.ttf),
+	url(favicon.ico/fonts/icomoon.eot); /* IE9+ */
+}
+
+h2{
+	margin:0;
+	padding:30px;
+	text-align:center;
+	border-bottom:#5CA7BA 1px dashed;
+	color:#346C7A;
+	font-family:myFirstFont;
+}
+a{
+	text-decoration:none;
+	display:block;
+}
+h3{
+	text-align:center;
+	color:#FFF;
+	font-size:14px;
+	line-height:50px;
+}
+p{
+	text-align:center;
+	color:#000;
+}
+img{
+	margin:auto;
+}
+.header{
+	max-width:720px;
+	margin:auto;
+	background-color:rgba(175,215,255,0.7);
+	text-align:center;
+	padding:30px 0;	
+	position:relative;
+}
+.header-b{
+	position:absolute;
+	top:0;
+	left:0;
+	width:200px;
+}
+.header p{
+	width:100%;
+	margin:0;
+}
+.content{
+	background-color:rgba(175,215,255,0.7);
+	max-width:720px;
+	margin:auto;
+}
+.webpage{
+	padding:30px;
+}
+.webpage h2:before{
+	content:"\e957";
+}
+	
+.web-p{
+	float:left;
+	margin:10px;
+}
+.web-p-item{
+	position:relative;
+	overflow:hidden;
+	box-shadow:0px 0px 10px #666;
+}
+
+.web-p:hover .web-p-item{
+	box-shadow:2px 2px 5px #666;
+}
+
+.webpage img{
+	width:200px;
+	height:200px;
+	border:none;/*IE10+*/
+}
+.apppage{
+	padding:30px;
+}
+.apppage h2:before{
+	content:"\e958";
+}
+.app-p{
+	float:left;
+	margin:10px;
+}
+.app-p img:first-child{
+	width:300px;
+	height:220px;
+	border:none;/*IE10+*/
+}
+.app-p-item{
+	position:relative;
+	overflow:hidden;
+	box-shadow:0px 0px 10px #666;
+}
+
+.app-p:hover .app-p-item{
+	box-shadow:2px 2px 5px #666;
+}
+.game{
+	padding:30px;
+}
+.game h2:before{
+	content:"\e916";
+}
+.game-p{
+	float:left;
+	margin:10px;
+}
+.game-p img:first-child{
+	width:200px;
+	height:330px;
+	border:none;/*IE10+*/
+}
+.game-p-item{
+	position:relative;
+	overflow:hidden;
+	box-shadow:0px 0px 10px #666;
+}
+
+
+.game-p:hover .game-p-item{
+	box-shadow:2px 2px 5px #666;
+}
+.footer{
+	width:720px;
+	margin:auto;
+	background-color:#AFD7ED;
+	padding:50px 0 50px 0;
+	border-top:#5CA7BA 5px dashed;
+	position:relative;
+}
+ul{
+	list-style-type:none;
+	margin:0;
+}
+.footer li{
+	background-image:url(images/sprites.png);
+	background-repeat:no-repeat;
+	height:40px;
+	padding-left:50px;
+	line-height:40px;
+	margin-bottom:10px;
+}
+.chat{
+	background-position:0px 0px;
+}
+.email{
+	background-position:0px -46px;
+}
+.github{
+	background-position:0px -94px;
+}
+.footer-b{
+	position:absolute;
+	width:200px;
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	right:0;
+	bottom:0;
+}
+/*  下面是hoverdir插件的css*/
+.da-thumbs .move {
+    position: relative;
+}
+.da-thumbs .move,
+.da-thumbs .move img {
+    display: block;
+    position: relative;
+}
+.da-thumbs .move {
+    overflow: hidden;
+}
+.da-thumbs .move div {
+    position: absolute;
+    background:rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+}
+.da-thumbs .move div.da-animate {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+/* 动画开始阶段的class */
+.da-slideFromTop {
+    left: 0px;
+    top: -100%;
+}
+.da-slideFromBottom {
+    left: 0px;
+    top: 100%;
+}
+.da-slideFromLeft {
+    top: 0px; 
+    left: -100%;
+}
+.da-slideFromRight {
+    top: 0px;
+    left: 100%;
+}
+/* 动画结果阶段的class: */
+.da-slideTop {
+    top: 0px;
+}
+.da-slideLeft {
+    left: 0px;
+}
