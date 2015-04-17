@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="jquery.fullPage.css" rel="stylesheet" />
+<script src="jquery-1.8.3.min.js"></script>
+<script src="jquery.fullPage.min.js"></script>
+<script>
+
+$(document).ready(function() {
+	$('#dowebok').fullpage({
+		sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#1bbc9b','#4BBFC3','#7BAABE'],
+		anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6'],
+		//navigation: true,
+		navigationTooltips: ['page1', 'page2', 'page3', 'page4', 'page5','page6'],
+		verticalCentered: false,
+		afterLoad: function(anchorLink, index){
+			if(index == 6){
+				$("#phone4,#phone5,#phone6,#phone7").addClass("active");
+			}
+		},
+		onLeave: function(index,nextIndex, direction){
+			if(index == 1 && direction == 'down' ){
+				$("#staticImg").attr("class","moveTo2");
+			}
+			if(index == 2 && direction == 'up' ){
+				$("#staticImg").attr("class","moveTo1");
+			}
+			if(index == 2 && direction == 'down' ){
+				$("#staticImg").attr("class","moveTo3");
+			}
+			if(index == 3 && direction == 'up' ){
+				$("#staticImg").attr("class","moveTo2");
+			}
+			if(index == 3 && direction == 'down' ){
+				$("#staticImg").attr("class","moveTo4");
+			}
+			if(index == 4 && direction == 'up' ){
+				$("#staticImg").attr("class","moveTo3");
+			}
+			if(index == 4 && direction == 'down' ){
+				$("#staticImg").attr("class","moveTo5");
+			}
+			if(index == 5 && direction == 'up' ){
+				$("#staticImg").attr("class","moveTo4");
+			}
+			if(index == 6){
+				$("#phone4,#phone5,#phone6,#phone7").removeClass("active");
+			}
+		}
+		
+	});
+});
+</script>
+<style>
+/*.imgs{
+	position:relative;
+}*/
+img{
+	position:absolute;
+	transition: all 0.7s ease-out;
+	top:50px;
+	left:50%;
+}
+
+#phone4{
+	transform:rotate(135deg);
+	opacity:0;
+	margin-left:-1000px;
+	top:-600px;
+}
+#phone4.active{
+	margin-left:-700px;
+	top:-300px;
+	opacity:1;
+}
+#phone5{
+	transform:rotate(45deg);
+	opacity:0;
+	margin-left:-700px;
+	top:500px;
+
+}
+#phone5.active{
+	margin-left:-400px;
+	top:200px;
+	opacity:1;
+}
+#phone6{
+	transform:rotate(-135deg);
+	opacity:0;
+	margin-left:600px;
+	top:-500px;
+
+}
+#phone6.active{
+	margin-left:300px;
+	top:-200px;
+	opacity:1;
+}
+#phone7{
+	transform:rotate(-45deg);
+	opacity:0;
+	margin-left:450px;
+	top:700px;
+
+}
+#phone7.active{
+	margin-left:150px;
+	top:400px;
+	opacity:1;
+}
+
+#staticImg {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	transition: all 0.7s ease-out;
+	left:50%;
+	margin-left:-200px;
+}
+#phone0,#phone1,#phone2,#phone3{
+	transform:rotateY(90deg);
+}
+#staticImg.moveTo1{
+	top:0;
+}
+#staticImg.moveTo2{
+	top:100%;
+}
+#staticImg.moveTo3{
+	top:200%;
+}
+#staticImg.moveTo4{
+	top:300%;
+}
+#staticImg.moveTo5{
+	top:400%;
+}
+#staticImg.moveTo2 #phone0{
+	transform:rotateY(90deg);
+}
+#staticImg.moveTo1 #phone0{
+	transform:rotateY(0deg);
+	transition: all 0.7s ease-out 0.7s;
+}
+#staticImg.moveTo2 #phone1{
+	transition: all 0.7s ease-out 0.7s;
+	transform:rotateZ(-60deg);
+}
+#staticImg.moveTo3 #phone1{
+	transform:rotateY(90deg);
+}
+#staticImg.moveTo3 #phone2{
+	transform:rotateY(0deg);
+	transition: all 0.7s ease-out 0.7s;
+}
+#staticImg.moveTo4 #phone2{
+	transform:rotateY(90deg);
+}
+#staticImg.moveTo4 #phone3{
+	transform:rotateZ(90deg);
+	transition: all 0.7s ease-out 0.7s;
+}
+#phone8{
+	left:50%;
+	margin-left:-200px;
+}
+#staticImg.moveTo5 #phone3{
+	transform:rotateZ(0deg);
+	margin-left:-320px;
+}
+#phone9-1{
+	transform:rotate(-60deg);
+	left:50%;
+	margin-left:-600px;
+	top:200px;
+}
+#phone9-2{
+	transform:rotate(-60deg);
+	left:50%;
+	margin-left:300px;
+	top:-30px;
+}
+</style>
+</head>
+
+<body>
+<div id="dowebok">
+	<div id="staticImg" class="moveTo1">
+    	<img src="images/iphone3.png" id="phone0" />
+        <img src="images/iphone2.png" id="phone1" />
+        <img src="images/iphone-yellow.png" id="phone2" />
+        <img src="images/iphone-blue.png" id="phone3"  />
+    </div>
+    <div class="section" data-anchor="page1">
+
+    </div>
+    <div class="section" data-anchor="page2">
+	    <div class="imgs">
+        	<img src="images/iphone-red.png" id="phone9-1"/>
+            <img src="images/iphone-red.png" id="phone9-2"/>
+        </div>   
+
+    </div>
+    <div class="section" data-anchor="page3">
+        
+    </div>
+    <div class="section" data-anchor="page4">
+        
+    </div>
+    <div class="section" data-anchor="page5">
+    	 <div class="imgs">
+        	<img src="images/iphone-two.png" id="phone8"/>
+        </div>   
+    </div>
+    <div class="section" data-anchor="page6">
+       <div class="imgs">
+        	<img src="images/iphone3.png" id="phone4"/>
+            <img src="images/iphone-blue.png" id="phone5" />
+            <img src="images/iphone-yellow.png" id="phone6" />
+            <img src="images/iphone-red.png" id="phone7" />
+        </div>        
+    </div>
+    
+    
+</div>
+
+</body>
+</html>
