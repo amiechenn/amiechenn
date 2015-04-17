@@ -60,12 +60,14 @@ $(document).ready(function() {
 img{
 	position:absolute;
 	transition: all 0.7s ease-out;
+	-webkit-transition: all 0.7s ease-out;
 	top:50px;
 	left:50%;
 }
 
 #phone4{
 	transform:rotate(135deg);
+	-webkit-transform:rotate(135deg);
 	opacity:0;
 	margin-left:-1000px;
 	top:-600px;
@@ -77,6 +79,7 @@ img{
 }
 #phone5{
 	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
 	opacity:0;
 	margin-left:-700px;
 	top:500px;
@@ -89,6 +92,7 @@ img{
 }
 #phone6{
 	transform:rotate(-135deg);
+	-webkit-transform:rotate(-135deg);
 	opacity:0;
 	margin-left:600px;
 	top:-500px;
@@ -101,6 +105,7 @@ img{
 }
 #phone7{
 	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
 	opacity:0;
 	margin-left:450px;
 	top:700px;
@@ -117,11 +122,13 @@ img{
 	position: absolute;
 	z-index: 1;
 	transition: all 0.7s ease-out;
+	-webkit-transition: all 0.7s ease-out;
 	left:50%;
 	margin-left:-200px;
 }
 #phone0,#phone1,#phone2,#phone3{
 	transform:rotateY(90deg);
+	-webkit-transform:rotateY(90deg);
 }
 #staticImg.moveTo1{
 	top:0;
@@ -140,28 +147,39 @@ img{
 }
 #staticImg.moveTo2 #phone0{
 	transform:rotateY(90deg);
+	-webkit-transform:rotateY(90deg);
 }
 #staticImg.moveTo1 #phone0{
 	transform:rotateY(0deg);
+	-webkit-transform:rotateY(0deg);
 	transition: all 0.7s ease-out 0.7s;
+	-webkit-transition: all 0.7s ease-out 0.7s;
 }
 #staticImg.moveTo2 #phone1{
 	transition: all 0.7s ease-out 0.7s;
+	-webkit-transition: all 0.7s ease-out 0.7s;
 	transform:rotateZ(-60deg);
+	-webkit-transform:rotateZ(-60deg);
 }
 #staticImg.moveTo3 #phone1{
 	transform:rotateY(90deg);
+	-webkit-transform:rotateY(90deg);
 }
 #staticImg.moveTo3 #phone2{
 	transform:rotateY(0deg);
+	-webkit-transform:rotateY(0deg);
 	transition: all 0.7s ease-out 0.7s;
+	-webkit-transition: all 0.7s ease-out 0.7s;
 }
 #staticImg.moveTo4 #phone2{
 	transform:rotateY(90deg);
+	-webkit-transform:rotateY(90deg);
 }
 #staticImg.moveTo4 #phone3{
 	transform:rotateZ(90deg);
+	-webkit-transform:rotateZ(90deg);
 	transition: all 0.7s ease-out 0.7s;
+	-webkit-transition: all 0.7s ease-out 0.7s;
 }
 #phone8{
 	left:50%;
@@ -169,16 +187,19 @@ img{
 }
 #staticImg.moveTo5 #phone3{
 	transform:rotateZ(0deg);
+	-webkit-transform:rotateZ(0deg);
 	margin-left:-320px;
 }
 #phone9-1{
 	transform:rotate(-60deg);
+	-webkit-transform:rotate(-60deg);
 	left:50%;
 	margin-left:-600px;
 	top:200px;
 }
 #phone9-2{
 	transform:rotate(-60deg);
+	-webkit-transform:rotate(-60deg);
 	left:50%;
 	margin-left:300px;
 	top:-30px;
