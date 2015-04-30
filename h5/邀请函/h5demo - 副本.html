@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no" />
+<title>h5 模板</title>
+<link href="h5demo.css" rel="stylesheet" />
+<script src="jquery-2.1.3.min.js"></script>
+<script src="jquery.touchSwipe.min.js"></script>
+
+</head>
+<body  style="overflow: hidden">
+	<div id='wx_logo' style='margin:0 auto;display:none;'>
+		<img src="" />
+	</div>
+ 	<div>
+        <div class="music-box">
+            <div class="music rotate">
+                <img src="" />
+            </div>
+            <div class="note"><img src="" width="60px" /></div> 
+            <audio src="" loop autoplay id="yin"></audio>	
+        </div>
+        <div class="top"><img src="images/top.png" /></div>
+        <div class="page page1 current">
+            <div class="logo">
+            	<img src="images/logo.png" />
+            </div>
+            <div class="bannerone">
+            	<img src="images/bannerone.png" />
+                <div class="title">广州e贷老友记投资者回馈会</div>
+            </div>
+            <div class="inform">
+            	<p class="inform-t">时间：5月9日（星期六）14：00</p>
+                <p class="inform-a">地点：广州e贷办公大楼</p>
+            </div>
+        </div>
+        <div class="page page2  hide">
+            <h2>不一样的周年庆回馈</h2>
+            <div class="page2-text">
+            	<p>实地考察参观广州e贷办公大楼<br />聆听金融理财专家讲解投资理财知识，疑问解答。</p>
+                <i>最高抽奖机会达4次！！！</i>
+            
+            </div>
+            <div class="tips">
+            	<div class="tips-title">听说当天过来带上您的朋友，抽奖机会更多哦！</div>
+                <div class="tips-text">1）老用户个人参与，可获1次抽奖机会，<br />
+     老用户推荐1位增加1次抽奖机会，推荐2位增加2次，推荐3位用户增加3次，欢迎推荐新用户参加。抽奖机会4次封顶。<br />
+2）新用户个人参与，完成注册亦可获1次抽奖机会；<br />
+     备注：老用户定义为在广州e贷有过投资记录的；新用户定义为还没在广州e贷注册的用户。
+</div>
+            </div>
+        </div>
+        <div class="page page3 hide">
+            
+        </div>
+        <div class="page page4 hide ">
+            
+        </div>
+        <div  class="page page5 hide">
+           
+        </div>
+        <div  class="page page6 hide">
+            
+        </div>
+        <div  class="page page7 hide">
+            
+        </div>
+   </div>
+
+<script>
+var page=0;
+var slide=true;//防止连续滑动，当settimeout动作完成时才能继续滑动。
+$(document).ready(function(){
+	$(".page").swipe({
+		swipeUp:function(){
+			if(page!=($(".page").length-1)&&slide==true){
+				slide=false;
+				$($(".page").get(page+1)).removeClass("hide");
+				$($(".page").get(page+1)).addClass("page-movefrombottom current");
+				$($(".page").get(page)).addClass("page-movetotop");
+				setTimeout(function(){
+					$($(".page").get(page+1)).removeClass("page-movefrombottom");
+					$($(".page").get(page)).removeClass("page-movetotop");
+					$($(".page").get(page)).removeClass("current");
+					$($(".page").get(page)).addClass("hide");
+					page++;
+					slide=true;
+				},600);
+				if(page==($(".page").length-2)){
+					$(".top").addClass("hide");
+				}
+				return;
+			};
+			
+		},
+		swipeDown:function(){
+			if(page!=0&&slide==true){
+				slide=false;
+				$($(".page").get(page-1)).removeClass("hide");
+				$($(".page").get(page-1)).addClass("page-movefromtop current");
+				$($(".page").get(page)).addClass("page-movetobottom");
+				setTimeout(function(){
+					$($(".page").get(page-1)).removeClass("page-movefromtop");
+					$($(".page").get(page)).removeClass("page-movetobottom");
+					$($(".page").get(page)).removeClass("current");
+					$($(".page").get(page)).addClass("hide");
+					page--;
+					slide=true;
+				},600);
+				if(page==($(".page").length-1)){
+					$(".top").removeClass("hide");
+				}
+				return;
+			};
+		},
+	});
+});
+var music=true;
+$(".music").click(function show(){
+	
+  var audio=document.getElementById("yin");
+  if(music==false){
+	 audio.play();
+	  $(".music").addClass("rotate");
+	  $(".note").removeClass("hide");
+	  music=true;
+	  return;
+	};
+  if(music==true){
+	  audio.pause();
+	  $(".music").removeClass("rotate");
+	  $(".note").addClass("hide")
+	  music=false;
+	  return;
+	};
+});
+
+</script>
+
+</body>
+</html>

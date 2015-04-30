@@ -1,0 +1,233 @@
+@charset "utf-8";
+.page{
+	font-family:  'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+	font-size:12px;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	position:absolute;
+	color:#FFF;
+	display:block;
+	overflow: hidden;
+}
+.hide{
+	display:none;
+}
+.current{
+	z-index:1;
+}
+ul{
+	list-style-type:none;
+	padding-left:0;
+}
+p{
+	margin:0;
+}
+i{
+	font-style: normal;
+}
+@-webkit-keyframes moveToTop {
+	from { -webkit-transform: translateY(0); }
+	to { -webkit-transform: translateY(-100%); }
+}
+@keyframes moveToTop {
+	from {transform: translateY(0); }
+	to { transform: translateY(-100%); }
+}
+@-webkit-keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); }
+	to { -webkit-transform: translateY(0); }
+}
+@keyframes moveFromTop {
+	from { transform: translateY(-100%);  }
+	to { transform: translateY(0);  }
+}
+
+@-webkit-keyframes moveToBottom {
+	from {-webkit-transform: translateY(0); }
+	to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+	from { transform: translateY(0);}
+	to { transform: translateY(100%); }
+}
+
+@-webkit-keyframes moveFromBottom {
+	from { -webkit-transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
+}
+@keyframes moveFromBottom {
+	from { transform: translateY(100%); }
+	to { transform: translateY(0); }
+}
+.page-movetotop{
+	animation:moveToTop 0.6s both;
+	-webkit-animation:moveToTop 0.6s both;
+	-moz-animation:moveToTop 0.6s both;
+	-o-animation:moveToTop 0.6s both;
+}
+.page-movefromtop{
+	animation:moveFromTop 0.6s both;
+	-webkit-animation:moveFromTop 0.6s both;
+	-moz-animation:moveFromTop 0.6s both;
+	-o-animation:moveFromTop 0.6s both;
+}
+.page-movefrombottom{
+	animation:moveFromBottom 0.6s both;
+	-webkit-animation:moveFromBottom  0.6s both ;
+	-moz-animation:moveFromBottom  0.6s both;
+	-o-animation:moveFromBottom  0.6s both;
+}
+.page-movetobottom{
+	animation:moveToBottom 0.6s both;
+	-webkit-animation:moveToBottom  0.6s both ;
+	-moz-animation:moveToBottom  0.6s both;
+	-o-animation:moveToBottom  0.6s both;
+}
+/*
+.music-box{
+	position:absolute;
+	top:5%;
+	left:50%;
+	margin-left:5em;
+	
+}
+.music{
+	background-color:#fff;
+	position:relative;
+	z-index:3;
+	width:2em;
+	border-radius:50px;
+	
+}
+.music img{
+	position:relative;
+	width:2em;
+}
+.note{
+	position:relative;
+	top:-3.7em;
+	left:0em;
+	z-index:2;
+} 音乐样式*/
+@keyframes top{
+	0%{ opacity:1;top:90%;}
+	100%{ opacity:0;top:95%;}
+}
+@-webkit-keyframes top{
+	0%{ opacity:1;top:90%;}
+	100%{ opacity:0;top:95%;}
+}
+.top img{
+	position:absolute;
+	z-index:2;
+	top:95%;
+	left:50%;
+	margin-left:-25px;
+	animation:top 1s linear infinite;
+	-webkit-animation:top 1s linear infinite;
+}
+.page3, .page4, .page5, .page6, .page7{
+	background:url(images/bgone.jpg)  no-repeat;
+	background-size:cover;
+}
+.page1{
+	background:url(images/bgone01.jpg)  no-repeat;
+	background-size:cover;
+}
+.page2{
+	background:url(images/bgone02.jpg)  no-repeat;
+	background-size:cover;
+}
+.logo{
+	position: absolute;
+	top: 3%;
+	left: 50%;
+	margin-left:-70px;
+}
+.logo img{
+	width:140px;
+	margin:50px 0;
+}
+@keyframes shrink{
+	0%{ opacity:0;transform: scale(3);}
+	100%{ opacity:1;transform: scale(1);}
+}
+@-webkit-keyframes shrink{
+	0%{ opacity:0;-webkit-transform: scale(3);}
+	100%{ opacity:1;-webkit-transform: scale(1);}
+}
+.bannerone{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left:-125px;
+	animation:shrink 1s linear ;
+	-webkit-animation:shrink 1s linear ;
+}
+.bannerone img{
+	width:250px;
+}
+.title{
+	background-color:#022b9e;
+	width:250px;
+	margin:auto;
+	font-size:16px;
+	line-height:30px;
+	text-align:center;
+}
+@-webkit-keyframes fadeIn{
+	0%{opacity:0; -webkit-transform: translateX(100px);}
+	100%{opacity:1; -webkit-transform: translateX(0px);}
+}
+.inform{
+	width:180px;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	margin-left:-80px;
+	animation:fadeIn 1s linear 1s both;
+	-webkit-animation:fadeIn 1s linear 1s both;
+
+}
+.inform p{
+	margin:0;
+}
+.page2 h2{
+	position: absolute;
+	top: 17%;
+	left: 50%;
+	margin-left:-120px;
+	font-size:26px;
+}
+.page2-text{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left:-120px;
+}
+.page2-text i{
+	color:#faeb3a;
+	font-size:14px;	
+}
+.tips{
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	margin-left:-125px;
+}
+.tips-title{
+	padding:15px 10px;
+	background:url(images/titleone1.png)  no-repeat;
+	background-size:100% 100%;
+}
+.tips-text{
+	color:#555555;
+	padding:15px;
+	width:240px;
+	background:url(images/boxone1.png)  no-repeat;
+	background-size:100% 100%;
+	line-height:18px;
+	font-size:10px;
+}
