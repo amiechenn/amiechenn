@@ -76,7 +76,7 @@ $(".music-box").click(function show(){
 	};
 });
 
-    //创建和初始化地图函数：
+//创建和初始化地图函数：
     function initMap(){
       createMap();//创建地图
       setMapEvent();//设置地图事件
@@ -122,11 +122,11 @@ $(".music-box").click(function show(){
     //向地图添加控件
     function addMapControl(){
       var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+      scaleControl.setUnit(BMAP_UNIT_METRIC);
       map.addControl(scaleControl);
-      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:3});
       map.addControl(navControl);
-      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
+      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:false});
       map.addControl(overviewControl);
     }
     var map;
