@@ -173,7 +173,11 @@ i{
 	line-height:30px;
 	text-align:center;
 }
-@-webkit-keyframes fadeIn{
+@keyframes fadeInRight{
+	0%{opacity:0; transform: translateX(100px);}
+	100%{opacity:1; transform: translateX(0px);}
+}
+@-webkit-keyframes fadeInRight{
 	0%{opacity:0; -webkit-transform: translateX(100px);}
 	100%{opacity:1; -webkit-transform: translateX(0px);}
 }
@@ -183,25 +187,39 @@ i{
 	top: 70%;
 	left: 50%;
 	margin-left:-80px;
-	animation:fadeIn 1s linear 1s both;
-	-webkit-animation:fadeIn 1s linear 1s both;
+	animation:fadeInRight 1s linear 1s both;
+	-webkit-animation:fadeInRight 1s linear 1s both;
 
 }
 .inform p{
 	margin:0;
 }
+@keyframes fadeInLeft{
+	0%{opacity:0; transform: translateX(-200px);}
+	100%{opacity:1; transform: translateX(0px);}
+}
+@-webkit-keyframes fadeInLeft{
+	0%{opacity:0; -webkit-transform: translateX(-200px);}
+	100%{opacity:1; -webkit-transform: translateX(0px);}
+}
+
 .page2 h2{
 	position: absolute;
 	top: 17%;
 	left: 50%;
 	margin-left:-120px;
 	font-size:26px;
+	animation:fadeInLeft 1s linear  both;
+	-webkit-animation:fadeInLeft 1s linear  both;
 }
 .page2-text{
 	position: absolute;
 	top: 30%;
 	left: 50%;
 	margin-left:-120px;
+	animation:fadeInLeft 0.5s linear 1s both;
+	-webkit-animation:fadeInLeft 0.5s linear 1s  both;
+
 }
 .page2-text i{
 	color:#faeb3a;
@@ -213,10 +231,28 @@ i{
 	left: 50%;
 	margin-left:-125px;
 }
+@keyframes wider{
+	0%{opacity:0; transform: scale(0,1);}
+	100%{opacity:1;transform: scale(1,1);}
+}
+@-webkit-keyframes wider{
+	0%{opacity:0; -webkit-transform: scale(0,1);}
+	100%{opacity:1;-webkit-transform: scale(1,1);}
+}
 .tips-title{
 	padding:15px 10px;
 	background:url(images/titleone1.png)  no-repeat;
 	background-size:100% 100%;
+	animation:wider .5s linear 1s both;
+	-webkit-animation:wider .5s linear 1s both;
+}
+@keyframes rotateY{
+	0%{opacity:0;transform:rotateY(130deg);}
+	100%{opacity:1;transform:rotateY(0deg);}
+}
+@-webkit-keyframes rotateY{
+	0%{opacity:0;-webkit-transform:rotateY(130deg);}
+	100%{opacity:1;-webkit-transform:rotateY(0deg);}
 }
 .tips-text{
 	color:#555555;
@@ -226,6 +262,8 @@ i{
 	background-size:100% 100%;
 	line-height:18px;
 	font-size:10px;
+	animation:rotateY 1s linear 1.5s both;
+	-webkit-animation:rotateY 1s linear 1.5s both;
 }
 h3{
 	font-size:20px;
