@@ -85,7 +85,7 @@ $(".music-box").click(function show(){
     }
     function createMap(){ 
       map = new BMap.Map("map"); 
-      map.centerAndZoom(new BMap.Point(113.320526,23.095381),19);
+      map.centerAndZoom(new BMap.Point(113.32521,23.092393),17);
     }
     function setMapEvent(){
       map.enableScrollWheelZoom();
