@@ -76,7 +76,7 @@ $(".music-box").click(function show(){
 	};
 });
 
-//创建和初始化地图函数：
+ //创建和初始化地图函数：
     function initMap(){
       createMap();//创建地图
       setMapEvent();//设置地图事件
@@ -85,7 +85,7 @@ $(".music-box").click(function show(){
     }
     function createMap(){ 
       map = new BMap.Map("map"); 
-      map.centerAndZoom(new BMap.Point(113.32521,23.092393),17);
+      map.centerAndZoom(new BMap.Point(113.322336,23.095368),17);
     }
     function setMapEvent(){
       map.enableScrollWheelZoom();
