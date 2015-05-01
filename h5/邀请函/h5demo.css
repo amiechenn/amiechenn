@@ -85,32 +85,29 @@ i{
 	-moz-animation:moveToBottom  0.6s both;
 	-o-animation:moveToBottom  0.6s both;
 }
-/*
+
 .music-box{
 	position:absolute;
 	top:5%;
 	left:50%;
-	margin-left:5em;
-	
+	margin-left:35%;
 }
-.music{
-	background-color:#fff;
-	position:relative;
+.music-on{
+	background:url(images/icoone.png) no-repeat;
+	background-position:0 -20px;
+	position:absolute;
 	z-index:3;
-	width:2em;
-	border-radius:50px;
-	
+	width:50px;
+	height:50px;
 }
-.music img{
-	position:relative;
-	width:2em;
+.music-off{
+	background:url(images/icoone.png) no-repeat;
+	background-position:0 -61px;
+	position:absolute;
+	z-index:3;
+	width:50px;
+	height:50px;
 }
-.note{
-	position:relative;
-	top:-3.7em;
-	left:0em;
-	z-index:2;
-} 音乐样式*/
 @keyframes top{
 	0%{ opacity:1;top:90%;}
 	100%{ opacity:0;top:95%;}

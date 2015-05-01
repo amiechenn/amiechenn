@@ -11,15 +11,13 @@
 </head>
 <body  style="overflow: hidden">
 	<div id='wx_logo' style='margin:0 auto;display:none;'>
-		<img src="" />
+		<img src="images/minone.jpg"/>
 	</div>
  	<div>
         <div class="music-box">
-            <div class="music rotate">
-                <img />
-            </div>
-            <div class="note"><img src="" width="60px" /></div> 
-            <audio src="" loop autoplay id="yin"></audio>	
+            <div class="music-on"></div>
+            <div class="music-off hide"></div>
+            <audio src="images/Epistra - Good Life.mp3" loop autoplay id="yin"></audio>	
         </div>
         <div class="top"><img src="images/top.png" /></div>
         <div class="page page1 current ">
@@ -170,20 +168,20 @@ $(document).ready(function(){
 	});
 });
 var music=true;
-$(".music").click(function show(){
+$(".music-box").click(function show(){
 	
   var audio=document.getElementById("yin");
   if(music==false){
 	 audio.play();
-	  $(".music").addClass("rotate");
-	  $(".note").removeClass("hide");
+	  $(".music-off").addClass("hide");
+	  $(".music-on").removeClass("hide");
 	  music=true;
 	  return;
 	};
   if(music==true){
 	  audio.pause();
-	  $(".music").removeClass("rotate");
-	  $(".note").addClass("hide")
+	  $(".music-off").removeClass("hide");
+	  $(".music-on").addClass("hide");
 	  music=false;
 	  return;
 	};
