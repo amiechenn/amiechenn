@@ -1,4 +1,7 @@
 @charset "utf-8";
+.wx_logo{
+	background-image:url(images/minone.jpg);
+}
 .page{
 	font-family:  'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
 	font-size:14px;
@@ -383,25 +386,13 @@ h3{
 	width:100%;
 	height:200px;
 }
-@keyframes fadeInSkew{
-	0%{opacity:0;transform: skew(0deg);left:300%;}
-	10%{opacity:1;transform: skew(0deg);left:300%;}
-	60%{opacity:1;transform: skew(30deg);left:50%;}
-	100%{opacity:1;transform: skew(0deg);left:50%;}
-}
-@-webkit-keyframes fadeInSkew{
-	0%{opacity:0;-webkit-transform: skew(0deg);left:300%;}
-	10%{opacity:1;-webkit-transform: skew(0deg);left:300%;}
-	60%{opacity:1;-webkit-transform: skew(30deg);left:50%;}
-	100%{opacity:1;-webkit-transform: skew(0deg);left:50%;}
-}
 .inform2{
 	position: absolute;
 	top: 75%;
 	left: 50%;
 	margin-left:-150px;
-	animation:fadeInSkew 1s  0.5s both;
-	-webkit-animation:fadeInSkew 1s  0.5s both;
+	animation:fadeInRight 1s  0.5s both;
+	-webkit-animation:fadeInRight 1s  0.5s both;
 }
 .page6 h3{
 	background-position:0 -255px;
