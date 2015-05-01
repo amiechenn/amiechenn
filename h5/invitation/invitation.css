@@ -1,8 +1,4 @@
 @charset "utf-8";
-.wx_logo{
-	background-image:url(images/minone.jpg);
-}
-
 .page{
 	font-family:  'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
 	font-size:14px;
