@@ -337,5 +337,63 @@ h3{
 	background-position:0 -255px;
 	top: 18%;
 	margin-left:-50px;
-	
 }
+.page6 form {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left:-120px;
+}
+.page6 form label{
+	vertical-align:middle;
+	font-size:20px;
+}
+.page6 form .input, textarea{
+	vertical-align:middle;
+	width:200px;
+	font-size:20px;
+	line-height:30px;
+	margin:10px 5px;
+	border:0;
+	border-radius: 1px;
+}
+.submit{
+	background-color:#0082d7;
+	border:0;
+	border-bottom:3px solid #0053b5;
+	width:205px;
+	color:#FFF;
+	line-height:30px;
+	font-size:18px;
+	margin-left:48px;
+	margin-top:10px;
+}
+.inform3{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left:-130px;
+	text-align:center;
+}
+.inform3-text{
+	font-size:20px;
+}
+.inform3-number{
+	font-size:22px;
+	padding-top:10px;
+}
+.page7 button{
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	margin-left:-100px;
+	background-color:#0082d7;
+	border:0;
+	border-bottom:3px solid #0053b5;
+	width:200px;
+	color:#FFF;
+	line-height:30px;
+	font-size:18px;
+	margin-top:10px;
+}
+	
