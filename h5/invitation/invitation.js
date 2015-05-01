@@ -1,4 +1,4 @@
-
+//loading	
 $(function() {
 		$(window).load(function() {
 			"use strict";
@@ -7,8 +7,8 @@ $(function() {
 			$('body').delay(1000);
 			$(".bannerone").removeClass("hide");
 		});
-     })
-	 	//------loading--------	
+})
+//滑动翻页 	
 var page=0;
 var slide=true;//防止连续滑动，当settimeout动作完成时才能继续滑动。
 $(document).ready(function(){
@@ -56,6 +56,7 @@ $(document).ready(function(){
 		},
 	});
 });
+//音乐播放控制
 var music=true;
 $(".music-box").click(function show(){
 	
@@ -75,6 +76,8 @@ $(".music-box").click(function show(){
 	  return;
 	};
 });
+
+
  //创建和初始化地图函数：
     function initMap(){
       createMap();//创建地图
