@@ -143,7 +143,6 @@ i{
 	margin-left:-70px;
 }
 .logo img{
-	width:140px;
 	margin:50px 0;
 }
 @keyframes shrink{
@@ -162,9 +161,6 @@ i{
 	animation:shrink 1s linear ;
 	-webkit-animation:shrink 1s linear ;
 }
-.bannerone img{
-	width:250px;
-}
 .title{
 	background-color:#022b9e;
 	width:250px;
@@ -174,11 +170,11 @@ i{
 	text-align:center;
 }
 @keyframes fadeInRight{
-	0%{opacity:0; transform: translateX(100px);}
+	0%{opacity:0; transform: translateX(200px);}
 	100%{opacity:1; transform: translateX(0px);}
 }
 @-webkit-keyframes fadeInRight{
-	0%{opacity:0; -webkit-transform: translateX(100px);}
+	0%{opacity:0; -webkit-transform: translateX(200px);}
 	100%{opacity:1; -webkit-transform: translateX(0px);}
 }
 .inform{
@@ -219,7 +215,6 @@ i{
 	margin-left:-120px;
 	animation:fadeInLeft 0.5s linear 1s both;
 	-webkit-animation:fadeInLeft 0.5s linear 1s  both;
-
 }
 .page2-text i{
 	color:#faeb3a;
@@ -272,13 +267,15 @@ h3{
 	background:url(images/icoone.png) no-repeat;
 	position: absolute;
 	left: 50%;
-
+	animation:fadeInRight .5s linear both;
+	-webkit-animation:fadeInRight .5s linear both;
 }
 .page3 h3{
 	background-position:0 -115px;
 	top: 18%;
 	margin-left:-100px;
 }
+
 .prize{
 	width:110px;
 	background:url(images/prizeone.png) no-repeat;
@@ -287,40 +284,62 @@ h3{
 	padding-top:100px;
 	text-align:center;
 }
+@keyframes fadeIn{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@-webkit-keyframes fadeIn{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
 .prize1{
 	background-position:0 0px;
 	top: 30%;
 	margin-left:-110px;
+	animation:fadeIn 1s  both;
+	-webkit-animation:fadeIn 1s  both;
 }
 .prize2{
 	background-position:0 -100px;
 	top: 30%;
 	margin-left:20px;
+	animation:fadeIn 1s 0.2s both;
+	-webkit-animation:fadeIn 1s 0.2s  both;
 }
 .prize3{
 	background-position:0 -200px;
 	top: 50%;
 	margin-left:-150px;
+	animation:fadeIn 1s  0.5s both;
+	-webkit-animation:fadeIn 1s 0.5s both;
 }
 .prize4{
 	background-position:0 -315px;
 	top: 50%;
 	margin-left:-50px;
+	animation:fadeIn 1s 0.8s both;
+	-webkit-animation:fadeIn 1s 0.8s both;
 }
 .prize5{
 	background-position:0 -418px;
 	top: 50%;
 	margin-left:50px;
+	animation:fadeIn 1s 1.1s both;
+	-webkit-animation:fadeIn 1s 1.1s both;
 }
 .prize6{
 	background-position:0 -520px;
 	top: 70%;
 	margin-left:-100px;
+	animation:fadeIn 1s 1.4s both;
+	-webkit-animation:fadeIn 1s 1.4s both;
 }
 .prize7{
 	background-position:0 -610px;
 	top: 70%;
 	margin-left:10px;
+	animation:fadeIn 1s 1.7s both;
+	-webkit-animation:fadeIn 1s 1.7s both;
 }
 .page4 h3{
 	background-position:0 -155px;
@@ -333,13 +352,15 @@ h3{
 	left: 50%;
 	margin-left:-140px;
 	color:#faeb3a;
-	border-right:1px solid #6559e8;
+	border-right:1px solid #6559e8;	
+	animation:fadeInLeft 1s  0.5s both;
+	-webkit-animation:fadeInLeft 1s  0.5s both;
 }
 .times-list li{
 	padding-left:25px;
 	margin:18px 10px 18px 18px;
 	background:url(images/icoone.png) no-repeat;
-	background-position:0 -192px;
+	background-position:0 -193px;
 	font-size:10px;
 }
 .activity-list{
@@ -347,6 +368,8 @@ h3{
 	top: 30%;
 	left: 50%;
 	margin-left:-30px;
+	animation:fadeInRight 1s  0.5s both;
+	-webkit-animation:fadeInRight 1s  0.5s both;
 }
 .activity-list li{
 	margin:18px;
@@ -356,7 +379,6 @@ h3{
 	background-position:0 -215px;
 	top: 18%;
 	margin-left:-30px;
-	
 }
 .map{
 	position: absolute;
@@ -365,11 +387,25 @@ h3{
 	width:100%;
 	height:200px;
 }
+@keyframes fadeInSkew{
+	0%{opacity:0;transform: skew(0deg);left:300%;}
+	10%{opacity:1;transform: skew(0deg);left:300%;}
+	60%{opacity:1;transform: skew(30deg);left:50%;}
+	100%{opacity:1;transform: skew(0deg);left:50%;}
+}
+@-webkit-keyframes fadeInSkew{
+	0%{opacity:0;-webkit-transform: skew(0deg);left:300%;}
+	10%{opacity:1;-webkit-transform: skew(0deg);left:300%;}
+	60%{opacity:1;-webkit-transform: skew(30deg);left:50%;}
+	100%{opacity:1;-webkit-transform: skew(0deg);left:50%;}
+}
 .inform2{
 	position: absolute;
 	top: 75%;
 	left: 50%;
 	margin-left:-150px;
+	animation:fadeInSkew 1s  0.5s both;
+	-webkit-animation:fadeInSkew 1s  0.5s both;
 }
 .page6 h3{
 	background-position:0 -255px;
@@ -412,6 +448,8 @@ h3{
 	left: 50%;
 	margin-left:-130px;
 	text-align:center;
+	animation:shrink 1s linear ;
+	-webkit-animation:shrink 1s linear ;
 }
 .inform3-text{
 	font-size:20px;
@@ -419,6 +457,22 @@ h3{
 .inform3-number{
 	font-size:22px;
 	padding-top:10px;
+}
+@keyframes rotato{
+	0%{transform: rotate(0deg);}
+	20%{transform: rotate(-2deg);}
+	40%{transform: rotate(2deg);}
+	60%{transform: rotate(-2deg);}
+	80%{transform: rotate(2deg);}
+	100%{transform: rotate(0deg);}
+}
+@-webkit-keyframes rotato{
+	0%{-webkit-transform: rotate(0deg);}
+	20%{-webkit-transform: rotate(-2deg);}
+	40%{-webkit-transform: rotate(2deg);}
+	60%{-webkit-transform: rotate(-2deg);}
+	80%{-webkit-transform: rotate(2deg);}
+	100%{-webkit-transform: rotate(0deg);}
 }
 .page7 button{
 	position: absolute;
@@ -433,5 +487,7 @@ h3{
 	line-height:30px;
 	font-size:18px;
 	margin-top:10px;
+	animation:rotato .5s 1s linear ;
+	-webkit-animation:rotato .5s 1s linear ;
 }
 	
