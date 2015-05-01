@@ -2,6 +2,7 @@
 .wx_logo{
 	background-image:url(images/minone.jpg);
 }
+
 .page{
 	font-family:  'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
 	font-size:14px;
@@ -111,6 +112,31 @@ i{
 	width:50px;
 	height:50px;
 }
+/*music*/
+.preloading {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 9999;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	display: block;
+}
+.loading-gif {
+	opacity: 1 ;
+  	-webkit-border-radius: 3px ;
+  	background: #000;
+  	position: absolute;
+  	left: 50%;
+  	top: 50%;
+	margin-left:-50px;
+	margin-top:-50px;
+}
+/* loading */
 @keyframes top{
 	0%{ opacity:1;top:90%;}
 	100%{ opacity:0;top:95%;}
