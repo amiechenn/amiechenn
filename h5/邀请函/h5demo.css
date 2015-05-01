@@ -129,7 +129,7 @@ i{
 .loading-gif {
 	opacity: 1 ;
   	-webkit-border-radius: 3px ;
-  	background: #000;
+  	background: #fff;
   	position: absolute;
   	left: 50%;
   	top: 50%;
@@ -145,7 +145,10 @@ i{
 	0%{ opacity:1;top:90%;}
 	100%{ opacity:0;top:95%;}
 }
-.top img{
+.top{
+	background:url(images/icoone.png) no-repeat;
+	width:35px;
+	height:25px;
 	position:absolute;
 	z-index:2;
 	top:95%;
