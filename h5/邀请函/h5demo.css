@@ -133,8 +133,7 @@ i{
   	position: absolute;
   	left: 50%;
   	top: 50%;
-	margin-left:-50px;
-	margin-top:-50px;
+	margin-left:-20px;
 }
 /* loading */
 @keyframes top{
