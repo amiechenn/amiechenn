@@ -5,13 +5,7 @@ $(function() {
 			$('.loading-gif').delay().fadeOut('slow');
 			$('.preloading').delay().fadeOut('slow');
 			$('body').delay(1000);
-			$('.black-box').removeClass("hide");
-			setTimeout(function(){
-		      	$(".black").addClass("hide");
-	 		},2000);
-			setTimeout(function(){
-		      	$(".movetitle").addClass("hide");
-	 		},4000);
+			$(".bannerone").removeClass("hide");
 		});
      })
 	 	//------loading--------	
