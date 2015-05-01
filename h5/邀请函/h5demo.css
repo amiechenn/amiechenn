@@ -123,13 +123,12 @@ i{
 	display: none;
 	width: 100%;
 	height: 100%;
-	background: #000;
+	background: #fff;
 	display: block;
 }
 .loading-gif {
 	opacity: 1 ;
   	-webkit-border-radius: 3px ;
-  	background: #fff;
   	position: absolute;
   	left: 50%;
   	top: 50%;
