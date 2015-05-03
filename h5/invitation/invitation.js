@@ -133,3 +133,25 @@ $(".music-box").click(function show(){
     }
     var map;
       initMap();
+	  
+	  
+//正则
+function checkFrom(){
+	var phone=document.getElementById("phone").value;
+	var people=document.getElementById("people").value;
+	var re=/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/;
+	var reg=/^\d{1,2}$/;
+	if(re.test(phone)!=true){
+		alert("电话格式不正确！")
+		return false;
+	}
+	if(reg.test(people)!=true){
+		alert("请填写人数！")
+		return false;
+	}
+	if(re.test(phone)&&reg.test(people)){
+		alert("提交成功")
+		return true;
+	}
+	
+};

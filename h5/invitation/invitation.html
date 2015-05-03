@@ -16,7 +16,7 @@
     </div>
  	<div>
         <div class="top"></div>
-        <div class="page page1 current ">
+        <div class="page page1 hide ">
             <div class="logo">
             	<img src="images/logo.png" />
             </div>
@@ -90,22 +90,22 @@
                 <p class="inform-t">活动时间：5月9日（星期六）14：00</p>
            </div>
         </div>
-        <div  class="page page6 hide">
+        <div  class="page page6 current">
             <h3>在线报名</h3>
             <form>
             	<label>姓名</label>
-                <input  type="text" class="input" name="name">
+                <input  type="text" class="input" name="name" >
                 <br />
                 <label>电话</label>
-                <input  type="text" class="input" name="name">
+                <input  type="text" class="input" name="name" id="phone">
 				<br />
                 <label>人数</label>
-                <input  type="text" class="input" name="name">
+                <input  type="text" class="input" name="name" id="people">
                 <br />
                 <label>备注</label>
                 <textarea rows="3"  class="name"></textarea>
                 <br />
-            	<input type="submit" class="submit" value="提  交">
+            	<input type="button" class="submit" value="提  交" onClick="checkFrom()">
             </form>
         </div>
         <div  class="page page7 hide ">
