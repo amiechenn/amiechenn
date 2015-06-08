@@ -62,7 +62,7 @@ to{transform:translateY(0)}}
 .page2 .slide3 .slide-title{margin-left: -105px;}
 .page2 .slide3 .red{padding-bottom: 10px;}
 .top-bar{height: 25px;text-align: center;border-bottom: 1px solid #ccc;width: 100%;}
-.top-bar .bar-text{line-height: 50px;background-color: #FFF6D8;width: 100px;margin: auto;ß}
+.top-bar .bar-text{line-height: 50px;background-color: #FFF6D8;width: 150px;margin: auto;font-size: 18px;}
 .page3 h2{color: #ED484A;font-size: 22px;width: 100%;text-align: center;margin-top: 5%;font-weight: 900;}
 .page3 h3{ color: #ED484A;font-size: 18px;width: 100%;text-align: center;margin: 5px 0;}
 .page3 p{background-color: #F49F31;color:#fff;padding: 5px;width: 70%;margin: auto;}
