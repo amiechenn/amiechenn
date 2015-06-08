@@ -1,0 +1,83 @@
+@charset "utf-8";
+.page{font-family:'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;font-size:12px;height:100%;width:100%;top:0;left:0;position:absolute;color:#877F73;display:block;overflow:hidden;background-color: #FFF6D8;}
+.hide{display:none}
+.current{z-index:1}
+ul{list-style-type:none;padding-left:0}
+p,h2,h3{margin:0}
+i{font-style:normal}
+a{text-decoration:none;color:#FFF}
+
+@-webkit-keyframes moveToTop{from{-webkit-transform:translateY(0)}
+to{-webkit-transform:translateY(-100%)}}
+@keyframes moveToTop{from{transform:translateY(0)}
+to{transform:translateY(-100%)}}
+@-webkit-keyframes moveFromTop{from{-webkit-transform:translateY(-100%)}
+to{-webkit-transform:translateY(0)}}
+@keyframes moveFromTop{from{transform:translateY(-100%)}
+to{transform:translateY(0)}}
+@-webkit-keyframes moveToBottom{from{-webkit-transform:translateY(0)}
+to{-webkit-transform:translateY(100%)}}
+@keyframes moveToBottom{from{transform:translateY(0)}
+to{transform:translateY(100%)}}
+@-webkit-keyframes moveFromBottom{from{-webkit-transform:translateY(100%)}
+to{-webkit-transform:translateY(0)}}
+@keyframes moveFromBottom{from{transform:translateY(100%)}
+to{transform:translateY(0)}}
+.page-movetotop{animation:moveToTop .6s both;-webkit-animation:moveToTop .6s both;-moz-animation:moveToTop .6s both;-o-animation:moveToTop .6s both}
+.page-movefromtop{animation:moveFromTop .6s both;-webkit-animation:moveFromTop .6s both;-moz-animation:moveFromTop .6s both;-o-animation:moveFromTop .6s both}
+.page-movefrombottom{animation:moveFromBottom .6s both;-webkit-animation:moveFromBottom .6s both;-moz-animation:moveFromBottom .6s both;-o-animation:moveFromBottom .6s both}
+.page-movetobottom{animation:moveToBottom .6s both;-webkit-animation:moveToBottom .6s both;-moz-animation:moveToBottom .6s both;-o-animation:moveToBottom .6s both}
+/*.music-box{position:absolute;top:5%;left:50%;margin-left:35%}
+.music-on{background:url(images/icoone.png) no-repeat;background-position:0 -20px;position:absolute;z-index:3;width:50px;height:50px}
+.music-off{background:url(images/icoone.png) no-repeat;background-position:0 -61px;position:absolute;z-index:3;width:50px;height:50px}
+.preloading{position:fixed;left:0;top:0;right:0;bottom:0;z-index:9999;width:100%;height:100%;background:#fff;display:block}
+.loading-gif{opacity:1;-webkit-border-radius:3px;position:absolute;left:50%;top:50%;margin-left:-20px}
+*/
+@keyframes top{
+	0%{ opacity:1;top:90%;}
+	100%{ opacity:0;top:85%;}
+}
+@-webkit-keyframes top{
+	0%{ opacity:1;top:90%;}
+	100%{ opacity:0;top:85%;}
+}
+.top{background:url(images/ico.png) no-repeat;background-position:0 -60px;width:35px;height:35px;position:absolute;z-index:2;top:80%;left:80%;animation:top 1s linear infinite;-webkit-animation:top 1s linear infinite; -webkit-transform: rotate(180deg); transform: rotate(180deg);}
+.btn{color: #fff;background-color: #3FA7D9;border-bottom: 1px solid #246FA0;position: absolute;bottom: 6%;left: 50%;margin-left: -75px;width: 150px;line-height: 40px;text-align: center;}
+.page1 .logo-bg{width:100%;}
+.page1 .logo{position: absolute;top: 7px;left: 50%;margin-left: -85px;width: 150px;}
+.page2 h2{ color: #ED484A;font-size: 22px;width: 100%;text-align: center;margin-top: 5%;}
+.page2 h3{ color: #F49F31;font-size: 18px;width: 100%;text-align: center;margin: 5px 0;}
+.page2 .slide{background-color: #FCE6C4;position: absolute;top: 20%;left: 50%;margin-left: -45%;width: 90%;}
+.page2 .slide .slide-title{position: absolute;top: -10px;left: 50%;margin-left: -75px;color: #fff;font-size: 14px;}
+.page2 .slide .slide-title i{width: 33px;height: 32px;background:url(images/ico.png) no-repeat;position: relative;z-index: 2;display: inline-block;vertical-align: middle;  text-align: center;line-height: 32px;}
+.page2 .slide .slide-title span{background-color: #ED484A;border-radius: 25px;position: relative;z-index: 1;left: -25px;padding: 3px 15px 3px 25px;  vertical-align: middle;}
+.page2 .slide .red{color: #ED484A;width: 100%;line-height: 20px;text-align: center;padding-top: 25px;padding-bottom: 0;}
+.page2 .slide p{width: 100%;padding-bottom: 5px;text-align: center;}
+.page2 .slide p b{color: #ED484A;font-size: 22px;}
+.page2 .slide1{}
+.page2 .slide2 {top: 40%;height: 25%;}
+.page2 .slide2 p{padding-top: 20px;padding-bottom: 5px;}
+.page2 .slide2 img{width: 90%;  position: absolute;left: 50%;margin-left: -45%;}
+.page2 .slide3 {top: 72%}
+.page2 .slide3 .slide-title{margin-left: -105px;}
+.page2 .slide3 .red{padding-bottom: 10px;}
+.top-bar{height: 25px;text-align: center;border-bottom: 1px solid #ccc;width: 100%;}
+.top-bar .bar-text{line-height: 50px;background-color: #FFF6D8;width: 100px;margin: auto;ß}
+.page3 h2{color: #ED484A;font-size: 22px;width: 100%;text-align: center;margin-top: 5%;font-weight: 900;}
+.page3 h3{ color: #ED484A;font-size: 18px;width: 100%;text-align: center;margin: 5px 0;}
+.page3 p{background-color: #F49F31;color:#fff;padding: 5px;width: 70%;margin: auto;}
+.page3 p b{font-size: 22px;}
+.page3 img{position: absolute;top: 25%;width: 80%;left: 50%;margin-left: -40%;}
+.page3 p{position: absolute;top: 72%;left: 50%;margin-left: -125px;width: 250px;text-align: center;}
+
+.page4 h2{color: #ED484A;font-size: 22px;width: 100%;text-align: center;margin-top: 5%;font-weight: 900;}
+.page4 img{position: absolute;top: 20%;width: 80%;left: 50%;margin-left: -40%;}
+.page4 .text{position: absolute;top: 50%;left: 50%;margin-left: -40%;width: 80%;}
+.page4 .text h3{ font-size:18px;font-weight: 700;color: #3FA7D9;padding-left: 25px;background:url(images/ico.png) no-repeat;background-position: 0 -120px;}
+.page4 .text p{  padding: 0 0 5px 25px;}
+.page5 h2{color: #ED484A;font-size: 22px;width: 100%;text-align: center;margin-top: 5%;font-weight: 900;}
+.page5 img{position: absolute;top: 10%;width: 60%;left: 50%;margin-left: -30%;}
+.page5 .text{position: absolute;top: 68%;left: 50%;margin-left: -45%;width: 90%;}
+.page5 .text h3{  font-size: 14px;color: #FFF;background-color: #096baf;border-radius: 3px;font-weight: 700;padding: 5px;width: 140px;}
+.page5 .text p{font-size:10px;padding:5px 0;}
+.page5 .text p b{color: #3FA7D9;}

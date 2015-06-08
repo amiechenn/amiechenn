@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)http://www.gzdai.com/special/20150516/index.html?from=singlemessage&isappinstalled=0 -->
+<html slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no">
+<title>618</title>
+<meta name="keywords" content="广州e贷,广州易贷，p2p网贷,投资理财,金融投资,网络贷款,网络理财,互联网金融,网络贷款平台,广州e贷老友记投资者回馈会">
+<meta name="description" content="广州易贷成立一周年,任性大回馈,广州e贷老友记投资者回馈会">
+<link href="618.css" rel="stylesheet">
+<style>
+    .hello{ width:0; height:0; opacity:0;}
+</style>
+<body style="overflow: hidden">
+    <p class="hello">2015.5.9邀请您参加“广州e贷成立一周年任性大回馈”活动</p>
+	<div id="wx_logo" style="margin:0 auto;display:none;">
+    	<img src="./广州e贷成立一周年邀请函_files/minone.jpg">
+    </div>
+    <div class="preloading" style="display: none;">
+        <img class="loading-gif" src="./广州e贷成立一周年邀请函_files/loading.gif" alt="preloader" style="display: none;">
+    </div>
+ 	<div>
+        <div class="top"></div>
+        <div class="page page1 current">
+            <img class="logo-bg" src="images/content1.jpg">
+            <img class="logo" src="images/logo.png">
+            <a href="" class="btn">去注册</a>
+        </div>
+        <div class="page page2   hide">
+            <h2>一场互联网金融的盛宴</h2>
+            <h3>与广州e贷一起狂欢，壕享巨额奖励</h3>
+            <div class="slide1 slide">
+                <div  class="slide-title">
+                    <i>奖</i>
+                    <span>邀请好友享奖励</span>
+                </div>
+                <p class="red">多邀多得 上不封顶</p>
+                <p>推荐新用户，享新用户投资额<b>1‰</b>作为奖励</p>
+            </div>
+            <div class="slide2 slide">
+                <div  class="slide-title">
+                    <i>返</i>
+                    <span>投资返现大狂欢</span>
+                </div>
+                <p>最高<b>6180元</b>壕气送</p>
+                <img src="images/content6.jpg">
+            </div>
+            <div class="slide3 slide">
+                <div  class="slide-title">
+                    <i>抽</i>
+                    <span>开心抽大奖 轻松拿iPhone</span>
+                </div>
+                <p class="red"> 100%中奖 赚钱就这么简单</p>
+            </div>
+            <a href="" class="btn">去投标</a>
+        </div>
+        <div class="page page3 hide">
+            <div class="top-bar">
+                <div class="bar-text">广州e贷是什么</div>
+            </div>
+            <h2>广州首家上市公司参股</h2>
+            <h3>的互联网金融理财平台</h3>
+            <img src="images/content2.png" width="300px">
+            <p><b>50倍</b>银行活期利率<b>50元</b>即可理财</p>
+        </div>
+        <div class="page page4 hide">
+            <div class="top-bar">
+                <div class="bar-text">为什么选广州e贷</div>
+            </div>
+            <h2>多重审核，严控项目风险</h2>
+            <img src="images/content3.png">
+            <div class="text">
+                <h3>实地考察</h3>
+                <p>身份核实、征信调查</p>
+                <h3>资质审核</h3>
+                <p>银行流水、经营状况、借款人背景等多种必备材料</p>
+                <h3>风控措施</h3>
+                <p>抵押、质押、担保多种方式</p>
+                <h3>黑名单管理</h3>
+                <p>借款人黑名单动态数据管理</p>
+            </div>
+        </div>
+        <div class="page page5 hide">
+            <h2>多重审核，严控项目风险</h2>
+            <img src="images/content4.png">
+            <div class="text">
+                    <h3>借款逾期怎么办？</h3>
+                    <p>合作机构为其推荐的每一笔借款提供不可撤销的代偿服务</p>
+                    <h3>若合作机构无法赔付？</h3>
+                    <p>广州e贷将会启动风险准备金进行代偿</p>
+                    <p>风险准备金高达<b>10，053，757元</b>存入独立银行账户</p>
+                </div>
+        </div>
+   </div>
+<script src="jquery.min.js"></script>
+<script src="jquery.touchSwipe.min.js"></script>
+<script>
+var page=0;
+var slide=true;//防止连续滑动，当settimeout动作完成时才能继续滑动。
+$(document).ready(function(){
+    $(".page").swipe({
+        swipeUp:function(){
+            if(page!=($(".page").length-1)&&slide==true){
+                slide=false;
+                $($(".page").get(page+1)).removeClass("hide");
+                $($(".page").get(page+1)).addClass("page-movefrombottom current");
+                $($(".page").get(page)).addClass("page-movetotop");
+                setTimeout(function(){
+                    $($(".page").get(page+1)).removeClass("page-movefrombottom");
+                    $($(".page").get(page)).removeClass("page-movetotop");
+                    $($(".page").get(page)).removeClass("current");
+                    $($(".page").get(page)).addClass("hide");
+                    page++;
+                    slide=true;
+                },600);
+                if(page==($(".page").length-2)){
+                    $(".top").addClass("hide");
+                }
+                return;
+            };
+        },
+        swipeDown:function(){
+            if(page!=0&&slide==true){
+                slide=false;
+                $($(".page").get(page-1)).removeClass("hide");
+                $($(".page").get(page-1)).addClass("page-movefromtop current");
+                $($(".page").get(page)).addClass("page-movetobottom");
+                setTimeout(function(){
+                    $($(".page").get(page-1)).removeClass("page-movefromtop");
+                    $($(".page").get(page)).removeClass("page-movetobottom");
+                    $($(".page").get(page)).removeClass("current");
+                    $($(".page").get(page)).addClass("hide");
+                    page--;
+                    slide=true;
+                },600);
+                if(page==($(".page").length-1)){
+                    $(".top").removeClass("hide");
+                }
+                return;
+            };
+        },
+    });
+});
+</script>
+
+
+
+</body></html>

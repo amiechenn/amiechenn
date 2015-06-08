@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Examples</title>
+
+</head>
+<script src="http://news.qq.com/js/baronxiongjs/inc/jquery.js"></script>
+<script src="http://news.qq.com/js/baronxiongjs/inc/jquery.mousewheel.min.js"></script>
+<script src="fresco.js"></script>
+<link rel="stylesheet" type="text/css" href="fresco.css">
+<script type="text/javascript">
+// JavaScript Document
+$(document).ready(function() {
+	var JW={
+		main:$('#main'),
+		slides:$('#slides'),
+		slidesItem:$('.slides-item'),
+		slidesCurrentIndex:0,
+		scrolling:false,
+		resizing:null,
+		init:function(){
+			JW.slidesLen=JW.slidesItem.length;//滚动个数
+			JW.slidesInit();
+			$('.footer').show();
+			
+			//缩放窗口
+			$(window).resize(function(){
+				if(JW.resizing){
+					clearTimeout(JW.resizing);
+				}
+				JW.resizing=setTimeout(function(){
+					JW.slidesInit();
+					JW.slides.css({left:'-'+(JW.w*JW.slidesCurrentIndex)+'px'});//缩放之后滚动
+				},30);
+			});
+			//滚动
+			JW.main.mousewheel(function(event,delta){
+				if(delta>0 && JW.scrolling==false){//向右滚
+					JW.scrollItem(JW.slidesCurrentIndex,'prev');
+				}else if(delta<0 && JW.scrolling==false){//向左滚
+					JW.scrollItem(JW.slidesCurrentIndex,'next');
+				}
+				return false;//阻止默认动作
+			});
+			
+			//键盘
+			$(document).keyup(function(event){
+				switch(event.keyCode){
+					case 39:
+					case 40:
+						JW.scrollItem(JW.slidesCurrentIndex,'next');
+						break;
+					case 37:
+					case 38:
+						JW.scrollItem(JW.slidesCurrentIndex,'prev');
+						break;
+				}
+			});
+			
+			//导航
+			JW.navItems=$('#nav a');
+			JW.navItems.each(function(index, element) {
+                $(this).click(function(event){
+					JW.doScroll(index);
+					event.preventDefault();
+				});
+            });
+			
+			JW.header=$('#header');
+			JW.header.hide();
+			
+			//tab
+			JW.tabInit();
+			
+			//share
+			JW.shareInit();
+		},
+		slidesInit:function(){
+			var tempW=parseInt($(window).width());
+			var tempH=parseInt($(window).height()-145);
+			JW.w=tempW-1000>0?tempW:1000;//窗口宽度
+			JW.h=tempH-500>0?tempH:500;//主要区域高度
+			JW.main.height(JW.h).show();//main高度
+			JW.slides.width(JW.w*JW.slidesLen);//滚动区域宽度
+			JW.slidesItem.width(JW.w).height(JW.h);//每屏的尺寸
+			JW.slidesItem.eq(0).addClass('current');
+		},
+		scrollItem:function(n,direction){
+			if(direction=='next'){//向左滚动
+				n++;
+				if(n>JW.slidesLen-1){
+					n=JW.slidesLen-1
+				}
+			} else {
+				n--;
+				if(n<0){
+					n=0;
+				}
+			}
+			JW.doScroll(n);
+		},
+		doScroll:function(n){
+				JW.scrolling=true;//正在滚动
+				var left=JW.w*n;
+				JW.slidesItem.removeClass('current').eq(n).addClass('current');
+				JW.slides.animate({left:'-'+left+'px'},function(){
+					JW.scrolling=false;
+				});
+				
+				//更新导航
+				JW.navItems.removeClass('current');
+				JW.navItems.eq(n).addClass('current');
+				if(n!=0){
+					JW.header.fadeIn('fast');
+				} else{
+					JW.header.fadeOut('fast');
+				}
+				JW.slidesCurrentIndex=n;//更新当前序号
+		},
+		tabInit:function(){
+			JW.tabs=$('.tab');
+			JW.tab(JW.tabs.eq(0));
+			JW.tab(JW.tabs.eq(1));
+		},
+		tab:function(root){
+			var tabNavs=$('.navitem',root);
+			var tabContents=$('.slide-links-item',root);
+			var currentIndex=0;
+			
+			//默认显示第一个
+			tabNavs.eq(0).addClass('current');
+			JW.tabShowItem(tabContents,0);
+			
+			
+			tabNavs.each(function(index) {
+                $(this).click(function(event){
+					tabNavs.removeClass('current');
+					tabNavs.eq(index).addClass('current');
+					JW.tabShowItem(tabContents,index);
+				});
+            });
+			
+		},
+		tabShowItem:function(obj,n){
+			obj.removeClass('current').hide();
+			obj.eq(n).addClass('current').show();
+		},
+		shareInit:function(){
+			//分享到微信
+			$('.share-item-wechat a').hover(function(){
+				$('.rcode').fadeIn();
+			},function(){
+				$('.rcode').fadeOut();
+			});
+			
+		var shareT=document.title;
+		var shareUrl=window.location.href;
+		var shareImg='http://img1.gtimg.com/news/pics/hv1/177/187/1662/108119412.png';//
+			
+		$('#share a').click(function(event){
+			switch(event.target.name){
+				case 'sina':
+					JW.shareTo('tsina',shareT,shareUrl,shareImg);
+					break;
+				case 'tqq':
+					JW.shareTo('tqq',shareT,shareUrl,shareImg);
+					break;
+				case 'qzone':
+					JW.shareTo('qzone',shareT,shareUrl,shareImg);
+					break;
+			}
+			event.preventDefault();
+			
+		});
+			
+			
+		},
+	shareTo:function(target,title,url,imgurl){
+			window.open("http://s.jiathis.com/?webid="+target+"&url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(title) + "&uid=1626433&jid=1344496797938582&pic="+encodeURIComponent(imgurl) , "腾讯网ishare", "height=600, width=560,toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,status=no,top=200,left=200");
+	}
+	
+		
+		
+	
+		
+	}
+	JW.init();
+});
+	
+
+
+
+   
+    
+    
+ 
+	
+	
+
+</script>
+<style type="text/css">
+.main{overflow: hidden;position: relative;}
+.slides{position: absolute;}
+.slides-item{float: left;position: relative;}
+.header{  height: 68px;position: absolute;left: 0;top: 0;z-index: 2;}
+.topbar {
+  height: 23px;
+  padding-top: 45px;
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;}
+.nav{}
+.nav-item {
+  float: left;
+}
+.nav-item a {
+  /*display: block;*/
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 23px;
+  cursor: pointer;
+}
+.topbar {
+  height: 23px;
+  padding-top: 45px;
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;}
+</style>
+<body>
+	<div class="header" id="header">
+		<div class="topbar">
+			<div class="nav" id="nav">
+				<div class="nav-item"><a>111</a></div>
+				<div class="nav-item"><a>222</a></div>
+				<div class="nav-item"><a>333</a></div>
+				<div class="nav-item"><a>444</a></div>
+			</div>
+		</div>
+	</div>
+   <div class="main" id="main">
+   		<div class="slides" id="slides">
+   			<div class="slides-item" style="background-color: #ccc">
+	   			<a href="2.jpg" id="demo_show_image" class="fresco" data-fresco-caption="Caption on top of the image" data-fresco-group="unique_name" data-fresco-options="thumbnail: 'phpThumb.php?src=image1.jpg&w=240&h=240&zc=1'"> image1</a>
+	   			<a href="1.jpg" class="fresco" data-fresco-group="unique_name">image2</a>
+   			</div>
+   			<div class="slides-item" style="background-color: #999">2</div>
+   			<div class="slides-item" style="background-color: #898989">3</div>
+   			<div class="slides-item" style="background-color: #800073">4</div>
+   		</div>
+   </div> 
+
+</body>
+</html>

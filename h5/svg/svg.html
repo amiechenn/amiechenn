@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script src="N:\Users\mie\Desktop\amiechenn\jquery-2.1.3.min.js"></script>
+<style type="text/css">
+.pupil {
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: black;
+  position: relative;
+  margin-left: -10px;
+  left: 50px;
+  margin: 10px;
+}
+.container {
+  width: 80%;
+  min-height: 400px;
+  background-color: #ee3a4c;
+  overflow: auto;
+  display: block;
+  margin: 0 auto;
+  }
+</style>
+
+<body>
+<div class="container">
+<div class="pupil" style="top: 2px; left: 50px;"></div>
+</div>
+<script type="text/javascript">
+/*var rect = $(".eye").getBoundingClientRect();
+document.write(rect);*/
+var limitX = 100, limitY = 100;
+var containerW = $('.container').width();
+var containerH = $('.container').height();
+$( ".container" ).mousemove(function( e ) {
+  //var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+  //var clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+  var mouseY = Math.min(e.clientY/(containerH*.01), limitY);
+  var mouseX = Math.min(e.clientX/(containerW*.01), limitX);
+  $('.pupil').css('top', mouseY);
+  $('.pupil').css('left', mouseX);
+  console.log(e.clientY+'  '+e.clientX);
+});
+
+
+//this is better.....
+/*var mouseX = 0, mouseY = 0, limitX = 80-15, limitY = 80-15;
+$(".container" ).mousemove(function(e){
+   mouseX = Math.min(e.clientX, limitX);
+   mouseY = Math.min(e.clientY, limitY);
+});
+var xp = 0, yp = 0;
+var loop = setInterval(function(){
+    // change 12 to alter damping higher is slower
+    xp += (mouseX - xp) / 1;
+    yp += (mouseY - yp) / 1;
+    $('.pupil').css({left:xp, top:yp});
+    
+}, 30);*/
+
+
+</script>
+</body>
+</html>
