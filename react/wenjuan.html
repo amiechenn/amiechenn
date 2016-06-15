@@ -20,18 +20,18 @@ body{    font: 14px/1.5 '黑体';}
 <body>
 	<div id="box"></div>
    
-<script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js"></script>
 <script src="react.js"></script>
 <script src="react-dom.js"></script>
 <script src="browser.min.js"></script><!-- type=1(单选） 2（多选) 3（填空） -->
 <script  type="text/babel"> 
 	var listJson={
 		"object":[
-			{"item":["男","女","人妖"],"num":1, "required":1,"type":1,"qus":"性别"},
+			{"item":["男","女"],"num":1, "required":1,"type":1,"qus":"性别"},
 			{"item":["大","中","小"],"num":2, "required":1,"type":2,"qus":"体积"},
 			{"item":["喜欢","一般","不喜欢"],"num":3, "required":1,"type":1,"qus":"好感"},
-			{"item":[""],"num":4, "required":1,"type":3,"qus":"why？"}//,
-			//{"item":["170","160","150"],"num":5, "required":1,"type":2,"qus":"身高"}
+			{"item":["170","160","150"],"num":4, "required":1,"type":2,"qus":"身高"},
+			{"item":[""],"num":5, "required":1,"type":3,"qus":"why？"}
 		]
 	}
 	var checkarr = {} //初始化多选选项数据  存{1:{result：[false,...]},{isDone:flase}}
@@ -74,33 +74,6 @@ body{    font: 14px/1.5 '黑体';}
 		handlerItem:function(itemCheck){//itemCheck:itemques:{1:{isDone:true,result:1}}
 			var quesCheck = {}//所以答案
 			quesCheck = $.extend(this.state.questions,itemCheck)//第一种方法
-			// var  quesCheck = this.state.questions//第二种方法不行
-			// this.state.questions = itemCheck
-			//特殊规则
-			// var que1 = this.state.questions[1].result,
-			// 	que2 = this.state.questions[2].result,
-			// 	que3 = this.state.questions[3].result,
-			// 	queobj = this.state.questions
-			// if(que1==1 && que2[0] && que2[1]){//第一题选1第二题选23 第三题出现
-			// 	this.setState({showTtem3:true})
-
-			// 	 if(que3==3){//第三题选3 第四题出现
-			// 		this.setState({showTtem4:true})
-					
-			// 	}else{
-					
-			// 		this.state.questions[4] = {isDone:true,result:''}
-			// 		this.setState({showTtem4:false})
-			// 		this.setState({hideBtn:true})
-			// 	}
-			// }else{
-			// 	this.state.questions[3] = {isDone:true,result:''}
-			// 	this.state.questions[4] = {isDone:true,result:''}
-			// 	this.setState({questions:queobj})
-			// 	this.setState({showTtem3:false})
-			// 	this.setState({showTtem4:false})
-			// 	this.setState({hideBtn:true})
-			// }
 			this.setState({questions:quesCheck},function(){
 				for(var e in this.state.questions){
 					if(this.state.questions[e].isDone==false){
@@ -125,7 +98,7 @@ body{    font: 14px/1.5 '黑体';}
 						}else{
 							return(
 							<div className='item' className={item.num==this.state.error?'error item':'item'} key={i}>	
-							<p><strong>{i+1}、</strong>{item.qus}<small className={item.num==this.state.error?null:'hide'}>填写完成！</small></p>
+							<p><strong>{item.num}、</strong>{item.qus}<small className={item.num==this.state.error?null:'hide'}>填写完成！</small></p>
 								<FormItem listIndex={i} listType={item.type} listNum={item.num}  callbackParent={this.handlerItem}/>
 							</div>)
 						}						
