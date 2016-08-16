@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>广州e贷助力2015广州十公里路跑赛</title>
+
+
+<link rel="stylesheet" href="jquery.fancybox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://libs.useso.com/js/fancybox/2.1.5/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<div class="wrap">
+	<div class="header" id="header">
+		<div class="logo zt-icon"><a href="/"></a></div>
+		<div class="topbar">
+			<div class="nav" id="nav">
+				<div class="nav-item"><a class="zt-icon">首页</a></div>
+				<div class="nav-item"><a class="zt-icon">品牌宣传</a></div>
+				<div class="nav-item"><a class="zt-icon">媒体报道</a></div>
+				<div class="nav-item"><a class="zt-icon">嘉年华</a></div>
+				<div class="nav-item"><a class="zt-icon">花絮</a></div>
+			</div>
+			<div id="share" class="share">
+				<a class="share-item share01 zt-icon" ></a>
+				<div class="rcode" style="display: none;">
+                        <img src="images/wx-share.png" width="105" height="105">
+                </div>
+				<a class="share-item share02 zt-icon" name="sina"></a>
+				<a class="share-item share03 zt-icon" name="qzone"></a>
+				<a class="share-item share04 zt-icon" name="tqq"></a>
+			</div>			
+		</div>
+	</div>
+   <div class="main" id="main">
+   		<div class="slides" id="slides">
+   			<div class="slides-item slides-item01">
+   				<div class="slide-wrap">
+   					<div class="title">
+   						<img class="text-e" src="images/title.png">
+   						<img class="e" src="images/e.png">
+   					</div>
+   					<h1>广州e贷助力2015广州十公里路跑赛</h1>
+   					<div class="tips">
+   						<p><< ·  · · · · · · · · · · · · · · >></p>
+   						<p>滑动鼠标 或 按键盘左右键</p>
+   					</div>
+   				</div>
+   			</div>
+   			<div class="slides-item slides-item02">
+   				<div class="slide-wrap">
+   					<h2 class="zt-icon"></h2>
+					<div class="sort-box">
+						
+					</div>
+					<div style="display:none">
+						
+					</div>
+					<div class="sort-nav-left hide">
+						
+					</div>
+   				</div>
+   			</div>
+   			<div class="slides-item slides-item03">
+   				<div class="slide-wrap">
+					<h2 class="zt-icon"></h2>
+					<div class="links">
+					</div>
+   				</div>
+   			</div>
+   			<div class="slides-item slides-item04">
+   				<div class="slide-wrap">
+	   				<div><img src="images/bg-03.jpg"></div>
+	   				<div class="btn-box">
+	   					<div class="text">
+		   					<p>我在嘉年华，你在哪里？</p>
+		   					<small>观看相册 >></small>
+		   				</div>
+		   				<a class="btn btn01 fancybox-thumb" rel="photo01" href="images/carnival/carnival01.jpg">
+		   					<p></p>
+		   				</a>
+						<div style="display: none">
+							
+						</div>
+	   				</div>
+   				</div>
+   			</div>
+   			<div class="slides-item slides-item05">
+   				<div class="slide-wrap">
+   					<div><img src="images/bg-04.jpg"></div>
+   					<div class="btn-box">
+						<div class="text">
+		   					<p>盘点那些幽默的瞬间</p>
+		   					<small>观看相册 >></small>
+		   				</div>
+		   				<a class="btn btn02 fancybox-thumb" rel="photo02" href="images/hx/hx01.jpg">
+		   					<p></p>
+		   				</a>
+		   				
+		   			</div>
+   				</div>
+   			</div>
+   		</div>
+	</div> 
+	<div class="footer"><p>版权所有 © 2013-2015 广州e贷 All Rights Reserved | 广州易贷金融信息服务股份有限公司 | 备案号：粤ICP备14043720号</p></div>	
+</div>
+</body>
+
+<script src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+<script src="jquery.mousewheel.min.js"></script>
+<!-- <script src="http://libs.useso.com/js/fancybox/2.1.5/jquery.fancybox.pack.js"></script> -->
+<script src="jquery.fancybox.js"></script>
+<script src="http://libs.useso.com/js/fancybox/2.1.5/helpers/jquery.fancybox-thumbs.js"></script>
+<script src="jquery.touchSwipe.min.js"></script>
+<script >
+// zt模板
+var flag = true//fancybox打开后屏幕制止翻页
+$(document).ready(function() {
+	var JW={
+		main:$('#main'),
+		slides:$('#slides'),
+		slidesItem:$('.slides-item'),
+		slidesCurrentIndex:0,
+		scrolling:false,
+		resizing:null,
+		init:function(){
+			JW.slidesLen=JW.slidesItem.length;//滚动个数
+			JW.slidesInit();
+			$('.footer').show();
+			
+			//缩放窗口
+			$(window).resize(function(){
+				if(JW.resizing){
+					clearTimeout(JW.resizing);
+				}
+				JW.resizing=setTimeout(function(){
+					JW.slidesInit();
+					JW.slides.css({left:'-'+(JW.w*JW.slidesCurrentIndex)+'px'});//缩放之后滚动
+				},30);
+			});
+			//滚动
+			JW.main.mousewheel(function(event,delta){
+				if(delta>0 && JW.scrolling==false){//向右滚
+					JW.scrollItem(JW.slidesCurrentIndex,'prev');
+				}else if(delta<0 && JW.scrolling==false){//向左滚
+					JW.scrollItem(JW.slidesCurrentIndex,'next');
+				}
+				return false;//阻止默认动作
+			});
+			
+			//键盘
+			$(document).keyup(function(event){
+				switch(event.keyCode){
+					case 39:
+					case 40:
+						flag && JW.scrollItem(JW.slidesCurrentIndex,'next');
+						break;
+					case 37:
+					case 38:
+						flag && JW.scrollItem(JW.slidesCurrentIndex,'prev');
+						break;
+				}
+			});
+			//划屏
+			$(document).swipe({
+				swipeRight:function(){
+					if( flag==true && JW.scrolling==false){//向右滚
+						JW.scrollItem(JW.slidesCurrentIndex,'prev');
+					}
+					return;
+				},
+				swipeLeft:function(event,delta){
+					if(flag==true && JW.scrolling==false){//向左滚
+						JW.scrollItem(JW.slidesCurrentIndex,'next');
+					}
+					return;
+				},
+			});
+			
+			//导航
+			JW.navItems=$('#nav a');
+			JW.navItems.each(function(index, element) {
+                $(this).click(function(event){
+					JW.doScroll(index);
+					event.preventDefault();
+				});
+            });
+			
+			JW.header=$('#header');
+			JW.header.hide();
+			
+			//tab
+			JW.tabInit();
+			
+			//share
+			JW.shareInit();
+		},
+		slidesInit:function(){
+			var tempW=parseInt($(window).width());
+			var tempH=parseInt($(window).height()-40);//40是footer高度
+			JW.w=tempW-1000>0?tempW:1000;//窗口宽度
+			JW.h=tempH-550>0?tempH:550;//主要区域高度
+			JW.main.height(JW.h).show();//main高度
+			JW.slides.width(JW.w*JW.slidesLen);//滚动区域宽度
+			JW.slidesItem.width(JW.w).height(JW.h);//每屏的尺寸
+			JW.slidesItem.eq(0).addClass('current');
+		},
+		scrollItem:function(n,direction){
+			if(direction=='next'){//向左滚动
+				n++;
+				if(n>JW.slidesLen-1){
+					n=JW.slidesLen-1
+				}
+			} else {
+				n--;
+				if(n<0){
+					n=0;
+				}
+			}
+			JW.doScroll(n);
+		},
+		doScroll:function(n){
+				JW.scrolling=true;//正在滚动
+				var left=JW.w*n;
+				JW.slidesItem.removeClass('current').eq(n).addClass('current');
+				JW.slides.animate({left:'-'+left+'px'},function(){
+					JW.scrolling=false;
+				});
+				
+				//更新导航
+				JW.navItems.removeClass('current');
+				JW.navItems.eq(n).addClass('current');
+				if(n!=0){
+					JW.header.fadeIn('fast');
+				} else{
+					JW.header.fadeOut('fast');
+				}
+				JW.slidesCurrentIndex=n;//更新当前序号
+		},
+		tabInit:function(){
+			JW.tabs=$('.tab');
+			JW.tab(JW.tabs.eq(0));
+			JW.tab(JW.tabs.eq(1));
+		},
+		tab:function(root){
+			var tabNavs=$('.navitem',root);
+			var tabContents=$('.slide-links-item',root);
+			var currentIndex=0;
+			
+			//默认显示第一个
+			tabNavs.eq(0).addClass('current');
+			JW.tabShowItem(tabContents,0);
+			
+			
+			tabNavs.each(function(index) {
+                $(this).click(function(event){
+					tabNavs.removeClass('current');
+					tabNavs.eq(index).addClass('current');
+					JW.tabShowItem(tabContents,index);
+				});
+            });
+			
+		},
+		tabShowItem:function(obj,n){
+			obj.removeClass('current').hide();
+			obj.eq(n).addClass('current').show();
+		},
+		shareInit:function(){
+			//分享到微信
+			$('.share01').hover(function(){
+				$('.rcode').fadeIn();
+			},function(){
+				$('.rcode').fadeOut();
+			});
+			
+		var shareT=document.title;
+		var shareUrl=window.location.href;
+		var shareImg='http://www.gzdai.com/special/20150516-zt/images/shareImg.jpg';//
+			
+		$('#share a').click(function(event){
+			switch(event.target.name){
+				case 'sina':
+					JW.shareTo('tsina',shareT,shareUrl,shareImg);
+					break;
+				case 'tqq':
+					JW.shareTo('tqq',shareT,shareUrl,shareImg);
+					break;
+				case 'qzone':
+					JW.shareTo('qzone',shareT,shareUrl,shareImg);
+					break;
+			}
+			event.preventDefault();
+			
+		});
+			
+			
+		},
+		shareTo:function(target,title,url,imgurl){
+				window.open("http://s.jiathis.com/?webid="+target+"&url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(title) + "&uid=1626433&jid=1344496797938582&pic="+encodeURIComponent(imgurl) , "腾讯网ishare", "height=600, width=560,toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,status=no,top=200,left=200");
+		}
+	}
+	JW.init();
+});
+
+
+$(document).ready(function() {
+	//fancybox
+	$(".fancybox-thumb").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+		helpers	: {
+			thumbs	: {
+				width	: 100,
+				height	: 100
+			}
+		},
+		afterClose :function(){$(".sort-nav-left").addClass("hide"); flag = true},
+		afterShow  :function(){$(".sort-nav-left").removeClass("hide"); flag = false}
+	});
+	//侧边栏颜色切换
+	var sidebar = $('.sort-nav-left .sort')
+	$('.sort').on('click',function(){
+		var index = $(this).index()
+		sidebar.eq(index).removeClass('bg-transparent').siblings().addClass('bg-transparent')
+	})
+	//判断屏幕高度
+	var bodyH = $(window).height()
+	if(bodyH<610){
+		$("body").addClass("min-height")
+	}else{
+		$("body").removeClass("min-height")
+	};
+
+
+});
+
+</script>
+</html>

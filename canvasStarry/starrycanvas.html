@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Canvas tutorial</title>
+    <style type="text/css">
+    body{background-color: #000;overflow: hidden; }
+      #canvas { }
+      img{position: absolute;top: 50%;left: 50%;width: 200px;margin-left: -100px;transform: rotate(20deg);animation: myfirst 1s linear alternate infinite;}
+      @keyframes myfirst
+        {
+        0%   {transform: translate(0px,5px);}
+        100% {transform: translate(0px,0);}
+        }*/
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script src="http://libs.useso.com/js/jquery/2.1.0/jquery.min.js"></script>
+    <script src="jquery.starrycanvas.js"></script>
+    <script>
+        $("#canvas").starrycanvas({
+           'starAmount':400,
+           'backRange' : ""
+        })
+    </script>
+  </body>
+
+</html>
