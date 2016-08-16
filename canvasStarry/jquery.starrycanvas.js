@@ -3,10 +3,10 @@
     可输入参数
     'startSpeed' : 0.5,  //*开始移动速度、后面递增
     'increase' : 0.01,  //*加速度递增值，0则为匀速
-    'r' : 1,  //*star半径
+    'size' : 1,  //*star半径
     'starAmount' : 100,//*star数量
     'starFlash' : 'darkToLight',//*star "glitter"闪烁效果 默认"darkToLight" 由暗到亮
-    'backRange' : '' //*以鼠标为中心的的正方形范围--r空为整屏范围
+    'backRange' : '0' //*以鼠标为中心的的正方形范围--r '0'整屏范围
 */
 
 ;(function ($) {
@@ -59,7 +59,7 @@
         //溢出屏幕后重现范围
         var getBackRange = function(backRange){
             var range = {}
-            if (backRange == '') {
+            if (backRange == 0) {
                 range.starX =  Math.random()* canvas_width
                 range.starY =  Math.random()* canvas_height
             }else{
@@ -76,14 +76,14 @@
                 'starY' : Math.random()*canvas_height,  //开始坐标随机
                 'startSpeed' : 0.5,  //*开始移动速度、后面递增
                 'increase' : 0.01,  //*加速度递增值，0则为匀速
-                'r' : 1,  //*star半径
+                'size' : 1,  //*star半径
                 'sAngle' : 0,  //画圆的参数
                 'eAngle' : 2*Math.PI,  //画圆的参数
                 'opacity' : 0,  //透明度
                 'opacitySel' : 0 ,//0+；1-判断变暗变亮 flashStyle()使用
                 'starAmount' : 100,//*star数量
                 'starFlash' : 'darkToLight',//*star "glitter"闪烁效果 默认"darkToLight" 由暗到亮
-                'backRange' : '' //*以鼠标为中心的的正方形范围--r空为整屏范围
+                'backRange' : '0' //*以鼠标为中心的的正方形范围--'0'整屏范围
             }
             index++
             stars[index] = this
@@ -113,7 +113,7 @@
             options.opacitySel = flash.opacitySel
             
             ctx.beginPath();
-            ctx.arc(options.starX,options.starY,options.r,options.sAngle,options.eAngle);
+            ctx.arc(options.starX,options.starY,options.size,options.sAngle,options.eAngle);
             ctx.fillStyle = 'rgba(255,255,255,'+ options.opacity +')';
             ctx.fill();
         }
