@@ -2,9 +2,9 @@
 /*
     可输入参数
     'startSpeed' : 0.5,  //*开始移动速度、后面递增
-    'increase' : 0.01,  //*加速度递增值，0则为匀速
+    'increase' : 0.03,  //*加速度递增值，0则为匀速
     'size' : 1,  //*star半径
-    'starAmount' : 100,//*star数量
+    'starAmount' : 300,//*star数量
     'starFlash' : 'darkToLight',//*star "glitter"闪烁效果 默认"darkToLight" 由暗到亮
     'backRange' : '0' //*以鼠标为中心的的正方形范围--r '0'整屏范围
 */
@@ -75,13 +75,13 @@
                 'starX' : Math.random()*canvas_width,  //开始坐标随机
                 'starY' : Math.random()*canvas_height,  //开始坐标随机
                 'startSpeed' : 0.5,  //*开始移动速度、后面递增
-                'increase' : 0.01,  //*加速度递增值，0则为匀速
+                'increase' : 0.03,  //*加速度递增值，0则为匀速
                 'size' : 1,  //*star半径
                 'sAngle' : 0,  //画圆的参数
                 'eAngle' : 2*Math.PI,  //画圆的参数
                 'opacity' : 0,  //透明度
                 'opacitySel' : 0 ,//0+；1-判断变暗变亮 flashStyle()使用
-                'starAmount' : 100,//*star数量
+                'starAmount' : 300,//*star数量
                 'starFlash' : 'darkToLight',//*star "glitter"闪烁效果 默认"darkToLight" 由暗到亮
                 'backRange' : '0' //*以鼠标为中心的的正方形范围--'0'整屏范围
             }

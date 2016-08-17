@@ -27,10 +27,10 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
 </head>
 <body>
 	<div class="wrapper">
-	<h2>产品满意度调查问卷<p>感谢参与本次活动调查！1、2、3为必填哦！</p></h2>
+	<h2>产品满意度调查问卷<p>感谢参与本次活动调查！</p></h2>
 		<div id="box" class="box"></div>
    	</div>
-<script src="http://libs.useso.com/js/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js"></script>
 <script src="react.js"></script>
 <script src="react-dom.js"></script>
 <script src="browser.min.js"></script><!-- type=1(单选） 2（多选) 3（填空） -->
@@ -40,8 +40,8 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
 			{"item":["男","女"],"num":1, "required":1,"type":1,"qus":"性别？"},
 			{"item":["25以下","26~35","36~45","46~55",'56以上'],"num":2, "required":1,"type":1,"qus":"您的年龄在什么范围内？"},
 			{"item":["少于一年","1~2年","3年以上"],"num":3, "required":1,"type":1,"qus":"您投资了我们产品多久？"},
-			{"item":["电脑网页版","手机网页版","APP"],"num":5, "required":1,"type":2,"qus":"您主要使用哪种平台投资？"},
-			{"item":[""],"num":4, "required":1,"type":3,"qus":"对我们平台有何建议？"}
+			{"item":["电脑网页版","手机网页版","APP"],"num":4, "required":1,"type":2,"qus":"您主要使用哪种平台投资？"},
+			{"item":[""],"num":5, "required":1,"type":3,"qus":"对我们平台有何建议？"}
 		]
 	}
 	var checkarr = {} //初始化多选选项数据  存{1:{result：[false,...]},{isDone:flase}}
@@ -84,33 +84,33 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
 		handlerItem:function(itemCheck){//itemCheck:itemques:{1:{isDone:true,result:1}}
 			var quesCheck = {}//所以答案
 			quesCheck = $.extend(this.state.questions,itemCheck)//第一种方法
-			// var  quesCheck = this.state.questions//第二种方法不行
-			// this.state.questions = itemCheck
-			//特殊规则
-			// var que1 = this.state.questions[1].result,
-			// 	que2 = this.state.questions[2].result,
-			// 	que3 = this.state.questions[3].result,
-			// 	queobj = this.state.questions
-			// if(que1==1 && que2[0] && que2[1]){//第一题选1第二题选23 第三题出现
-			// 	this.setState({showTtem3:true})
+			/*var  quesCheck = this.state.questions//第二种方法不行
+			this.state.questions = itemCheck
+			特殊规则
+			var que1 = this.state.questions[1].result,
+				que2 = this.state.questions[2].result,
+				que3 = this.state.questions[3].result,
+				queobj = this.state.questions
+			if(que1==1 && que2[0] && que2[1]){//第一题选1第二题选23 第三题出现
+				this.setState({showTtem3:true})
 
-			// 	 if(que3==3){//第三题选3 第四题出现
-			// 		this.setState({showTtem4:true})
+				 if(que3==3){//第三题选3 第四题出现
+					this.setState({showTtem4:true})
 					
-			// 	}else{
+				}else{
 					
-			// 		this.state.questions[4] = {isDone:true,result:''}
-			// 		this.setState({showTtem4:false})
-			// 		this.setState({hideBtn:true})
-			// 	}
-			// }else{
-			// 	this.state.questions[3] = {isDone:true,result:''}
-			// 	this.state.questions[4] = {isDone:true,result:''}
-			// 	this.setState({questions:queobj})
-			// 	this.setState({showTtem3:false})
-			// 	this.setState({showTtem4:false})
-			// 	this.setState({hideBtn:true})
-			// }
+					this.state.questions[4] = {isDone:true,result:''}
+					this.setState({showTtem4:false})
+					this.setState({hideBtn:true})
+				}
+			}else{
+				this.state.questions[3] = {isDone:true,result:''}
+				this.state.questions[4] = {isDone:true,result:''}
+				this.setState({questions:queobj})
+				this.setState({showTtem3:false})
+				this.setState({showTtem4:false})
+				this.setState({hideBtn:true})
+			}*/
 			this.setState({questions:quesCheck},function(){
 				for(var e in this.state.questions){
 					if(this.state.questions[e].isDone==false){
@@ -139,8 +139,7 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
 							</div>)
 						}						
 					}, this)}
-					<input type="submit" value="提 交" className="btn" disabled={this.state.hideBtn} id="ok"/>
-					<p id="oko">ok</p>
+					<input type="button" value="提 交" className="btn" disabled={this.state.hideBtn} id="send"/>
 			    </form>				
 			);
 		}
@@ -202,8 +201,8 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
 			            <li key={i} onChange={this.handlerItemsel.bind(this,i+1)}>
 
 			            {this.props.listType==3? <textarea name={this.props.listNum} defaultValue={item}></textarea> :
-							<div><input type={this.state.type} name={this.props.listNum} defaultValue={item}/>
-								<span><b>{i+1}）</b><span>{item}</span></span></div>
+							<div><input type={this.state.type} name={this.props.listNum} defaultValue={item} />
+								<label><b>{i+1}）</b><span>{item}</span></label></div>
 						}
 						</li>
 			          );
@@ -220,11 +219,10 @@ textarea{width: 100%;height: 150px;font-size: 18px;line-height: 25px;}
       document.getElementById('box')
     );
 	
-	$("#oko").on("click",function(){
+	$("#send").on("click",function(){
 		console.log(checkarr)
-		alert(checkarr)
+		alert("提交成功！可在console查看输出数据哦！")
 	})
-	
 
 
 </script>

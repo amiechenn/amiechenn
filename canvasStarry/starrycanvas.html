@@ -10,21 +10,23 @@
     input{border: none;line-height: 20px;padding-left: 10px;border-radius: 3px;}
     .btn{width: 80%;text-align: center;background-color: rgba(0,82,156,1);line-height: 30px;border-radius: 3px;margin:auto;margin-top: 15px;cursor: pointer;}
     .btn:hover{background-color: rgba(0,82,156,.5)}
+    p{text-align: center;}
     </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
         <div class="box" id="box">
             <ul>
-                <li><span>星星数量</span><input type="text" value="100" id="starAmount"></li>
-                <li><span>星星开始速度</span><input type="text" value="0.5" id="startSpeed"></li>
-                <li><span>星星加速度</span><input type="text" value="0.01" id="increase"></li>
-                <li><span>星星半径</span><input type="text" value="1" id="size"></li>
+                <p>以鼠标为中心发散的星星<br>移动鼠标，星星会跑开哦</p>
+                <li><span>星星数量</span><input type="text" value="" id="starAmount" placeholder="建议值100-500，默认300"></li>
+                <li><span>星星开始速度</span><input type="text" value="" id="startSpeed" placeholder="建议值0.1-2，默认0.5"></li>
+                <li><span>星星加速度</span><input type="text" value="" id="increase" placeholder="建议值0.01-0.5，默认0.03"></li>
+                <li><span>星星半径</span><input type="text" value="" id="size" placeholder="建议值1-5，默认1"></li>
                 <li id="starFlash"><span>星星透明效果</span>
                     <input type="radio" name="flash" value="darkToLight" checked>darkToLight
                     <input type="radio" name="flash" value="glitter">glitter
                 </li>
-                <li><span>星星发出范围</span><input type="text" value="0" id="backRange"></li>                
+                <li><span>星星发出范围</span><input type="text" value="" id="backRange" placeholder="建议值0-200，默认0，0为整屏"></li>                
             </ul>
             <div class="btn" id="btn">渲染生成</div>
         </div>
@@ -38,7 +40,12 @@
                 var increase = parseFloat($("#increase").val())
                 var size = parseInt($("#size").val())
                 var starFlash = $("#starFlash input:checked").val()
-                var backRange = parseInt($("#backRange").val()) 
+                var backRange = parseInt($("#backRange").val())
+                starAmount = isNaN(starAmount) ? 300 : starAmount
+                startSpeed = isNaN(startSpeed) ? 0.5 : startSpeed
+                increase = isNaN(increase) ? 0.03 : increase
+                size = isNaN(size) ? 1: size
+                backRange = isNaN(backRange) ? 0 : backRange
                 $("#canvas").starrycanvas({
                    'starAmount':starAmount,
                    'startSpeed':startSpeed,
