@@ -9,37 +9,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no">
 <link href="" rel="stylesheet">
 <style>
-    body{font: 12px/1.5 'microsoft yahei', Tahoma;}
-	ul{width: 320px;list-style-type: none;padding: 0;margin: auto;}
-    ul:after{ content: "";display: table;clear: both;  }
-	li{width: 78px;height: 78px;float: left;border: 1px solid #ccc;font-size: 30px;text-align: center;cursor: pointer;padding-top: 15px;box-sizing: border-box;}
-    .time{background-color: #fa7600;width: 150px;line-height: 40px;border-radius: 3px;font-size: 20px;color: #fff;margin:auto;margin-top: 10px;text-align: center;}
+    body{font: 12px/1.5 'microsoft yahei', Tahoma;background-color: #ffd573;margin: 0;padding-top: 2rem;}
+    a{text-decoration: none;}
+	ul{width: 312px;list-style-type: none;padding: 0;margin: auto;transform: perspective(500px); -webkit-transform: perspective(500px);perspective-origin: 50% 50%; -webkit-perspective-origin: 50% 50%; transform-style: preserve-3d;-webkit-transform-style: preserve-3d;margin-bottom: 2rem;}
+    ul:after{ content: "";display: table;clear: both; }
+	li{width: 78px;height: 78px;float: left;border: 1px solid #ffb040;font-size: 30px;text-align: center;cursor: pointer;padding-top: 15px;box-sizing: border-box;border-radius: 8px;}
+    .time{background-color: #fa7600;width: 150px;line-height: 40px;border-radius: 5px;font-size: 20px;color: #fff;margin:auto;margin-top: 10px;text-align: center;border-bottom: 4px solid #da7316;}
+    .img0{background: url(img/0.jpg) no-repeat;}
+    .img1{background: url(img/1.jpg) no-repeat;}
+    .img2{background: url(img/2.jpg) no-repeat;}
+    .img3{background: url(img/3.jpg) no-repeat;}
+    .img4{background: url(img/4.jpg) no-repeat;}
+    .img5{background: url(img/5.jpg) no-repeat;}
+    .img6{background: url(img/6.jpg) no-repeat;}
+    .img7{background: url(img/7.jpg) no-repeat;}
+    .img0, .img1, .img2, .img3, .img4, .img5, .img6, .img7{background-size: 100%;animation: img 1.2s;-webkit-animation: img 1.2s;}
+    .imgbg{background: url(img/bg.jpg) no-repeat;background-size: 100%;backface-visibility:hidden;animation: imgbg .5s;-webkit-animation: imgbg .5s;}
+    @keyframes img
+    {
+       0% {transform: rotateY(90deg);-webkit-transform: rotateY(90deg);}
+        50% {transform: rotateY(0deg);-webkit-transform: rotateY(0deg);}
+        60% {transform: rotateY(0deg);-webkit-transform: rotateY(0deg);}
+        100% {transform: rotateY(90deg);-webkit-transform: rotateY(90deg);}
+    }
+    @keyframes imgbg
+    {
+        from {transform: rotateY(-90deg);-webkit-transform: rotateY(-90deg);}
+        to {transform: rotateY(0deg);-webkit-transform: rotateY(0deg);}
+    }
+    .overlay{position: fixed;top: 0;left: 0;width: 100%;height: 100%;}
+    .overlay-bg{width: 100%;height: 100%;background-color: rgba(0,0,0,.6);}
+    .content{position: absolute;top: 50%;left: 50%;width: 230px;margin-left: -115px;margin-top: -54px;background-color: #fff;border:1px solid #dfdfdf;border-radius:15px;font-size: 18px;animation: fade .5s;}
+    .content p{text-align: center;margin:1.2rem 0;}
+    .content a{display: block;border-top: 1px solid #dfdfdf;width: 100%;text-align: center;line-height: 40px;}
+    @keyframes fade
+    {
+       0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
 </style>
 </head>
 <body>
  	<ul id="box">
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
- 		<li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
-        <li>?</li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+ 		<li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
+        <li class="imgbg"></li>
  	</ul>
     <div class="time">倒计时：<span id="time" >60</span></div>
-	<script src="https://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js"></script>
+    <div class="overlay" id="overlay" style="display: none;">
+        <div class="overlay-bg"></div>
+        <div class="content">
+            <p id="text"></p>
+            <a href="javascript:;" id="close">好</a>
+        </div>
+    </div>
+	<script src="jquery-2.1.3.min.js"></script>
     <script>
     	$(function(){
-            var count //到机时
+            var count //倒计时
+            var countdown_start = 0 //倒计时 1：开始 0：未开始
             var game = function(){
                 var arr = [], //初始化数组
                     arr2 =[], //随机数组
@@ -73,37 +114,47 @@
                 }
                 /*生成随机数组*/
                 arr2 = arr.sort(randomsort);
+                
                 /*点击事件+判断*/
                 $("#box").find("li").on('click',function(){
                     if(canClick == 1){/*判断是否为可点击期间*/
                         /*查找对应格子对应的对象*/
+                        var _this = $(this)//setTimeout 的this指向window，所以要设置变量存贮当前this
                         var index = $(this).index()
                         var value = arr2[index].options.value
                         var click = arr2[index].options.click
+                        console.log(value)
                         /*判断是否可点击对象*/
                         if(click == 1){
                             canClick = 0
-                            $(this).text(value)
+                            $(this).removeClass("imgbg").addClass('img'+value)
                             arr2[index].options.click = 0 //点击后下一次为不可点击
                             t = setTimeout(function(){
-                                $("#box").find("li").eq(index).text("?")//1秒后恢复隐藏
+                                $("#box").find("li").eq(index).removeClass('img'+value).addClass("imgbg")//1秒后恢复隐藏
                                 canClick = 1//1秒后开启点击
-                            },500)
+                            },1000)
                             if(value == first.value){//判断正确
                                 clearTimeout(t)//禁止恢复隐藏
-                                canClick = 1//判断正常马上可以继续点击下一个
-                                $(this).text('')
-                                $("#box").find("li").eq(first.index).text('')
                                 /*正确对象属性设置为不可点击*/
                                 arr2[index].options.click = 0
                                 arr2[first.index].options.click = 0
-                                first.value = null
-                                first.index = null
-                                rightNum++
-                                if(rightNum == 8){
-                                    alert("恭喜，过关！")
-                                    clearTimeout(count)
-                                }
+                                canClick = 0//展示过程全部中不可点击
+                                
+                                $("#box").find("li").eq(first.index).removeClass("imgbg").addClass('img'+first.value)//展示正确对象
+                                setTimeout(function(){
+                                    $(_this).removeClass('img'+value)
+                                    $("#box").find("li").eq(first.index).removeClass('img'+first.value)
+                                    first.value = null
+                                    first.index = null
+                                    rightNum++
+                                    if(rightNum == 8){
+                                        $("#overlay").show()
+                                        $("#text").text("恭喜，过关！")
+                                        clearTimeout(count)
+                                    }
+                                    canClick = 1
+                                },1000)
+                                
                             }else{
                                 first.index != null ? arr2[first.index].options.click = 1: null
                                 first.value = value
@@ -117,19 +168,31 @@
             game()
 
             var time = function(){
-                var countdown = 60
+                var countdown = 30
                   count= setInterval(function(){
                     if(countdown == 0){
                          clearTimeout(count)
-                         alert('时间到~弱爆了~')
+                         $("#overlay").show()
+                         $("#text").text("时间到~弱爆了~")
                     }else{
                         countdown--
                         $("#time").text(countdown)
                     }
                 },1000)
             }
-            $("#box").one('click',function(){
-                time()
+            $("#box").on('click',function(){
+                if(countdown_start == 0){
+                    time()
+                    countdown_start = 1
+                }
+                
+            })
+            $("#close").on('click',function(){
+                $("#time").text('60')
+                $("#box").find("li").addClass('imgbg')
+                game()
+                countdown_start = 0
+                $("#overlay").hide()
             })
 
     	})
