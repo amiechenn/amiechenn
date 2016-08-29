@@ -81,6 +81,20 @@
 	<script src="https://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js""></script>
     <script>
     	$(function(){
+            //图片预加载
+            function preLoadImg(url) { 
+                var img = new Image(); 
+                img.src = url; 
+            } 
+            preLoadImg('img/0.jpg')
+            preLoadImg('img/1.jpg')
+            preLoadImg('img/2.jpg')
+            preLoadImg('img/3.jpg')
+            preLoadImg('img/4.jpg')
+            preLoadImg('img/5.jpg')
+            preLoadImg('img/6.jpg')
+            preLoadImg('img/7.jpg')
+            
             var count //倒计时
             var countdown_start = 0 //倒计时 1：开始 0：未开始
             var  fanpai = function(){
@@ -201,19 +215,7 @@
                 $("#overlay").hide()
             })
            
-            //图片预加载
-            function preLoadImg(url) { 
-                var img = new Image(); 
-                img.src = url; 
-            } 
-            preLoadImg('img/0.jpg')
-            preLoadImg('img/1.jpg')
-            preLoadImg('img/2.jpg')
-            preLoadImg('img/3.jpg')
-            preLoadImg('img/4.jpg')
-            preLoadImg('img/5.jpg')
-            preLoadImg('img/6.jpg')
-            preLoadImg('img/7.jpg')
+            
 
             var fan = new fanpai()
             fan.game()
