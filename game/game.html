@@ -200,9 +200,23 @@
                 countdown_start = 0
                 $("#overlay").hide()
             })
+           
+            //图片预加载
+            function preLoadImg(url) { 
+                var img = new Image(); 
+                img.src = url; 
+            } 
+            preLoadImg('img/0.jpg')
+            preLoadImg('img/1.jpg')
+            preLoadImg('img/2.jpg')
+            preLoadImg('img/3.jpg')
+            preLoadImg('img/4.jpg')
+            preLoadImg('img/5.jpg')
+            preLoadImg('img/6.jpg')
+            preLoadImg('img/7.jpg')
+
             var fan = new fanpai()
             fan.game()
-
     	})
 
 
