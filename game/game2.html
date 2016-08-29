@@ -47,7 +47,7 @@
        0% {opacity: 0;}
         100% {opacity: 1;}
     }
-    .tips{font-size: 12px;position: absolute;bottom: 0;text-align: center;width: 100%;}
+    .tips{font-size: 12px;position: absolute;bottom: 0;}
 </style>
 </head>
 <body>
@@ -80,25 +80,28 @@
     </div>
 	<script src="https://amiechenn.github.io/amiechenn/jquery-2.1.3.min.js""></script>
     <script>
+    // 第一版非面向对象设计
     	$(function(){
             var count //倒计时
             var countdown_start = 0 //倒计时 1：开始 0：未开始
-            var  fanpai = function(){
-                this.canClick = 1, //1:全部可点击，0为全部可以点击，在翻转为？前使用
-                this.rightNum = 0, //消除数目
-                this.first = {},//上一个点击对象容器
+            var game = function(){
+                var arr = [], //初始化数组
+                    arr2 =[], //随机数组
+                    index =0, //数组序号
+                    canClick = 1, //1:全部可点击，0为全部可以点击，在翻转为？前使用
+                    rightNum = 0, //消除数目
+                    first = {}//上一个点击对象容器
 
-                this.first.value = null,
-                this.first.index = null
-                var _arr = [],_arr2 = [],_index = 0
-                function obj(el, options){//每格对象
+                    first.value = null
+                    first.index = null
+        		function obj(el, options){//每格对象
                     this.$element = el,
                     this.defaults = {
                         'click' : 1,//
                         'value' : '?'
                     }
-                    _index++
-                    _arr[_index] = this//生成有序数组
+                    index++
+                    arr[index] = this//生成有序数组
                     this.options = $.extend({}, this.defaults, options)
                 }
                 /*初始化每格对象*/
@@ -113,65 +116,60 @@
                     //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
                 }
                 /*生成随机数组*/
-                _arr2 = _arr.sort(randomsort);
-                this.arr = _arr,
-                this.arr2 = _arr2,
-                this.index = _index //数组序号
-
-            } 
-           
-            fanpai.prototype.game = function(){   
+                arr2 = arr.sort(randomsort);
+                
                 /*点击事件+判断*/
-                var _this = this
                 $("#box").find("li").on('click',function(){
-                    if(_this.canClick == 1){/*判断是否为可点击期间*/
+                    if(canClick == 1){/*判断是否为可点击期间*/
                         /*查找对应格子对应的对象*/
-                        var this_ = $(this)//setTimeout 的this指向window，所以要设置变量存贮当前this
+                        var _this = $(this)//setTimeout 的this指向window，所以要设置变量存贮当前this
                         var index = $(this).index()
-                        var value = _this.arr2[index].options.value
-                        var click = _this.arr2[index].options.click
+                        var value = arr2[index].options.value
+                        var click = arr2[index].options.click
+                        console.log(value)
                         /*判断是否可点击对象*/
                         if(click == 1){
-                            _this.canClick = 0
-                            $(this_).removeClass("imgbg").addClass('img'+value)
-                            _this.arr2[index].options.click = 0 //点击后下一次为不可点击
+                            canClick = 0
+                            $(this).removeClass("imgbg").addClass('img'+value)
+                            arr2[index].options.click = 0 //点击后下一次为不可点击
                             t = setTimeout(function(){
-                                $(this_).removeClass('img'+value).addClass("imgbg")//1秒后恢复隐藏
-                                _this.canClick = 1//1秒后开启点击
+                               $(_this).removeClass('img'+value).addClass("imgbg")//1秒后恢复隐藏
+                                canClick = 1//1秒后开启点击
                             },1000)
-                            if(value == _this.first.value){//判断正确
+                            if(value == first.value){//判断正确
                                 clearTimeout(t)//禁止恢复隐藏
                                 /*正确对象属性设置为不可点击*/
-                                _this.arr2[index].options.click = 0
-                                _this.arr2[_this.first.index].options.click = 0
-                                _this.canClick = 0//展示过程全部中不可点击
+                                arr2[index].options.click = 0
+                                arr2[first.index].options.click = 0
+                                canClick = 0//展示过程全部中不可点击
                                 
-                                $("#box").find("li").eq(_this.first.index).removeClass("imgbg").addClass('img'+_this.first.value)//展示正确对象
+                                $("#box").find("li").eq(first.index).removeClass("imgbg").addClass('img'+first.value)//展示正确对象
                                 setTimeout(function(){
-                                    $(this_).removeClass('img'+value)
-                                    $("#box").find("li").eq(_this.first.index).removeClass('img'+_this.first.value)
-                                    _this.first.value = null
-                                    _this.first.index = null
-                                    _this.rightNum++
-                                    if(_this.rightNum == 8){
+                                    $(_this).removeClass('img'+value)
+                                    $("#box").find("li").eq(first.index).removeClass('img'+first.value)
+                                    first.value = null
+                                    first.index = null
+                                    rightNum++
+                                    if(rightNum == 8){
                                         $("#overlay").show()
                                         $("#text").text("恭喜，过关！")
                                         clearTimeout(count)
                                     }
-                                    _this.canClick = 1
+                                    canClick = 1
                                 },1000)
                                 
                             }else{
-                                _this.first.index != null ? _this.arr2[_this.first.index].options.click = 1: null
-                                _this.first.value = value
-                                _this.first.index = index
+                                first.index != null ? arr2[first.index].options.click = 1: null
+                                first.value = value
+                                first.index = index
                             }
                         }
                     }
                 })
 
             }
-           
+            game()
+
             var time = function(){
                 var countdown = 60
                   count= setInterval(function(){
@@ -190,18 +188,16 @@
                     time()
                     countdown_start = 1
                 }
+                
             })
             $("#close").on('click',function(){
                 $("#time").text('60')
                 $("#box").find("li").addClass('imgbg')
                 $("#box").find("li").unbind('click')
-                fan = new fanpai()
-                fan.game()
+                game()
                 countdown_start = 0
                 $("#overlay").hide()
             })
-            var fan = new fanpai()
-            fan.game()
 
     	})
 
