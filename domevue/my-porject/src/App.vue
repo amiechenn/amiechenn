@@ -92,7 +92,7 @@ a{
     background-color: #fff;
     border-radius: 3px;
     position: absolute;
-    bottom: 10px;
+    bottom: 0.2rem;
     left: 50%;
     width: 95%;
     margin-left: -47.5%;
@@ -100,30 +100,29 @@ a{
     overflow: hidden;
     opacity: 1;
     h2{
-	    font-size: 12px;
+	    font-size: .24rem;
 	    color: #C0BFBF;
 	    border-bottom: 1px solid #e2e2e2;
-	    padding: 10px;
+	    padding: .2rem;
 	  }
     ul{
-      padding: 0 10px;
+      padding: 0 0.2rem;
     }
     li{
-      line-height: 30px;
+      line-height: .9rem;
       text-transform:capitalize;
     }
     i{
       color: #C0BFBF;
       display: inline-block;
-      padding-right: 10px;
     }
     span{
       text-align: center;
       display: block;
       background-color: #f5f5f5;
-      padding: 10px;
       font-weight: 600;
       color: #C0BFBF;
+      line-height: .7rem;
     }
   }
 }

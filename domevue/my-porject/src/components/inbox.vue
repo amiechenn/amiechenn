@@ -3,9 +3,9 @@
     <footerbar></footerbar>
     <div>
     	<ul class="top">
-    		<li class="writer left">✎</li>
+    		<li class="writer left"></li>
 				<li class="title">Inbox</li>
-				<li class="set right">☑</li>
+				<li class="set right"></li>
 			</ul>
 			<ul class="nav">
 				<li v-on:click="toggleTabs('tab1',1)" :class="{active:active==1}">messages</li>
@@ -66,7 +66,7 @@ export default {
 <style scoped lang="less">
 .nav{
   background-color: #fff;
-  line-height: 40px;
+  line-height: 0.8rem;
   text-transform: capitalize;
   border-bottom: 1px solid #e2e2e2;
   li{

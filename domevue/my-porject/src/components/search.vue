@@ -22,15 +22,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .search{
-	padding: 10px;
+	padding: 0.2rem;
   background-color: #fff;
 }
 input{
 	background-color: #EFEFED;
 	width: 100%;
 	border:none;
-	padding-left: 5px;
+	padding-left: 0.1rem;
 	box-sizing: border-box;
 	outline: none;
+  line-height: 0.6rem;
 }
 </style>

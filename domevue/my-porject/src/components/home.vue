@@ -53,10 +53,10 @@
         <div class="box">
           <h2>SORT POSTS BY:</h2>
            <ul>
-            <li><i>☁</i>Hot</li>
-            <li><i>☁</i>New</li>
-            <li><i>☁</i>Top</li>
-            <li><i>☁</i>Controversial</li>
+            <li><i class="icon icon-9"></i>Hot</li>
+            <li><i class="icon icon-9"></i>New</li>
+            <li><i class="icon icon-9"></i>Top</li>
+            <li><i class="icon icon-9"></i>Controversial</li>
           </ul>
           <span  v-on:click="sortShow = !sortShow">CLOSE</span>
         </div>
@@ -69,9 +69,9 @@
       <div class="overlay-bg" v-on:click="moreShow = !moreShow"></div>
         <div class="box">
            <ul>
-            <li><i>☁</i>save</li>
-            <li><i>☁</i>hide</li>
-            <li><i>☁</i>report</li>
+            <li><i class="icon icon-9"></i>save</li>
+            <li><i class="icon icon-9"></i>hide</li>
+            <li><i class="icon icon-9"></i>report</li>
           </ul>
           <span v-on:click="moreShow = !moreShow">CLOSE</span>
         </div>
@@ -157,19 +157,13 @@ h1{
     border-left: 0.12rem solid transparent;
     vertical-align: middle;
   }
-  .icon-9{
-    display: inline-block;
-    width: .4rem;
-    height: .4rem;
-    background-position: -1.5rem -1.52rem;
-    vertical-align: middle;
-  } 
+  
 }
 .area{
   padding: 0 .20rem;
   background-color: #fff;
   margin-bottom: .2rem;
-  height: 400px;
+  height: 8rem;
 }
 .top{
   color: #C0BFBF;
@@ -281,6 +275,7 @@ h1{
   }
 }
 .mint-loadmore-top{
+  margin-top: -1.1rem;
   .icon-1{
     background-position: 0 -.69rem;
     display: block;
@@ -295,6 +290,16 @@ h1{
 {
 from {transform: scale(.8);}
 to {transform: scale(1.2);}
+}
+.icon-9{
+  display: inline-block;
+  width: .4rem;
+  height: .4rem;
+  background-position: -1.5rem -1.52rem;
+  vertical-align: middle;
+} 
+.box{
+
 }
 
 </style>

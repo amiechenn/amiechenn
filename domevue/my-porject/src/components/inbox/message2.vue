@@ -32,21 +32,21 @@ export default {
 li{
   background-color: #fff;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 .2rem;
   box-sizing: border-box;
-  padding-bottom: 10px;
-  margin-bottom: 5px;
+  padding-bottom: .2rem;
+  margin-bottom: 0.1rem;
   h3{
     font-weight: normal;
-    font-size: 12px;
-    line-height: 30px;
+    font-size: .24rem;
+    line-height: .8rem;
     span{
       color: #C0BFBF;
     }
   }
   p{
     color: #C0BFBF;
-    line-height: 20px;
+    line-height: 0.4rem;
   }
 }
 </style>

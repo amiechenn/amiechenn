@@ -46,8 +46,8 @@ export default {
 		text-transform:capitalize;
 	}
 	.back{
-		font-size: 30px;
-		line-height: 40px;
+		font-size: .6rem;
+		line-height: .9rem;
 		
 	}
 	.send{
@@ -55,7 +55,7 @@ export default {
 	}
 }
 .content{
-	padding: 10px;
+	padding: 0.2rem;
 }
 input,textarea{
 	display: block;
@@ -63,13 +63,13 @@ input,textarea{
 	width: 100%;
 }
 input{
-	font-size: 14px;
-	line-height: 40px;
-	margin-bottom: 20px;
+	font-size: .28rem;
+	line-height: 0.8rem;
+	margin-bottom: 0.4rem
 }
 textarea{
-	line-height: 20px;
-	height: 200px;
+	line-height: 0.4rem;
+	height: 4rem;
 }
 .sendtext-enter-active, .sendtext-leave-active{
   transition: all 0.3s ease;
