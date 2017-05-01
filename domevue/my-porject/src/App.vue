@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view ></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -104,6 +106,7 @@ a{
 	    color: #C0BFBF;
 	    border-bottom: 1px solid #e2e2e2;
 	    padding: .2rem;
+      font-size: normal;
 	  }
     ul{
       padding: 0 0.2rem;
@@ -111,6 +114,7 @@ a{
     li{
       line-height: .9rem;
       text-transform:capitalize;
+      text-align: center;
     }
     i{
       color: #C0BFBF;
@@ -120,7 +124,6 @@ a{
       text-align: center;
       display: block;
       background-color: #f5f5f5;
-      font-weight: 600;
       color: #C0BFBF;
       line-height: .7rem;
     }
@@ -145,6 +148,7 @@ a{
 }
 .icon{
   background-size: 4.5rem;
-  background-image: url('http://amiechenn.github.io/amiechenn/domevue/my-porject/static/icon.png')
+  // background-image: url('http://amiechenn.github.io/amiechenn/domevue/my-porject/static/icon.png')
+  background-image: url('assets/icon.png')
 }
 </style>

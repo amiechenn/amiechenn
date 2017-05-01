@@ -11,11 +11,10 @@
         <div class="overlay" v-if="sendShow">
           <div class="overlay-bg" v-on:click="sendShow = !sendShow"></div>
             <div class="box2" >
-              <h2>Post to Reddit</h2>
+              <h2>发布</h2>
                <ul>
-                <li  v-on:click="sendtextShow = !sendtextShow;sendShow = !sendShow"><i class="icon icon-6"></i><p>TEXT</p></li>
-                <li  v-on:click="sendtextShow = !sendtextShow;sendShow = !sendShow"><i class="icon icon-7"></i><p>IMAGE</p></li>
-                <li  v-on:click="sendtextShow = !sendtextShow;sendShow = !sendShow"><i class="icon icon-8"></i><p>LINK</p></li>
+                <li  v-on:click="sendtextShow = !sendtextShow;sendShow = !sendShow"><i class="icon icon-6"></i><p>文字</p></li>
+                <li  v-on:click="sendimgShow = !sendimgShow;sendShow = !sendShow"><i class="icon icon-7"></i><p>图文</p></li>
               </ul>
               <i class="zf"></i>
               <span v-on:click="sendShow = !sendShow" class="close-send icon"></span>
@@ -23,25 +22,30 @@
         </div>
     </transition>
     <sendtext :sendtextOpen="sendtextShow" v-on:closeSendtext="FcloseSendtext"></sendtext>
+    <sendimg :sendtextOpen="sendimgShow" v-on:closeSendtext="FcloseSendtext"></sendimg>
   </div>
 </template>
 
 <script>
 import sendtext from '@/components/send/sendtext'
+import sendimg from '@/components/send/sendimg'
 export default {
   name: 'footerbar',
   components: {
-    sendtext
+    sendtext,
+    sendimg
   },
   data () {
     return {
       sendShow: false,
-      sendtextShow:false
+      sendtextShow:false,
+      sendimgShow:false
     }
   },
   methods: {
     FcloseSendtext: function () {
       this.sendtextShow = false
+      this.sendimgShow = false
     }
   }
   
@@ -86,20 +90,20 @@ export default {
   }
   .router-link-active{
      .icon-1{
-      background-position: 0 -.69rem;
+      background-position: 0 -.67rem;
      }
      .icon-2{
-      background-position: -.65rem -.69rem;
+      background-position: -.65rem -.68rem;
     }
     .icon-3{
-      background-position: -1.3rem -.69rem;
+      background-position: -1.3rem -.68rem;
     }
     .icon-4{
-      background-position: -1.9rem -.69rem;
+      background-position: -1.9rem -.68rem;
     }
   }
   .icon-1{
-    background-position:  0 .01rem;
+    background-position:  0 0rem;
    }
   .icon-2{
     background-position: -.65rem 0;
@@ -140,7 +144,7 @@ export default {
   }
   li{
     float: left;
-    width: 33.33%;
+    width: 50%;
     i{
       display: block;
       width:1.2rem;
@@ -148,13 +152,10 @@ export default {
       margin: auto; 
     }
     .icon-6{
-      background-position: 0 -3.1rem;
+      background-position: 0 -3.05rem;
     }
     .icon-7{
-      background-position: -1.62rem -3.1rem;
-    }
-    .icon-8{
-      background-position: -3.3rem -3.1rem;
+      background-position: -1.62rem -3.05rem;
     }
   }
   .zf{

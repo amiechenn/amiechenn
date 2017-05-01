@@ -1,15 +1,17 @@
 <template>
 	<transition name="sendtext">
 	  <div class="send-text" v-if="sendtextOpen">
-	  	<ul class="top">
-	  		<li v-on:click="closeSendtext" class="back left">×</li>
-	  		<li class="title">text post</li>
-	  		<li class="send right">post</li>
-	  	</ul>
-	  	<div class="content">
-	  		<input type="text" name="title" placeholder="An interesting title">
-	  		<textarea placeholder="You text post (optional)"></textarea>
-	  	</div>
+	  	<form>
+		  	<ul class="top">
+		  		<li v-on:click="closeSendtext" class="back left">×</li>
+		  		<li class="title">文字</li>
+		  		<li class="send right"><input type="text" name="" value='发布' v-on:click="postText()"></li>
+		  	</ul>
+		  	<div class="content">
+		  		<input type="text" name="title" placeholder="写一个有趣的标题" v-model="inputTitle">
+		  		<textarea placeholder="写点内容···" name="content" v-model="inputContent"></textarea>
+		  	</div>
+	  	</form>
 	  </div>
 	</transition>
 </template>
@@ -20,13 +22,31 @@ export default {
   name: 'send-text',
  	data(){
  		return{
+ 			inputTitle:'',
+ 			inputContent:'',
+ 			type:3,
+ 			time:new Date(),
+ 			comment:0,
+ 			zan:0
  		}
  	},
  	props:['sendtextOpen'],
  	methods: {
     closeSendtext: function () {
       this.$emit('closeSendtext')
-    }
+    },
+    postText:function(){
+    	this.time = this.time.getTime()
+      	this.$http.get("http://127.0.0.1:8081/textpost?title="+this.inputTitle+"&content="+this.inputContent+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
+        	(res) => {
+	        // 处理成功的结果
+	        console.log(res.data);
+	        this.$router.push({path:'/home'})
+      	}, (res) =>  {
+      	// 处理失败的结果
+      	console.log(res.data);
+      })
+    },
   },
 }
 
@@ -51,7 +71,10 @@ export default {
 		
 	}
 	.send{
-		color: #009a61;
+		input{
+			background-color: #fff;
+			color: #009a61;
+		}
 	}
 }
 .content{

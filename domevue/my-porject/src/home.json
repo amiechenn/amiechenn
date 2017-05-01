@@ -3,7 +3,6 @@
 		"list":[
 			{
 				"type":"1",
-				"community":"aaa",
 				"time":"3h",
 				"title":"hello",
 				"text":"A friend of my grandmother is a computer scientist from MIT. He told me that I should not learn Python because it's a dying language and that I should learn assembly because it's better than Python.",

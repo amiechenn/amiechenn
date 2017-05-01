@@ -1,79 +1,59 @@
 <template>
   <div class="home" id="home">
     <footerbar></footerbar>
-    <h1>reddit</h1>
-    <div class="sel">
-      <div class="sel-btn" v-on:click="sortShow = !sortShow"><i class="icon icon-9"></i><span>HOT POSTS</span><i class="arrows"></i></div>
+    <div class="sel-top">
+      <div class="tab">
+        <span v-on:click="topSel=1">最新</span>
+        <span v-on:click="topSel=2">热门</span>
+      </div>
+      <b class="line" :class="{line2:topSel==2}"></b>
     </div>
-    <div style="height:5rem;">
-      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-        <ul class="list">
-          <li class="area" v-for="(item, index) in itemsList">
-            <div class="top">
-              <span class="time">r{{index}}/{{item.community}}·{{item.time}}{{item.type}}</span>
-              <span class="more-btn" v-on:click="moreShow = !moreShow">···</span>
-            </div>
-            <div class="content" :class="{'style1':item.type == 1,style2:item.type == 2}">
-              <p>{{item.text}}</p>
-              <span>
-                <img :src="item.img" />
-                <a><small>{{item.url}}</small></a>
-              </span>
-              
-            </div>
-            <div class="bottom">
-              <ul>
-                <li class="item1">
-                  <i class="icon ico1" v-on:click="item.zan+=1;item.zanStatus=1" :class="{'active':item.zanStatus == 1}"></i>
-                  <span>{{item.zan}}</span>
-                  <i class="icon ico2"v-on:click="item.zan-=1;item.zanStatus=2" :class="{'active':item.zanStatus == 2}"></i>
-                </li>
-                <li class="item2">
-                  <i class="icon ico3"></i>
-                  <span>{{item.comment}}</span>
-                </li>
-                <li>
-                  <i class="icon ico4"></i>
-                  <span>Share</span>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        <div slot="top" class="mint-loadmore-top">
-          <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }"><i class="icon icon-1"></i></span>
-          <span v-show="topStatus === 'loading'">Loading...</span>
-        </div>
+    <div>
+      <ul class="list" id="list" ref="list">
+        <li class="area" v-for="(item, index) in itemsList">
+          <div class="top">
+            <span class="time">（{{index}}） {{item.time | time}}</span>
+            <span class="more-btn" v-on:click="moreShow = !moreShow">···</span>
+          </div>
+          <div class="content" :class="{'style1':item.type == 1 ,style2:item.type == 3}">
+            <p>{{item.content}}</p>
+            <span>
+              <img :src="item.img" />
+            </span>
+            
+          </div>
+          <div class="bottom">
+            <ul>
+              <li class="item2">
+                <i class="icon ico5" v-on:click="item.zan += 1;item.zanStatus=1" :class="{'active':item.zanStatus == 1}"></i>
+                <span>{{item.zan}}</span>
+                <!-- <i class="icon ico2"v-on:click="item.zan -= 1;item.zanStatus=2" :class="{'active':item.zanStatus == 2}"></i> -->
+              </li>
+              <li class="item2">
+                <i class="icon ico3"></i>
+                <span>{{item.comment}}</span>
+              </li>
+              <li>
+                <i class="icon ico4"></i>
+                <span>分享</span>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
         
-      </mt-loadmore>
     </div>
-    <transition name="overlay"> 
-    <div class="overlay" v-if="sortShow">
-      <div class="overlay-bg" v-on:click="sortShow = !sortShow"></div>
-        <div class="box">
-          <h2>SORT POSTS BY:</h2>
-           <ul>
-            <li><i class="icon icon-9"></i>Hot</li>
-            <li><i class="icon icon-9"></i>New</li>
-            <li><i class="icon icon-9"></i>Top</li>
-            <li><i class="icon icon-9"></i>Controversial</li>
-          </ul>
-          <span  v-on:click="sortShow = !sortShow">CLOSE</span>
-        </div>
-    </div>
-    </transition>
     
-  </scroller>
+    
     <transition name="overlay"> 
     <div class="overlay" v-if="moreShow">
       <div class="overlay-bg" v-on:click="moreShow = !moreShow"></div>
         <div class="box">
            <ul>
-            <li><i class="icon icon-9"></i>save</li>
-            <li><i class="icon icon-9"></i>hide</li>
-            <li><i class="icon icon-9"></i>report</li>
+            <li>收藏</li>
+            <li>举报</li>
           </ul>
-          <span v-on:click="moreShow = !moreShow">CLOSE</span>
+          <span v-on:click="moreShow = !moreShow">取 消</span>
         </div>
     </div>
     </transition>
@@ -82,47 +62,66 @@
 </template>
 
 <script>
-import Scroller from 'vue-scroller'
 import footerbar from '@/components/footerbar'
-import homeJson from '../../static/home.json'
+// import homeJson from '../../static/home.json'
+
 
 export default {
   name: 'home',
   components: {
     footerbar,
-    homeJson,
-    Scroller
+    // homeJson
   },
   data () {
     return {
-      sortShow: false,
+      topSel:1,
       moreShow: false,
       count:0,
-      items:homeJson,
-      itemsList:homeJson.list,
+      items:'',
+      itemsList:'',
       topStatus: '',
       allLoaded:false
     }
   },
+  mounted:function(){
+    this.getJson()
+    window.addEventListener('scroll', this.downLoad);
+  },
+  beforeDestroy:function(){
+    window.removeEventListener('scroll', this.downLoad);
+  },
   methods: {
-    handleTopChange(status) {
-      this.topStatus = status;
-    },
-    loadTop: function () {
-      for(var i = 1;i < 3; i++){
-        this.itemsList.push(this.itemsList[i])
-      } 
-      this.$refs.loadmore.onTopLoaded();
-    },
+    getJson:function(){
+      this.$http.get("http://127.0.0.1:8081/").then(
+        (res) => {
+        // 处理成功的结果
+         // console.log(res.data);
+        // this.items = JSON.parse(res.data)
+        // this.itemsList = this.items.list
+        this.items = res.data
+        this.itemsList = res.data.object.list
+          // console.log(this.itemsList)
 
-    loadBottom: function () {
-      for(var i = 1;i < 3; i++){
-        this.itemsList.push(this.itemsList[i])
-      }          
-      // this.allLoaded = true;// 若数据已全部获取完毕
-      this.$refs.loadmore.onBottomLoaded();
+      }, (res) =>  {
+        // 处理失败的结果
+        console.log(res.data);
+      })
+    },
+    downLoad:function(){
+      let oncedown = true     
+      let browserheight = document.documentElement.clientHeight//浏览器高度
+      let scrollnum = document.body.scrollTop //屏幕上面以外的高度
+      let contentheight = this.$refs.list.offsetHeight//元素总高度
+      if(scrollnum+browserheight>=contentheight && oncedown==true){
+        oncedown = false
+        this.itemsList.push(this.itemsList[0])
+        oncedown = true
+      } 
+      
     }
+    
   }
+
 }
 
 
@@ -130,40 +129,40 @@ export default {
 </script>
 
 <style lang="less" scoped>
-h1{
-  font-size: .4rem;
+.sel-top{
+  font-size: .28rem;
   line-height: 0.9rem;
   text-align: center;
-  background-color: #fff;
-}
-.sel{
-  color: #C0BFBF;
-  display: block;
-  line-height: 0.9rem;
-  padding-left: .2rem;
-  border-bottom: 1px solid #e2e2e2;
-  .sel-btn{
-    width: 2.20rem;
-  }
+  position: relative;
+  width: 3rem;
+  left: 50%;
+  margin-left: -1.5rem;
   span{
     display: inline-block;
-    padding-right: 0.15rem;
-    vertical-align: middle;
+    width: 48%;
   }
-  .arrows{
-    display: inline-block;
-    border-right: 0.12rem solid transparent;
-    border-top: 0.12rem solid #C0BFBF;
-    border-left: 0.12rem solid transparent;
-    vertical-align: middle;
+  .line{
+    display: block;
+    height: 2px;
+    width: 1rem;
+    background-color: #40D7C2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform:translateX(0.24rem);
+    transition:all .3s;
   }
-  
+  .line2.line{
+    transform:translateX(1.8rem);
+    background-color: #009a61;
+  }
 }
+
 .area{
   padding: 0 .20rem;
   background-color: #fff;
   margin-bottom: .2rem;
-  height: 8rem;
+  // height: 8rem;
 }
 .top{
   color: #C0BFBF;
@@ -197,7 +196,7 @@ h1{
   }
   i{
     display: inline-block;
-    width: 0.3rem;
+    width: 0.4rem;
     height: 0.3rem;
   }
   .active.ico1{
@@ -205,6 +204,9 @@ h1{
   }
   .active.ico2{
     background-position: -0.3rem -1.94rem;
+  }
+  .active.ico5{
+    background-position: -1.1rem -1.94rem;
   }
   .ico1{
     background-position: .05rem -1.52rem;
@@ -218,6 +220,10 @@ h1{
   .ico4{
     background-position: -1.15rem -1.52rem;
   }
+  .ico5{
+    background-position: -.69rem -1.94rem;
+  }
+
 }
 .content{
   padding:0.2rem 0;
@@ -230,48 +236,11 @@ h1{
   img{
     width: 100%;
   }
-  a{
-    display: none;
-  }
+  
 }
 .style2{
-  &:after{
-    display: table;
-    content:'';
-    clear: both;
-  }
-  p{
-    width: 70%;
-    float: left;
-    padding-right:.2rem;
-    box-sizing: border-box;
-  }
   span{
-    float: left;
-    width: 30%;
-    position: relative;
-    border-radius:5px;
-    overflow: hidden;
-    img{
-      width: 100%;
-      display: block;
-    }
-    a{
-      background-color: rgba(0, 0, 0, 0.7);
-      position: absolute;
-      bottom: 0;
-      color: #fff;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0 .10rem;
-      small{
-        display: inline-block;
-        overflow: hidden;
-        line-height: .4rem;
-        font-size: .26rem;
-        width: 100%;
-      }
-    }
+    display: none;
   }
 }
 .mint-loadmore-top{
@@ -298,8 +267,5 @@ to {transform: scale(1.2);}
   background-position: -1.5rem -1.52rem;
   vertical-align: middle;
 } 
-.box{
-
-}
 
 </style>

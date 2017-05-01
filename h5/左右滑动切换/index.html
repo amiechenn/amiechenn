@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, ,maximum-scale=1.0,user-scalable=no">
+	<style>
+div{
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    width:100%;
+    left:0px;
+    
+}
+li{
+    list-style-type: none;
+    height:100px;
+    background: #ccc;
+    border-bottom: solid 1px #fff;
+    text-align: left;
+    line-height: 35px;
+    padding-left:15px;
+}
+ul{
+    width:100%;
+    margin-top:0px;
+    position: absolute;
+    left:0px;
+    padding:0px;
+    top:0px;
+}
+.outerScroller{
+	
+	transition: all 0.3s ;
+}
+</style>
+</head>
+<body>
+<div class="outerScroller" id="box">
+    <ul id="content">
+    	<li id="up">0</li>
+    	<li>0</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    	<li>1</li>
+    </ul>
+</div>
+<script>
+  
+  let upload = ()=>{
+  	let obj = document.getElementById('box')
+	  let starty
+	  let num =0
+	  let once = true
+  	obj.addEventListener('touchstart',(event)=>{
+	   	let touch = event.targetTouches[0];
+		 	starty = touch.pageY
+	  })
+	  obj.addEventListener('touchmove',(event)=>{
+	   	let touch = event.targetTouches[0];
+		 	let movey = touch.pageY-starty
+		    
+		  
+		  if(movey<0){//上拉
+		  	return false
+		  }else{//下拉
+		  	if(obj.getBoundingClientRect().top>=0){//元素到顶部，getBoundingClientRect元素相对浏览器距离
+					obj.style.transform = `translateY(${movey}px)`;
+					obj.addEventListener('touchend',(event)=>{
+					  obj.style.transform = `translate(0,0)`;
+					  once=true
+				  })
+					if(movey>100 && once==true){
+				  	num++
+				  	document.getElementById('up').innerHTML = num
+				  	once=false
+				  	
+				  }
+				}
+		  }
+	  })
+  }
+  
+  upload()
+
+  let download = ()=>{
+  	let oncedown = true
+  	window.onscroll = ()=>{
+	  	let browserheight = document.documentElement.clientHeight//浏览器高度
+	  	let scrollnum = document.body.scrollTop //屏幕上面以外的高度
+	  	let contentheight = document.getElementById('content').offsetHeight//元素总高度
+	  	if(scrollnum+browserheight>=contentheight && oncedown==true){
+	  		oncedown = false
+	  		var next = document.createElement('li')
+		  	next.innerHTML= `next`
+		  	document.getElementById('content').appendChild(next)
+	  		oncedown = true
+	  	}	
+	  }
+  }
+
+  download()
+</script>
+</body>
+</html>

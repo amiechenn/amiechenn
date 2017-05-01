@@ -4,10 +4,13 @@ import home from '@/components/home'
 import search from '@/components/search'
 import inbox from '@/components/inbox'
 import user from '@/components/user'
-
+import mypost from '@/components/user/mypost'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  
+
   routes: [
     {
       path: '/home',
@@ -28,7 +31,13 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: user
+    },
+    {
+      path: '/user/mypost',
+      name: 'mypost',
+      component: mypost
     }
 
   ]
+
 })
