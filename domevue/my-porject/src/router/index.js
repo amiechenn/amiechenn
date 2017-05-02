@@ -8,7 +8,7 @@ import mypost from '@/components/user/mypost'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',//这个需要配置服务器，否则页面404
   routes: [
     {
       path: '/home',
