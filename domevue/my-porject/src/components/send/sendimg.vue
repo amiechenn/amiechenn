@@ -48,11 +48,11 @@ export default {
 	      	this.$http.get("http://127.0.0.1:8081/textpost?content="+this.content+"&img="+this.img+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
 	        	(res) => {
 		        // 处理成功的结果
-		        console.log(res.data);
-		        this.$router.push({path:'/home'})
+		        this.$router.push({path:'/user'})
 	      	}, (res) =>  {
 	      		// 处理失败的结果
-	      		console.log(res.data);
+	      		this.closeSendtext()
+	      		this.$router.push({path:'/home'})
 	      	})
     	},
     	getImg:function(){
