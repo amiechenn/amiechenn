@@ -5,12 +5,12 @@
 		  	<ul class="top">
 		  		<li v-on:click="closeSendtext" class="back left">×</li>
 		  		<li class="title">图文</li>
-		  		<li class="send right"><input type="text" name="" value='发布' v-on:click="postImg()"></li>
+		  		<li class="send right" v-on:click="postImg()">发布</li>
 		  	</ul>
 		  	<div class="content">
 		  		<div class="img-box" v-if="!imgChange">
-		  			<label><i class="icon icon-camera"></i>相机</label>
-					<label for="fliePost"><i class="icon icon-photoss" for="fliePost"></i>照片</label>
+		  			<!-- <label><i class="icon icon-camera"></i>相机</label> -->
+					<label for="fliePost"><i class="icon icon-photoss" for="fliePost"></i>照片/相机</label>
 					<input type="file" v-on:change="getImg" id="fliePost" ref="inputer"  accept="image/*,video/*;" style="display:none" capture="camera">
 		  		</div>
 		  		 
@@ -105,10 +105,7 @@ export default {
 		
 	}
 	.send{
-		input{
-			background-color: #fff;
-			color: #009a61;
-		}
+		color: #009a61;
 	}
 }
 .content{

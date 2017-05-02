@@ -15,7 +15,7 @@
             <span class="time">（{{index}}） {{item.time | time}}</span>
             <span class="more-btn" v-on:click="moreShow = !moreShow">···</span>
           </div>
-          <div class="content" :class="{'style1':item.type == 1 ,style2:item.type == 3}">
+          <div class="content" :class="{'style1':item.type == 1 ,style2:item.type == 2||item.type == 3}">
             <p>{{item.content}}</p>
             <span>
               <img :src="item.img" />

@@ -5,7 +5,7 @@
 		  	<ul class="top">
 		  		<li v-on:click="closeSendtext" class="back left">×</li>
 		  		<li class="title">文字</li>
-		  		<li class="send right"><input type="text" name="" value='发布' v-on:click="postText()"></li>
+		  		<li class="send right" v-on:click="postText()">发布</li>
 		  	</ul>
 		  	<div class="content">
 		  		<textarea placeholder="写点内容···" name="content" v-model="inputContent"></textarea>
@@ -69,10 +69,7 @@ export default {
 		
 	}
 	.send{
-		input{
-			background-color: #fff;
-			color: #009a61;
-		}
+		color: #009a61;
 	}
 }
 .content{
