@@ -15,7 +15,7 @@
 		  		</div>
 		  		 
 		  		<div v-if="imgChange"><img :src="img" width="100%"></div>    
-		  		<input type="text" name="title" placeholder="写一个有趣的标题" v-model="inputTitle">
+		  		<input type="text" name="title" placeholder="写一些有趣的文字" v-model="content">
 		  	</div>
 	  	</form>
 	  </div>
@@ -29,12 +29,12 @@ export default {
  	data(){
  		return{
  			img:'',
- 			inputTitle:'',
+ 			content:'',
  			type:1,
  			time:new Date(),
  			comment:0,
  			zan:0,
- 			imgChange:false,
+ 			imgChange:false,//切换选择和图片div
  		}
  	},
  	props:['sendtextOpen'],
@@ -45,7 +45,7 @@ export default {
 	    },
    		postImg:function(){
 	    	this.time = this.time.getTime()
-	      	this.$http.get("http://127.0.0.1:8081/textpost?title="+this.inputTitle+"&img="+this.img+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
+	      	this.$http.get("http://127.0.0.1:8081/textpost?content="+this.content+"&img="+this.img+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
 	        	(res) => {
 		        // 处理成功的结果
 		        console.log(res.data);
@@ -124,8 +124,8 @@ export default {
 	}
 	i{
 		display: block;
-	    width: 1.2rem;
-	    height: 1.2rem;
+	    width: 1.3rem;
+	    height: 1.3rem;
 	    margin: auto;
 	    margin-bottom: 0.2rem;
 	}

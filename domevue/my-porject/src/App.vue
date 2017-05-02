@@ -148,7 +148,7 @@ a{
 }
 .icon{
   background-size: 4.5rem;
-  // background-image: url('http://amiechenn.github.io/amiechenn/domevue/my-porject/static/icon.png')
-  background-image: url('assets/icon.png')
+  background-image: url('http://amiechenn.github.io/amiechenn/domevue/my-porject/static/icon.png');
+  // background-image: url('assets/icon.png')
 }
 </style>

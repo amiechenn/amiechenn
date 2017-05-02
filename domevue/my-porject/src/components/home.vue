@@ -63,14 +63,13 @@
 
 <script>
 import footerbar from '@/components/footerbar'
-// import homeJson from '../../static/home.json'
-
-
+import {upLoad,downLoad} from '../assets/js/util.js'
+import homeJson from '../../static/home.json'
+ 
 export default {
   name: 'home',
   components: {
-    footerbar,
-    // homeJson
+    footerbar
   },
   data () {
     return {
@@ -80,45 +79,41 @@ export default {
       items:'',
       itemsList:'',
       topStatus: '',
-      allLoaded:false
+      allLoaded:false,
+      localItem:homeJson
     }
   },
   mounted:function(){
+    let self = this
     this.getJson()
-    window.addEventListener('scroll', this.downLoad);
+    window.addEventListener('scroll', function(){
+      downLoad(self.$refs.list,function(){
+        self.itemsList.push(self.itemsList[0])
+      })
+    });
+    
+    upLoad(this.$refs.list,function(){
+      self.itemsList.unshift(self.itemsList[3])
+    })
   },
   beforeDestroy:function(){
-    window.removeEventListener('scroll', this.downLoad);
+    window.removeEventListener('scroll', downLoad);
   },
   methods: {
     getJson:function(){
       this.$http.get("http://127.0.0.1:8081/").then(
         (res) => {
         // 处理成功的结果
-         // console.log(res.data);
-        // this.items = JSON.parse(res.data)
-        // this.itemsList = this.items.list
         this.items = res.data
         this.itemsList = res.data.object.list
-          // console.log(this.itemsList)
-
       }, (res) =>  {
         // 处理失败的结果
-        console.log(res.data);
+        this.item = this.localItem
+        this.itemsList = this.item.object.list
       })
     },
-    downLoad:function(){
-      let oncedown = true     
-      let browserheight = document.documentElement.clientHeight//浏览器高度
-      let scrollnum = document.body.scrollTop //屏幕上面以外的高度
-      let contentheight = this.$refs.list.offsetHeight//元素总高度
-      if(scrollnum+browserheight>=contentheight && oncedown==true){
-        oncedown = false
-        this.itemsList.push(this.itemsList[0])
-        oncedown = true
-      } 
-      
-    }
+    
+    
     
   }
 
@@ -154,7 +149,7 @@ export default {
   }
   .line2.line{
     transform:translateX(1.8rem);
-    background-color: #009a61;
+    background-color: #ed741c;
   }
 }
 

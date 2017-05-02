@@ -8,7 +8,6 @@
 		  		<li class="send right"><input type="text" name="" value='发布' v-on:click="postText()"></li>
 		  	</ul>
 		  	<div class="content">
-		  		<input type="text" name="title" placeholder="写一个有趣的标题" v-model="inputTitle">
 		  		<textarea placeholder="写点内容···" name="content" v-model="inputContent"></textarea>
 		  	</div>
 	  	</form>
@@ -22,9 +21,8 @@ export default {
   name: 'send-text',
  	data(){
  		return{
- 			inputTitle:'',
  			inputContent:'',
- 			type:3,
+ 			type:2,
  			time:new Date(),
  			comment:0,
  			zan:0
@@ -37,7 +35,7 @@ export default {
     },
     postText:function(){
     	this.time = this.time.getTime()
-      	this.$http.get("http://127.0.0.1:8081/textpost?title="+this.inputTitle+"&content="+this.inputContent+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
+      	this.$http.get("http://127.0.0.1:8081/textpost?content="+this.inputContent+"&type="+this.type+"&time="+this.time+"&comment="+this.comment+"&zan="+this.zan).then(
         	(res) => {
 	        // 处理成功的结果
 	        console.log(res.data);

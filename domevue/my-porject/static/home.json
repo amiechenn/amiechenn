@@ -1,121 +1,36 @@
-{	
-	"count":8,
-	"list":[
-		{
-			"id":"01",
-			"type":"1",
-			"community":"aaa",
-			"time":"3h",
-			"title":"hello",
-			"text":"A friend of my grandmother is a computer scientist from MIT. He told me that I should not learn Python because it's a dying language and that I should learn assembly because it's better than Python.",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment": 100,
-			"zan":200,
-			"zanStatus":0
-		},
-		{
-			"id":"02",
-			"type":"2",
-			"community":"bbb",
-			"time":"3h",
-			"title":"hello",
-			"text":"现在是用jquery的ajax方法，如果不用jquery是需要自己写个通用的ajax方法吗？",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment":600,
-			"zan":800,
-			"zanStatus":0
-		},
-		{
-			"id":"03",
-			"type":"1",
-			"community":"ccc",
-			"time":"3h",
-			"title":"hello",
-			"text":"A friend of my grandmother is a computer scientist from MIT. He told me that I should not learn Python because it's a dying language and that I should learn assembly because it's better than Python.",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment":200,
-			"zan":500,
-			"zanStatus":0
-		},
-		{
-			"id":"04",
-			"type":"2",
-			"community":"ddd",
-			"time":"3h",
-			"title":"hello",
-			"text":"现在是用jquery的ajax方法，如果不用jquery是需要自己写个通用的ajax方法吗？",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment": 600,
-			"zan": 80,
-			"zanStatus":0
-		},
-		{
-			"id":"01",
-			"type":"1",
-			"community":"aaa",
-			"time":"3h",
-			"title":"hello",
-			"text":"A friend of my grandmother is a computer scientist from MIT. He told me that I should not learn Python because it's a dying language and that I should learn assembly because it's better than Python.",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment": 100,
-			"zan":200,
-			"zanStatus":0
-		},
-		{
-			"id":"02",
-			"type":"2",
-			"community":"bbb",
-			"time":"3h",
-			"title":"hello",
-			"text":"现在是用jquery的ajax方法，如果不用jquery是需要自己写个通用的ajax方法吗？",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment":600,
-			"zan":800,
-			"zanStatus":0
-		},
-		{
-			"id":"03",
-			"type":"1",
-			"community":"ccc",
-			"time":"3h",
-			"title":"hello",
-			"text":"A friend of my grandmother is a computer scientist from MIT. He told me that I should not learn Python because it's a dying language and that I should learn assembly because it's better than Python.",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment":200,
-			"zan":500,
-			"zanStatus":0
-		},
-		{
-			"id":"04",
-			"type":"2",
-			"community":"ddd",
-			"time":"3h",
-			"title":"hello",
-			"text":"现在是用jquery的ajax方法，如果不用jquery是需要自己写个通用的ajax方法吗？",
-			"url":"www.baidu.com",
-			"img":"http://img05.tooopen.com/images/20150202/sy_80219211654.jpg",
-			"video":"",
-			"comment": 600,
-			"zan": 80,
-			"zanStatus":0
-		}
-	]
+{"object":
+	{
+		"list":[
+			{
+				"type":"1",
+				"time":"1493106191434",
+				"content":"喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵",
+				"img":"http://amiechenn.github.io/amiechenn/domevue/my-porject/static/mao.jpg",
+				"comment":100,
+				"zan":200
+			},
+			{
+				"type":"2",
+				"time":"1493106191434",
+				"content":"只有文字只有文字只有文字只有文字只有文字只有文字只有文字只有文字",
+				"comment":100,
+				"zan":200
+			},
+			{
+				"type":"2",
+				"time":"1493106191434",
+				"content":"hello world！hello world！hello world！hello world！hello world！hello world！hello world！hello world！",
+				"comment":100,
+				"zan":200
+			},
+			{
+				"type":"1",
+				"time":"1493106191434",
+				"content":"喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵",
+				"img":"http://amiechenn.github.io/amiechenn/domevue/my-porject/static/mao2.jpg",
+				"comment":100,
+				"zan":200
+			}
+		]
+	}	
 }
-
-	
-
-	
