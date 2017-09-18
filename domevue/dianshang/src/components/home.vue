@@ -7,7 +7,7 @@
         </form>
         <div class="area">
             <div class="banner">
-                <img src="../../static/img/banner.jpg">
+                <img src="../assets/img/banner.jpg">
             </div>
             <div class="tab-box">
                 <ul class="clearfix">
