@@ -12,7 +12,7 @@ Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 Vue.component(Loadmore.name, Loadmore);
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/index',
