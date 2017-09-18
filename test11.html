@@ -38,13 +38,13 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script>
-		var t = $("#box").offset().top
-		t = t-$(window).height()
+		var t = $("#box").offset().top//box相对浏览器顶部位置
+		t = t-$(window).height()//-浏览器高度
 		 $(window).scroll(function(){
 		 	if($(window).scrollTop() >t){
-		 		$("#btn").text('off')
+		 		$("#btn").text('off')//滚动到box出现在底部的时候
 		 	}else{
-		 		$("#btn").text('on')
+		 		$("#btn").text('on')//滚动到box离开底部的时候
 		 	}
 		 })
 		 window.addEventListener("orientationchange", function() {

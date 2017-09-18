@@ -1,0 +1,159 @@
+.shoping{
+	margin-bottom: 1rem;
+	position: relative;
+}
+h1{
+	background-image: url(../img/top.jpg);
+	line-height: 1rem;
+	font-size: 0.32rem;
+	text-align: center;
+	color: #fff;
+	position: relative;
+	span{
+		font-size: 0.28rem;
+		position: absolute;
+		top: 0;
+		right: 0.3rem;
+	}
+}
+.shoping-all{
+	margin-bottom: 1.9rem;
+}
+.area{
+	margin-bottom: 0.15rem;
+	border-bottom: 1px solid #d9d9d9;
+	h3{
+		line-height: 0.9rem;
+		background-color: #fff;
+		.checkbox{
+			margin:0 0.2rem;
+			vertical-align: middle;
+			position: relative;
+		}
+		span{
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 0.6rem;
+		}
+	}
+}
+.checkbox{
+	display: inline-block;
+	vertical-align: middle;
+	input{
+		display: none;
+	}
+	label{
+		width: 0.4rem;
+		height: 0.4rem;
+		border: 1px solid #a1a5b8;
+		border-radius: 0.3rem;
+		display: inline-block;
+		box-sizing: border-box;
+		position: absolute;
+		top: 50%;
+		transform:translateY(-50%);
+		left: 0.2rem;
+	}
+	
+	input:checked + label:before{
+		content: ' ';
+    	display: inline-block;
+    	position: absolute;
+		top: -0.02rem;
+	    left: -0.02rem;
+	    width: 0.4rem;
+	    height: 0.4rem;
+	    background-image:url(../img/check.png);
+	    background-size: 100%;
+	    border-radius: 0.3rem;
+	}
+}
+.list{
+	li{
+		position: relative;
+		background-color: #fafafa;
+		padding:0.2rem;
+		margin-bottom: 0.04rem;
+		.checkbox{
+			display: inline-block;
+			margin-right: 0.2rem;
+		}
+		.img{
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 0.2rem;
+		}
+	}
+	
+	img{
+		width: 1.8rem;
+		margin-left: 0.3rem;
+	}
+	li:last-child{
+		margin-bottom: 0;
+	}
+}
+.content{
+	display: inline-block;
+	font-size: 0.24rem;
+	width: 4rem;
+	vertical-align: middle;
+	h2{
+		padding-bottom: 0.1rem;
+	}
+	p{
+		font-size: 0.2rem;
+		padding-bottom: 0.1rem;
+		color: #515561;
+	}
+	.money{
+		color: #f0483f;
+	}
+	.tip{
+		color: #f0483f;
+		font-size: 0.2rem;
+		padding-bottom: .1rem;
+	}
+}
+.total{
+	position: fixed;
+	bottom: 1rem;
+	left: 0;
+	font-size: 0.3rem;
+	width: 100%;
+	background-color: #fff;
+	line-height: 0.9rem;
+	border-top: 1px solid #e2e2e2;
+	h3{
+		display: inline-block;
+		background-color: #fff;
+		.checkbox{
+			margin:0 0.2rem;
+			vertical-align: middle;
+			position: relative;
+		}
+		span{
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 0.6rem;
+		}
+	}
+	.num{
+		display: inline-block;
+		width: 3.8rem;
+		text-align: right;
+		span{
+			color: #f0483f;
+		}
+	}
+	.btn{
+		display: inline-block;
+		background-color: #f62b20;
+		color: #fff;
+		width: 2rem;
+		text-align: center;
+		float: right;
+
+	}
+}

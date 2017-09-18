@@ -1,0 +1,57 @@
+body{
+	font-family: 'microsoft yahei', Tahoma;
+    background-color: #efefef;
+}
+.clearfix:after {display: table; content: ""; clear:both;}
+body,ul,p,h1,h2,h3,h4,h5,img{
+	margin: 0;
+	padding: 0;
+    font-weight: normal;
+    font-size: 0.24rem;
+}
+a{
+	text-decoration: none;
+    color: #000;
+}
+
+ul{
+	list-style: none outside none;
+}
+.hide{
+	display: none;
+}
+@media(min-width: 320px) {
+    html {
+        font-size:42.6667px;
+    }
+}
+@media(min-width: 360px) {
+    html {
+        font-size:48px;
+    }
+}
+@media(min-width: 375px) {
+    html {
+        font-size:50px;
+    }
+}
+@media(min-width: 400px) {
+    html {
+        font-size:53.3px;
+    }
+}
+@media(min-width: 414px) {
+    html {
+        font-size:55.2px;
+    }
+}
+@media(min-width: 420px) {
+    html {
+        font-size:56px;
+    }
+}
+@media(min-width: 460px) {
+    html {
+        font-size:61.3px;  
+    }
+}

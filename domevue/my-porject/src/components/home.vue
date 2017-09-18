@@ -50,7 +50,7 @@ export default {
     return {
       moreShow: false,
       selTop:1,
-      currentView: newp,
+      currentView: newp
     }
   },
   methods: {

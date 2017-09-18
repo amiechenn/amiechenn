@@ -3,7 +3,7 @@
     <li class="area" v-for="(item, index) in itemsList">
       <div class="top">
         <span class="time">（{{index}}） {{item.time | time}}</span>
-        <span class="more-btn" v-on:click="moreShow = !moreShow">···</span>
+        <span class="more-btn" v-on:click="moreShow = !moreShow">···{{moreShow}}</span>
       </div>
       <div class="content" :class="{'style1':item.type == 1 ,style2:item.type == 2||item.type == 3}">
         <p>{{item.content}}</p>
@@ -40,6 +40,7 @@ export default {
   name: 'new',
   data () {
     return {
+    	moreShow: false,
       items:'',
       itemsList:'',
       localItem:homeJson
