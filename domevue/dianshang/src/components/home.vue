@@ -11,83 +11,50 @@
             </div>
             <div class="tab-box">
                 <ul class="clearfix">
-                    <li>
+                    <router-link tag="li" :to="{path:'list',query: {key:1}}">
                         <span class="ico item1"></span>
                         <h3>笔记本</h3>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link tag="li" :to="{path:'list',query: {key:2}}">
                         <span class="ico item2"></span>
                         <h3>Yoga系列</h3>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link tag="li" :to="{path:'list',query: {key:3}}">
                         <span class="ico item3"></span>
                         <h3>一体机</h3>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link tag="li" :to="{path:'list',query: {key:5}}">
                         <span class="ico item4"></span>
                         <h3>其他</h3>
-                    </li>
+                    </router-link>
                 </ul>
             </div>
         </div>
         <div class="area new-box">
             <h1 class="title">新品上市<small>/NEW ARRIAVEL</small></h1>
-            <div class="item">
-                <img src="../assets/img/1.jpg">
-                <div class="text">
-                    <h2>小新超燃版 510S-IKB 粉色</h2>
-                    <p>Windows10 家庭版/I7/Windows 10 家庭版/14英寸/4G/1T/粉</p>
-                    <strong class="money">￥4,699.00</strong>
-                </div>
-            </div>
-            <div class="item">
-                <img src="../assets/img/1.jpg">
-                <div class="text">
-                    <h2>小新超燃版 510S-IKB 粉色</h2>
-                    <p>Windows10 家庭版/I7/Windows 10 家庭版/14英寸/4G/1T/粉</p>
-                    <strong class="money">￥4,699.00</strong>
-                </div>
+            <div v-for="(item,index) in newList">
+                <router-link tag="div" :to="{path:'detail',query: {key:item}}" class="item">
+                    <img :src="require('../assets/img/product/'+item+'.jpg')">
+                    <div class="text">
+                        <h2>小新超燃版 510S-IKB 粉色</h2>
+                        <p>Windows10 家庭版/I7/Windows 10 家庭版/14英寸/4G/1T/粉</p>
+                        <strong class="money">￥4,699.00</strong>
+                    </div>
+                </router-link>
             </div>
         </div>
         <div class="area hot-box">
             <h1 class="title">明星产品<small>/HOT SALE</small></h1>
             <swiper :options="swiperOption" ref="mySwiper" class="clearfix hot-list">
-                <swiper-slide class="item">
-                    <img src="../assets/img/1.jpg">
-                    <div class="text">
-                        <h2>联想YOGA平板3</h2>
-                        <strong class="money">￥4,699.00</strong>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="item">
-                    <img src="../assets/img/2.jpg">
-                    <div class="text">
-                        <h2>联想YOGA平板3</h2>
-                        <strong class="money">￥4,699.00</strong>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="item">
-                    <img src="../assets/img/2.jpg">
-                    <div class="text">
-                        <h2>联想YOGA平板3</h2>
-                        <strong class="money">￥4,699.00</strong>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="item">
-                    <img src="../assets/img/2.jpg">
-                    <div class="text">
-                        <h2>联想YOGA平板3</h2>
-                        <strong class="money">￥4,699.00</strong>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="item">
-                    <img src="../assets/img/2.jpg">
-                    <div class="text">
-                        <h2>联想YOGA平板3</h2>
-                        <strong class="money">￥4,699.00</strong>
-                    </div>
-                </swiper-slide>
-               
+                <swiper-slide class="item" v-for="(item,index) in hotList" :key="item">
+                    <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                        <img :src="require('../assets/img/product/'+item+'.jpg')">
+                        <div class="text">
+                            <h2>联想YOGA平板3</h2>
+                            <strong class="money">￥4,699.00</strong>
+                        </div>
+                    </router-link>
+                </swiper-slide> 
             </swiper>
         </div>
         <div class="area lottery-box">
@@ -101,7 +68,7 @@
                 <ul class="clearfix"> 
                     <li v-for="(item,index) in itemList" :class="index%2==0?'left':'right'">
                         <router-link tag="a" :to="{path:'detail',query: {key:item}}">
-                            <img src="../assets/img/2.jpg">
+                            <img  :src="require('../assets/img/product/'+item+'.jpg')">
                             <h2>{{item}}</h2>
                         </router-link>
                         <div class="bottom clearfix">
@@ -137,20 +104,24 @@ export default {
                 setWrapperSize:true,
                 loop : true,
                 slidesPerView : 2.5,
-             
+                loopedSlides :5,
             },
-            itemList: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+            itemList: [1,2,3,4,5,6,7,8,9,10],
+            newList:[1,2],
+            hotList:[1,2,3,4,5],
             allLoaded: false,
             bottomStatus: ''
-
         }
+    },
+    mounted() {
+        
     },
     methods:{
         handleBottomChange(status) {
             this.bottomStatus = status;
         },
         loadBottom: function () {
-          for(var i = 1;i < 3; i++){
+          for(var i = 0;i < 10; i++){
             this.itemList.push(this.itemList[i])
           }          
           // this.allLoaded = true;// 若数据已全部获取完毕

@@ -28,13 +28,13 @@ export default {
   border-top: 1px solid #e2e2e2;
   background-color: #fff;
   z-index: 999;
-  font-size:0.15rem;
   line-height: 0.15rem;
   color: #e3ad88;
   li{
     float: left;
     width: 25%;
     text-align: center;
+    font-size: 0.2rem;
     i{
       font-style: normal;
     }

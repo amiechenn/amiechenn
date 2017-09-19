@@ -14,215 +14,60 @@
                     <h2>笔记本电脑</h2>
                     <!-- <div class="more"></div> -->
                     <ul class="clearfix">
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
+                        <li  v-for="(item,index) in oneList">
+                            <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                                <img :src="require('../assets/img/product/'+item+'.jpg')">
                                 <h3>常规笔记本</h3>
-                            </a>    
+                            </router-link>    
                         </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        
                     </ul>
                 </div>
                 <div class="area" :class="{hide:currentView !='area2'}">
                     <h2>YOGA系列</h2>
                     <!-- <div class="more"></div> -->
                     <ul class="clearfix">
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
+                        <li  v-for="(item,index) in twoList">
+                            <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                                <img :src="require('../assets/img/product/'+item+'.jpg')">
+                                <h3>YOGA系列</h3>
+                            </router-link>    
                         </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        
                     </ul>
                 </div>
                 <div class="area" :class="{hide:currentView !='area3'}">
                     <h2>一体机</h2>
                     <!-- <div class="more"></div> -->
                     <ul class="clearfix">
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
+                        <li  v-for="(item,index) in threeList">
+                            <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                                <img :src="require('../assets/img/product/'+item+'.jpg')">
+                                <h3>一体机</h3>
+                            </router-link>    
                         </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        
                     </ul>
                 </div>
                 <div class="area"  :class="{hide:currentView !='area4'}">
                     <h2>鼠标键盘</h2>
                     <!-- <div class="more"></div> -->
                     <ul class="clearfix">
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
+                        <li  v-for="(item,index) in fourList">
+                            <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                                <img :src="require('../assets/img/product/'+item+'.jpg')">
+                                <h3>鼠标键盘</h3>
+                            </router-link>    
                         </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/2.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        
                     </ul>
                 </div>
                 <div class="area" :class="{hide:currentView !='area5'}">
                     <h2>其他</h2>
                     <!-- <div class="more"></div> -->
                     <ul class="clearfix">
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
+                        <li  v-for="(item,index) in fiveList">
+                            <router-link tag="a" :to="{path:'detail',query: {key:item}}">
+                                <img :src="require('../assets/img/product/'+item+'.jpg')">
+                                <h3>其他</h3>
+                            </router-link>    
                         </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="../assets/img/1.jpg">
-                                <h3>常规笔记本</h3>
-                            </a>    
-                        </li>
-                        
                     </ul>
                 </div>
             </div>
@@ -233,7 +78,7 @@
 
 <script>
 import footerbar from '@/components/footer';
-import '../assets/js/base.js';
+import  {getUrlValue} from '../assets/js/base.js';
 export default {
     name: 'list',
     components: {
@@ -243,7 +88,18 @@ export default {
         return {
             active:0,
             currentView: 'area1',
-            tabs:['笔记本电脑','YOGA系列','一体机','鼠标键盘','其他']
+            tabs:['笔记本电脑','YOGA系列','一体机','鼠标键盘','其他'],
+            oneList: [1,2,3,4,5,6,7,8,9,10],
+            twoList: [6,7,8,9,10,1,2,3,4,5],
+            threeList: [4,5,6,1,2,3,7,8,9,10],
+            fourList: [5,6,7,1,2,3,4,8,9,10],
+            fiveList: [3,4,5,6,7,1,2,8,9,10],
+            keynum:getUrlValue('key')
+        }
+    },
+    mounted() {
+        if(this.keynum!=''){
+            this.toggle(this.keynum-1)
         }
     },
     methods:{
