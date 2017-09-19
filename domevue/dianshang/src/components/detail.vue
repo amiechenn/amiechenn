@@ -24,7 +24,7 @@
         <div class="bottom">
             <ul class="clearfix">
                 <li>客服</li>
-                <li>收藏</li>
+                <router-link tag="li" to="/shoping">购物车</router-link>
             </ul>
             <div class="btn">加入购物车</div>
         </div>

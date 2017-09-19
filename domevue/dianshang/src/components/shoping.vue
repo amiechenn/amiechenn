@@ -1,7 +1,7 @@
 <template>
     <div class="shoping" id="shoping">
         <footerbar></footerbar>
-        <h1>购物车<span>编辑</span></h1>
+        <h1>购物车<!-- <span>编辑</span> --></h1>
         <div class="shoping-all">
             <div class="area"> 
                 <!-- <h3>
@@ -35,7 +35,7 @@
         <div class="total">
            <h3>
                 <div class="checkbox">
-                    <input type="checkbox" name="store" id="all" v-model='checked' @click='checkedAll'>
+                    <input type="checkbox" name="store" id="all" v-model='checked' @change='checkedAll'>
                     <label for="all"></label>
                 </div>
                 <span>全选</span>
@@ -66,14 +66,13 @@ export default {
     watch:{
         'checkboxModel': {
             handler: function (val, oldVal) { 
-                var str = false
                 if(this.checkboxModel.length == this.itemList.length){                
                     for(var i=0;i<this.checkboxModel.length;i++){
                         if(this.checkboxModel[i]==false||this.checkboxModel[i]==null){
                             this.checked=false;
                             return
                         }else{
-                            this.checked=true;
+                             this.checked=true;
                         }
                     }
                 }else{
@@ -87,17 +86,16 @@ export default {
     methods:{
         checkedAll(){
             var self = this;
-            if (this.checked) {//实现反选
-              self.checkboxModel = [];
-              this.takeMoney = 0
-            }else{//实现全选
-              self.checkboxModel = [];
-              self.itemList.forEach(function(item) {
+            if (this.checked) {//实现全选
+                self.checkboxModel = [];
+                this.itemList.forEach(function(item) {
                 self.checkboxModel.push(item);
               });
               this.takeMoney = 500*3
+            }else{
+              self.checkboxModel = [];
+              this.takeMoney = 0
             }
-            console.log(self.checkboxModel); 
         },
         money(x,y){
             if(y==true){
