@@ -15,7 +15,7 @@
                     <ul>
                         <li v-for="(item,index) in itemList">
                             <div class="checkbox">
-                                <input type="checkbox" name="item" :id="item" v-model='checkboxModel[index]' @click="checkboxModel[index]?money(500)">
+                                <input type="checkbox" name="item" :id="item" v-model='checkboxModel[index]'  @change="money(500,checkboxModel[index])">
                                 <label :for="item"></label>
                             </div>
                             <div class="img">
@@ -25,7 +25,7 @@
                                 <h2>拯救者-15ISK 游戏笔记本80RQ000B CD</h2>
                                 <p>颜色分类：MT8165 64-bit处理器16G存储空间，支持128G扩展;套餐类型：官方标配</p>
                                 <div class="tip">已优惠￥200.00</div>
-                                <div class="money">￥5,699.00</div>
+                                <div class="money">￥500.00</div>
                             </router-link>
                         </li>
                     </ul>
@@ -89,16 +89,23 @@ export default {
             var self = this;
             if (this.checked) {//实现反选
               self.checkboxModel = [];
+              this.takeMoney = 0
             }else{//实现全选
               self.checkboxModel = [];
               self.itemList.forEach(function(item) {
                 self.checkboxModel.push(item);
               });
+              this.takeMoney = 500*3
             }
             console.log(self.checkboxModel); 
         },
-        money(x){
-            this.takeMoney+=x
+        money(x,y){
+            if(y==true){
+                this.takeMoney+=x
+            }else{
+                this.takeMoney-=x
+            }
+            
         }
     }
 }
