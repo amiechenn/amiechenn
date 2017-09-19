@@ -15,18 +15,18 @@
                     <ul>
                         <li v-for="(item,index) in itemList">
                             <div class="checkbox">
-                                <input type="checkbox" name="item" :id="item" v-model='checkboxModel'>
+                                <input type="checkbox" name="item" :id="item" v-model='checkboxModel[index]' @click="checkboxModel[index]?money(500)">
                                 <label :for="item"></label>
                             </div>
-                            <router-link tag="div" :to="{path:'detail',query: {key:item}}" class="img">
+                            <div class="img">
                                 <img :src="require('../assets/img/product/'+item+'.jpg')">
-                            </router-link>
-                            <div class="content">
+                            </div>
+                            <router-link tag="div" :to="{path:'detail',query: {key:item}}" class="content">
                                 <h2>拯救者-15ISK 游戏笔记本80RQ000B CD</h2>
                                 <p>颜色分类：MT8165 64-bit处理器16G存储空间，支持128G扩展;套餐类型：官方标配</p>
                                 <div class="tip">已优惠￥200.00</div>
                                 <div class="money">￥5,699.00</div>
-                            </div>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -58,7 +58,7 @@ export default {
         return{
             itemList:[1,2,3],
             takeMoney:0, 
-            checkboxModel:[1,2,3],
+            checkboxModel:[],
             checked:""
 
         }
@@ -66,27 +66,36 @@ export default {
     watch:{
         'checkboxModel': {
             handler: function (val, oldVal) { 
-              if (this.checkboxModel.length === this.itemList.length) {
-                this.checked=true;
-              }else{
-                this.checked=false;
-              }
+                var str = false
+                if(this.checkboxModel.length == this.itemList.length){                
+                    for(var i=0;i<this.checkboxModel.length;i++){
+                        if(this.checkboxModel[i]==false||this.checkboxModel[i]==null){
+                            this.checked=false;
+                            return
+                        }else{
+                            this.checked=true;
+                        }
+                    }
+                }else{
+                    this.checked=false;
+                }
+              // console.log(this.checkboxModel,this.checked)
             },
             deep: true
         }
     },
     methods:{
         checkedAll(){
-            var _this = this;
-            console.log(_this.checkboxModel);
+            var self = this;
             if (this.checked) {//实现反选
-              _this.checkboxModel = [];
+              self.checkboxModel = [];
             }else{//实现全选
-              _this.checkboxModel = [];
-              _this.itemList.forEach(function(item) {
-                _this.checkboxModel.push(item);
+              self.checkboxModel = [];
+              self.itemList.forEach(function(item) {
+                self.checkboxModel.push(item);
               });
-            } 
+            }
+            console.log(self.checkboxModel); 
         },
         money(x){
             this.takeMoney+=x
