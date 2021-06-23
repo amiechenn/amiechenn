@@ -21,7 +21,7 @@ cc.Class({
     },
     test() {
         let arr = [
-           
+
         ]
         this.testB = { x: 240.4539643366011, y: -35.084056704043725, level: 4 }
         for (let i = 0; i < arr.length; i++) {
@@ -79,7 +79,7 @@ cc.Class({
         this.clickFlag = false; // 控制是否可发射，执行完一个球，createBlock成功后才可发射
         this.blockArr = []; // 所有球
         this.maxNumInCircle = parseInt(6.28 / this.getBlcokArc((this.blockSize + ((this.maxLevel - 1) * this.blockSizeAdd) / 2)));
-        this.isGameOver = false;// 是否游戏结束
+        this.isGameOver = false; // 是否游戏结束
         this.randomBlock = {
             num: 0,
             dir: true
@@ -115,7 +115,7 @@ cc.Class({
 
     //移除球射出的拖尾效果
     romoveMotion() {
-        this.ctrlBlock.getChildByName('motion')?.destroy();
+        this.ctrlBlock.getChildByName('motion') ? this.ctrlBlock.getChildByName('motion').destroy() : null;
     },
 
     // 发射成功并且所有流程走完后，ctrlBlock 即可转成 blockbox里面的球
@@ -205,7 +205,7 @@ cc.Class({
     createBlockByCircle(arr) {
         let num = this.randomNum(3);
         let lastNode = null;
-        if (this.randomBlock.dir) {//left
+        if (this.randomBlock.dir) { //left
             if (num == arr[0].level) {
                 num = this.createBlockCheckIsSame(num);
             }
@@ -226,11 +226,12 @@ cc.Class({
         Sprite.setContentSize(cc.size(r, r));
         node.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
         node.level = num;
-        let pos = {}, arc = null;
-        if (this.randomBlock.dir) {//left
+        let pos = {},
+            arc = null;
+        if (this.randomBlock.dir) { //left
             arc = arr[0].arc - arr[0].selfArcHarf - node.selfArcHarf;
             lastNode = arr[arr.length - 1];
-        } else {//right
+        } else { //right
             let index = arr.length - 1;
             arc = arr[index].arc + arr[index].selfArcHarf + node.selfArcHarf;
             lastNode = arr[0];
@@ -239,13 +240,13 @@ cc.Class({
         pos = this.getPosition(arc, this.circleRadius);
         node.setPosition(cc.v2(pos.x, pos.y));
         // 判断随机增加的球是否和另一侧最后一个球重叠，重叠则结束游戏
-        this.isGameOver = arr.length > this.maxNumInCircle?this.checkBlackIsOverlap(lastNode,node):false;
+        this.isGameOver = arr.length > this.maxNumInCircle ? this.checkBlackIsOverlap(lastNode, node) : false;
         node.parent = this.blockBox;
         let scaleTo = cc.scaleTo(0.2, 1, 1);
         let seq = cc.sequence(
             scaleTo,
             cc.callFunc(() => {
-                if(this.isGameOver){
+                if (this.isGameOver) {
                     arr.push(node);
                     this.gameOverAction(lastNode, node, arr, []);
                     return;
@@ -253,11 +254,11 @@ cc.Class({
             })
         );
         node.runAction(seq);
-        
+
     },
 
     setTouch() {
-        this.node.on('touchend', function (event) {
+        this.node.on('touchend', function(event) {
             if (!this.clickFlag) return;
             let pos = event.getLocation();
             pos = this.node.convertToNodeSpaceAR(pos);
@@ -336,7 +337,7 @@ cc.Class({
             let isBySide = null; // 和左边球是否挨着
             if (i != 0) {
                 isBySide = this.checkBlockBySide(node, preNode);
-                if(!isBySide){
+                if (!isBySide) {
                     let a = blockArr.slice(0, i);
                     let b = blockArr.slice(i, blockArr.length);
                     return b.concat(a);
@@ -357,7 +358,7 @@ cc.Class({
             this.randomBlock.dir = !this.randomBlock.dir;
         }
         // 
-        if(!this.isGameOver){
+        if (!this.isGameOver) {
             let arr = this.blockBox.children;
             this.blockArr = this.sortMinToMax(arr);
             this.clickFlag = true; // 排序后才可以点击发射
@@ -618,14 +619,14 @@ cc.Class({
         // 还有问题，需要做好左右移动完后，才执行moveAllOverCallFun
         // 左边往左移动
         this.moveAllBlcokToLeftOrRight('left', moveArcLeft, obj.leftArr, () => {
-            if (obj.rightArr.length == 0) {
-                if (this.isGameOver) {
-                    return
+                if (obj.rightArr.length == 0) {
+                    if (this.isGameOver) {
+                        return
+                    }
+                    this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
                 }
-                this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
-            }
-        })
-        // 右边边往右移动
+            })
+            // 右边边往右移动
         this.moveAllBlcokToLeftOrRight('right', moveArcRight, obj.rightArr, () => {
             if (this.isGameOver) {
                 return
@@ -656,7 +657,7 @@ cc.Class({
             } else {
                 let seq = cc.sequence(
                     moveTo,
-                    cc.callFunc(() => { })
+                    cc.callFunc(() => {})
                 );
                 node.runAction(seq);
             }
@@ -927,42 +928,42 @@ cc.Class({
                 });
                 return
             } else
-                if (index == 0) {
-                    // 与左边球相同
-                    newBlockArr[index].destroy();
-                    newBlockArr.splice(index, 1);
-                    this.ctrlBlockLevelUp('right', () => {
-                        if (newBlockArr.length > 0) {
-                            // 减去第一个球，第二个球变成第一个球，index还是0
-                            let moveArc = 0;
-                            moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                            this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
-                                this.moveToBlockByCircleCallFun(newBlockArr, 0);
-                            })
-                        } else {
-                            this.changeCtrlBlock();
-                        }
-                    });
-                    return
-                } else {
-                    // 与右边球相同
-                    newBlockArr[index].destroy();
-                    newBlockArr.splice(index, 1);
-                    this.ctrlBlockLevelUp('left', () => {
-                        if (newBlockArr.length > 0) {
-                            let moveArc = 0;
-                            // 减去最后一个球，index要-1
-                            moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                            this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
-                                this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
-                            })
-                        } else {
-                            this.changeCtrlBlock();
+            if (index == 0) {
+                // 与左边球相同
+                newBlockArr[index].destroy();
+                newBlockArr.splice(index, 1);
+                this.ctrlBlockLevelUp('right', () => {
+                    if (newBlockArr.length > 0) {
+                        // 减去第一个球，第二个球变成第一个球，index还是0
+                        let moveArc = 0;
+                        moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                        this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
+                            this.moveToBlockByCircleCallFun(newBlockArr, 0);
+                        })
+                    } else {
+                        this.changeCtrlBlock();
+                    }
+                });
+                return
+            } else {
+                // 与右边球相同
+                newBlockArr[index].destroy();
+                newBlockArr.splice(index, 1);
+                this.ctrlBlockLevelUp('left', () => {
+                    if (newBlockArr.length > 0) {
+                        let moveArc = 0;
+                        // 减去最后一个球，index要-1
+                        moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                        this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
+                            this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
+                        })
+                    } else {
+                        this.changeCtrlBlock();
 
-                        }
-                    });
-                    return
-                }
+                    }
+                });
+                return
+            }
         } else {
             this.changeCtrlBlock();
         }
