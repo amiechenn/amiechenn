@@ -86,7 +86,7 @@ cc.Class({
         };
         // this.test(); //debug
         // this.testNum = 0; //debug
-        // this.testarr = [2,7,2,1,4,2,5,7]; //debug
+        // this.testarr = [2, 7, 4, 7, 3, 2, 5, ]; //debug
 
         //第一个球
         this.createBlock(true, 1);
@@ -264,7 +264,7 @@ cc.Class({
             pos = this.node.convertToNodeSpaceAR(pos);
             this.ctrlBlcokGo(pos);
             // this.testNum++
-            // this.createBlock(false,this.testarr[this.testNum]);//test
+            // this.createBlock(false, this.testarr[this.testNum]); //test
             this.randomBlock.num = this.randomBlock.num + 1;
             this.createBlock(false); // 射出发后马上生成下一个球
         }, this)
@@ -725,7 +725,7 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('right', moveArc, leftArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            this.oneBlcokChangeCtrlBlock();
+                            this.oneBlcokChangeCtrlBlock(rightArr[0]);
                             rightArr[0].destroy();
                             rightArr.splice(0, 1);
                         }
@@ -756,7 +756,7 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('left', moveArc, rightArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            this.oneBlcokChangeCtrlBlock();
+                            this.oneBlcokChangeCtrlBlock(leftArr[0]);
                             leftArr[0].destroy();
                             leftArr.splice(0, 1);
                         }
@@ -877,7 +877,7 @@ cc.Class({
                 delta = Math.abs(pi2 - newArc + oldArc);
             }
         }
-        let moveMax = 0.4; //每次移动最大度数
+        let moveMax = 0.015; //每次移动最大度数
         let seq = cc.sequence(
             this.actionBy,
             cc.callFunc(() => {
@@ -886,18 +886,20 @@ cc.Class({
                 let callFunc = cc.callFunc(() => {
                     this.moveToBlockByCircleCallFun(newBlockArr, index);
                 });
+
                 if (delta > moveMax) { //移动距离太大，需要分段移动，形成环形移动效果
                     let num = parseInt(delta / moveMax);
+                    let time = ((num + 1) * 0.000005) + 0.0016;
                     for (let i = 0; i < num + 1; i++) {
                         if (i == num) {
                             let pos = this.getPosition(newArc, this.circleRadius);
-                            let moveTo = cc.moveTo(0.1, cc.v2(pos.x, pos.y));
+                            let moveTo = cc.moveTo(time - (i * 0.000005), cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                             actArray.push(callFunc);
                         } else {
                             let arc = toLeftOrRight == 'right' ? oldArc + (moveMax * (i + 1)) : oldArc - (moveMax * (i + 1));
                             let pos = this.getPosition(arc, this.circleRadius);
-                            let moveTo = cc.moveTo(0.1, cc.v2(pos.x, pos.y));
+                            let moveTo = cc.moveTo(time - (i * 0.000005), cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                         }
                     }
@@ -908,7 +910,10 @@ cc.Class({
                     actArray.push(callFunc);
                 }
                 let seq2 = cc.sequence(actArray);
-                this.ctrlBlock.runAction(seq2);
+                setTimeout(() => {
+
+                    this.ctrlBlock.runAction(seq2);
+                }, 100)
             })
         );
         this.ctrlBlock.runAction(seq);
