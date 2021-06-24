@@ -18,6 +18,8 @@ cc.Class({
         scoreLabel: cc.Label,
         gameOver: cc.Node,
         gameOverScore: cc.Label,
+        audioClip: cc.AudioClip,
+        boomAudioClip: cc.AudioClip,
     },
     test() {
         let arr = [
@@ -86,7 +88,7 @@ cc.Class({
         };
         // this.test(); //debug
         // this.testNum = 0; //debug
-        // this.testarr = [2, 7, 4, 7, 3, 2, 5, ]; //debug
+        // this.testarr = [2, 7, 1, 7, 3, 1, 2, 5]; //debug
 
         //第一个球
         this.createBlock(true, 1);
@@ -258,14 +260,15 @@ cc.Class({
     },
 
     setTouch() {
-        this.node.on('touchend', function(event) {
+        this.node.on('touchend', function (event) {
             if (!this.clickFlag) return;
             let pos = event.getLocation();
             pos = this.node.convertToNodeSpaceAR(pos);
             this.ctrlBlcokGo(pos);
-            // this.testNum++
-            // this.createBlock(false, this.testarr[this.testNum]); //test
             this.randomBlock.num = this.randomBlock.num + 1;
+
+            // this.testNum++;
+            // this.createBlock(false, this.testarr[this.testNum]); //test
             this.createBlock(false); // 射出发后马上生成下一个球
         }, this)
     },
@@ -373,6 +376,7 @@ cc.Class({
             overlapIndexRight = null; //发射球的右边第一个球在序列中的index
         //第一个球，不需要做任何处理
         if (this.blockArr.length == 0) {
+            this.playEffect();
             let seq = cc.sequence(
                 this.actionBy,
                 cc.callFunc(() => {
@@ -405,6 +409,7 @@ cc.Class({
                 let pos = this.getPosition(newArc, this.circleRadius);
                 this.actionBy = cc.moveTo(this.speedSecond, cc.v2(pos.x, pos.y));
                 // 把发射球改变发射到的位置，改成嵌套求的左（右）边
+                this.playEffect();
                 let seq = cc.sequence(
                     this.actionBy,
                     cc.callFunc(() => {
@@ -434,6 +439,7 @@ cc.Class({
             }
         }
         if (moveArcLeft || moveArcRight) { //有碰撞
+            this.playEffect();
             let seq = cc.sequence(
                 this.actionBy,
                 cc.callFunc(() => {
@@ -521,9 +527,13 @@ cc.Class({
 
     // 获取两个球之间重叠的角度
     getOverlapArc(nodeLfet, nodeRight) {
+        let pi2 = this.pi * 2;
         let b1 = nodeRight.selfArcHarf + nodeRight.arc;
         let a2 = nodeLfet.arc - nodeLfet.selfArcHarf;
-        return b1 - a2; // 两个球之间重叠部分的占位角度
+        let num = b1 - a2;
+        if (num < 0) num = pi2 + num;
+        if (num > pi2) num = num - pi2;
+        return num; // 两个球之间重叠部分的占位角度
     },
 
     //重新排序，以发射球左边为第一个,从左到右排序
@@ -619,14 +629,14 @@ cc.Class({
         // 还有问题，需要做好左右移动完后，才执行moveAllOverCallFun
         // 左边往左移动
         this.moveAllBlcokToLeftOrRight('left', moveArcLeft, obj.leftArr, () => {
-                if (obj.rightArr.length == 0) {
-                    if (this.isGameOver) {
-                        return
-                    }
-                    this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
+            if (obj.rightArr.length == 0) {
+                if (this.isGameOver) {
+                    return
                 }
-            })
-            // 右边边往右移动
+                this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
+            }
+        })
+        // 右边边往右移动
         this.moveAllBlcokToLeftOrRight('right', moveArcRight, obj.rightArr, () => {
             if (this.isGameOver) {
                 return
@@ -640,26 +650,78 @@ cc.Class({
     // moveArc: 移动的角度
     moveAllBlcokToLeftOrRight(direction, moveArc, arr, callback) {
         for (let i = 0; i < arr.length; i++) {
+            let pi2 = this.pi * 2;
             let node = arr[i];
-            let arc = direction == 'left' ? node.arc + moveArc : node.arc - moveArc;
-            node.arc = arc;
-            let newPos = this.getPosition(arc, this.circleRadius);
+            let oldArc = node.arc;
+            let newArc = direction == 'left' ? node.arc + moveArc : node.arc - moveArc;
+            // 转成角坐标存在的值
+            let newArcToNode = newArc;
+            if (newArc < 0) newArcToNode = pi2 + newArc;
+            if (newArc > pi2) newArcToNode = newArc - pi2;
+            node.arc = newArcToNode;
+            let newPos = this.getPosition(newArc, this.circleRadius);
             let moveTo = cc.moveTo(this.speedMove, cc.v2(newPos.x, newPos.y));
             if (i == arr.length - 1) {
-                let seq = cc.sequence(
-                    moveTo,
-                    cc.callFunc(() => {
-                        // 最后一个移动完执行callback
-                        callback && callback();
-                    })
-                );
-                node.runAction(seq);
+                // 移动太长，两个西瓜爆炸后
+                let moveMax = 0.01;
+                let actArray = [];
+                let callFunc = cc.callFunc(() => {
+                    callback && callback();
+                });
+                if (moveArc > 0.66) {
+                    let num = parseInt(moveArc / moveMax);
+                    for (let j = 0; j < num + 1; j++) {
+                        if (j == num) {
+                            let moveToItem = cc.moveTo(0.003, cc.v2(newPos.x, newPos.y));
+                            actArray.push(moveToItem);
+                            actArray.push(callFunc);
+                        } else {
+                            let arc = direction == 'left' ? oldArc + (moveMax * (j + 1)) : oldArc - (moveMax * (j + 1));
+                            let pos = this.getPosition(arc, this.circleRadius);
+                            let moveToItem = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
+                            actArray.push(moveToItem);
+                        }
+                    }
+                    let seq = cc.sequence(actArray);
+                    node.runAction(seq);
+                } else {
+                    // 正常情况
+                    let seq = cc.sequence(
+                        moveTo,
+                        cc.callFunc(() => {
+                            // 最后一个移动完执行callback
+                            callback && callback();
+                        })
+                    );
+                    node.runAction(seq);
+                }
             } else {
-                let seq = cc.sequence(
-                    moveTo,
-                    cc.callFunc(() => {})
-                );
-                node.runAction(seq);
+                // 移动太长，两个西瓜爆炸后
+                let moveMax = 0.01;
+                let actArray = [];
+                if (moveArc > 0.66) {
+                    let num = parseInt(moveArc / moveMax);
+                    for (let j = 0; j < num + 1; j++) {
+                        if (j == num) {
+                            let moveToItem = cc.moveTo(0.003, cc.v2(newPos.x, newPos.y));
+                            actArray.push(moveToItem);
+                        } else {
+                            let arc = direction == 'left' ? oldArc + (moveMax * (j + 1)) : oldArc - (moveMax * (j + 1));
+                            let pos = this.getPosition(arc, this.circleRadius);
+                            let moveToItem = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
+                            actArray.push(moveToItem);
+                        }
+                    }
+                    let seq = cc.sequence(actArray);
+                    node.runAction(seq);
+                } else {
+                    // 正常情况
+                    let seq = cc.sequence(
+                        moveTo,
+                        cc.callFunc(() => { })
+                    );
+                    node.runAction(seq);
+                }
             }
         }
     },
@@ -725,11 +787,16 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('right', moveArc, leftArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            this.oneBlcokChangeCtrlBlock(rightArr[0]);
-                            rightArr[0].destroy();
-                            rightArr.splice(0, 1);
+                            setTimeout(()=>{//爆炸动画执行完再执行
+                                this.oneBlcokChangeCtrlBlock(rightArr[0], () => {
+                                    rightArr[0].destroy();
+                                    rightArr.splice(0, 1);
+                                    this.moveAllOverCallFun(leftArr, rightArr);
+                                });
+                            },100)
+                        }else{
+                            this.moveAllOverCallFun(leftArr, rightArr);
                         }
-                        this.moveAllOverCallFun(leftArr, rightArr);
                     })
                 } else {
                     this.moveAllOverCallFun(leftArr, rightArr);
@@ -756,11 +823,16 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('left', moveArc, rightArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            this.oneBlcokChangeCtrlBlock(leftArr[0]);
-                            leftArr[0].destroy();
-                            leftArr.splice(0, 1);
+                            setTimeout(()=>{//爆炸动画执行完再执行
+                                this.oneBlcokChangeCtrlBlock(leftArr[0], () => {
+                                    leftArr[0].destroy();
+                                    leftArr.splice(0, 1);
+                                    this.moveAllOverCallFun(leftArr, rightArr);
+                                });
+                            },100)
+                        }else{
+                            this.moveAllOverCallFun(leftArr, rightArr);
                         }
-                        this.moveAllOverCallFun(leftArr, rightArr);
                     })
                 } else {
                     this.moveAllOverCallFun(leftArr, rightArr);
@@ -877,7 +949,8 @@ cc.Class({
                 delta = Math.abs(pi2 - newArc + oldArc);
             }
         }
-        let moveMax = 0.015; //每次移动最大度数
+        let moveMax = 0.01; //每次移动最大度数
+        this.playEffect();
         let seq = cc.sequence(
             this.actionBy,
             cc.callFunc(() => {
@@ -889,17 +962,16 @@ cc.Class({
 
                 if (delta > moveMax) { //移动距离太大，需要分段移动，形成环形移动效果
                     let num = parseInt(delta / moveMax);
-                    let time = ((num + 1) * 0.000005) + 0.0016;
                     for (let i = 0; i < num + 1; i++) {
                         if (i == num) {
                             let pos = this.getPosition(newArc, this.circleRadius);
-                            let moveTo = cc.moveTo(time - (i * 0.000005), cc.v2(pos.x, pos.y));
+                            let moveTo = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                             actArray.push(callFunc);
                         } else {
                             let arc = toLeftOrRight == 'right' ? oldArc + (moveMax * (i + 1)) : oldArc - (moveMax * (i + 1));
                             let pos = this.getPosition(arc, this.circleRadius);
-                            let moveTo = cc.moveTo(time - (i * 0.000005), cc.v2(pos.x, pos.y));
+                            let moveTo = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                         }
                     }
@@ -911,9 +983,8 @@ cc.Class({
                 }
                 let seq2 = cc.sequence(actArray);
                 setTimeout(() => {
-
                     this.ctrlBlock.runAction(seq2);
-                }, 100)
+                }, 10)
             })
         );
         this.ctrlBlock.runAction(seq);
@@ -933,42 +1004,42 @@ cc.Class({
                 });
                 return
             } else
-            if (index == 0) {
-                // 与左边球相同
-                newBlockArr[index].destroy();
-                newBlockArr.splice(index, 1);
-                this.ctrlBlockLevelUp('right', () => {
-                    if (newBlockArr.length > 0) {
-                        // 减去第一个球，第二个球变成第一个球，index还是0
-                        let moveArc = 0;
-                        moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                        this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
-                            this.moveToBlockByCircleCallFun(newBlockArr, 0);
-                        })
-                    } else {
-                        this.changeCtrlBlock();
-                    }
-                });
-                return
-            } else {
-                // 与右边球相同
-                newBlockArr[index].destroy();
-                newBlockArr.splice(index, 1);
-                this.ctrlBlockLevelUp('left', () => {
-                    if (newBlockArr.length > 0) {
-                        let moveArc = 0;
-                        // 减去最后一个球，index要-1
-                        moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                        this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
-                            this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
-                        })
-                    } else {
-                        this.changeCtrlBlock();
+                if (index == 0) {
+                    // 与左边球相同
+                    newBlockArr[index].destroy();
+                    newBlockArr.splice(index, 1);
+                    this.ctrlBlockLevelUp('right', () => {
+                        if (newBlockArr.length > 0) {
+                            // 减去第一个球，第二个球变成第一个球，index还是0
+                            let moveArc = 0;
+                            moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                            this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
+                                this.moveToBlockByCircleCallFun(newBlockArr, 0);
+                            })
+                        } else {
+                            this.changeCtrlBlock();
+                        }
+                    });
+                    return
+                } else {
+                    // 与右边球相同
+                    newBlockArr[index].destroy();
+                    newBlockArr.splice(index, 1);
+                    this.ctrlBlockLevelUp('left', () => {
+                        if (newBlockArr.length > 0) {
+                            let moveArc = 0;
+                            // 减去最后一个球，index要-1
+                            moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                            this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
+                                this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
+                            })
+                        } else {
+                            this.changeCtrlBlock();
 
-                    }
-                });
-                return
-            }
+                        }
+                    });
+                    return
+                }
         } else {
             this.changeCtrlBlock();
         }
@@ -986,6 +1057,7 @@ cc.Class({
     // direction:固定位置（left：left固定，xy往右，mid：中间，xy不变，）
     ctrlBlockLevelUp(direction, callback) {
         // 爆炸
+        this.playEffectBoomAudioClip();
         var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
         anim.play();
         this.scoreLabel.string = parseInt(this.scoreLabel.string) + parseInt(this.ctrlBlock.level);
@@ -1026,7 +1098,7 @@ cc.Class({
     },
 
     //  最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-    oneBlcokChangeCtrlBlock(node) {
+    oneBlcokChangeCtrlBlock(node, callback) {
         this.ctrlBlock.level = node.level;
         this.ctrlBlock.setPosition(cc.v2(node.x, node.y));
         this.ctrlBlock.setContentSize(cc.size(node.width, node.height));
@@ -1035,6 +1107,7 @@ cc.Class({
         this.ctrlBlock.getChildByName('boom').color = this.colorArr[this.ctrlBlock.level];
         this.ctrlBlock.selfArcHarf = node.selfArcHarf;
         this.ctrlBlock.arc = node.arc;
+        callback && callback();
     },
 
     // 角度差值
@@ -1071,6 +1144,7 @@ cc.Class({
                     if (i == leftArr.length) {
                         if (leftArr.length >= rightArr.length) {
                             setTimeout(() => {
+                                this.playEffectBoomAudioClip();
                                 var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
                                 anim.play();
                                 this.ctrlBlock.destroy();
@@ -1087,6 +1161,7 @@ cc.Class({
                     if (i == rightArr.length) {
                         if (rightArr.length > leftArr.length) {
                             setTimeout(() => {
+                                this.playEffectBoomAudioClip();
                                 var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
                                 anim.play();
                                 this.ctrlBlock.destroy();
@@ -1106,6 +1181,7 @@ cc.Class({
                 for (let i = 0; i < arr.length + 1; i++) {
                     if (i == arr.length) {
                         setTimeout(() => {
+                            this.playEffectBoomAudioClip();
                             var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
                             anim.play();
                             this.ctrlBlock.destroy();
@@ -1126,6 +1202,7 @@ cc.Class({
         boom.color = this.colorArr[node.level];
         boom.setPosition(cc.v2(node.x, node.y));
         boom.parent = this.blockBox;
+        this.playEffectBoomAudioClip();
         var anim = boom.getComponent(cc.Animation);
         anim.play();
         node.destroy();
@@ -1174,6 +1251,15 @@ cc.Class({
     // 点击开始
     clickStart() {
         this.init();
+    },
+
+    // 播放音效
+    playEffect() {
+        cc.audioEngine.play(this.audioClip, false, 1);
+    },
+
+    playEffectBoomAudioClip() {
+        cc.audioEngine.play(this.boomAudioClip, false, 1);
     },
 
     onLoad() {
