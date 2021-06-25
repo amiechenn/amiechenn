@@ -37,13 +37,13 @@
   },
   "clear-simulator-cache": true,
   "facebook": {
-    "enable": false,
-    "appID": "",
+    "enable": true,
+    "appID": "541606183515187",
     "live": {
       "enable": false
     },
     "audience": {
-      "enable": false
+      "enable": true
     }
   },
   "last-module-event-record-time": 1624358591414

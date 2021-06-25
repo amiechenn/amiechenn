@@ -87,6 +87,8 @@ cc.Class({
             num: 0,
             dir: true
         };
+        this.ctrlBlockArea.zIndex = 99;
+        this.blockBox.zIndex = 1;
         // this.test(); //debug
         // this.testNum = 0; //debug
         // this.testarr = [2, 7, 1,2 , 3, 1,7, 2, 3]; //debug
@@ -1110,7 +1112,10 @@ cc.Class({
                 this.ctrlBlock.getChildByName('ctrlBlock').setContentSize(cc.size(r, r));
                 this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame = this[`block${this.ctrlBlock.level}`];
                 this.ctrlBlock.getChildByName('ctrlBlock').runAction(cc.scaleTo(0.2, 1, 1));
-                this.ctrlBlock.getChildByName('boom').color = this.colorArr[this.ctrlBlock.level];
+                setTimeout(() => {
+                    // 不延迟，上一个爆咋的时候，颜色突然会变成下一个
+                    this.ctrlBlock.getChildByName('boom').color = this.colorArr[this.ctrlBlock.level];
+                },400)
                 this.ctrlBlock.selfArcHarf = levelUpSelfArcHarf;
                 this.ctrlBlock.arc = levelUpArc;
             } else {
