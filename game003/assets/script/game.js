@@ -23,9 +23,9 @@ cc.Class({
     },
     test() {
         let arr = [
-
+            
         ]
-        this.testB = { x: 240.4539643366011, y: -35.084056704043725, level: 4 }
+        this.testB = {x: 68.20162182695145, y: -233.23279953765828, level: 4}
         for (let i = 0; i < arr.length; i++) {
             let item = arr[i];
             let num = item.level;
@@ -45,12 +45,13 @@ cc.Class({
 
             // }
         }
-        // this.createBlock(true, this.testB.level)
+        this.createBlock(true, this.testB.level)
         this.arrToSort()
 
     },
     testClick() {
         this.ctrlBlcokGo(this.testB);
+        this.createBlock(false); // 射出发后马上生成下一个球
     },
 
     init() {
@@ -88,7 +89,7 @@ cc.Class({
         };
         // this.test(); //debug
         // this.testNum = 0; //debug
-        // this.testarr = [2, 7, 1, 7, 3, 1, 2, 5]; //debug
+        // this.testarr = [2, 7, 1,2 , 3, 1,7, 2, 3]; //debug
 
         //第一个球
         this.createBlock(true, 1);
@@ -267,8 +268,8 @@ cc.Class({
             this.ctrlBlcokGo(pos);
             this.randomBlock.num = this.randomBlock.num + 1;
 
-            // this.testNum++;
-            // this.createBlock(false, this.testarr[this.testNum]); //test
+            // this.testNum++;//debug
+            // this.createBlock(false, this.testarr[this.testNum]); //debug
             this.createBlock(false); // 射出发后马上生成下一个球
         }, this)
     },
@@ -318,6 +319,14 @@ cc.Class({
         return newPos
     },
 
+    // 转成角坐标存在的值
+    changeArc(arc){
+        let pi2 = this.pi*2;
+        if (arc < 0) arc = pi2 + arc;
+        if (arc > pi2) arc = arc - pi2;
+        return arc;
+    },
+
     //从小到大排序
     sortMinToMax(arr) {
         if (arr.length > 0) {
@@ -330,9 +339,16 @@ cc.Class({
         }
         return arr
     },
+
     //从右到左排序
     // arr :是从小到大排序的
     sortRightToLeft(blockArr) {
+        // 只有两个球的时候判断顺序
+        if(blockArr.length==2){
+            if(this.isBlockLfetOrRight(blockArr[0], blockArr[1]) == 'left'){
+                return blockArr.reverse();
+            }
+        }
         for (let i = 0; i < blockArr.length; i++) {
             let node = blockArr[i];
             let preNode = blockArr[i - 1];
@@ -396,11 +412,13 @@ cc.Class({
             if (isInside) {
                 if (this.isBlockLfetOrRight(node, this.ctrlBlock) == 'left') { //判断在发射球左（右）边
                     newArc = node.arc - newArc;
+                    newArc = this.changeArc(newArc);
                     moveArcLeft = null;
                     moveArcRight = this.ctrlBlock.selfArcHarf * 2;
                     overlapIndexLeft = i;
                 } else {
                     newArc = node.arc + newArc;
+                    newArc = this.changeArc(newArc);
                     moveArcLeft = this.ctrlBlock.selfArcHarf * 2;
                     moveArcRight = null;
                     overlapIndexLeft = (i == (this.blockArr.length - 1)) ? 0 : i + 1;
@@ -527,12 +545,21 @@ cc.Class({
 
     // 获取两个球之间重叠的角度
     getOverlapArc(nodeLfet, nodeRight) {
-        let pi2 = this.pi * 2;
-        let b1 = nodeRight.selfArcHarf + nodeRight.arc;
-        let a2 = nodeLfet.arc - nodeLfet.selfArcHarf;
+        let pi2 = this.pi * 2; //360度
+        let pi90 = this.pi / 2; // 90度
+        let b1 = this.changeArc(nodeRight.selfArcHarf + nodeRight.arc);
+        let a2 = this.changeArc(nodeLfet.arc - nodeLfet.selfArcHarf);
+        // nodeRight 在第一和nodeLfet在第四象限的时候
+        if (b1 < pi90 && a2 > (pi2 - pi90)) {
+            //在第四象限的点都变成负数
+            a2 = a2 - pi2;
+        }
+        // nodeLfet 在第一和nodeRight在第四象限的时候
+        if (a2 < pi90 && b1 > (pi2 - pi90)) {
+            //在第四象限的点都变成负数
+            b1 = b1 - pi2;
+        }
         let num = b1 - a2;
-        if (num < 0) num = pi2 + num;
-        if (num > pi2) num = num - pi2;
         return num; // 两个球之间重叠部分的占位角度
     },
 
@@ -650,14 +677,11 @@ cc.Class({
     // moveArc: 移动的角度
     moveAllBlcokToLeftOrRight(direction, moveArc, arr, callback) {
         for (let i = 0; i < arr.length; i++) {
-            let pi2 = this.pi * 2;
             let node = arr[i];
             let oldArc = node.arc;
             let newArc = direction == 'left' ? node.arc + moveArc : node.arc - moveArc;
             // 转成角坐标存在的值
-            let newArcToNode = newArc;
-            if (newArc < 0) newArcToNode = pi2 + newArc;
-            if (newArc > pi2) newArcToNode = newArc - pi2;
+            let newArcToNode = this.changeArc(newArc);
             node.arc = newArcToNode;
             let newPos = this.getPosition(newArc, this.circleRadius);
             let moveTo = cc.moveTo(this.speedMove, cc.v2(newPos.x, newPos.y));
@@ -788,6 +812,10 @@ cc.Class({
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
                             setTimeout(()=>{//爆炸动画执行完再执行
+                                if(rightArr.length==0){
+                                    this.moveAllOverCallFun(leftArr, rightArr);
+                                    return;
+                                }
                                 this.oneBlcokChangeCtrlBlock(rightArr[0], () => {
                                     rightArr[0].destroy();
                                     rightArr.splice(0, 1);
@@ -824,6 +852,10 @@ cc.Class({
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
                             setTimeout(()=>{//爆炸动画执行完再执行
+                                if(leftArr.length==0){
+                                    this.moveAllOverCallFun(leftArr, rightArr);
+                                    return;
+                                }
                                 this.oneBlcokChangeCtrlBlock(leftArr[0], () => {
                                     leftArr[0].destroy();
                                     leftArr.splice(0, 1);
@@ -933,8 +965,7 @@ cc.Class({
             newArc = narestBlock.arc + newArc;
         }
         // 转成角坐标存在的值
-        if (newArc < 0) newArc = pi2 + newArc;
-        if (newArc > pi2) newArc = newArc - pi2;
+        newArc = this.changeArc(newArc);
         let oldArc = this.ctrlBlock.arc;
         this.ctrlBlock.arc = newArc;
         let delta = Math.abs(newArc - oldArc); //角度差，要移动的角度
@@ -1099,14 +1130,30 @@ cc.Class({
 
     //  最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
     oneBlcokChangeCtrlBlock(node, callback) {
-        this.ctrlBlock.level = node.level;
-        this.ctrlBlock.setPosition(cc.v2(node.x, node.y));
-        this.ctrlBlock.setContentSize(cc.size(node.width, node.height));
-        this.ctrlBlock.getChildByName('ctrlBlock').setContentSize(cc.size(node.width, node.height));
-        this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame = node.getComponent(cc.Sprite).spriteFrame;
-        this.ctrlBlock.getChildByName('boom').color = this.colorArr[this.ctrlBlock.level];
-        this.ctrlBlock.selfArcHarf = node.selfArcHarf;
-        this.ctrlBlock.arc = node.arc;
+        let num = node.level;
+        let newNode = new cc.Node('Node');
+        let Sprite = new cc.Node('Sprite');
+        Sprite.parent = newNode;
+        Sprite.name = 'ctrlBlock';
+        let sp = Sprite.addComponent(cc.Sprite);
+        sp.sizeMode = 'CUSTOM';
+        sp.spriteFrame = this[`block${num}`];
+        newNode.setPosition(cc.v2(node.x, node.y));
+        let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
+        newNode.setContentSize(cc.size(r, r));
+        Sprite.setContentSize(cc.size(r, r));
+        newNode.selfArcHarf = node.selfArcHarf;
+        newNode.arc = node.arc;
+        newNode.level = num;
+        newNode.parent = this.ctrlBlockArea;
+        // 爆炸效果
+        let boom = cc.instantiate(this.boomPrefal);
+        boom.parent = newNode;
+        boom.color = this.colorArr[num];
+        // 移除ctrlBlock
+        this.ctrlBlock.destroy();
+        // 换成新的ctrlBlock
+        this.ctrlBlock = newNode;
         callback && callback();
     },
 
