@@ -23,9 +23,9 @@ cc.Class({
     },
     test() {
         let arr = [
-            
+
         ]
-        this.testB = {x: 68.20162182695145, y: -233.23279953765828, level: 4}
+        this.testB = { x: 68.20162182695145, y: -233.23279953765828, level: 4 }
         for (let i = 0; i < arr.length; i++) {
             let item = arr[i];
             let num = item.level;
@@ -87,7 +87,8 @@ cc.Class({
             num: 0,
             dir: true
         };
-        this.ctrlBlockArea.zIndex = 99;
+        this.gameOver.zIndex = 10;
+        this.ctrlBlockArea.zIndex = 9;
         this.blockBox.zIndex = 1;
         // this.test(); //debug
         // this.testNum = 0; //debug
@@ -263,7 +264,7 @@ cc.Class({
     },
 
     setTouch() {
-        this.node.on('touchend', function (event) {
+        this.node.on('touchend', function(event) {
             if (!this.clickFlag) return;
             let pos = event.getLocation();
             pos = this.node.convertToNodeSpaceAR(pos);
@@ -322,8 +323,8 @@ cc.Class({
     },
 
     // 转成角坐标存在的值
-    changeArc(arc){
-        let pi2 = this.pi*2;
+    changeArc(arc) {
+        let pi2 = this.pi * 2;
         if (arc < 0) arc = pi2 + arc;
         if (arc > pi2) arc = arc - pi2;
         return arc;
@@ -346,8 +347,8 @@ cc.Class({
     // arr :是从小到大排序的
     sortRightToLeft(blockArr) {
         // 只有两个球的时候判断顺序
-        if(blockArr.length==2){
-            if(this.isBlockLfetOrRight(blockArr[0], blockArr[1]) == 'left'){
+        if (blockArr.length == 2) {
+            if (this.isBlockLfetOrRight(blockArr[0], blockArr[1]) == 'left') {
                 return blockArr.reverse();
             }
         }
@@ -658,14 +659,14 @@ cc.Class({
         // 还有问题，需要做好左右移动完后，才执行moveAllOverCallFun
         // 左边往左移动
         this.moveAllBlcokToLeftOrRight('left', moveArcLeft, obj.leftArr, () => {
-            if (obj.rightArr.length == 0) {
-                if (this.isGameOver) {
-                    return
+                if (obj.rightArr.length == 0) {
+                    if (this.isGameOver) {
+                        return
+                    }
+                    this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
                 }
-                this.moveAllOverCallFun(obj.leftArr, obj.rightArr);
-            }
-        })
-        // 右边边往右移动
+            })
+            // 右边边往右移动
         this.moveAllBlcokToLeftOrRight('right', moveArcRight, obj.rightArr, () => {
             if (this.isGameOver) {
                 return
@@ -744,7 +745,7 @@ cc.Class({
                     // 正常情况
                     let seq = cc.sequence(
                         moveTo,
-                        cc.callFunc(() => { })
+                        cc.callFunc(() => {})
                     );
                     node.runAction(seq);
                 }
@@ -813,8 +814,8 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('right', moveArc, leftArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            setTimeout(()=>{//爆炸动画执行完再执行
-                                if(rightArr.length==0){
+                            setTimeout(() => { //爆炸动画执行完再执行
+                                if (rightArr.length == 0) {
                                     this.moveAllOverCallFun(leftArr, rightArr);
                                     return;
                                 }
@@ -823,8 +824,8 @@ cc.Class({
                                     rightArr.splice(0, 1);
                                     this.moveAllOverCallFun(leftArr, rightArr);
                                 });
-                            },100)
-                        }else{
+                            }, 100)
+                        } else {
                             this.moveAllOverCallFun(leftArr, rightArr);
                         }
                     })
@@ -853,8 +854,8 @@ cc.Class({
                     this.moveAllBlcokToLeftOrRight('left', moveArc, rightArr, () => {
                         if (this.ctrlBlock.level > this.maxLevel) {
                             // 最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
-                            setTimeout(()=>{//爆炸动画执行完再执行
-                                if(leftArr.length==0){
+                            setTimeout(() => { //爆炸动画执行完再执行
+                                if (leftArr.length == 0) {
                                     this.moveAllOverCallFun(leftArr, rightArr);
                                     return;
                                 }
@@ -863,8 +864,8 @@ cc.Class({
                                     leftArr.splice(0, 1);
                                     this.moveAllOverCallFun(leftArr, rightArr);
                                 });
-                            },100)
-                        }else{
+                            }, 100)
+                        } else {
                             this.moveAllOverCallFun(leftArr, rightArr);
                         }
                     })
@@ -1037,42 +1038,42 @@ cc.Class({
                 });
                 return
             } else
-                if (index == 0) {
-                    // 与左边球相同
-                    newBlockArr[index].destroy();
-                    newBlockArr.splice(index, 1);
-                    this.ctrlBlockLevelUp('right', () => {
-                        if (newBlockArr.length > 0) {
-                            // 减去第一个球，第二个球变成第一个球，index还是0
-                            let moveArc = 0;
-                            moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                            this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
-                                this.moveToBlockByCircleCallFun(newBlockArr, 0);
-                            })
-                        } else {
-                            this.changeCtrlBlock();
-                        }
-                    });
-                    return
-                } else {
-                    // 与右边球相同
-                    newBlockArr[index].destroy();
-                    newBlockArr.splice(index, 1);
-                    this.ctrlBlockLevelUp('left', () => {
-                        if (newBlockArr.length > 0) {
-                            let moveArc = 0;
-                            // 减去最后一个球，index要-1
-                            moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
-                            this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
-                                this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
-                            })
-                        } else {
-                            this.changeCtrlBlock();
+            if (index == 0) {
+                // 与左边球相同
+                newBlockArr[index].destroy();
+                newBlockArr.splice(index, 1);
+                this.ctrlBlockLevelUp('right', () => {
+                    if (newBlockArr.length > 0) {
+                        // 减去第一个球，第二个球变成第一个球，index还是0
+                        let moveArc = 0;
+                        moveArc = newBlockArr[0].arc - this.ctrlBlock.arc - newBlockArr[0].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                        this.moveAllBlcokToLeftOrRight('right', moveArc, newBlockArr, () => {
+                            this.moveToBlockByCircleCallFun(newBlockArr, 0);
+                        })
+                    } else {
+                        this.changeCtrlBlock();
+                    }
+                });
+                return
+            } else {
+                // 与右边球相同
+                newBlockArr[index].destroy();
+                newBlockArr.splice(index, 1);
+                this.ctrlBlockLevelUp('left', () => {
+                    if (newBlockArr.length > 0) {
+                        let moveArc = 0;
+                        // 减去最后一个球，index要-1
+                        moveArc = this.ctrlBlock.arc - newBlockArr[index - 1].arc - newBlockArr[index - 1].selfArcHarf - this.ctrlBlock.selfArcHarf;
+                        this.moveAllBlcokToLeftOrRight('left', moveArc, newBlockArr, () => {
+                            this.moveToBlockByCircleCallFun(newBlockArr, index - 1);
+                        })
+                    } else {
+                        this.changeCtrlBlock();
 
-                        }
-                    });
-                    return
-                }
+                    }
+                });
+                return
+            }
         } else {
             this.changeCtrlBlock();
         }
@@ -1115,7 +1116,7 @@ cc.Class({
                 setTimeout(() => {
                     // 不延迟，上一个爆咋的时候，颜色突然会变成下一个
                     this.ctrlBlock.getChildByName('boom').color = this.colorArr[this.ctrlBlock.level];
-                },400)
+                }, 400)
                 this.ctrlBlock.selfArcHarf = levelUpSelfArcHarf;
                 this.ctrlBlock.arc = levelUpArc;
             } else {
@@ -1300,9 +1301,41 @@ cc.Class({
         this.gameOverScore.string = this.scoreLabel.string;
         this.gameOver.active = true;
     },
-    // 点击开始
+    // 点击 重新开始
     clickStart() {
-        this.init();
+        let self = this;
+        let ad = null;
+        // 插播视频
+        FBInstant.getInterstitialAdAsync(
+            '541606183515187_542798350062637'
+        ).then(function(interstitial) {
+            let ad = interstitial;
+            return ad.loadAsync();
+            // interstitial.getPlacementID(); // 'my_placement_id'
+        }).then(function() {
+            // Ad loaded
+            self.init();
+            return ad.showAsync();
+        });
+    },
+    // 点击 复活
+    clickFuhuo() {
+        let self = this;
+        let ad = null;
+        // 激励视频
+        FBInstant.getRewardedVideoAsync(
+            '541606183515187_542797943396011'
+        ).then(function(rewardedVideo) {
+            ad = rewardedVideo;
+            return ad.loadAsync();
+            // rewardedVideo.getPlacementID(); // 'my_placement_id'
+        }).then(function() {
+            // Ad loaded
+            return ad.showAsync();
+        }).then(function() {
+            // Ad watched
+            self.init();
+        });;
     },
 
     // 播放音效
