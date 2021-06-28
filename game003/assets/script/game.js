@@ -15,7 +15,7 @@ cc.Class({
         boomAudioClip: cc.AudioClip,
         handNode: cc.Node,
         scoreImgBox: cc.Node,
-        scoreImgPrefab:cc.Prefab,
+        scoreImgPrefab: cc.Prefab,
     },
     test() {
         let arr = [
@@ -54,7 +54,7 @@ cc.Class({
         this.gameOver.active = false;
         this.ctrlBlockArea.destroyAllChildren();
         this.blockBox.destroyAllChildren();
-        if(str != 'fuhuo') {
+        if (str != 'fuhuo') {
             this.scoreLabel.string = 0;
             this.scoreImg(0);
         }
@@ -162,8 +162,8 @@ cc.Class({
         Sprite.setContentSize(cc.size(r, r));
         node.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
         node.level = num;
-        node.arc = this.getArcAndRadius(0,-this.circleRadius).arc;
-        node.setPosition(cc.v2(0,-this.circleRadius));
+        node.arc = this.getArcAndRadius(0, -this.circleRadius).arc;
+        node.setPosition(cc.v2(0, -this.circleRadius));
         node.parent = this.blockBox;
         this.arrToSort();
         this.handNode.active = true;
@@ -295,7 +295,7 @@ cc.Class({
     setTouch() {
         this.node.on('touchend', function(event) {
             if (!this.clickFlag) return;
-            if(this.handNode.active) {
+            if (this.handNode.active) {
                 this.handNode.active = false;
                 this.handStop();
             }
@@ -1350,7 +1350,7 @@ cc.Class({
             // Ad loaded
             self.init();
             return ad.showAsync();
-        }).catch(function(err){
+        }).catch(function(err) {
             console.log(err);
         });
     },
@@ -1362,23 +1362,23 @@ cc.Class({
         FBInstant.getRewardedVideoAsync(
             '541606183515187_542797943396011'
         ).then(function(rewardedVideo) {
-            if(typeof rewardedVideo !== 'undefined'){
-                if(typeof rewardedVideo.getPlacementID() === 'undefined'){
-                  console.log('can not get placement ID')
+            if (typeof rewardedVideo !== 'undefined') {
+                if (typeof rewardedVideo.getPlacementID() === 'undefined') {
+                    console.log('can not get placement ID')
                 }
                 ad = rewardedVideo;
                 return rewardedVideo.loadAsync()
-              } else {
+            } else {
                 return Promise.reject(new Error('rewardedVideo is undefined'))
-              }
+            }
         }).then(function() {
             // Ad loaded
             return ad.showAsync();
         }).then(function() {
             // Ad watched
-            if(customEventData == 'fuhuo') {
+            if (customEventData == 'fuhuo') {
                 self.init('fuhuo');
-            }else{
+            } else {
                 // change
                 let num = this.randomNum(4);
                 let level = this.ctrlBlock.level;
@@ -1389,8 +1389,8 @@ cc.Class({
                 }
                 this.createBlock(true, num)
             }
-            
-        }).catch(function(err){
+
+        }).catch(function(err) {
             console.log(err);
         });
     },
@@ -1438,18 +1438,18 @@ cc.Class({
 
     // 分数图片
     scoreImg(num) {
-        num = num.toString().split("");
-        let len = this.scoreImgBox.children.length;
-        if(len<num.length){
-            for(let i=0;i<(num.length-len);i++) {
-                let node = cc.instantiate(this.scoreImgPrefab);
-                node.parent = this.scoreImgBox;
-            }
-        }
-        let children = this.scoreImgBox.children;
-        for(let i=0;i<num.length;i++) {
-            children[i].getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(num[i].toString());
-        }
+        // num = num.toString().split("");
+        // let len = this.scoreImgBox.children.length;
+        // if(len<num.length){
+        //     for(let i=0;i<(num.length-len);i++) {
+        //         let node = cc.instantiate(this.scoreImgPrefab);
+        //         node.parent = this.scoreImgBox;
+        //     }
+        // }
+        // let children = this.scoreImgBox.children;
+        // for(let i=0;i<num.length;i++) {
+        //     children[i].getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(num[i].toString());
+        // }
     },
 
 
