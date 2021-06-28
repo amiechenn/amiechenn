@@ -5,6 +5,7 @@ cc.Class({
         blockBox: cc.Node, // 环形上的球的集合
         ctrlBlockArea: cc.Node, // 发射球和待发射球的集合
         blockAtlas: cc.SpriteAtlas,
+        numberAtlas: cc.SpriteAtlas,
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
         scoreLabel: cc.Label,
@@ -13,6 +14,8 @@ cc.Class({
         audioClip: cc.AudioClip,
         boomAudioClip: cc.AudioClip,
         handNode: cc.Node,
+        scoreImgBox: cc.Node,
+        scoreImgPrefab:cc.Prefab,
     },
     test() {
         let arr = [
@@ -53,6 +56,7 @@ cc.Class({
         this.blockBox.destroyAllChildren();
         if(str != 'fuhuo') {
             this.scoreLabel.string = 0;
+            this.scoreImg(0);
         }
         this.colorArr = ['',
             new cc.Color(0, 133, 255, 255),
@@ -1124,6 +1128,7 @@ cc.Class({
         var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
         anim.play();
         this.scoreLabel.string = parseInt(this.scoreLabel.string) + parseInt(this.ctrlBlock.level);
+        this.scoreImg(this.scoreLabel.string);
         let r = this.blockSize + (this.ctrlBlock.level * this.blockSizeAdd); //升级球的直径
         let levelUpSelfArcHarf = this.getBlcokArc(r / 2) / 2; // 升级球的占位角度的一半
         let levelUpArc = this.ctrlBlock.arc;
@@ -1429,6 +1434,22 @@ cc.Class({
     handStop() {
         var anim = this.handNode.getComponent(cc.Animation);
         anim.stop();
+    },
+
+    // 分数图片
+    scoreImg(num) {
+        num = num.toString().split("");
+        let len = this.scoreImgBox.children.length;
+        if(len<num.length){
+            for(let i=0;i<(num.length-len);i++) {
+                let node = cc.instantiate(this.scoreImgPrefab);
+                node.parent = this.scoreImgBox;
+            }
+        }
+        let children = this.scoreImgBox.children;
+        for(let i=0;i<num.length;i++) {
+            children[i].getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(num[i].toString());
+        }
     },
 
 
