@@ -171,7 +171,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f22a91df-337b-43cf-96a5-acd9150810a4"
+      "__uuid__": "f6415c4b-b9f8-48d5-8aa6-b286d3524d82"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -212,7 +212,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "04NnuaBrxM8pb1y8TvQkEE",
     "sync": false
@@ -341,7 +341,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "95fMHXEIBPva3e4Wisy3ez",
     "sync": false
@@ -470,7 +470,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "12Ucqvs3pCrLMCWXSAo2AQ",
     "sync": false
@@ -582,13 +582,9 @@
       "__id__": 14
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "f1ef11f2-7dc2-4ffe-9631-80e35069e96b"
-    },
+    "_defaultClip": null,
     "_clips": [
-      {
-        "__uuid__": "f1ef11f2-7dc2-4ffe-9631-80e35069e96b"
-      }
+      null
     ],
     "playOnLoad": false,
     "_id": ""
@@ -599,7 +595,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "94wet9MDhMIY61eeAqWLsx",
     "sync": false
@@ -711,13 +707,9 @@
       "__id__": 18
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "4f935104-17f0-4cbe-87d1-a4882def6fa5"
-    },
+    "_defaultClip": null,
     "_clips": [
-      {
-        "__uuid__": "4f935104-17f0-4cbe-87d1-a4882def6fa5"
-      }
+      null
     ],
     "playOnLoad": false,
     "_id": ""
@@ -728,7 +720,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "82zsASq/JCeY0eqVMgCST6",
     "sync": false
@@ -840,13 +832,9 @@
       "__id__": 22
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "d3973ebc-037d-491f-9d8a-8bea4ea40517"
-    },
+    "_defaultClip": null,
     "_clips": [
-      {
-        "__uuid__": "d3973ebc-037d-491f-9d8a-8bea4ea40517"
-      }
+      null
     ],
     "playOnLoad": false,
     "_id": ""
@@ -857,7 +845,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "20uSJRHUJO8JiktW+0ZpCC",
     "sync": false
@@ -868,7 +856,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "01a2967f-0bd9-4ecc-befd-3a211187c56f"
     },
     "fileId": "",
     "sync": false

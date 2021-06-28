@@ -4,16 +4,7 @@ cc.Class({
     properties: {
         blockBox: cc.Node, // 环形上的球的集合
         ctrlBlockArea: cc.Node, // 发射球和待发射球的集合
-        // blockAtlas: cc.SpriteAtlas,
-        block1: cc.SpriteFrame,
-        block2: cc.SpriteFrame,
-        block3: cc.SpriteFrame,
-        block4: cc.SpriteFrame,
-        block5: cc.SpriteFrame,
-        block6: cc.SpriteFrame,
-        block7: cc.SpriteFrame,
-        block8: cc.SpriteFrame,
-        block9: cc.SpriteFrame,
+        blockAtlas: cc.SpriteAtlas,
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
         scoreLabel: cc.Label,
@@ -34,7 +25,7 @@ cc.Class({
             aa = new cc.Node('Sprite');
             let sp = aa.addComponent(cc.Sprite);
             sp.sizeMode = 'CUSTOM';
-            sp.spriteFrame = this[`block${num}`];
+            sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
             aa.parent = this.blockBox;
             aa.setPosition(cc.v2(item.x, item.y));
             let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
@@ -56,11 +47,13 @@ cc.Class({
         this.createBlock(false); // 射出发后马上生成下一个球
     },
 
-    init() {
+    init(str) {
         this.gameOver.active = false;
         this.ctrlBlockArea.destroyAllChildren();
         this.blockBox.destroyAllChildren();
-        this.scoreLabel.string = 0;
+        if(str != 'fuhuo') {
+            this.scoreLabel.string = 0;
+        }
         this.colorArr = ['',
             new cc.Color(0, 133, 255, 255),
             new cc.Color(255, 0, 20, 255),
@@ -159,7 +152,7 @@ cc.Class({
         Sprite.parent = node;
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
-        sp.spriteFrame = this[`block${num}`];
+        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
         Sprite.setContentSize(cc.size(r, r));
@@ -171,11 +164,11 @@ cc.Class({
         this.arrToSort();
         this.handNode.active = true;
         this.handPlay();
-        console.log('this.blockBox',this.blockBox)
     },
 
     // 创造新的随机球的发射球
-    createBlock(isFirst, level) {
+    // isCtrlBlock: 是否直接变成控制球
+    createBlock(isCtrlBlock, level) {
         let num = level ? level : this.randomNum(this.canCtrlBlcokLevel);
         // this.waitBlcok = cc.instantiate(this.blockPrefal);
         this.waitBlcok = new cc.Node('Node');
@@ -185,7 +178,7 @@ cc.Class({
         Sprite.name = 'ctrlBlock';
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
-        sp.spriteFrame = this[`block${num}`];
+        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());;
         this.waitBlcok.setPosition(cc.v2(0, 0));
         this.waitBlcok.setScale(cc.v2(0, 0));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
@@ -212,8 +205,9 @@ cc.Class({
                 Motion.color = this.colorArr[num];
                 MotionStreak.parent = this.waitBlcok;
 
-                if (isFirst) {
+                if (isCtrlBlock) {
                     this.ctrlBlock = this.waitBlcok;
+                    this.waitBlcok = null;
                     this.clickFlag = true;
                 }
             })
@@ -221,13 +215,15 @@ cc.Class({
         this.waitBlcok.runAction(seq);
     },
 
-    // 创造新的随机球 是否和附件相同，相同则改成不同的
+    // 创造新的随机球 是否和附近相同，相同则改成不同的
     createBlockCheckIsSame(num) {
         switch (num) {
             case 1:
                 return num + 1;
                 break;
             case 2:
+            case 3:
+            case 4:
                 return num - 1;
                 break;
             default:
@@ -254,7 +250,7 @@ cc.Class({
         Sprite.parent = node;
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
-        sp.spriteFrame = this[`block${num}`];
+        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());;
         node.setScale(cc.v2(0, 0));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
@@ -1144,7 +1140,7 @@ cc.Class({
             if (this.ctrlBlock.level < this.maxLevel + 1) {
                 this.ctrlBlock.setContentSize(cc.size(r, r));
                 this.ctrlBlock.getChildByName('ctrlBlock').setContentSize(cc.size(r, r));
-                this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame = this[`block${this.ctrlBlock.level}`];
+                this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(this.ctrlBlock.level.toString());
                 this.ctrlBlock.getChildByName('ctrlBlock').runAction(cc.scaleTo(0.2, 1, 1));
                 setTimeout(() => {
                     // 不延迟，上一个爆咋的时候，颜色突然会变成下一个
@@ -1176,7 +1172,7 @@ cc.Class({
         Sprite.name = 'ctrlBlock';
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
-        sp.spriteFrame = this[`block${num}`];
+        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
         newNode.setPosition(cc.v2(node.x, node.y));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         newNode.setContentSize(cc.size(r, r));
@@ -1349,26 +1345,69 @@ cc.Class({
             // Ad loaded
             self.init();
             return ad.showAsync();
+        }).catch(function(err){
+            console.log(err);
         });
     },
     // 点击 复活
-    clickFuhuo() {
+    clickFuhuo(event, customEventData) {
         let self = this;
         let ad = null;
         // 激励视频
         FBInstant.getRewardedVideoAsync(
             '541606183515187_542797943396011'
         ).then(function(rewardedVideo) {
-            ad = rewardedVideo;
-            return ad.loadAsync();
-            // rewardedVideo.getPlacementID(); // 'my_placement_id'
+            if(typeof rewardedVideo !== 'undefined'){
+                if(typeof rewardedVideo.getPlacementID() === 'undefined'){
+                  console.log('can not get placement ID')
+                }
+                ad = rewardedVideo;
+                return rewardedVideo.loadAsync()
+              } else {
+                return Promise.reject(new Error('rewardedVideo is undefined'))
+              }
         }).then(function() {
             // Ad loaded
             return ad.showAsync();
         }).then(function() {
             // Ad watched
-            self.init();
-        });;
+            if(customEventData == 'fuhuo') {
+                self.init('fuhuo');
+            }else{
+                // change
+                let num = this.randomNum(4);
+                let level = this.ctrlBlock.level;
+                this.waitBlcok && this.waitBlcok.destroy();
+                this.ctrlBlock && this.ctrlBlock.destroy();
+                if (num == level) {
+                    num = this.createBlockCheckIsSame(num);
+                }
+                this.createBlock(true, num)
+            }
+            
+        }).catch(function(err){
+            console.log(err);
+        });
+    },
+
+    // 分享
+    shareGame() {
+        FBInstant.context.chooseAsync().then(function() {
+            FBInstant.updateAsync({
+                action: "CUSTOM",
+                template: "top_score",
+                cta: "Race " + FBInstant.player.getName(),
+                image: 'BASE64',
+                text: {
+                    default: "I Challenge You To A Race!"
+                },
+                data: {
+                    myReplayData: "..."
+                },
+                strategy: "LAST",
+                notification: "NO_PUSH"
+            }).then(function() {});
+        });
     },
 
     // 播放音效
