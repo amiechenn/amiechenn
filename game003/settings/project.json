@@ -37,7 +37,7 @@
   },
   "clear-simulator-cache": true,
   "facebook": {
-    "enable": true,
+    "enable": false,
     "appID": "541606183515187",
     "live": {
       "enable": false

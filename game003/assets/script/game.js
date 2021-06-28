@@ -13,6 +13,7 @@ cc.Class({
         block6: cc.SpriteFrame,
         block7: cc.SpriteFrame,
         block8: cc.SpriteFrame,
+        block9: cc.SpriteFrame,
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
         scoreLabel: cc.Label,
@@ -20,6 +21,7 @@ cc.Class({
         gameOverScore: cc.Label,
         audioClip: cc.AudioClip,
         boomAudioClip: cc.AudioClip,
+        handNode: cc.Node,
     },
     test() {
         let arr = [
@@ -67,10 +69,12 @@ cc.Class({
             new cc.Color(246, 126, 7, 255),
             new cc.Color(246, 7, 88, 255),
             new cc.Color(0, 255, 5, 255),
+            new cc.Color(106, 58, 58, 255),
+            new cc.Color(251, 11, 11, 255),
         ];
         this.blockSize = 40; //最小球值
         this.blockSizeAdd = 20; //levelup +20
-        this.maxLevel = 7; //最大的值，西瓜的值
+        this.maxLevel = 9; //最大的值，西瓜的值
         this.canCtrlBlcokLevel = 4; // 可以发射的球的最大等级
         this.pi = 3.1415926; //Π
         this.circleRadius = 243; //环的半径
@@ -87,14 +91,16 @@ cc.Class({
             num: 0,
             dir: true
         };
-        this.gameOver.zIndex = 10;
-        this.ctrlBlockArea.zIndex = 9;
         this.blockBox.zIndex = 1;
+        this.ctrlBlockArea.zIndex = 9;
+        this.handNode.zIndex = 10;
+        this.gameOver.zIndex = 11;
         // this.test(); //debug
         // this.testNum = 0; //debug
         // this.testarr = [2, 7, 1,2 , 3, 1,7, 2, 3]; //debug
 
         //第一个球
+        this.firstBlockInCricle();
         this.createBlock(true, 1);
         this.setTouch();
     },
@@ -143,6 +149,29 @@ cc.Class({
         // 换成新的ctrlBlock
         this.ctrlBlock = this.waitBlcok;
         this.arrToSort() //环上的球重新获取并排序
+    },
+
+    // 初始化第一个球再环上
+    firstBlockInCricle() {
+        let num = 1;
+        let node = new cc.Node('Node');
+        let Sprite = new cc.Node('Sprite');
+        Sprite.parent = node;
+        let sp = Sprite.addComponent(cc.Sprite);
+        sp.sizeMode = 'CUSTOM';
+        sp.spriteFrame = this[`block${num}`];
+        let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
+        node.setContentSize(cc.size(r, r));
+        Sprite.setContentSize(cc.size(r, r));
+        node.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
+        node.level = num;
+        node.arc = this.getArcAndRadius(0,-this.circleRadius).arc;
+        node.setPosition(cc.v2(0,-this.circleRadius));
+        node.parent = this.blockBox;
+        this.arrToSort();
+        this.handNode.active = true;
+        this.handPlay();
+        console.log('this.blockBox',this.blockBox)
     },
 
     // 创造新的随机球的发射球
@@ -266,6 +295,10 @@ cc.Class({
     setTouch() {
         this.node.on('touchend', function(event) {
             if (!this.clickFlag) return;
+            if(this.handNode.active) {
+                this.handNode.active = false;
+                this.handStop();
+            }
             let pos = event.getLocation();
             pos = this.node.convertToNodeSpaceAR(pos);
             this.ctrlBlcokGo(pos);
@@ -308,7 +341,7 @@ cc.Class({
 
         }
         // VI +360
-        else if (y < 0 && x > 0) {
+        else if (y < 0 && x >= 0) {
             pos.arc = pos.arc + 2 * this.pi;
         }
         return pos;
@@ -1346,6 +1379,19 @@ cc.Class({
     playEffectBoomAudioClip() {
         cc.audioEngine.play(this.boomAudioClip, false, 1);
     },
+
+    // hand  动画
+    handPlay() {
+        var anim = this.handNode.getComponent(cc.Animation);
+        anim.play();
+    },
+
+    // hand  动画
+    handStop() {
+        var anim = this.handNode.getComponent(cc.Animation);
+        anim.stop();
+    },
+
 
     onLoad() {
         this.init();
