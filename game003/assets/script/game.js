@@ -8,7 +8,6 @@ cc.Class({
         numberAtlas: cc.SpriteAtlas,
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
-        scoreLabel: cc.Label,
         gameOver: cc.Node,
         gameOverScore: cc.Label,
         audioClip: cc.AudioClip,
@@ -55,13 +54,12 @@ cc.Class({
         this.ctrlBlockArea.destroyAllChildren();
         this.blockBox.destroyAllChildren();
         if (str != 'fuhuo') {
-            this.scoreLabel.string = 0;
             this.scoreImg(0);
         }
         this.colorArr = ['',
             new cc.Color(0, 133, 255, 255),
-            new cc.Color(255, 0, 20, 255),
             new cc.Color(143, 13, 216, 255),
+            new cc.Color(255, 0, 20, 255),
             new cc.Color(255, 245, 0, 255),
             new cc.Color(246, 126, 7, 255),
             new cc.Color(246, 7, 88, 255),
@@ -74,7 +72,7 @@ cc.Class({
         this.maxLevel = 9; //最大的值，西瓜的值
         this.canCtrlBlcokLevel = 4; // 可以发射的球的最大等级
         this.pi = 3.1415926; //Π
-        this.circleRadius = 243; //环的半径
+        this.circleRadius = 223; //环的半径
         this.speedMillisecond = 200; // 发射时间毫秒 speedMillisecond  与 speedSecond 相互对应一直
         this.speedSecond = 0.2; // 发射时间秒
         this.speedMove = 0.2; // 球在环上移动时间秒
@@ -136,6 +134,7 @@ cc.Class({
             let sp = block.addComponent(cc.Sprite);
             sp.sizeMode = 'CUSTOM';
             sp.spriteFrame = this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame;
+            sp.srcBlendFactor = cc.macro.BlendFactor.ONE;
             block.parent = this.blockBox;
             block.setPosition(cc.v2(this.ctrlBlock.x, this.ctrlBlock.y));
             block.setContentSize(cc.size(this.ctrlBlock.width, this.ctrlBlock.height));
@@ -157,6 +156,7 @@ cc.Class({
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
         sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
+        sp.srcBlendFactor = cc.macro.BlendFactor.ONE;
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
         Sprite.setContentSize(cc.size(r, r));
@@ -182,7 +182,8 @@ cc.Class({
         Sprite.name = 'ctrlBlock';
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
-        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());;
+        sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
+        sp.srcBlendFactor = cc.macro.BlendFactor.ONE;
         this.waitBlcok.setPosition(cc.v2(0, 0));
         this.waitBlcok.setScale(cc.v2(0, 0));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
@@ -255,6 +256,7 @@ cc.Class({
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
         sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());;
+        sp.srcBlendFactor = cc.macro.BlendFactor.ONE;
         node.setScale(cc.v2(0, 0));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
@@ -1127,8 +1129,7 @@ cc.Class({
         this.playEffectBoomAudioClip();
         var anim = this.ctrlBlock.getChildByName('boom').getComponent(cc.Animation);
         anim.play();
-        this.scoreLabel.string = parseInt(this.scoreLabel.string) + parseInt(this.ctrlBlock.level);
-        this.scoreImg(this.scoreLabel.string);
+        this.scoreImg(parseInt(this.score) + parseInt(this.ctrlBlock.level));
         let r = this.blockSize + (this.ctrlBlock.level * this.blockSizeAdd); //升级球的直径
         let levelUpSelfArcHarf = this.getBlcokArc(r / 2) / 2; // 升级球的占位角度的一半
         let levelUpArc = this.ctrlBlock.arc;
@@ -1146,6 +1147,7 @@ cc.Class({
                 this.ctrlBlock.setContentSize(cc.size(r, r));
                 this.ctrlBlock.getChildByName('ctrlBlock').setContentSize(cc.size(r, r));
                 this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(this.ctrlBlock.level.toString());
+                this.ctrlBlock.getChildByName('ctrlBlock').getComponent(cc.Sprite).srcBlendFactor = cc.macro.BlendFactor.ONE;
                 this.ctrlBlock.getChildByName('ctrlBlock').runAction(cc.scaleTo(0.2, 1, 1));
                 setTimeout(() => {
                     // 不延迟，上一个爆咋的时候，颜色突然会变成下一个
@@ -1165,7 +1167,7 @@ cc.Class({
                 this.ctrlBlock.selfArcHarf = 0;
             }
             callback && callback();
-        }, 200)
+        }, this.speedMillisecond)
     },
 
     //  最大球爆炸后，this.ctrlBlock代替数组中的球去检测碰撞
@@ -1178,6 +1180,7 @@ cc.Class({
         let sp = Sprite.addComponent(cc.Sprite);
         sp.sizeMode = 'CUSTOM';
         sp.spriteFrame = this.blockAtlas.getSpriteFrame(num.toString());
+        sp.srcBlendFactor = cc.macro.BlendFactor.ONE;
         newNode.setPosition(cc.v2(node.x, node.y));
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         newNode.setContentSize(cc.size(r, r));
@@ -1332,7 +1335,7 @@ cc.Class({
     // 游戏结束切换结束页，并重新开始
     gameOverScene() {
         // reset all param
-        this.gameOverScore.string = this.scoreLabel.string;
+        this.gameOverScore.string = this.score;
         this.gameOver.active = true;
     },
     // 点击 重新开始
@@ -1438,18 +1441,19 @@ cc.Class({
 
     // 分数图片
     scoreImg(num) {
-        // num = num.toString().split("");
-        // let len = this.scoreImgBox.children.length;
-        // if(len<num.length){
-        //     for(let i=0;i<(num.length-len);i++) {
-        //         let node = cc.instantiate(this.scoreImgPrefab);
-        //         node.parent = this.scoreImgBox;
-        //     }
-        // }
-        // let children = this.scoreImgBox.children;
-        // for(let i=0;i<num.length;i++) {
-        //     children[i].getComponent(cc.Sprite).spriteFrame = this.blockAtlas.getSpriteFrame(num[i].toString());
-        // }
+        this.score = num;
+        num = this.score.toString().split("");
+        let len = this.scoreImgBox.children.length;
+        if(len<num.length){
+            for(let i=0;i<(num.length-len);i++) {
+                let node = cc.instantiate(this.scoreImgPrefab);
+                node.parent = this.scoreImgBox;
+            }
+        }
+        let children = this.scoreImgBox.children;
+        for(let i=0;i<num.length;i++) {
+            children[i].getComponent(cc.Sprite).spriteFrame = this.numberAtlas.getSpriteFrame(num[i].toString());
+        }
     },
 
 

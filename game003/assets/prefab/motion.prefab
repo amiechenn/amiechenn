@@ -92,7 +92,7 @@
     "_minSeg": 1,
     "_stroke": 40,
     "_texture": {
-      "__uuid__": "567dcd80-8bf4-4535-8a5a-313f1caf078a"
+      "__uuid__": "08d33c99-373d-4478-ba51-633fbdc55174"
     },
     "_color": {
       "__type__": "cc.Color",
@@ -111,7 +111,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "74a3efcb-5ec2-4f6f-938d-f65eac045eb3"
     },
     "fileId": "",
     "sync": false
