@@ -57,15 +57,15 @@ cc.Class({
             this.scoreImg(0);
         }
         this.colorArr = ['',
-            new cc.Color(0, 133, 255, 255),
-            new cc.Color(143, 13, 216, 255),
-            new cc.Color(255, 0, 20, 255),
-            new cc.Color(255, 245, 0, 255),
-            new cc.Color(246, 126, 7, 255),
-            new cc.Color(246, 7, 88, 255),
-            new cc.Color(0, 255, 5, 255),
-            new cc.Color(106, 58, 58, 255),
-            new cc.Color(251, 11, 11, 255),
+            new cc.Color(50, 125, 243, 255),
+            new cc.Color(110, 8, 159, 255),
+            new cc.Color(218, 27, 19, 255),
+            new cc.Color(243, 205, 28, 255),
+            new cc.Color(254, 114, 29, 255),
+            new cc.Color(234, 138, 155, 255),
+            new cc.Color(128, 196, 119, 255),
+            new cc.Color(113, 68, 12, 255),
+            new cc.Color(48, 154, 0, 255),
         ];
         this.blockSize = 40; //最小球值
         this.blockSizeAdd = 20; //levelup +20
@@ -92,7 +92,7 @@ cc.Class({
         this.gameOver.zIndex = 11;
         // this.test(); //debug
         // this.testNum = 0; //debug
-        // this.testarr = [2, 7, 1,2 , 3, 1,7, 2, 3]; //debug
+        // this.testarr = [4, 5, 6,7 , 8, 9,7, 2, 3]; //debug
 
         //第一个球
         this.firstBlockInCricle();
