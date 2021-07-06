@@ -1,3 +1,5 @@
+const common = require("./common");
+
 cc.Class({
     extends: cc.Component,
 
@@ -9,20 +11,25 @@ cc.Class({
         numberAtlas: cc.SpriteAtlas,
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
-        gameOver: cc.Node,
-        gameOverScore: cc.Node,
-        gameOverScoreImgPrefab: cc.Prefab,
         audioClip: cc.AudioClip,
         boomAudioClip: cc.AudioClip,
         handNode: cc.Node,
         scoreImgBox: cc.Node,
         scoreImgPrefab: cc.Prefab,
+        gameOverNode: cc.Node,
     },
     test() {
         let arr = [
-
+            {x: -149.9357447997648, y: -165.07050745466253, level: 1, acr: 3.974999756571179, selfArcHarf: 0.08971618416929489},
+ {x: -100.60762101767565, y: -199.01534260745765, level: 3, acr: 4.244329532482892, selfArcHarf: 0.179613538152625},
+ {x: -34.16565121603093, y: -220.36721234563123, level: 2, acr: 4.5585739260165425, selfArcHarf: 0.13463080179123252},
+ {x: 45.505398559752386, y: -218.30771562617315, level: 4, acr: 4.917892364973209, selfArcHarf: 0.224687583575641},
+ {x: 143.6720783030873, y: -170.55009210220783, level: 5, acr: 5.412456499791622, selfArcHarf: 0.2698765512427715},
+ {x: 207.14595427782908, y: -82.58058867753081, level: 4, acr: 5.903835434610035, selfArcHarf: 0.224687583575641},
+ {x: 222.9117344138634, y: 6.273648109609809, level: 3, acr: 0.028136663517886136, selfArcHarf: 0.179613538152625},
+ {x: -188.45333636952273, y: -119.2239070455062, level: 3, acr: 3.705669980659466, selfArcHarf: 0.179613538152625}
         ]
-        this.testB = { x: 68.20162182695145, y: -233.23279953765828, level: 4 }
+        this.testB = {x: -184.56490646513976, y: -125.15907998029633, level: 4}
         for (let i = 0; i < arr.length; i++) {
             let item = arr[i];
             let num = item.level;
@@ -52,11 +59,10 @@ cc.Class({
     },
 
     init(str) {
-        this.score = 199;
-        this.gameOverScoreImg();
-        this.gameOver.active = true;
+        // this.gameOverNode.getComponent('gameOver').gameOverScoreImg(199);
+        // this.gameOverNode.active = true;
         // test
-        // this.gameOver.active = false;
+        this.gameOverNode.active = false;
         this.ctrlBlockArea.destroyAllChildren();
         this.blockBox.destroyAllChildren();
         if (str != 'fuhuo') {
@@ -78,6 +84,7 @@ cc.Class({
         this.maxLevel = 9; //最大的值，西瓜的值
         this.canCtrlBlcokLevel = 4; // 可以发射的球的最大等级
         this.pi = 3.1415926; //Π
+        window.circleRadius = 223;
         this.circleRadius = 223; //环的半径
         this.speedMillisecond = 200; // 发射时间毫秒 speedMillisecond  与 speedSecond 相互对应一直
         this.speedSecond = 0.2; // 发射时间秒
@@ -86,7 +93,7 @@ cc.Class({
         this.ctrlBlock = null; // 发射球
         this.clickFlag = false; // 控制是否可发射，执行完一个球，createBlock成功后才可发射
         this.blockArr = []; // 所有球
-        this.maxNumInCircle = parseInt(6.28 / this.getBlcokArc((this.blockSize + ((this.maxLevel - 1) * this.blockSizeAdd) / 2)));
+        this.maxNumInCircle = parseInt(6.28 / common.getBlcokArc((this.blockSize + ((this.maxLevel - 1) * this.blockSizeAdd) / 2)));
         this.isGameOver = false; // 是否游戏结束
         this.randomBlock = {
             num: 0,
@@ -95,7 +102,7 @@ cc.Class({
         this.blockBox.zIndex = 1;
         this.ctrlBlockArea.zIndex = 9;
         this.handNode.zIndex = 10;
-        this.gameOver.zIndex = 11;
+        this.gameOverNode.zIndex = 11;
         // this.test(); //debug
         // this.testNum = 0; //debug
         // this.testarr = [4, 5, 6,7 , 8, 9,7, 2, 3]; //debug
@@ -106,25 +113,7 @@ cc.Class({
         this.setTouch();
     },
 
-    //随机球1-4 
-    randomNum(canCtrlBlcokLevel) {
-        // 1-3 都是3次概率
-        let num = Math.ceil(Math.random() * ((canCtrlBlcokLevel - 3) * 2 + 9));
-        // 未完善，先写死最多4
-        if (1 <= num && num <= 3) {
-            return 1;
-        }
-        if (4 <= num && num <= 6) {
-            return 2;
-        }
-        if (7 <= num && num <= 9) {
-            return 3;
-        }
-        if (10 <= num && num <= 11) {
-            return 4;
-        }
-        return 1
-    },
+    
 
     //移除球射出的拖尾效果
     romoveMotion() {
@@ -166,9 +155,9 @@ cc.Class({
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
         Sprite.setContentSize(cc.size(r, r));
-        node.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
+        node.selfArcHarf = common.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
         node.level = num;
-        node.arc = this.getArcAndRadius(0, -this.circleRadius).arc;
+        node.arc = common.getArcAndRadius(0, -this.circleRadius).arc;
         node.setPosition(cc.v2(0, -this.circleRadius));
         node.parent = this.blockBox;
         this.arrToSort();
@@ -179,8 +168,7 @@ cc.Class({
     // 创造新的随机球的发射球
     // isCtrlBlock: 是否直接变成控制球
     createBlock(isCtrlBlock, level) {
-        let num = level ? level : this.randomNum(this.canCtrlBlcokLevel);
-        // this.waitBlcok = cc.instantiate(this.blockPrefal);
+        let num = level ? level : common.randomNum(this.canCtrlBlcokLevel);
         this.waitBlcok = new cc.Node('Node');
         this.waitBlcok.parent = this.ctrlBlockArea;
         let Sprite = new cc.Node('Sprite');
@@ -195,7 +183,7 @@ cc.Class({
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         this.waitBlcok.setContentSize(cc.size(r, r));
         Sprite.setContentSize(cc.size(r, r));
-        this.waitBlcok.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
+        this.waitBlcok.selfArcHarf = common.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
         this.waitBlcok.level = num;
         // 爆炸效果
         let boom = cc.instantiate(this.boomPrefal);
@@ -226,34 +214,20 @@ cc.Class({
         this.waitBlcok.runAction(seq);
     },
 
-    // 创造新的随机球 是否和附近相同，相同则改成不同的
-    createBlockCheckIsSame(num) {
-        switch (num) {
-            case 1:
-                return num + 1;
-                break;
-            case 2:
-            case 3:
-            case 4:
-                return num - 1;
-                break;
-            default:
-                return num - 1;
-        }
-    },
+    
 
     // 创造新的随机球 在圆环上
     // arr :从右到左排序
     createBlockByCircle(arr) {
-        let num = this.randomNum(3);
+        let num = common.randomNum(3);
         let lastNode = null;
         if (this.randomBlock.dir) { //left
             if (num == arr[0].level) {
-                num = this.createBlockCheckIsSame(num);
+                num = common.createBlockCheckIsSame(num);
             }
         } else {
             if (num == arr[arr.length - 1].level) {
-                num = this.createBlockCheckIsSame(num);
+                num = common.createBlockCheckIsSame(num);
             }
         }
         let node = new cc.Node('Node');
@@ -267,7 +241,7 @@ cc.Class({
         let r = this.blockSize + ((num - 1) * this.blockSizeAdd);
         node.setContentSize(cc.size(r, r));
         Sprite.setContentSize(cc.size(r, r));
-        node.selfArcHarf = this.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
+        node.selfArcHarf = common.getBlcokArc(r / 2) / 2; // 固定球占位角度数的一半
         node.level = num;
         let pos = {},
             arc = null;
@@ -280,10 +254,10 @@ cc.Class({
             lastNode = arr[0];
         }
         node.arc = arc;
-        pos = this.getPosition(arc, this.circleRadius);
+        pos = common.getPosition(arc, this.circleRadius);
         node.setPosition(cc.v2(pos.x, pos.y));
         // 判断随机增加的球是否和另一侧最后一个球重叠，重叠则结束游戏
-        this.isGameOver = arr.length > this.maxNumInCircle ? this.checkBlackIsOverlap(lastNode, node) : false;
+        this.isGameOver = arr.length > this.maxNumInCircle ? common.checkBlackIsOverlap(lastNode, node) : false;
         node.parent = this.blockBox;
         let scaleTo = cc.scaleTo(0.2, 1, 1);
         let seq = cc.sequence(
@@ -320,102 +294,20 @@ cc.Class({
     // 点击发射球 获取发射到的位置
     ctrlBlcokGo(pos) {
         this.clickFlag = false;
-        let aPos = this.getArcAndRadius(pos.x, pos.y); //获取发射角度
-        let bPos = this.getPosition(aPos.arc, this.circleRadius); //获取发射到环上的xy位置
+        let aPos = common.getArcAndRadius(pos.x, pos.y); //获取发射角度
+        let bPos = common.getPosition(aPos.arc, this.circleRadius); //获取发射到环上的xy位置
         this.actionBy = cc.moveTo(this.speedSecond, cc.v2(bPos.x, bPos.y)); //移动到xy位置的运动
         this.ctrlBlock.arc = aPos.arc;
         console.log('发射求的位置xy', { x: bPos.x, y: bPos.y, level: this.ctrlBlock.level })
         this.checkBlack();
     },
 
-    // 获取球的占位角度数
-    getBlcokArc(blockRadius) { //blockRadius:球半径
-        let arc = Math.asin(blockRadius / 2 / this.circleRadius) * 2;
-        return arc * 2;
-    },
-
-    // 获取点击的角度(xy坐标转角坐标)
-    getArcAndRadius(x, y) {
-        let pos = {};
-        pos.r = Math.sqrt(x * x + y * y);
-        pos.arc = Math.atan(y / x);
-        // II +180
-        if (y > 0 && x < 0) {
-            pos.arc = pos.arc + this.pi;
-        }
-        // III +180
-        else if (y < 0 && x < 0) {
-            pos.arc = pos.arc + this.pi;
-
-        }
-        // VI +360
-        else if (y < 0 && x >= 0) {
-            pos.arc = pos.arc + 2 * this.pi;
-        }
-        return pos;
-    },
-
-    // 获取点击后对应圆圈上的点（角坐标转xy坐标）
-    getPosition(arc, radius) {
-        let newPos = {};
-        newPos.x = radius * Math.cos(arc);
-        newPos.y = radius * Math.sin(arc);
-        return newPos
-    },
-
-    // 转成角坐标存在的值
-    changeArc(arc) {
-        let pi2 = this.pi * 2;
-        if (arc < 0) arc = pi2 + arc;
-        if (arc > pi2) arc = arc - pi2;
-        return arc;
-    },
-
-    //从小到大排序
-    sortMinToMax(arr) {
-        if (arr.length > 0) {
-            for (let i = 0; i < arr.length; i++) {
-                var item = arr[i];
-                item.arc = this.getArcAndRadius(item.x, item.y).arc;
-                item.selfArcHarf = this.getBlcokArc(item.width / 2) / 2; // 固定球占位角度数的一半
-            }
-            arr = arr.sort((a, b) => a.arc - b.arc);
-        }
-        return arr
-    },
-
-    //从右到左排序
-    // arr :是从小到大排序的
-    sortRightToLeft(blockArr) {
-        // 只有两个球的时候判断顺序
-        if (blockArr.length == 2) {
-            if (this.isBlockLfetOrRight(blockArr[0], blockArr[1]) == 'left') {
-                return blockArr.reverse();
-            }
-        }
-        for (let i = 0; i < blockArr.length; i++) {
-            let node = blockArr[i];
-            let preNode = blockArr[i - 1];
-            if (node.x == 0 && node.y == 0) continue;
-            let isBySide = null; // 和左边球是否挨着
-            if (i != 0) {
-                isBySide = this.checkBlockBySide(node, preNode);
-                if (!isBySide) {
-                    let a = blockArr.slice(0, i);
-                    let b = blockArr.slice(i, blockArr.length);
-                    return b.concat(a);
-                }
-            }
-        }
-        return blockArr;
-    },
-
     // 获取每个球所在角度+从小到大排序
     arrToSort() {
         if (this.randomBlock.num == 3) {
             let arr = this.blockBox.children;
-            arr = this.sortMinToMax(arr);
-            arr = this.sortRightToLeft(arr);
+            arr = common.sortMinToMax(arr);
+            arr = common.sortRightToLeft(arr);
             this.createBlockByCircle(arr);
             this.randomBlock.num = 0;
             this.randomBlock.dir = !this.randomBlock.dir;
@@ -423,7 +315,7 @@ cc.Class({
         // 
         if (!this.isGameOver) {
             let arr = this.blockBox.children;
-            this.blockArr = this.sortMinToMax(arr);
+            this.blockArr = common.sortMinToMax(arr);
             this.clickFlag = true; // 排序后才可以点击发射
         }
     },
@@ -451,24 +343,24 @@ cc.Class({
         for (let i = 0; i < this.blockArr.length; i++) {
             let node = this.blockArr[i];
             if (node.x == 0 && node.y == 0) continue;
-            let isInside = this.checkBlackIsInside(node, this.ctrlBlock); //是否嵌套
+            let isInside = common.checkBlackIsInside(node, this.ctrlBlock); //是否嵌套
             let newArc = this.ctrlBlock.selfArcHarf + node.selfArcHarf;
             if (isInside) {
-                if (this.isBlockLfetOrRight(node, this.ctrlBlock) == 'left') { //判断在发射球左（右）边
+                if (common.isBlockLfetOrRight(node, this.ctrlBlock) == 'left') { //判断在发射球左（右）边
                     newArc = node.arc - newArc;
-                    newArc = this.changeArc(newArc);
+                    newArc = common.changeArc(newArc);
                     moveArcLeft = null;
                     moveArcRight = this.ctrlBlock.selfArcHarf * 2;
                     overlapIndexLeft = i;
                 } else {
                     newArc = node.arc + newArc;
-                    newArc = this.changeArc(newArc);
+                    newArc = common.changeArc(newArc);
                     moveArcLeft = this.ctrlBlock.selfArcHarf * 2;
                     moveArcRight = null;
                     overlapIndexLeft = (i == (this.blockArr.length - 1)) ? 0 : i + 1;
                 }
                 this.ctrlBlock.arc = newArc;
-                let pos = this.getPosition(newArc, this.circleRadius);
+                let pos = common.getPosition(newArc, this.circleRadius);
                 this.actionBy = cc.moveTo(this.speedSecond, cc.v2(pos.x, pos.y));
                 // 把发射球改变发射到的位置，改成嵌套求的左（右）边
                 this.playEffect();
@@ -487,15 +379,15 @@ cc.Class({
         for (let i = 0; i < this.blockArr.length; i++) {
             let node = this.blockArr[i];
             if (node.x == 0 && node.y == 0) continue;
-            let isOverlap = this.checkBlackIsOverlap(node, this.ctrlBlock);
+            let isOverlap = common.checkBlackIsOverlap(node, this.ctrlBlock);
             if (isOverlap) {
-                if (this.isBlockLfetOrRight(node, this.ctrlBlock) == 'left') {
+                if (common.isBlockLfetOrRight(node, this.ctrlBlock) == 'left') {
                     // 在发射球的左侧
-                    moveArcLeft = this.getOverlapArc(node, this.ctrlBlock);
+                    moveArcLeft = common.getOverlapArc(node, this.ctrlBlock);
                     overlapIndexLeft = i;
                 } else {
                     // 在发射球的右侧
-                    moveArcRight = this.getOverlapArc(this.ctrlBlock, node);
+                    moveArcRight = common.getOverlapArc(this.ctrlBlock, node);
                     overlapIndexRight = i;
                 }
             }
@@ -515,108 +407,6 @@ cc.Class({
         }
     },
 
-    // 检测两个是否嵌套(ctrlBlock是否嵌套在node内)
-    checkBlackIsInside(nodeA, nodeB) {
-        // 有重叠才会有嵌套，跨越3个现象的会计算出错，先判断是否重叠
-        let isOverlap = this.checkBlackIsOverlap(nodeA, nodeB);
-        if (!isOverlap) return false;
-        let pi2 = this.pi * 2; //360度
-        let pi90 = this.pi / 2; // 90度
-        // 获取两个球与环上切点的角度
-        let a1 = nodeA.arc + nodeA.selfArcHarf;
-        let a2 = nodeA.arc - nodeA.selfArcHarf;
-        let b1 = nodeB.arc + nodeB.selfArcHarf;
-        let b2 = nodeB.arc - nodeB.selfArcHarf;
-        // 如果是负数或者大于360度的，则转为360度内的数值
-        if (a1 > pi2) a1 = a1 - pi2;
-        if (a1 < 0) a1 = pi2 + a1;
-        if (a2 > pi2) a2 = a2 - pi2;
-        if (a2 < 0) a2 = pi2 + a2;
-        if (b1 > pi2) b1 = b1 - pi2;
-        if (b1 < 0) b1 = pi2 - b1;
-        if (b2 > pi2) b2 = b2 - pi2;
-        if (b2 < 0) b2 = pi2 + b2;
-        // 球跨越第一和第四象限的时候
-        if (a1 < pi90 && a2 > (pi2 - pi90)) {
-            //在第四象限的点都变成负数
-            a2 = a2 - pi2;
-            if (b1 > (pi2 - pi90)) b1 = b1 - pi2;
-            if (b2 > (pi2 - pi90)) b2 = b2 - pi2;
-        }
-        // 球跨越第一和第四象限的时候
-        if (b1 < pi90 && b2 > (pi2 - pi90)) {
-            //在第四象限的点都变成负数
-            b2 = b2 - pi2;
-            if (a1 > (pi2 - pi90)) a1 = a1 - pi2;
-            if (a2 > (pi2 - pi90)) a2 = a2 - pi2;
-        }
-        if (nodeA.width > nodeB.width) {
-            if (a1 >= b1 && a2 <= b2) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (b1 >= a1 && b2 <= a2) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    },
-
-    // 检测两个是否重叠（碰撞预测）
-    checkBlackIsOverlap(node1, node2) {
-        let delta = this.getDelta(node1, node2);
-        if (delta.toFixed(6) < (node1.selfArcHarf + node2.selfArcHarf).toFixed(6)) { // 角度差 小于两个球各一半的占位角度,则碰撞
-            return true;
-        }
-        return false;
-    },
-
-    //检测两个球是否挨着
-    checkBlockBySide(node1, node2) {
-        let delta = this.getDelta(node1, node2);
-        // console.log('delta3', Math.abs(delta).toFixed(6), (node1.selfArcHarf + node2.selfArcHarf).toFixed(6))
-        // console.log('delta4', delta, node1.selfArcHarf + node2.selfArcHarf)
-        // console.log('+0.082327', node1.selfArcHarf + node2.selfArcHarf + 0.082327)
-        // 不知道那里导致球与球之间右细微的距离，所有加上0.00001
-        if (delta.toFixed(6) > ((node1.selfArcHarf + node2.selfArcHarf + 0.00001).toFixed(6))) { // 角度差 大于两球各一半的占位角度,则不挨
-            return false;
-        }
-        return true;
-    },
-
-    // 获取两个球之间重叠的角度
-    getOverlapArc(nodeLfet, nodeRight) {
-        let pi2 = this.pi * 2; //360度
-        let pi90 = this.pi / 2; // 90度
-        let b1 = this.changeArc(nodeRight.selfArcHarf + nodeRight.arc);
-        let a2 = this.changeArc(nodeLfet.arc - nodeLfet.selfArcHarf);
-        // nodeRight 在第一和nodeLfet在第四象限的时候
-        if (b1 < pi90 && a2 > (pi2 - pi90)) {
-            //在第四象限的点都变成负数
-            a2 = a2 - pi2;
-        }
-        // nodeLfet 在第一和nodeRight在第四象限的时候
-        if (a2 < pi90 && b1 > (pi2 - pi90)) {
-            //在第四象限的点都变成负数
-            b1 = b1 - pi2;
-        }
-        let num = b1 - a2;
-        return num; // 两个球之间重叠部分的占位角度
-    },
-
-    //重新排序，以发射球左边为第一个,从左到右排序
-    // IndexLeft发射球左边第一个球的index
-    reSort(IndexLeft) {
-        let aArr = [],
-            bArr = [];
-        aArr = this.blockArr.slice(IndexLeft, this.blockArr.length);
-        bArr = this.blockArr.slice(0, IndexLeft);
-        return aArr.concat(bArr);
-    },
-
     // 拆分成两个数组，左右两边各一个
     splitBlockArr(blockArr) {
         for (let i = 0; i < blockArr.length; i++) {
@@ -627,16 +417,16 @@ cc.Class({
             let isBlockLfetOrRight = null;
             if (i == 0) {
                 // 第一个球和发射球对比是否挨着
-                isBySide = this.checkBlockBySide(this.ctrlBlock, node);
-                isBlockLfetOrRight = this.isBlockLfetOrRight(node, this.ctrlBlock);
+                isBySide = common.checkBlockBySide(this.ctrlBlock, node);
+                isBlockLfetOrRight = common.isBlockLfetOrRight(node, this.ctrlBlock);
                 if (blockArr.length > 1 && (this.ctrlBlock.arc - this.ctrlBlock.selfArcHarf) < node.arc) {
                     // 如果发射球因发射在比自身大的球的内部偏左，发射球则自己向左移动到大球左边，
                     // 则发射球左边第一个球如果半径小于发射球，则isBlockLfetOrRight返回right，但其实该球是在发射球的left
                     isBlockLfetOrRight = 'left';
                 }
             } else {
-                isBySide = this.checkBlockBySide(preNode, node);
-                isBlockLfetOrRight = this.isBlockLfetOrRight(node, preNode);
+                isBySide = common.checkBlockBySide(preNode, node);
+                isBlockLfetOrRight = common.isBlockLfetOrRight(node, preNode);
             }
             // 如果没挨着|| 挨着但是在球的右边（当只有两个球的时候会出现这情况） || 没有左边球（暂时没有这情况）
             // 则断开，分成左右两边的数组
@@ -667,7 +457,7 @@ cc.Class({
         if (overlapIndexLeft == null) {
             overlapIndexLeft = overlapIndexRight + 1;
         }
-        blockArr = this.reSort(overlapIndexLeft);
+        blockArr = common.reSort(overlapIndexLeft,this.blockArr);
 
         // test测试打印
         let testArr = [];
@@ -675,26 +465,10 @@ cc.Class({
             let item = blockArr[i]
             testArr[i] = { 'x': item.x, 'y': item.y, 'level': item.level, 'acr': item.arc, 'selfArcHarf': item.selfArcHarf };
         }
-        console.log('copyArray', testArr)
+        console.log('copyArray', testArr,overlapIndexLeft)
 
         let obj = { leftArr: [], rightArr: [] }; // 拆分成两边，leftArr为发射球左边，rightArr发射球右边
-        // if (blockArr.length == 1) {
-        //     //  只有一个的时候，只要判断往左还是右移动即可
-        //     if (moveArcLeft) {
-        //         obj = {
-        //             leftArr: blockArr,
-        //             rightArr: [],
-        //         }
-        //     }
-        //     if (moveArcRight) {
-        //         obj = {
-        //             leftArr: [],
-        //             rightArr: blockArr,
-        //         }
-        //     }
-        // } else {
         obj = this.splitBlockArr(blockArr);
-        // }
         // 判断是否游戏结束
         this.isGameOver = blockArr.length > this.maxNumInCircle ? this.checkIsGameOver(obj.leftArr, obj.rightArr, moveArcLeft, moveArcRight) : false;
         // 还有问题，需要做好左右移动完后，才执行moveAllOverCallFun
@@ -725,9 +499,9 @@ cc.Class({
             let oldArc = node.arc;
             let newArc = direction == 'left' ? node.arc + moveArc : node.arc - moveArc;
             // 转成角坐标存在的值
-            let newArcToNode = this.changeArc(newArc);
+            let newArcToNode = common.changeArc(newArc);
             node.arc = newArcToNode;
-            let newPos = this.getPosition(newArc, this.circleRadius);
+            let newPos = common.getPosition(newArc, this.circleRadius);
             let moveTo = cc.moveTo(this.speedMove, cc.v2(newPos.x, newPos.y));
             if (i == arr.length - 1) {
                 // 移动太长，两个西瓜爆炸后
@@ -745,7 +519,7 @@ cc.Class({
                             actArray.push(callFunc);
                         } else {
                             let arc = direction == 'left' ? oldArc + (moveMax * (j + 1)) : oldArc - (moveMax * (j + 1));
-                            let pos = this.getPosition(arc, this.circleRadius);
+                            let pos = common.getPosition(arc, this.circleRadius);
                             let moveToItem = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveToItem);
                         }
@@ -775,7 +549,7 @@ cc.Class({
                             actArray.push(moveToItem);
                         } else {
                             let arc = direction == 'left' ? oldArc + (moveMax * (j + 1)) : oldArc - (moveMax * (j + 1));
-                            let pos = this.getPosition(arc, this.circleRadius);
+                            let pos = common.getPosition(arc, this.circleRadius);
                             let moveToItem = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveToItem);
                         }
@@ -816,7 +590,7 @@ cc.Class({
             this.ctrlBlockLevelUp('mid', () => {
                 // 还有问题，需要做好左右移动完后，才执行moveAllOverCallFun
                 if (leftArr.length > 0) {
-                    let moveArc = this.getOverlapArc(leftArr[0], this.ctrlBlock);
+                    let moveArc = common.getOverlapArc(leftArr[0], this.ctrlBlock);
                     this.moveAllBlcokToLeftOrRight('left', moveArc, leftArr, () => {
                         if (rightArr.length == 0) {
                             this.moveAllOverCallFun(leftArr, rightArr);
@@ -824,7 +598,7 @@ cc.Class({
                     })
                 }
                 if (rightArr.length > 0) {
-                    let moveArc = this.getOverlapArc(this.ctrlBlock, rightArr[0]);
+                    let moveArc = common.getOverlapArc(this.ctrlBlock, rightArr[0]);
                     this.moveAllBlcokToLeftOrRight('right', moveArc, rightArr, () => {
                         this.moveAllOverCallFun(leftArr, rightArr);
                     })
@@ -918,28 +692,7 @@ cc.Class({
         }
     },
 
-    // 判断球在ctrlBlock的右边还是左边，也可以用作判断其他球之间，返回结果是第一个参数球在第二个参数球的左（右）边
-    isBlockLfetOrRight(node, ctrlBlock) {
-        if (ctrlBlock === undefined || node === undefined) {
-            return '';
-        }
-        let ctrlBlockArc = ctrlBlock.arc;
-        let oppositeArc = ctrlBlockArc > this.pi ? ctrlBlockArc - this.pi : ctrlBlockArc + this.pi; // 发射球的对角位置度数
-        if (ctrlBlockArc <= this.pi) { //发射球所在角度小于180度
-            if (node.arc > ctrlBlockArc && node.arc < oppositeArc) {
-                return 'left';
-            } else {
-                return 'right';
-            }
-        } else {
-            if (node.arc < ctrlBlockArc && node.arc > oppositeArc) {
-                return 'right';
-            } else {
-                return 'left';
-            }
-        }
-    },
-
+    
     // 没碰撞，移动到最近的球附近
     moveToNearestBlock() {
         let blockArr = this.blockArr;
@@ -947,7 +700,7 @@ cc.Class({
         let ctrlBlockArc = this.ctrlBlock.arc;
         // 发射第二个球的时候
         if (blockArr.length == 1) {
-            if (this.isBlockLfetOrRight(this.ctrlBlock, blockArr[0]) == 'left') {
+            if (common.isBlockLfetOrRight(this.ctrlBlock, blockArr[0]) == 'left') {
                 this.moveToBlockByCircle(blockArr, 'left', 0);
             } else {
                 this.moveToBlockByCircle(blockArr, 'right', 0);
@@ -956,7 +709,7 @@ cc.Class({
         }
         // 所在角度比最小角度的球小的时候，则球在角度最大最小球之间
         if (ctrlBlockArc < blockArr[0].arc) {
-            newBlockArr = this.reSort(0); //从0开始从左到右排序
+            newBlockArr = common.reSort(0,this.blockArr); //从0开始从左到右排序
             let toLeftArc = newBlockArr[0].arc - ctrlBlockArc; // 发射球与左边球距离
             let toRightArc = ctrlBlockArc + (2 * this.pi - newBlockArr[newBlockArr.length - 1].arc); // 发射球与右边球距离
             if (toLeftArc < toRightArc) { //向左边靠拢
@@ -968,7 +721,7 @@ cc.Class({
         }
         // 所在角度比最大角度的球大的时候，则球在角度最大最小球之间
         if (ctrlBlockArc > blockArr[blockArr.length - 1].arc) {
-            newBlockArr = this.reSort(0); //从0开始从左到右排序
+            newBlockArr = common.reSort(0,this.blockArr); //从0开始从左到右排序
             let toLeftArc = newBlockArr[0].arc + (2 * this.pi - ctrlBlockArc); // 发射球与左边球距离
             let toRightArc = ctrlBlockArc - newBlockArr[newBlockArr.length - 1].arc; // 发射球与右边球距离
             if (toLeftArc < toRightArc) { //向左边靠拢
@@ -982,7 +735,7 @@ cc.Class({
         for (let i = 0; i < blockArr.length; i++) {
             // 在数组中间
             if (ctrlBlockArc > blockArr[i].arc && ctrlBlockArc < blockArr[i + 1].arc) {
-                newBlockArr = this.reSort(i + 1); //从左到右排序
+                newBlockArr = common.reSort(i + 1,this.blockArr); //从左到右排序
                 let toLeftArc = newBlockArr[0].arc - ctrlBlockArc; // 发射球与左边球距离
                 let toRightArc = ctrlBlockArc - newBlockArr[newBlockArr.length - 1].arc; // 发射球与右边球距离
                 if (toLeftArc < toRightArc) { //向左边靠拢
@@ -1009,7 +762,7 @@ cc.Class({
             newArc = narestBlock.arc + newArc;
         }
         // 转成角坐标存在的值
-        newArc = this.changeArc(newArc);
+        newArc = common.changeArc(newArc);
         let oldArc = this.ctrlBlock.arc;
         this.ctrlBlock.arc = newArc;
         let delta = Math.abs(newArc - oldArc); //角度差，要移动的角度
@@ -1039,19 +792,19 @@ cc.Class({
                     let num = parseInt(delta / moveMax);
                     for (let i = 0; i < num + 1; i++) {
                         if (i == num) {
-                            let pos = this.getPosition(newArc, this.circleRadius);
+                            let pos = common.getPosition(newArc, this.circleRadius);
                             let moveTo = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                             actArray.push(callFunc);
                         } else {
                             let arc = toLeftOrRight == 'right' ? oldArc + (moveMax * (i + 1)) : oldArc - (moveMax * (i + 1));
-                            let pos = this.getPosition(arc, this.circleRadius);
+                            let pos = common.getPosition(arc, this.circleRadius);
                             let moveTo = cc.moveTo(0.003, cc.v2(pos.x, pos.y));
                             actArray.push(moveTo);
                         }
                     }
                 } else {
-                    let pos = this.getPosition(newArc, this.circleRadius);
+                    let pos = common.getPosition(newArc, this.circleRadius);
                     let moveTo = cc.moveTo(this.speedMove, cc.v2(pos.x, pos.y));
                     actArray.push(moveTo);
                     actArray.push(callFunc);
@@ -1137,14 +890,14 @@ cc.Class({
         anim.play();
         this.scoreImg(parseInt(this.score) + parseInt(this.ctrlBlock.level));
         let r = this.blockSize + (this.ctrlBlock.level * this.blockSizeAdd); //升级球的直径
-        let levelUpSelfArcHarf = this.getBlcokArc(r / 2) / 2; // 升级球的占位角度的一半
+        let levelUpSelfArcHarf = common.getBlcokArc(r / 2) / 2; // 升级球的占位角度的一半
         let levelUpArc = this.ctrlBlock.arc;
         if (direction == 'right') {
             levelUpArc = (this.ctrlBlock.arc - this.ctrlBlock.selfArcHarf) + levelUpSelfArcHarf;
         } else if (direction == 'left') {
             levelUpArc = (this.ctrlBlock.arc + this.ctrlBlock.selfArcHarf) - levelUpSelfArcHarf;
         }
-        let newPos = this.getPosition(levelUpArc, this.circleRadius);
+        let newPos = common.getPosition(levelUpArc, this.circleRadius);
         this.ctrlBlock.getChildByName('ctrlBlock').runAction(cc.scaleTo(0.2, 0, 0));
         setTimeout(() => {
             this.ctrlBlock.level = this.ctrlBlock.level + 1;
@@ -1206,18 +959,7 @@ cc.Class({
         callback && callback();
     },
 
-    // 角度差值
-    getDelta(node1, node2) {
-        let delta = node1.arc - node2.arc;
-        if (Math.abs(delta) > this.pi) {
-            if (node2.arc > this.pi) {
-                delta = (this.pi * 2 - node2.arc) + node1.arc;
-            } else {
-                delta = (this.pi * 2 - node1.arc) + node2.arc;
-            }
-        }
-        return Math.abs(delta)
-    },
+    
 
     // 游戏结束效果
     gameOverAction(node1, node2, leftArr, rightArr) {
@@ -1292,6 +1034,7 @@ cc.Class({
             }
         }, 2000)
     },
+
     // boomArr
     boomArr(node) {
         let boom = cc.instantiate(this.boomPrefal);
@@ -1309,7 +1052,7 @@ cc.Class({
         if (leftArr.length > 0 && rightArr.length > 0) {
             let node1 = leftArr[leftArr.length - 1];
             let node2 = rightArr[rightArr.length - 1];
-            let delta = this.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
+            let delta = common.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
             if (delta <= this.ctrlBlock.selfArcHarf * 2) {
                 this.gameOverAction(node1, node2, leftArr, rightArr);
                 return true;
@@ -1319,7 +1062,7 @@ cc.Class({
         if (leftArr.length == 0) {
             let node1 = rightArr[rightArr.length - 1];
             let node2 = this.ctrlBlock;
-            let delta = this.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
+            let delta = common.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
             if (delta <= moveArcRight) {
                 this.gameOverAction(node1, node2, leftArr, rightArr);
                 return true;
@@ -1329,7 +1072,7 @@ cc.Class({
         if (rightArr.length == 0) {
             let node1 = leftArr[leftArr.length - 1];
             let node2 = this.ctrlBlock;
-            let delta = this.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
+            let delta = common.getDelta(node1, node2) - node1.selfArcHarf - node2.selfArcHarf;
             if (delta <= moveArcLeft) {
                 this.gameOverAction(node1, node2, leftArr, rightArr);
                 return true;
@@ -1338,12 +1081,12 @@ cc.Class({
         }
     },
 
-    // 游戏结束切换结束页，并重新开始
+    // 游戏结束切换结束页
     gameOverScene() {
-        // reset all param
-        this.gameOverScoreImg();
-        this.gameOver.active = true;
+        this.gameOverNode.getComponent('gameOver').gameOverScoreImg(this.score);
+        this.gameOverNode.active = true;
     },
+
     // 点击 重新开始
     clickStart() {
         let self = this;
@@ -1363,6 +1106,7 @@ cc.Class({
             console.log(err);
         });
     },
+
     // 点击 复活
     clickFuhuo(event, customEventData) {
         let self = this;
@@ -1389,12 +1133,12 @@ cc.Class({
                 self.init('fuhuo');
             } else {
                 // change
-                let num = this.randomNum(4);
+                let num = common.randomNum(4);
                 let level = this.ctrlBlock.level;
                 this.waitBlcok && this.waitBlcok.destroy();
                 this.ctrlBlock && this.ctrlBlock.destroy();
                 if (num == level) {
-                    num = this.createBlockCheckIsSame(num);
+                    num = common.createBlockCheckIsSame(num);
                 }
                 this.createBlock(true, num)
             }
@@ -1461,23 +1205,6 @@ cc.Class({
             children[i].getComponent(cc.Sprite).spriteFrame = this.numberAtlas.getSpriteFrame(num[i].toString());
         }
     },
-
-    // 分数图片
-    gameOverScoreImg() {
-        let num = this.score.toString().split("");
-        let len = this.gameOverScore.children.length;
-        if(len<num.length){
-            for(let i=0;i<(num.length-len);i++) {
-                let node = cc.instantiate(this.gameOverScoreImgPrefab);
-                node.parent = this.gameOverScore;
-            }
-        }
-        let children = this.gameOverScore.children;
-        for(let i=0;i<num.length;i++) {
-            children[i].getComponent(cc.Sprite).spriteFrame = this.numberAtlas.getSpriteFrame(num[i].toString());
-        }
-    },
-
 
     onLoad() {
         this.init();
