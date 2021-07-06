@@ -2,6 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        main: cc.Node,
         blockBox: cc.Node, // 环形上的球的集合
         ctrlBlockArea: cc.Node, // 发射球和待发射球的集合
         blockAtlas: cc.SpriteAtlas,
@@ -9,7 +10,8 @@ cc.Class({
         motionPrefal: cc.Prefab,
         boomPrefal: cc.Prefab,
         gameOver: cc.Node,
-        gameOverScore: cc.Label,
+        gameOverScore: cc.Node,
+        gameOverScoreImgPrefab: cc.Prefab,
         audioClip: cc.AudioClip,
         boomAudioClip: cc.AudioClip,
         handNode: cc.Node,
@@ -50,7 +52,11 @@ cc.Class({
     },
 
     init(str) {
-        this.gameOver.active = false;
+        this.score = 199;
+        this.gameOverScoreImg();
+        this.gameOver.active = true;
+        // test
+        // this.gameOver.active = false;
         this.ctrlBlockArea.destroyAllChildren();
         this.blockBox.destroyAllChildren();
         if (str != 'fuhuo') {
@@ -295,14 +301,14 @@ cc.Class({
     },
 
     setTouch() {
-        this.node.on('touchend', function(event) {
+        this.main.on('touchend', function(event) {
             if (!this.clickFlag) return;
             if (this.handNode.active) {
                 this.handNode.active = false;
                 this.handStop();
             }
             let pos = event.getLocation();
-            pos = this.node.convertToNodeSpaceAR(pos);
+            pos = this.main.convertToNodeSpaceAR(pos);
             this.ctrlBlcokGo(pos);
             this.randomBlock.num = this.randomBlock.num + 1;
 
@@ -1335,7 +1341,7 @@ cc.Class({
     // 游戏结束切换结束页，并重新开始
     gameOverScene() {
         // reset all param
-        this.gameOverScore.string = this.score;
+        this.gameOverScoreImg();
         this.gameOver.active = true;
     },
     // 点击 重新开始
@@ -1451,6 +1457,22 @@ cc.Class({
             }
         }
         let children = this.scoreImgBox.children;
+        for(let i=0;i<num.length;i++) {
+            children[i].getComponent(cc.Sprite).spriteFrame = this.numberAtlas.getSpriteFrame(num[i].toString());
+        }
+    },
+
+    // 分数图片
+    gameOverScoreImg() {
+        let num = this.score.toString().split("");
+        let len = this.gameOverScore.children.length;
+        if(len<num.length){
+            for(let i=0;i<(num.length-len);i++) {
+                let node = cc.instantiate(this.gameOverScoreImgPrefab);
+                node.parent = this.gameOverScore;
+            }
+        }
+        let children = this.gameOverScore.children;
         for(let i=0;i<num.length;i++) {
             children[i].getComponent(cc.Sprite).spriteFrame = this.numberAtlas.getSpriteFrame(num[i].toString());
         }
