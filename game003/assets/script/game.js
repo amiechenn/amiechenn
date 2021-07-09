@@ -79,13 +79,13 @@ cc.Class({
             new cc.Color(113, 68, 12, 255),
             new cc.Color(48, 154, 0, 255),
         ];
-        this.blockSize = 40; //最小球值
+        this.blockSize = 30; //最小球值
         this.blockSizeAdd = 20; //levelup +20
         this.maxLevel = 9; //最大的值，西瓜的值
         this.canCtrlBlcokLevel = 4; // 可以发射的球的最大等级
-        this.pi = 3.1415926; //Π
-        window.circleRadius = 223;
+        this.pi = 3.1415926535897; //Π
         this.circleRadius = 223; //环的半径
+        window.circleRadius = this.circleRadius;
         this.speedMillisecond = 200; // 发射时间毫秒 speedMillisecond  与 speedSecond 相互对应一直
         this.speedSecond = 0.2; // 发射时间秒
         this.speedMove = 0.2; // 球在环上移动时间秒
@@ -312,7 +312,7 @@ cc.Class({
             this.randomBlock.num = 0;
             this.randomBlock.dir = !this.randomBlock.dir;
         }
-        // 
+        
         if (!this.isGameOver) {
             let arr = this.blockBox.children;
             this.blockArr = common.sortMinToMax(arr);

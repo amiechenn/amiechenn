@@ -1,5 +1,5 @@
 const common = {
-    pi: 3.1415926,
+    pi: 3.1415926535897,
     // 创造新的随机球 是否和附近相同，相同则改成不同的
     createBlockCheckIsSame: (num) => {
         switch (num) {
@@ -72,8 +72,7 @@ const common = {
 
     // 转成角坐标存在的值
     changeArc:(arc) => {
-        let pi = 3.14;
-        let pi2 = pi * 2;
+        let pi2 = common.pi * 2;
         if (arc < 0) arc = pi2 + arc;
         if (arc > pi2) arc = arc - pi2;
         return arc;
@@ -89,6 +88,23 @@ const common = {
             }
             arr = arr.sort((a, b) => a.arc - b.arc);
         }
+        // // test
+        // for (let j = 0; j < arr.length; j++) {
+        //     let node1 = arr[j];
+        //     let node2 = null;
+        //     if(j == arr.length-1){
+        //         node2 = arr[0];
+        //     }else{
+        //         node2 = arr[j+1];
+        //     }
+        //     if(common.checkBlackIsOverlap(node1,node2)){
+        //         console.log('重叠重叠重叠重叠重叠重叠',j)
+        //     }
+        //     if(!common.checkBlockBySide(node1,node2)){
+        //         console.log('有空隙',j)
+        //     }
+        // }
+
         return arr
     },
 
@@ -167,11 +183,8 @@ const common = {
     //检测两个球是否挨着
     checkBlockBySide:(node1, node2) => {
         let delta = common.getDelta(node1, node2);
-        // console.log('delta3', Math.abs(delta).toFixed(6), (node1.selfArcHarf + node2.selfArcHarf).toFixed(6))
-        // console.log('delta4', delta, node1.selfArcHarf + node2.selfArcHarf)
-        // console.log('+0.082327', node1.selfArcHarf + node2.selfArcHarf + 0.082327)
-        // 不知道那里导致球与球之间右细微的距离，所有加上0.00001
-        if (delta.toFixed(6) > ((node1.selfArcHarf + node2.selfArcHarf + 0.0033).toFixed(6))) { // 角度差 大于两球各一半的占位角度,则不挨
+        // 0.0348 两度，为了避免误差
+        if (delta.toFixed(6) > ((node1.selfArcHarf + node2.selfArcHarf+0.0348).toFixed(6))) { // 角度差 大于两球各一半的占位角度,则不挨
             return false;
         }
         return true;
