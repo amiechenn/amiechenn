@@ -1092,60 +1092,75 @@ cc.Class({
         let self = this;
         let ad = null;
         // 插播视频
-        FBInstant.getInterstitialAdAsync(
-            '541606183515187_542798350062637'
-        ).then(function(interstitial) {
-            let ad = interstitial;
-            return ad.loadAsync();
-            // interstitial.getPlacementID(); // 'my_placement_id'
-        }).then(function() {
-            // Ad loaded
+        // if(FBInstant){
+        //     FBInstant.getInterstitialAdAsync(
+        //         '541606183515187_542798350062637'
+        //     ).then(function(interstitial) {
+        //         let ad = interstitial;
+        //         return ad.loadAsync();
+        //         // interstitial.getPlacementID(); // 'my_placement_id'
+        //     }).then(function() {
+        //         // Ad loaded
+        //         self.init();
+        //         return ad.showAsync();
+        //     }).catch(function(err) {
+        //         console.log(err);
+        //     });
+        // }else{
             self.init();
-            return ad.showAsync();
-        }).catch(function(err) {
-            console.log(err);
-        });
+        // }
     },
 
-    // 点击 复活
+    // 点击 复活或者换一个球
     clickFuhuo(event, customEventData) {
         let self = this;
         let ad = null;
         // 激励视频
-        FBInstant.getRewardedVideoAsync(
-            '541606183515187_542797943396011'
-        ).then(function(rewardedVideo) {
-            if (typeof rewardedVideo !== 'undefined') {
-                if (typeof rewardedVideo.getPlacementID() === 'undefined') {
-                    console.log('can not get placement ID')
-                }
-                ad = rewardedVideo;
-                return rewardedVideo.loadAsync()
-            } else {
-                return Promise.reject(new Error('rewardedVideo is undefined'))
+        // if(FBInstant){
+        //     FBInstant.getRewardedVideoAsync(
+        //         '541606183515187_542797943396011'
+        //     ).then(function(rewardedVideo) {
+        //         if (typeof rewardedVideo !== 'undefined') {
+        //             if (typeof rewardedVideo.getPlacementID() === 'undefined') {
+        //                 console.log('can not get placement ID')
+        //             }
+        //             ad = rewardedVideo;
+        //             return rewardedVideo.loadAsync()
+        //         } else {
+        //             return Promise.reject(new Error('rewardedVideo is undefined'))
+        //         }
+        //     }).then(function() {
+        //         // Ad loaded
+        //         return ad.showAsync();
+        //     }).then(function() {
+        //         // Ad watched
+        //         if (customEventData == 'fuhuo') {
+        //             self.init('fuhuo');
+        //         } else {
+        //             // change换一个球
+        //             let num = common.randomNum(4);
+        //             let level = this.ctrlBlock.level;
+        //             this.waitBlcok && this.waitBlcok.destroy();
+        //             this.ctrlBlock && this.ctrlBlock.destroy();
+        //             if (num == level) {
+        //                 num = common.createBlockCheckIsSame(num);
+        //             }
+        //             this.createBlock(true, num)
+        //         }
+    
+        //     }).catch(function(err) {
+        //         console.log(err);
+        //     });
+        // }else{
+            let num = common.randomNum(4);
+            let level = this.ctrlBlock.level;
+            this.waitBlcok && this.waitBlcok.destroy();
+            this.ctrlBlock && this.ctrlBlock.destroy();
+            if (num == level) {
+                num = common.createBlockCheckIsSame(num);
             }
-        }).then(function() {
-            // Ad loaded
-            return ad.showAsync();
-        }).then(function() {
-            // Ad watched
-            if (customEventData == 'fuhuo') {
-                self.init('fuhuo');
-            } else {
-                // change
-                let num = common.randomNum(4);
-                let level = this.ctrlBlock.level;
-                this.waitBlcok && this.waitBlcok.destroy();
-                this.ctrlBlock && this.ctrlBlock.destroy();
-                if (num == level) {
-                    num = common.createBlockCheckIsSame(num);
-                }
-                this.createBlock(true, num)
-            }
-
-        }).catch(function(err) {
-            console.log(err);
-        });
+            this.createBlock(true, num)
+        // }
     },
 
     // 分享
