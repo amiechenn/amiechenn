@@ -28,6 +28,17 @@ export default class main extends cc.Component {
         node.x = this.ctrlBlcok.x;
     }
 
+    //   替换刚体球
+    changeBlock(pos,index) {
+        let node = cc.instantiate(this.blockArr[index-1]);
+        node.parent = this.blockBox;
+        pos = this.node.convertToNodeSpaceAR(pos);
+        // node.x = pos.x;
+        // node.y = pos.y;
+        console.log('node',node)
+    }
+    
+
     // show一个控制球
     showBlock() {
         this.index = Math.floor(Math.random()*3)+1;
@@ -44,7 +55,7 @@ export default class main extends cc.Component {
     }
 
     // 转世界坐标
-    changeLocation(event) {
+    touchChangeLocation(event) {
         let pos = event.getLocation();
         return pos = this.node.convertToNodeSpaceAR(pos);
     }
@@ -64,17 +75,17 @@ export default class main extends cc.Component {
         }
     }
 
-    setTouch() {
+    init() {
         this.node.on('touchstart',(event) => {
-            let pos = this.changeLocation(event);
+            let pos = this.touchChangeLocation(event);
             this.moveCtrlBlock(pos);
         })
         this.node.on('touchmove',(event) => {
-            let pos = this.changeLocation(event);
+            let pos = this.touchChangeLocation(event);
             this.moveCtrlBlock(pos);
         })
         this.node.on('touchend',(event) => {
-            let pos = this.changeLocation(event);
+            let pos = this.touchChangeLocation(event);
             this.moveCtrlBlock(pos);
             if(this.moveFlag) {
                 this.moveFlag = false;
@@ -89,14 +100,20 @@ export default class main extends cc.Component {
         this.node.on('touchcancel',(event) => {
             this.moveFlag = true;
         })
+        //  监听碰撞后升级球
+        this.node.on('change-block',  (event) => {
+            // console.log('event',event)
+            this.changeBlock(event.target.pos,event.target.index);
+            event.stopPropagation();
+        });
     }
 
     onLoad () {
-        this.setTouch();
+        this.init();
         cc.director.getPhysicsManager().enabled = true;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = true;
+        // manager.enabledDebugDraw = true;
     }
 
     start () {
