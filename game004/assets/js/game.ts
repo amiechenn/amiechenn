@@ -7,6 +7,9 @@ export default class game extends cc.Component {
     @property(cc.Node)
     wall: cc.Node = null;
 
+    @property(cc.Node)
+    redLine: cc.Node = null;
+
     @property(cc.Prefab)
     cBlock: cc.Prefab = null;
 
@@ -44,7 +47,9 @@ export default class game extends cc.Component {
     @property
     addWidth: number = 20;
 
-
+    @property(cc.Node)
+    gameOver: cc.Node = null;
+    
     //  生产一个刚体球
     creatBlock(pos,number) {
         let num = number || this.indexNumber;
@@ -53,12 +58,16 @@ export default class game extends cc.Component {
         node.parent = this.blockBox;
         node.width = (num-1) * this.addWidth + this.blockWidth;
         node.height = node.width;
-        node.getComponent(cc.PhysicsCircleCollider).radius = node.width/2;
-        node.getComponent(cc.PhysicsCircleCollider).density = node.width*1000;
-        node.getComponent(cc.PhysicsCircleCollider).apply();
+        let PhysicsCircleCollider = node.getComponent(cc.PhysicsCircleCollider);
+        let RigidBody = node.getComponent(cc.RigidBody);
+        // RigidBody.linearVelocity = cc.v2(); 
+        // RigidBody.angularVelocity = 0;
+        PhysicsCircleCollider.radius = node.width/2;
+        // PhysicsCircleCollider.density = num*1000;
+        PhysicsCircleCollider.apply();
         node.getComponent('block').blockNumber = num;
         if(pos) { // 升级球
-            node.scale = 0;
+            // node.scale = 0;
             node.x = pos.x;
             node.y = pos.y;
             return node;
@@ -137,18 +146,36 @@ export default class game extends cc.Component {
                     node.getComponent(cc.PhysicsCircleCollider).radius = node.height / 2;
                     // node.getComponent(cc.RigidBody).type = cc.RigidBodyType.Dynamic;
                     node.getComponent(cc.PhysicsCircleCollider).apply();
+                    this.isGameOver(node);
                 }
 
             })
             .start()
-
-        // GameManager.Instance.fruitHeigth = GameManager.Instance.findHighestFruit();
-
     }
 
+    // 警戒线
+    isGameOver(node) {
+        let children = this.blockBox.children;
+        children = children.sort((a, b) => a.y - b.y);
+        let heightest = node.y;
 
-    init() {
-        this.createrCtrlBlockChildren();
+        // 显示警戒线
+        if(heightest > (this.redLine.y-200)){
+            this.redLine.active = true;
+            this.redLine.getComponent(cc.Animation).play();
+        }else{
+            this.redLine.getComponent(cc.Animation).stop();
+            this.redLine.active = false;
+        }
+        // 结束
+        console.log('heightest',heightest, this.redLine.y)
+        if(heightest > (this.redLine.y)){
+            console.log('gameOver')
+            this.gameOver.active = true;
+        }
+    }
+
+    setTouch() {
         this.node.on('touchstart',(event) => {
             let pos = this.touchChangeLocation(event);
             this.moveCtrlBlock(pos);
@@ -169,22 +196,30 @@ export default class game extends cc.Component {
                     this.moveFlag = true;
                 },500)
             }
+
         })
         this.node.on('touchcancel',(event) => {
             this.moveFlag = true;
         })
     }
 
+
+    init() {
+        this.gameOver.active = false;
+        this.createrCtrlBlockChildren();
+        this.setTouch();
+        // renLine
+        this.redLine.y = cc.winSize.height/2-100;
+        this.redLine.width = cc.winSize.width;
+        this.redLine.active = false;
+    }
+
     onLoad () {
-    //     if (GameManager.Instance != null) { 
-    //         GameManager.Instance.destroy();
-    //    }        
-    //    GameManager.Instance = this; 
         this.init();
         cc.director.getPhysicsManager().enabled = true;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = true;
+        // manager.enabledDebugDraw = true;
     }
 
     start () {

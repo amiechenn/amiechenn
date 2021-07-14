@@ -16,7 +16,7 @@ export default class block extends cc.Component {
     // 碰撞检测onBeginContact
     onBeginContact(contact, self, other) {
         if (other.node.group == "block") {
-            //  只有下方的水果触发碰撞回调
+            //  只有下方的block触发碰撞回调
             if (self.node.y < other.node.y) {
                 return
             }
@@ -26,19 +26,20 @@ export default class block extends cc.Component {
             }
             let selfNum = this.blockNumber;
             let otherNum = other.node.getComponent("block").blockNumber;
-            //  水果类型相同的合成
+            //  block相同的合成
             if (selfNum == otherNum && selfNum < 9 && otherNum < 9) {
                 if (self.node.getComponent("block").getNumber() == 0) {
-                    other.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
-                    other.node.getComponent(cc.PhysicsCircleCollider).apply()
-                    this.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
-                    this.node.getComponent(cc.PhysicsCircleCollider).apply();
+                    // other.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
+                    // other.node.getComponent(cc.PhysicsCircleCollider).apply()
+                    // this.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
+                    // this.node.getComponent(cc.PhysicsCircleCollider).apply();
+                    let pos =  self.node.position;
                     cc.tween(other.node)
-                        .to(0.1, { position: self.node.position })
+                        .to(0.1, { position:pos })
                         .call(() => {
                             //生成下一个等级的水果
                             // GameManager.Instance.score += this.blockNumber + 1;
-                            cc.find("Canvas/game").getComponent('game').createLevelUpBlock(this.blockNumber + 1, self.node.position);
+                            cc.find("Canvas/game").getComponent('game').createLevelUpBlock(this.blockNumber + 1,pos);
                             other.node.active = false;
                             self.node.active = false;
                             other.node.destroy();
@@ -48,10 +49,10 @@ export default class block extends cc.Component {
                 }
             } else if (selfNum == otherNum && selfNum == 9 && otherNum == 9) {
                 if (self.node.getComponent("block").getNumber() == 0) {
-                    other.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
-                    other.node.getComponent(cc.PhysicsCircleCollider).apply()
-                    this.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
-                    this.node.getComponent(cc.PhysicsCircleCollider).apply();
+                    // other.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
+                    // other.node.getComponent(cc.PhysicsCircleCollider).apply()
+                    // this.node.getComponent(cc.PhysicsCircleCollider).radius = 0;
+                    // this.node.getComponent(cc.PhysicsCircleCollider).apply();
                     cc.tween(other.node)
                         .to(0.1, { position: other.node.position })
                         .call(() => {
