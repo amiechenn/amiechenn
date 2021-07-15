@@ -8,4 +8,8 @@ export default class groupNode extends cc.Component {
     @property
     typeArr: Array<number> = [];
 
+    // 初始位置
+    @property
+    pos: object = {};
+
 }
