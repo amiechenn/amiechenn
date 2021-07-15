@@ -55,6 +55,26 @@ export default class ganme extends cc.Component {
             }
             this.allBlock.push(arr);
         }
+        // 大方块-换颜色
+        let color = cc.color(74,74,74,255);
+        let colorFlag = false;
+        for(let x=0;x<3;x++){
+            for(let i=0;i<3;i++){
+                let arr = [];
+                if(colorFlag){
+                    color =  cc.color(42,42,42,255);
+                }else{
+                    color = cc.color(74,74,74,255);
+                }
+                colorFlag = !colorFlag;
+                for(let j=0;j<3;j++){//col
+                    for(let k=0;k<3;k++){//row
+                        let block = this.allBlock[3*x+j][3*i+k];
+                        block.getChildByName('1').color = color;
+                    }
+                }
+            }
+        }
     }
 
     // 生产一个组合块
@@ -155,7 +175,6 @@ export default class ganme extends cc.Component {
 
     // 是否可放置
     canPullDown(closestBlock,groupNode) {
-        let 
         let row = closestBlock.getComponent('bgBlock').row;
         let col = closestBlock.getComponent('bgBlock').col;
         let PullDowmArr = [];// arr:  准备放的位置数组
