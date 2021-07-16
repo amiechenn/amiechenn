@@ -350,7 +350,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        150,
         0,
         0,
         0,
@@ -640,7 +640,7 @@
     "groupNode": {
       "__uuid__": "25f8e3c2-bd9c-4867-bc2d-7d3046df3661"
     },
-    "pickUpHeight": 100,
+    "pickUpHeight": 300,
     "blockWidth": 50,
     "PullDowmArr": [],
     "canDesArr": [],
@@ -907,6 +907,7 @@
     "type": 0,
     "typeArr": [],
     "pos": {},
+    "color": null,
     "_id": "52I5Hr02BP35WnybYa1r8j"
   },
   {
@@ -1127,9 +1128,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 121,
-      "g": 198,
-      "b": 150,
+      "r": 180,
+      "g": 20,
+      "b": 200,
       "a": 255
     },
     "_contentSize": {

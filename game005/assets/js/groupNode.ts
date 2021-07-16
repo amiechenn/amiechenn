@@ -12,4 +12,8 @@ export default class groupNode extends cc.Component {
     @property
     pos: object = {};
 
+    // 初始位置
+    @property
+    color: cc.Color = null;
+
 }

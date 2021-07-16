@@ -21,7 +21,7 @@ export default class ganme extends cc.Component {
     groupNode: cc.Prefab = null;
 
     @property
-    pickUpHeight: number = 100;
+    pickUpHeight: number = 300;
 
     @property
     blockWidth: number = 50;
@@ -56,15 +56,15 @@ export default class ganme extends cc.Component {
             this.allBlock.push(arr);
         }
         // 大方块-换颜色
-        let color = cc.color(74,74,74,255);
+        let color = new cc.Color(74,74,74,255);
         let colorFlag = false;
         for(let x=0;x<3;x++){
             for(let i=0;i<3;i++){
                 let arr = [];
                 if(colorFlag){
-                    color =  cc.color(42,42,42,255);
+                    color =  new cc.Color(42,42,42,255);
                 }else{
-                    color = cc.color(74,74,74,255);
+                    color = new cc.Color(74,74,74,255);
                 }
                 colorFlag = !colorFlag;
                 for(let j=0;j<3;j++){//col
@@ -97,7 +97,7 @@ export default class ganme extends cc.Component {
     // 转世界坐标
     touchChangeLocation(event) {
         let pos = event.getLocation();
-        return pos = this.node.convertToNodeSpaceAR(pos);
+        return pos = this.table.convertToNodeSpaceAR(pos);
     }
 
     // 绑定touch事件
@@ -141,7 +141,7 @@ export default class ganme extends cc.Component {
     }
 
     // 改变block颜色
-    changeBlockColor(showName,arr) {
+    changeBlockColor(showName,arr,color) {
         // showName： 0 复原
         for(let i= 0;i<arr.length;i++) {
             arr[i].getComponent('bgBlock').active = showName;
@@ -161,6 +161,9 @@ export default class ganme extends cc.Component {
                     }else{
                         element.active = false;
                     }
+                }
+                if(color && element.name == '2'){
+                    element.color = color;
                 }
             });
             if(showName == '2') {
@@ -285,10 +288,11 @@ export default class ganme extends cc.Component {
     groupNodePullDown(groupNode) {
         this.groupBlockScale(groupNode.getChildByName('groupMid').children,1);
         if(this.PullDowmArr.length > 0) {
+            let color = groupNode.getComponent('groupNode').color;
             cc.tween(groupNode)
             .to(0.2, { x:this.PullDowmArr[0].x, y:this.PullDowmArr[0].y-this.pickUpHeight}, { easing: 'backOut' })
             .call(() => {
-                this.changeBlockColor(2,this.PullDowmArr);
+                this.changeBlockColor(2,this.PullDowmArr,color);
                 this.PullDowmArr = [];
                 groupNode.destroy();
                 this.destroyBlock();
